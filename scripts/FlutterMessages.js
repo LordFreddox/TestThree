@@ -1,8 +1,8 @@
 window.addEventListener("message", handleMessage);
 
-const playButton = document.getElementById('boton');
-playButton.addEventListener("click", sendMessageWindow);
 
+//const playButton = document.getElementById('boton');
+//playButton.addEventListener("click", sendMessageWindow);
 
 function handleMessage(e) {
   var data = JSON.parse(e.data);
@@ -34,4 +34,7 @@ function sendMessageWindowIFrame() {
   // Should target the domain instead of '*'
   flutterIFrame.contentWindow.postMessage(message, '*');
 }
+
+window.sendMessageWindow = sendMessageWindow;
+
 
