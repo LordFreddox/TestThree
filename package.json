@@ -20,6 +20,7 @@
     "vite-plugin-top-level-await": "^1.4.1"
   },
   "dependencies": {
+    "@tweenjs/tween.js": "^23.1.2",
     "gsap": "^3.12.5"
   }
 }
