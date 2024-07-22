@@ -8,8 +8,8 @@ import * as TWEEN from '@tweenjs/tween.js';
 const playButton = (document.getElementById('boton') as HTMLFormElement);
 var targetOrigin:string;
 //var buttonPosition = new THREE.Vector3(80, 10, 0);
-var centerPosition = new THREE.Vector3(0.1, -1, 0);
-var originPointIn3D= new THREE.Vector3(0, 0, 0);
+var centerPosition = new THREE.Vector3(0.1, -1.1, 0.2);
+var originPointIn3D= new THREE.Vector3(0.1, 1.5, -2);
 
 
 const messageToFlutter = {
@@ -60,9 +60,9 @@ function handleMessage(e:any) {
           //targetOrigin = message.location;
           targetOrigin= e.origin;
           //updateAndSendMessage(SceneAction.StartScene,'');
-          const payload = JSON.parse(message.payLoad);
+          //const payload = JSON.parse(message.payLoad);
           //buttonPosition = new THREE.Vector3(payload.left, payload.bottom, 500);
-          originPointIn3D = getPointIn3DFromRelativeCoordinates(payload.left, payload.bottom);
+          //originPointIn3D = getPointIn3DFromRelativeCoordinates(payload.left, payload.bottom);
           
           //InstantiateMask(buttonPosition.unproject(camera), centerPosition);
           break;
@@ -125,7 +125,7 @@ window.addEventListener('resize', () => {
 let mixer: THREE.AnimationMixer
 
 
-new GLTFLoader().load('https://'+model[0]+'.glb', (gltf) => {
+new GLTFLoader().load('https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/ThreeAvatarTest/models/'+model[0]+'.glb', (gltf) => {
   mixer = new THREE.AnimationMixer(gltf.scene)
   //   //console.log(gltf  )
   const action1 = mixer.clipAction(gltf.animations[0]);
@@ -179,9 +179,9 @@ function animateModelToPosition(model: THREE.Object3D, targetPosition: THREE.Vec
     .start();
 }
 
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-function getPointIn3DFromRelativeCoordinates(xPercentage: number, yPercentage: number): THREE.Vector3 {
+//const raycaster = new THREE.Raycaster();
+//const mouse = new THREE.Vector2();
+/*function getPointIn3DFromRelativeCoordinates(xPercentage: number, yPercentage: number): THREE.Vector3 {
   // Calcular las coordenadas NDC
   mouse.x = (xPercentage / window.innerWidth) * 2 - 1;
   mouse.y = (yPercentage / window.innerHeight) * 2 - 1;
@@ -195,7 +195,7 @@ function getPointIn3DFromRelativeCoordinates(xPercentage: number, yPercentage: n
   raycaster.ray.intersectPlane(plane, pointIn3D);
   console.log(scene.children);
   return pointIn3D;
-}
+}*/
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function shrinkModelToDisappear(model: THREE.Object3D): Promise<void> {
   return new Promise((resolve) => {
@@ -274,7 +274,7 @@ console.log("modelo:"+model+"cargo");
  
 
  function InitAudio(){
-  audioLoader.load('https://'+model[0]+'.mp3', function(buffer) {
+  audioLoader.load('https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/ThreeAvatarFlutter/sounds/'+model[0]+'.mp3', function(buffer) {
     sound.setBuffer(buffer);
     sound.setLoop(false);
     sound.setVolume(0.5);
