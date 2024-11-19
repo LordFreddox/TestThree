@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avatar AR</title>
+    <title>Mapas</title>
     <script type="module" src="/src/main.ts"></script>
     
   </head>
 
-  <body>
+  <body style="background-color: black;padding: 0;">
     <script>
       
       //if debug enable next line, if production disable
@@ -16,22 +16,29 @@
           '{"action":"SceneInitialSettings", "left":15.15, "bottom":842.5636026532965, "width":77.06639734670358, "height":77.06639734670358, "location":"http://localhost:60901/#/563-company/brand"}',
            '*');*/
   </script>
-  <img id="logo" style="
-  background-color: transparent;border: none;padding: 10px;
-margin-left: 40%; margin: 0;
-position: absolute;
-top: 40%;
-left: 50%;
--ms-transform: translate(-50%, -50%);
-transform: translate(-50%, -50%);display: none;" src="img/logo.png" width="100%" height="auto"/>
-
-    <button id="boton" style="
-    background-color: transparent;border: none;padding: 10px;
-  margin-left: 40%; margin: 0;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); display: none;"><img id="logo" src="img/play.png"/></button>
-  </body>
+  
+  <div id="loading" style="position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black; /* Fondo negro */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */">
+    <div id="loading-container" style=" width: 80%;background-color: #ccc;z-index: 2;margin-top: 400px;border-radius: 20%;margin-right: 10%;">
+      <div id="loading-bar" style="width: 0%;height: 20px;background-color: #4caf50;border-radius: 20%;"></div>
+    </div>
+    <video id="ui-video" style="position: fixed;z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;  /* Ocupa todo el ancho de la ventana */
+    height: 100vh; /* Ocupa toda la altura de la ventana */" src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/loading.mp4" autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px; pointer-events: none;"></video>
+  </div>
+  <img id="tutorial" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
+   height: 10vh;margin-top: 100vw;" 
+   src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/zoomout.webp" 
+   autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
+    pointer-events: none;"/>
+</body>
 </html>
