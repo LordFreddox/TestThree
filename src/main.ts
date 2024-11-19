@@ -4,7 +4,6 @@ import { GLTFLoader , GLTF} from 'three/addons/loaders/GLTFLoader.js'
 //import * as TWEEN from '@tweenjs/tween.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { AmbientLight } from 'three';
-import { OrthographicCamera, Vector3 } from 'three';
 //import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
 //import gsap from 'gsap';
 // Crear la escena, cámara y renderer
@@ -34,20 +33,35 @@ const mouse = new THREE.Vector2()
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = 0;                // Permitir vista directamente hacia abajo
 controls.maxPolarAngle = Math.PI / 2.1;      // Limitar a un ángulo de 90 grados para evitar vistas desde abajo
-controls.maxDistance=10;
+controls.maxDistance=50;
 controls.minDistance=2;
-controls.autoRotate = false;
 //controls.enablePan = false;
-const panLimit = 10; // Ajusta según tu escena
+const panLimits = {
+  xMin: -15,
+  xMax: 15,
+  zMin: -10,
+  zMax: 10,
+};
 controls.addEventListener('change', () => {
-  const target = controls.target;
+  const offset = new THREE.Vector3();
+  offset.copy(camera.position).sub(controls.target); // Calcula el desplazamiento relativo
 
-  target.x = Math.max(-panLimit, Math.min(panLimit, target.x));
-  target.y = Math.max(-panLimit, Math.min(panLimit, target.y));
-  target.z = Math.max(-panLimit, Math.min(panLimit, target.z));
+  // Aplica los límites de paneo en X y Z
+  controls.target.x = Math.max(panLimits.xMin, Math.min(panLimits.xMax, controls.target.x));
+  controls.target.z = Math.max(panLimits.zMin, Math.min(panLimits.zMax, controls.target.z));
+
+  // Fija el valor de Y para que no cambie (manteniendo la altura constante)
+  controls.target.y = 0;
+
+  // Ajusta la posición de la cámara en consecuencia
+  camera.position.x = controls.target.x + offset.x;
+  camera.position.z = controls.target.z + offset.z;
+  camera.position.y = controls.target.y + offset.y; // Altura constante
 });
+controls.enableDamping = true;
+controls.dampingFactor = 0.1;
 
-camera.position.set(0, 20, 5)
+camera.position.set(0, 5, 7)
 controls.update()
 let interactObjects = [] as THREE.Object3D[];
 const imageElement = document.getElementById("logo") as HTMLImageElement;
