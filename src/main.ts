@@ -17,7 +17,7 @@ const worldPosition = new THREE.Vector3();
 //var centerPosition = new THREE.Vector3(0.1, -1, 0);
 //var originPointIn3D= new THREE.Vector3(0.1, 2, -5);
 const scene = new THREE.Scene()
-//const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 renderer.setClearColor(0x000000, 0);
@@ -29,26 +29,26 @@ let mixer: THREE.AnimationMixer
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2()
 
-const aspect = window.innerWidth / window.innerHeight;
+/*const aspect = window.innerWidth / window.innerHeight;
 const frustumSize = 20;
 const left = -frustumSize * aspect / 2;
 const right = frustumSize * aspect / 2;
 const top = frustumSize / 2;
 const bottom = -frustumSize / 2;
 const near = -50;// se corta el modelo
-const far = 1500;
+const far = 1500;*/
 
 // Cámara ortográfica
-const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
-camera.position.set(0, 0, 0);
-
+/*const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
+camera.position.set(1, 1, 1);*/
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = 0;                // Permitir vista directamente hacia abajo
-controls.maxPolarAngle = Math.PI / 2.1;      // Limitar angulo de camara
-//controls.maxDistance=50;//para camara perpectiva.
-//controls.minDistance=2;
-const minZoom = 0.2;//zoom con camara ortogonal
-const maxZoom = 3.5;
+controls.maxPolarAngle = Math.PI / 2.1;    // Limitar angulo de camara
+controls.maxDistance=50;//para camara perpectiva.
+controls.minDistance=2;
+//////////////////////////////////////////////////////////////////////////////////////////
+//const minZoom = 0.2;//zoom con camara ortogonal
+//const maxZoom = 3.5;
 const panLimits = {
   xMin: -15,
   xMax: 15,
@@ -57,11 +57,11 @@ const panLimits = {
 };
 controls.addEventListener('change', () => {
 //limitar zoom de la camara ortogonal
-if (camera.zoom < minZoom) {
+/*if (camera.zoom < minZoom) {
   camera.zoom = minZoom;
 } else if (camera.zoom > maxZoom) {
   camera.zoom = maxZoom;
-}
+}*/
 camera.updateProjectionMatrix();
 
   const offset = new THREE.Vector3();
@@ -85,6 +85,8 @@ camera.position.set(0, 5, 7)
 //const targetPosition = new THREE.Vector3(0, 0, 0);
 controls.update()
 let interactObjects = [] as THREE.Object3D[];
+let lookAtCamera = [] as THREE.Object3D[];
+const spawnModels: THREE.Vector3[] = [];
 //const imageElement = document.getElementById("logo") as HTMLImageElement;
 
 
@@ -239,14 +241,15 @@ const clipPlanes = [clipPlane]
 */
 var bigSurface = String(getUrlParameter("BigSurfaceId"));
 var model = bigSurface.split("-", 3); 
-/*new RGBELoader().load('img/cumulus_sky_dome_1k.hdr', (texture) => {
+new RGBELoader().load('img/cumulus_sky_dome_1k.hdr', (texture) => {//para camara perpectiva
   texture.mapping = THREE.EquirectangularReflectionMapping
   //scene.environment = texture
   scene.background = texture
   //scene.background = null
   scene.backgroundBlurriness = 0
-})*/
-const hdrLoader = new RGBELoader();
+})
+///////////////////////////////////////////////////////////////////////////////////////////////
+const hdrLoader = new RGBELoader();// para camara ortografica
 hdrLoader.load('img/cumulus_sky_dome_1k.hdr', (texture) => {
   texture.mapping = THREE.EquirectangularReflectionMapping;
 
@@ -296,9 +299,24 @@ loadModelWithCallback(
           console.log('Hijo encontrado:', child.name);
           if (child.name.includes('INTERACT_')){
           interactObjects.push(child);
+          lookAtCamera.push(child);
+          //console.log('array:'+interactObjects.length);
+        }
+        if (child.name.includes('BANNER_')){
+          lookAtCamera.push(child);
+          console.log("se encontró letrero");
           //console.log('array:'+interactObjects.length);
         }
       }
+  });
+  gltf.scene.traverse((node) => {
+    if (node.name.startsWith("SPAWN_")) {
+      spawnModels.push(node.position.clone());
+      console.log("Found spawn point:", node.name, node.position);
+    }
+  });
+  spawnModels.forEach((position) => {
+    spawnModelAt(position); // Llama a tu función para instanciar modelos
   });
     //desactivamos pantalla de carga
     loadingscreen.style.display = "none";
@@ -403,8 +421,9 @@ controls.addEventListener('change', () => {
   //console.log("El usuario ha interactuado");
   const cameraRotationZ = camera.rotation.z;
     // Actualizar la rotación de los objetos interactuables
-    interactObjects.forEach((object) => {
-        object.rotation.z = cameraRotationZ;
+    lookAtCamera.forEach((object) => {
+      console.log("objeto del foreach"+object);
+        object.rotation.z = -cameraRotationZ;
     });
 });
 const clock = new THREE.Clock()
@@ -430,7 +449,17 @@ const animate = () => {
 
   renderer.render(scene, camera);
 }
+function spawnModelAt(position: THREE.Vector3) {
+  loader.load('https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/models/tree.glb', (gltf) => {
+    const model = gltf.scene;
 
+    // Posicionar el modelo
+    model.position.copy(position);
+
+    // Agregar el modelo a la escena
+    scene.add(model);
+  });
+}
 
 animate()
 
@@ -451,6 +480,20 @@ window.addEventListener('click', (event) => {
   // Calcular intersecciones con los objetos interactuables
   const intersects = raycaster.intersectObjects(interactObjects, true);
 console.log("array"+interactObjects);
+  if (intersects.length > 0 && intersects[0].object.name.includes('INTERACT_')) {
+      console.log(interactObjects);
+      const object = intersects[0].object;
+
+      // Obtener la posición global del objeto
+      object.getWorldPosition(worldPosition);
+      console.log("Posición en el mundo:", worldPosition);
+
+      // Ajustar la posición objetivo (ej. elevarla)
+      //worldPosition.y += 5;
+
+      // Animar la cámara hacia el objetivo
+      animateCamera(worldPosition, 2000);
+  }
   if (intersects.length > 0 && intersects[0].object.name.includes('INTERACT_')) {
       console.log(interactObjects);
       const object = intersects[0].object;
