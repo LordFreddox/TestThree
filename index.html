@@ -5,41 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mapas</title>
     <script type="module" src="/src/main.ts"></script>
-    
+    <link rel="stylesheet" href="CSS/style.css">
   </head>
 
   <body style="background-color: black;padding: 0;">
-    <script>
-      
-      //if debug enable next line, if production disable
-      /*window.postMessage(
-          '{"action":"SceneInitialSettings", "left":15.15, "bottom":842.5636026532965, "width":77.06639734670358, "height":77.06639734670358, "location":"http://localhost:60901/#/563-company/brand"}',
-           '*');*/
-  </script>
-  
-  <div id="loading" style="position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: black; /* Fondo negro */
-    display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal */">
-    <div id="loading-container" style=" width: 80%;background-color: #ccc;z-index: 2;margin-top: 400px;border-radius: 20%;margin-right: 10%;">
-      <div id="loading-bar" style="width: 0%;height: 20px;background-color: #4caf50;border-radius: 20%;"></div>
+
+    <div id="loading" style="position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;">
+      <div id="loading-container" style=" width: 80%;background-color: #ccc;z-index: 2;margin-top: 400px;border-radius: 20%;margin-right: 10%;">
+        <div id="loading-bar" style="width: 0%;height: 20px;background-color: #4caf50;border-radius: 20%;"></div>
+      </div>
+      <video id="ui-video" style="position: fixed;z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;" src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/loading.mp4" autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px; pointer-events: none;"></video>
     </div>
-    <video id="ui-video" style="position: fixed;z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100vw;  /* Ocupa todo el ancho de la ventana */
-    height: 100vh; /* Ocupa toda la altura de la ventana */" src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/loading.mp4" autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px; pointer-events: none;"></video>
-  </div>
-  <img id="tutorial" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
-   height: 10vh;margin-top: 100vw;" 
-   src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/zoomout.webp" 
-   autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
-    pointer-events: none;"/>
-    <!--<button id="moveCameraButton">Movimiento</button>!-->
-</body>
+    <img id="tutorial" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
+      height: 10vh;margin-top: 100vw;" 
+      src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/zoomout.webp" 
+      autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
+      pointer-events: none;"/>
+    <script>
+      function toggleVisibility(id) {
+        var element = document.getElementById(id);
+        element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
+      }
+
+      function logText(text) {
+        console.log(text);
+      }
+    </script>
+    <footer id="footer" class="footer">
+      <input id="search-bar" type="text" class="search-bar" placeholder="Buscar...">
+      <div class="carousel">
+        <div class="carousel-container unselectable">
+        </div>
+      </div>
+    </footer>
+    <div id="footer-button" class="footer-button" onclick="showFooter()"></div>
+    <script>
+      const carouselContainer = document.querySelector('.carousel-container');
+
+      function disableSnap() {
+        carouselContainer.style.scrollSnapType = 'none';
+      }
+
+      function enableSnap() {
+        carouselContainer.style.scrollSnapType = 'x mandatory';
+      }
+
+      carouselContainer.addEventListener('touchstart', disableSnap);
+      carouselContainer.addEventListener('touchend', enableSnap);
+      carouselContainer.addEventListener('pointerdown', disableSnap);
+      carouselContainer.addEventListener('pointerup', enableSnap);
+
+      function showFooter() {
+        const footer = document.querySelector('.footer');
+        footer.classList.add('show');
+        document.getElementById('footer-button').style.display = 'none';
+      }
+
+      function hideFooter() {
+        const footer = document.querySelector('.footer');
+        footer.classList.remove('show');
+        document.getElementById('footer-button').style.display = 'block';
+      }
+
+      document.addEventListener('pointerup', (event) => {
+        if (!event.target.closest('.footer') && !event.target.closest('.footer-button')) {
+          hideFooter();
+        }
+      });
+    </script>
+  </body>
 </html>
