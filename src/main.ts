@@ -2,6 +2,8 @@ import * as THREE from 'three'
 //import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
 import { GLTFLoader , GLTF} from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { AmbientLight } from 'three';
 import { GetPlaces, Place} from './http-service.js';
 
@@ -28,24 +30,27 @@ let allAvailableAnimationClipsMap = new Map<THREE.Object3D, THREE.AnimationClip[
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2()
 const clock = new THREE.Clock();
-const aspect = window.innerWidth / window.innerHeight;
-const frustumSize = 20;
-const left = -frustumSize * aspect / 2;
-const right = frustumSize * aspect / 2;
-const top = frustumSize / 2;
-const bottom = -frustumSize / 2;
-const near = 1;// se corta el modelo
-const far = 1500;
 let MapObjectsListByCategoryName = {} as { [key: string]: THREE.Object3D[] };
+let MapObjectPlacesText = {} as { [key: string]: THREE.Object3D[] };
 const originalColors = new Map<THREE.Object3D, THREE.Color>();
-
+let lookAtCamera: THREE.Object3D[] = [];
+const COLOR_SELECTED = new THREE.Color(0x733D96);
+const COLOR_TEXT3D = new THREE.Color(0x111111);
+const COLOR_PLANE3D = new THREE.Color(0xFFFFFF);
 // Cámara ortográfica
-const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
+const camera = new THREE.OrthographicCamera(
+  -20 * (window.innerWidth / window.innerHeight) / 2,
+  20 * (window.innerWidth / window.innerHeight) / 2, 
+  20 / 2, 
+  -20 / 2, 
+  1, 
+  1500);
+
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = 0;                // Permitir vista directamente hacia abajo
 controls.maxPolarAngle = Math.PI / 2.1;      // Limitar angulo de camara
-var minPan = new THREE.Vector3( -10, -10, -10);
-var maxPan = new THREE.Vector3( 10, 10, 10);
+var minPan = new THREE.Vector3();
+var maxPan = new THREE.Vector3();
 var _v = new THREE.Vector3();
 
 controls.addEventListener('change', () => {
@@ -142,12 +147,7 @@ loadModelWithCallback(
     gltf.scene.position.set(0, 0, 0);
     scene.add(gltf.scene);
 
-    //calculate bounding box of the scene to set camera position
-    const box = new THREE.Box3().setFromObject(gltf.scene);
-    const size = box.getSize(new THREE.Vector3());
-    const center = box.getCenter(new THREE.Vector3());
-    camera.position.set(center.x + 10, center.y + size.y + 10, center.z + size.z + 10);
-    camera.far = size.length() * 10;
+    const size = GetBoundingBoxOptionalSetCamera(gltf.scene, true);
 
     //create skybox
     const geometry = new THREE.SphereGeometry(1, 60, 40);
@@ -156,15 +156,10 @@ loadModelWithCallback(
       side: THREE.BackSide,
     });
     const backgroundSphere = new THREE.Mesh(geometry, material);
+    backgroundSphere.name = 'backgroundSphere';
     scene.add(backgroundSphere);
     backgroundSphere.scale.set(
         size.length() + 100, size.length() + 100, size.length() + 100);
-
-    minPan = new THREE.Vector3(-size.length() / 4, 0, -size.length() / 4);
-    maxPan = new THREE.Vector3(size.length() / 4, 0, size.length() / 4);
-    controls.minZoom = 0.5;
-    controls.maxZoom = size.length() / 10;
-    controls.update();
 
     //populate animation array
     const mixer = new THREE.AnimationMixer(gltf.scene);
@@ -182,6 +177,7 @@ loadModelWithCallback(
   });
     loadingscreen.style.display = "none";
     document.getElementById('footer')!.style.display = 'block';
+    //document.getElementById('footer-button')!.style.display = 'block';
     const companyId = new URLSearchParams(window.location.search).get('placeId') || "0";
     
     if (companyId === "0" || window.location.hostname === "localhost") {
@@ -199,10 +195,32 @@ loadModelWithCallback(
   },
 );
 
+function GetBoundingBoxOptionalSetCamera(object: THREE.Object3D, setCamera: boolean): THREE.Vector3 {
+      //calculate bounding box of the scene to set camera position
+      const box = new THREE.Box3().setFromObject(object);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      if(setCamera){
+        //camera.position.set(size.x + 10, center.y + size.y + 30, center.z + size.z + 10);
+        camera.position.set(size.x + 10, center.y + size.y + 13, 0);
+        camera.far = size.length() * 10;
+        camera.zoom = -size.length() / 10;
+
+        minPan = new THREE.Vector3(-size.length() / 2, 0, -size.length() / 4);
+        maxPan = new THREE.Vector3(size.length() / 2, 0, size.length() / 4);
+        controls.minZoom = 0.5;
+        controls.maxZoom = size.length() / 10;
+        controls.update();
+      }
+      return size;
+}
+
 function GetPlacesReal(companyId: string){
   GetPlaces(companyId).then(json => {
-    const places: Place[] = json.data_place;
-    places.forEach((place) => {
+    console.log(typeof json.data_place); // Log the type of data_place
+    console.log(json.data_place); // Log the content of data_place
+
+    json.data_place.places.forEach((place) => {
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
       AddCarouselItem(place.companysubsidiary_image_url, place.companysubsidiary_name, object);
@@ -211,6 +229,7 @@ function GetPlacesReal(companyId: string){
         MapObjectsListByCategoryName[place.place_category_name] = [];
       }
       MapObjectsListByCategoryName[place.place_category_name].push(object);
+      CreateTextForPlace(place, object);
     }
     });
     CreateButtonFilters();
@@ -238,37 +257,105 @@ function GetPlacesFake(){
         MapObjectsListByCategoryName[place.place_category_name] = [];
       }
       MapObjectsListByCategoryName[place.place_category_name].push(object);
+      CreateTextForPlace(place, object);
     }
     });
     CreateButtonFilters();
   });
 }
 
+function createTextMeshAndPlane(text: string, position: THREE.Vector3, font: any): { textMesh: THREE.Mesh, planeMesh: THREE.Mesh } {
+    const textGeometry = new TextGeometry(text, {
+        font: font,
+        size: 0.5,
+        depth: 0.2,
+    });
+    const textMaterial = new THREE.MeshPhongMaterial({ color: COLOR_TEXT3D });
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+
+    textGeometry.computeBoundingBox();
+    const textBox = textGeometry.boundingBox!;
+    const textWidth = textBox.max.x - textBox.min.x;
+    const textHeight = textBox.max.y - textBox.min.y;
+
+    textMesh.geometry.center();
+    textMesh.position.copy(position);
+
+    const planeGeometry = new THREE.PlaneGeometry(textWidth + 0.5, textHeight + 0.5);
+    const planeMaterial = new THREE.MeshBasicMaterial({ color: COLOR_PLANE3D, opacity: 0.5, transparent: true });
+    const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
+    planeMesh.position.set(textMesh.position.x, textMesh.position.y, textMesh.position.z - 0.1);
+    planeMesh.rotation.copy(textMesh.rotation);
+
+    return { textMesh, planeMesh };
+}
+
+function CreateTextForPlace(place: Place, placeObject: THREE.Object3D) {
+    const fontLoader = new FontLoader();
+    fontLoader.load('./fonts/googlesans-medium.json', (font) => {
+        const formattedKey = place.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
+        const position = new THREE.Vector3(placeObject.position.x, new THREE.Box3().setFromObject(placeObject).max.y + 2.5, placeObject.position.z);
+        const { textMesh, planeMesh } = createTextMeshAndPlane(formattedKey, position, font);
+
+        textMesh.rotation.setFromVector3(new THREE.Vector3(0, Math.PI / 2, 0));
+        planeMesh.rotation.copy(textMesh.rotation);
+
+        textMesh.visible = false;
+        planeMesh.visible = false;
+
+        if (!MapObjectPlacesText[place.place_id]) {
+            MapObjectPlacesText[place.place_id] = [];
+        }
+        MapObjectPlacesText[place.place_id].push(textMesh, planeMesh);
+        lookAtCamera.push(textMesh, planeMesh);
+        scene.add(textMesh, planeMesh);
+    });
+}
+
 function CreateButtonFilters() {
-  const loader = new GLTFLoader();
-  loader.load('./models/ButtonFilterPrefab.glb', (gltf) => {
-    const prefab = gltf.scene;
-    let zPosition = prefab.children[0].position.z - 5;
-    // Iterate through keys on Map MapObjectsListByCategoryName
-    for (const key in MapObjectsListByCategoryName) {
-      const button = prefab.clone(true).children[0];
-      button.userData.place_category_name = key;
-      button.position.z = zPosition;
-      const mixer = new THREE.AnimationMixer(button);
-      const animationClips = gltf.animations.map(clip => clip.clone());
-      allAvailableAnimationClipsMap.set(button, animationClips);
-      animationClips.forEach((clip) => {
-        mixer.clipAction(clip);
-      });
-      mixers.push(mixer);
-      zPosition -= 5;
-      button.visible = true;
-      scene.add(button);
-    }
-    /*prefab.traverse(child => {
-      child.visible = false;
-    });*/
-  });
+    const loader = new GLTFLoader();
+    loader.load('./models/ButtonFilterPrefab.glb', (gltf) => {
+        const prefab = gltf.scene;
+        const backgroundSphere = scene.getObjectByName('backgroundSphere');
+        if (backgroundSphere) {
+            scene.remove(backgroundSphere);
+        }
+        const size = GetBoundingBoxOptionalSetCamera(scene, false);
+
+        if (backgroundSphere) {
+            scene.add(backgroundSphere);
+        }
+        let zPosition = size.z;
+        const fontLoader = new FontLoader();
+        fontLoader.load('./fonts/googlesans-medium.json', (font) => {
+            for (const key in MapObjectsListByCategoryName) {
+                const button = prefab.clone(true).children[0];
+                button.userData.place_category_name = key;
+                button.position.set((size.x / 2) + 3.5, 0, zPosition / 2);
+                const mixer = new THREE.AnimationMixer(button);
+                const animationClips = gltf.animations.map(clip => clip.clone());
+                allAvailableAnimationClipsMap.set(button, animationClips);
+                animationClips.forEach((clip) => {
+                    mixer.clipAction(clip);
+                });
+                mixers.push(mixer);
+                button.visible = true;
+                scene.add(button);
+
+                const formattedKey = key.replace(/ /g, '\n');
+                const position = new THREE.Vector3(button.position.x, button.position.y + 2.5, button.position.z);
+                const { textMesh, planeMesh } = createTextMeshAndPlane(formattedKey, position, font);
+
+                textMesh.rotation.setFromVector3(new THREE.Vector3(0, Math.PI / 2, 0));
+                planeMesh.rotation.copy(textMesh.rotation);
+
+                lookAtCamera.push(textMesh, planeMesh);
+                scene.add(textMesh, planeMesh);
+
+                zPosition -= 10;
+            }
+        });
+    });
 }
 
 let hasUserInteracted = false;
@@ -292,11 +379,13 @@ controls.addEventListener('change', () => {
 });
 
 function animate() {
-  renderer.render(scene, camera);
   controls.update();
   mixers.forEach((mixer) => 
     mixer.update(clock.getDelta())
   );
+  lookAtCamera.forEach((object) => {
+    object.lookAt(camera.position);
+  });
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
@@ -333,7 +422,7 @@ window.addEventListener('pointerup', (event) => {
             action.play().setLoop(THREE.LoopOnce, 1);
           }
         }
-        ChangeObjectColorsByCategory(intersectedInteract.userData.place_category_name, new THREE.Color(0xff0000));
+        ChangeObjectColorsByCategory(intersectedInteract.userData.place_category_name, COLOR_SELECTED);
         break;
       }
     }
@@ -374,6 +463,9 @@ function ChangeColorOfSingleObject(object: THREE.Object3D, color: THREE.Color) {
       (mesh.material as THREE.MeshStandardMaterial).color.set(color);
     }
   });
+  MapObjectPlacesText[object.userData.place_id].forEach((text) => {
+    text.visible = true;
+  });
 }
 
 function RestoreOriginalColors() {
@@ -381,7 +473,11 @@ function RestoreOriginalColors() {
     const mesh = object as THREE.Mesh;
     (mesh.material as THREE.MeshStandardMaterial).color.copy(color);
   });
-
+  for (const key in MapObjectPlacesText) {
+    MapObjectPlacesText[key].forEach((text) => {
+      text.visible = false;
+    });
+  }
   // Clear the map after restoring colors
   originalColors.clear();
 }
@@ -398,7 +494,7 @@ function AddCarouselItem(imageUrl: string, description: string, object: THREE.Ob
   //add a button event to the item
   newItem.addEventListener('click', () => {
     RestoreOriginalColors();
-    ChangeColorOfSingleObject(object, new THREE.Color(0xff0000));
+    ChangeColorOfSingleObject(object, COLOR_SELECTED);
   });
 }
 

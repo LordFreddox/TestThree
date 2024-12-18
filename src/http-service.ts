@@ -15,7 +15,7 @@ function GetPlaces(companyId: string): Promise<response> {
   return new Promise((result, reject) => {
       get('/places/unitypublic', companyId)
         .then(response => response.json())
-        .then(json => result(json.data))
+        .then(json => result(json.response))
         .catch(error => reject(error))
   })
 }
@@ -34,7 +34,10 @@ export interface Place {
 }
 
 interface response {
-  data_place: Place[],
+  data_place: places,
+}
+interface places {
+  places: Place[],
 }
 
 export { GetPlaces }
