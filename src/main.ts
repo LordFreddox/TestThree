@@ -46,6 +46,8 @@ const camera = new THREE.OrthographicCamera(
   1, 
   1500);
 
+//const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 2000)
+
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = 0;                // Permitir vista directamente hacia abajo
 controls.maxPolarAngle = Math.PI / 2.1;      // Limitar angulo de camara
@@ -137,8 +139,14 @@ function loadModelWithCallback(
   );
 }
 
-const placeId = new URLSearchParams(window.location.search).get('placeId') || "0";
-const modelUrl = placeId === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + placeId + '.glb';
+const urlParams = new URLSearchParams(window.location.search);
+const placeId = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
+let modelUrl;
+if (window.location.hostname === "localhost") {
+  modelUrl = './models/' + placeId + '.glb';
+} else {
+  modelUrl = placeId === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + placeId + '.glb';
+}
 
 loadModelWithCallback(
   modelUrl,
@@ -200,16 +208,21 @@ function GetBoundingBoxOptionalSetCamera(object: THREE.Object3D, setCamera: bool
       const box = new THREE.Box3().setFromObject(object);
       const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
+
+      //create a debug box that represents the bounding box
+      /*const helper = new THREE.Box3Helper(box, 0xffff00);
+      scene.add(helper);*/
+
       if(setCamera){
         //camera.position.set(size.x + 10, center.y + size.y + 30, center.z + size.z + 10);
         camera.position.set(size.x + 10, center.y + size.y + 13, 0);
         camera.far = size.length() * 10;
         camera.zoom = -size.length() / 10;
-
+        const mediam = (size.x + size.z) / 2;
         minPan = new THREE.Vector3(-size.length() / 2, 0, -size.length() / 4);
         maxPan = new THREE.Vector3(size.length() / 2, 0, size.length() / 4);
-        controls.minZoom = 0.5;
-        controls.maxZoom = size.length() / 10;
+        controls.minZoom = mediam / 100;
+        controls.maxZoom = mediam / 20;
         controls.update();
       }
       return size;
@@ -325,7 +338,7 @@ function CreateButtonFilters() {
         if (backgroundSphere) {
             scene.add(backgroundSphere);
         }
-        let zPosition = size.z;
+        let zPosition = size.z / 2;
         const fontLoader = new FontLoader();
         fontLoader.load('./fonts/googlesans-medium.json', (font) => {
             for (const key in MapObjectsListByCategoryName) {

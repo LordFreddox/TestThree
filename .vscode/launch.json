@@ -3,32 +3,12 @@
     "configurations": [
         {
             "type": "pwa-msedge",
-            "request": "launch",
-            "name": "Launch Edge against localhost",
-            "url": "http://localhost:3000/index.html?placeId=198",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "type": "pwa-msedge",
             "name": "Launch Microsoft Edge",
             "request": "launch",
             "runtimeArgs": [
                 "--remote-debugging-port=9222"
             ],
-            "url": "http://localhost:3000/index.html?placeId=198", // Provide your project's url to finish configuring
-            "presentation": {
-                "hidden": true
-            }
-        },
-        {
-            "type": "pwa-msedge",
-            "name": "Launch Microsoft Edge in headless mode",
-            "request": "launch",
-            "runtimeArgs": [
-                "--headless",
-                "--remote-debugging-port=9222"
-            ],
-            "url": "http://localhost:3000/index.html?placeId=198", // Provide your project's url to finish configuring
+            "url": "http://localhost:3000/index.html?placeId=198&project=triptrapp", // Provide your project's url to finish configuring
             "presentation": {
                 "hidden": true
             }
@@ -37,7 +17,7 @@
             "type": "vscode-edge-devtools.debug",
             "name": "Open Edge DevTools",
             "request": "attach",
-            "url": "http://localhost:3000/index.html?placeId=198", // Provide your project's url to finish configuring
+            "url": "http://localhost:3000/index.html?placeId=198&fakeId=198-jacuzzis&project=triptrapp", // Provide your project's url to finish configuring
             "presentation": {
                 "hidden": true
             }
