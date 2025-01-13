@@ -9,30 +9,17 @@
   </head>
 
   <body style="background-color: black;padding: 0;">
-
-    <div id="loading" style="position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;">
-      <div id="loading-container" style=" width: 80%;background-color: #ccc;z-index: 2;margin-top: 400px;border-radius: 20%;margin-right: 10%;">
-        <div id="loading-bar" style="width: 0%;height: 20px;background-color: #4caf50;border-radius: 20%;"></div>
-      </div>
-      <video id="ui-video" style="position: fixed;z-index: 1;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;" src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/loading.mp4" autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px; pointer-events: none;"></video>
+    <div id="containerLabels">
+      <canvas id="canvas"></canvas>
+      <div id="labelsScene" class="unselectable"></div>
     </div>
+
     <img id="tutorial" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
       height: 10vh;margin-top: 75vw;" 
-      src="https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/tutos/zoomout.webp" 
+      src="/img/zoomout.webp" 
       autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
       pointer-events: none;"/>
+
     <script>
       function toggleVisibility(id) {
         var element = document.getElementById(id);
@@ -43,14 +30,38 @@
         console.log(text);
       }
     </script>
-    <footer id="footer" class="footer show">
-      <input id="search-bar" type="text" class="search-bar" placeholder="Buscar...">
+
+    <div id="loadingMain" style="position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;">
+        <div class="load-4">
+          <div class="ring-1"></div>
+        </div>
+        <div id="loading-container" style="width: 80%; background-color: #ccc; border-radius: 20%; margin-top: 10vh;">
+          <div id="loading-bar" style="width: 0%; height: 20px; background-color: #4caf50; border-radius: 20%;"></div>
+        </div>
+    </div>
+
+    <!--create dropdown-->
+    <select id="floor-selector" class="floor-selector" title="Select Floor">
+    </select>
+
+    <footer id="footer" class="footer show" style="display: none;">
+      <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..."/>
       <div class="carousel">
         <div class="carousel-container unselectable">
         </div>
       </div>
+
     </footer>
+
     <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div>
+    
     <script>
       const carouselContainer = document.querySelector('.carousel-container');
 

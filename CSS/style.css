@@ -31,90 +31,78 @@ html, body {
     transform: translate(-50%, -50%);
 }
 
-.ImageCompany{
-    position: absolute;
-    top: 10%;
-    max-width: 35%;
-    max-height: 20%;
-    margin-left: 2vw;
+#canvas {
+    width: 100%;
+    height: 100%;
+    width: 100%;  
+    height: 100%;
+    display: block;
 }
-
-.containerFilters {
-    position: absolute;
-    margin-left: 3vw;
-    top: 20%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 30%; /* Adjust the width as needed */
-    float: left;
-}
-.toggle-section {
-    background-color: white;
-    border-radius: 10px;
+#containerLabels {
+    position: absolute;  
+    width: 100%;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.toggle-header {
-    cursor: pointer;
-    font-weight: bold;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #e0e0e0;
-}
-.toggle-content {
-    display: none;
-    padding: 15px;
-}
-.child-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.child-item {
-    flex: 1 1 calc(25% - 10px); /* Adjust the width and spacing */
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.child-item.color1 {
-    background-color: #e0e0e0; 
-}
-.child-item.color2 {
-    background-color: #ffcc00; 
-}
-.child-item.color3 {
-    background-color: #ff6600; 
 }
 
-.child-item.color4 {
-    background-color: #266de0; 
+#labelsScene {
+    position: absolute;  
+    z-index: 0;          
+    left: 0;            
+    top: 0;
+    color: black;
+    z-index: 0;
+}
+#labelsScene>div {
+    position: absolute;  
+    left: 0;             
+    top: 0;
+    font-size: 1em;
+    text-align: center;
+    text-shadow:         
+        -1px -1px 0 #ffffff,
+        0   -1px 0 #ffffff,
+        1px -1px 0 #ffffff,
+        1px  0   0 #ffffff,
+        1px  1px 0 #ffffff,
+        0    1px 0 #ffffff,
+        -1px  1px 0 #ffffff,
+        -1px  0   0 #ffffff;
+}
+
+.floor-selector {
+    position: absolute;
+    display: none;
+    top: 5vh;
+    left: 5vw;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
 }
 
 .footer {
     position: fixed;
-    bottom: -100%; /* Start hidden below the viewport */
+    bottom: -100%; 
     width: 100%;
     background-color: #333;
     padding: 10px;
     text-align: center;
-    transition: bottom 0.3s ease-in-out; /* Smooth transition */
+    transition: bottom 0.3s ease-in-out; 
 }
 
 .show{
-    bottom: 0; /* Show the footer */
+    bottom: 0; 
 }
 
 .footer-button {
     position: fixed;
     bottom: 1vh;
     right: 45%;
-    background-image: url('/img/ico_menu.png'); /* Real image */
-    background-size: contain; /* Ensure the entire image is visible */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-image: url('/img/ico_menu.png');
+    background-size: contain; 
+    background-repeat: no-repeat; 
     cursor: pointer;
-    z-index: 1000; /* Ensure it is above other elements */
+    z-index: 1000; 
     width: 8vw;
     height: 5vh;
     rotate: 90deg;
@@ -143,13 +131,13 @@ html, body {
     gap: 10px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none; 
     bottom: 0;
     
 }
 
 .carousel-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none; 
 }
 
 .carousel-item {
@@ -159,13 +147,13 @@ html, body {
     text-align: center;
     color: white;
     scroll-snap-align: start;
-    flex: 0 0 20%; /* Ensure items maintain a consistent size */
-    display: block; /* Ensure items are initially visible */
+    flex: 0 0 20%; 
+    display: block;
     height: 15vh;
 }
 
 .carousel-item.hidden {
-    display: none; /* Hide items when they do not match the search term */
+    display: none;
 }
 
 .carousel-item img {
@@ -176,4 +164,36 @@ html, body {
 .carousel-item p {
     margin-top: 10px;
     font-size: 0.7em;
+}
+
+.ring-1 {
+    display: block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: 20px dashed #ffffff;
+    border-radius: 100%;
+}
+
+.load-4 .ring-1 {
+    display: block;
+    align-items: center;
+    animation: loadingD 1.5s 0.3s cubic-bezier(0.17, 0.37, 0.43, 0.67) infinite;
+}
+
+.l-4 {
+    animation-delay: 0.84s;
+}
+
+@keyframes loadingD {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
