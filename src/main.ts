@@ -19,7 +19,8 @@ searchBar?.addEventListener('input', () => {
 const labelContainerElem = document.querySelector( '#labelsScene' );
 
 const scene = new Scene();
-const BASE_URL = 'https://sasiteit.blob.core.windows.net/container-unity/UnityBundles/webgl/ThreeJSProduction/MapsThree/models/';
+const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
+const BASE_URL = `${window.location.origin}${basePath}/models/`;
 //let animationArray = [] as THREE.AnimationAction[];
 const renderer = new WebGLRenderer({ antialias: true, alpha: true, canvas: document.querySelector('canvas')! });
 renderer.setClearColor(0x000000, 0);
@@ -188,7 +189,24 @@ function GetBoundingBoxSizeAndCenterOfObject(object: Object3D) {
 
 function GetPlacesReal(companyId: string){
   GetPlaces(companyId).then(json => {
-    json.data_place.places.forEach((place) => {
+    let places: Place[];
+    if(PROJECT === 'BOT'){
+      //initialize places array with objects
+      places = json.data.places.map(() => ({} as Place));
+      for (let i = 0; i < json.data.places.length; i++) {
+        places[i].place_id = json.data.places[i].id;
+        places[i].place_category_name = json.data.places[i].category;
+        places[i].place_area_name = json.data.places[i].floor.name;
+        places[i].place_area_id = json.data.places[i].floor.id;
+        places[i].companysubsidiary_name = json.data.places[i].name;
+        places[i].companysubsidiary_image_url = json.data.places[i].image;
+        places[i].company_id = json.data.places[i].company.id;
+        places[i].company_name = json.data.places[i].company.name;
+      }
+    }else{
+      places = json.data_place.places;
+    }
+    places.forEach((place) => {
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
       AddCarouselItem(place.companysubsidiary_image_url, place.companysubsidiary_name, object);
@@ -200,6 +218,8 @@ function GetPlacesReal(companyId: string){
       CreateTextForPlace(place, object);
     }
     });
+    updateLabelPositions();
+    updateLabelVisibility();
     //CreateButtonFilters();
   }).catch((error) => {
     console.error("Error al obtener los lugares:", error);
@@ -207,7 +227,7 @@ function GetPlacesReal(companyId: string){
 }
 
 function GetPlacesFake(){
-  fetch('src/response_bot.json')
+  fetch('src/response_uniandes.json')
   .then(json => {
     if (!json.ok) {
       console.log('Network response was not ok');
@@ -230,7 +250,7 @@ function GetPlacesFake(){
         places[i].company_name = json.data.places[i].company.name;
       }
     }else{
-      places = json.response.data_place.places;
+      places = json.data_place.places;
     }
     places.forEach((place) => {
     const object = scene.getObjectByName(place.place_id.toString());
@@ -527,7 +547,7 @@ function initFloorSelector() {
   defaultOption.text = 'Todos los Pisos';
   floorSelector.appendChild(defaultOption);
 
-  floorLevels.forEach((floor, index) => {
+  floorLevels.forEach((_, index) => {
     const option = document.createElement('option');
     option.value = index.toString();
     option.text = `Piso ${index + 1}`;

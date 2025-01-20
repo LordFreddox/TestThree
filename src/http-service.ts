@@ -12,7 +12,11 @@ const base_url = ProjectBaseURL[PROJECT];
 
 function get(url: string, companyId: string) {
   return fetch(`${base_url}${url}?cli=PUnity&companyId=${companyId}`, {
-    method: "GET"
+    method: "GET",
+    headers: {
+      'cli': 'PUnity',
+      'companyId': companyId
+    }
   });
 }
 
@@ -27,7 +31,7 @@ function GetPlaces(companyId: string): Promise<response> {
     if(PROJECT === 'BOT') {
       getBot('/place/listall', companyId)
       .then(response => response.json())
-      .then(json => result(json.response))
+      .then(json => result(json))
       .catch(error => reject(error));
     } else {
       get('/places/unitypublic', companyId)
@@ -48,12 +52,42 @@ export interface Place {
   company_id: number,
   company_name: string,
 }
+export interface PlaceBot {
+  id: number,
+  reference: string,
+  name: string,
+  image: string,
+  category: string,
+  area: {
+    id: number,
+    name: string,
+  },
+  floor: {
+    id: number,
+    name: string,
+  },
+  company: {
+    id: number,
+    name: string,
+    logo: string,
+    primary_color: string,
+  }
+}
 
 interface response {
   data_place: places,
+  data: placesBot,
 }
+
+/*interface data{
+  places: placesBot
+}*/
+
 interface places {
   places: Place[],
+}
+interface placesBot {
+  places: PlaceBot[],
 }
 
 export { GetPlaces, PROJECT }

@@ -1,0 +1,3195 @@
+{
+  "data": {
+    "places": [
+      {
+        "id": 1805,
+        "reference": "zion_13012",
+        "name": "Fondo Uniandes",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-06/723_companyImage_1688065243691.jpeg",
+        "area": {
+          "id": 151,
+          "name": "Uniandes"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1806,
+        "reference": "zion_13013",
+        "name": "Aula Virtual",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6481_companysubsidiaryImage1_1688066737529.jpeg",
+        "area": {
+          "id": 152,
+          "name": "Uniandes"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1807,
+        "reference": "zion_13014",
+        "local": " ",
+        "name": "Bloque RGB",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6483_companysubsidiaryImage1_1688066644928.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1808,
+        "reference": "zion_13015",
+        "name": "Aula Virtual",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6482_companysubsidiaryImage1_1688065645776.jpeg",
+        "area": {
+          "id": 151,
+          "name": "Uniandes"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1812,
+        "reference": "zion_13740",
+        "local": "  ",
+        "name": "Administración ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/7179_companysubsidiaryImage1_1681856272946.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1813,
+        "reference": "zion_13860",
+        "local": " ",
+        "name": "Muro de Escala ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/7323_companysubsidiaryImage1_1681861860247.jpeg",
+        "area": {
+          "id": 144,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1814,
+        "reference": "zion_13861",
+        "local": " ",
+        "name": "Cancha de Fútbol ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/7324_companysubsidiaryImage1_1681861805277.jpeg",
+        "area": {
+          "id": 141,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1815,
+        "reference": "zion_13862",
+        "local": " ",
+        "name": "Cafeteria ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/7325_companysubsidiaryImage1_1681861785930.jpeg",
+        "area": {
+          "id": 143,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1816,
+        "reference": "zion_15230",
+        "local": " ",
+        "name": "Lobby ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8231_companysubsidiaryImage1_1681323755986.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1817,
+        "reference": "zion_15231",
+        "local": " ",
+        "name": "Lockers",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8232_companysubsidiaryImage1_1681323837081.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1818,
+        "reference": "zion_15232",
+        "local": " ",
+        "name": "Mesas de trabajo",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8238_companysubsidiaryImage1_1681324995124.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1825,
+        "reference": "zion_15239",
+        "local": " ",
+        "name": "Cafetería Canela ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8243_companysubsidiaryImage1_1681325972892.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1865,
+        "reference": "zion_15285",
+        "local": " ",
+        "name": "Terraza",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8283_companysubsidiaryImage1_1681346051848.jpeg",
+        "area": {
+          "id": 159,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1872,
+        "reference": "zion_15294",
+        "local": " ",
+        "name": "Cajero Servibanca",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/8290_companysubsidiaryImage1_1686752950863.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1877,
+        "reference": "zion_15299",
+        "local": " ",
+        "name": "Área Coworking",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8296_companysubsidiaryImage1_1681422486348.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1883,
+        "reference": "zion_15306",
+        "local": " ",
+        "name": "Servicio aulas",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8303_companysubsidiaryImage1_1681424002601.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1886,
+        "reference": "zion_15309",
+        "local": " ",
+        "name": "Sala de profesores",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8306_companysubsidiaryImage1_1681424669867.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1887,
+        "reference": "zion_15310",
+        "local": " ",
+        "name": "Sala Working ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8307_companysubsidiaryImage1_1681427022798.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1890,
+        "reference": "zion_15313",
+        "local": " ",
+        "name": "Baños",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8291_companysubsidiaryImage1_1681420448635.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1891,
+        "reference": "zion_15315",
+        "local": " ",
+        "name": "Vending Machine",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8313_companysubsidiaryImage1_1681427604137.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1897,
+        "reference": "zion_15322",
+        "local": " ",
+        "name": "Lockers",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8321_companysubsidiaryImage1_1681428451278.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1911,
+        "reference": "zion_15344",
+        "local": " ",
+        "name": "Edificio C Arquitectura",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8230_companysubsidiaryImage1_1681323168173.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1912,
+        "reference": "zion_15345",
+        "local": " ",
+        "name": "Edificio RGD ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8335_companysubsidiaryImage1_1681430656432.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1913,
+        "reference": "zion_15348",
+        "local": " ",
+        "name": "Sala de Reuniones",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-05/8338_companysubsidiaryImage1_1683141395159.jpeg",
+        "area": {
+          "id": 167,
+          "name": "Piso 7"
+        },
+        "floor": {
+          "id": 7,
+          "name": "Piso 7"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1915,
+        "reference": "zion_15368",
+        "local": " ",
+        "name": "Ascensores",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8302_companysubsidiaryImage1_1681423769550.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1916,
+        "reference": "zion_15370",
+        "local": " ",
+        "name": "Ascensores ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8240_companysubsidiaryImage1_1681325207940.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1917,
+        "reference": "zion_15377",
+        "local": " ",
+        "name": "Recepción ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/8354_companysubsidiaryImage1_1686860479287.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1923,
+        "reference": "zion_15387",
+        "local": " ",
+        "name": "Edificio Mario Laserna ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8361_companysubsidiaryImage1_1688592870512.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1924,
+        "reference": "zion_15388",
+        "local": " ",
+        "name": "Edificio Alberto Lleras",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8362_companysubsidiaryImage1_1688594229930.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1925,
+        "reference": "zion_15389",
+        "local": " ",
+        "name": "Edificio Aulas ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8363_companysubsidiaryImage1_1688595376923.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1926,
+        "reference": "zion_15390",
+        "local": " ",
+        "name": "Gestión Humana y Desarrollo",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8364_companysubsidiaryImage1_1688661762848.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1927,
+        "reference": "zion_15391",
+        "local": " ",
+        "name": "Edificio Pedro Navas ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8365_companysubsidiaryImage1_1688653215052.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1928,
+        "reference": "zion_15392",
+        "local": " ",
+        "name": "Edificio Centro del Japón",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8366_companysubsidiaryImage1_1688658627667.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1929,
+        "reference": "zion_15393",
+        "local": " ",
+        "name": "Facultad Ciencias Sociales ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8367_companysubsidiaryImage1_1688661142206.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1930,
+        "reference": "zion_15394",
+        "local": " ",
+        "name": "Facultad de Educación Uniandes",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8368_companysubsidiaryImage1_1688664145865.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1931,
+        "reference": "zion_15395",
+        "local": " ",
+        "name": "Juan Valdez Café",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/2636_companysubsidiaryImage1_1688664634701.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1932,
+        "reference": "zion_15396",
+        "local": " ",
+        "name": "Edif. Roberto Franco",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8369_companysubsidiaryImage1_1688665753727.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1933,
+        "reference": "zion_15397",
+        "local": " ",
+        "name": "Bloque E",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8370_companysubsidiaryImage1_1688667800451.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1934,
+        "reference": "zion_15398",
+        "local": " ",
+        "name": "Artesanías Colombianas Uniandes",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8371_companysubsidiaryImage1_1688668541686.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1935,
+        "reference": "zion_15399",
+        "local": " ",
+        "name": "City U",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8372_companysubsidiaryImage1_1688673146112.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1936,
+        "reference": "zion_15514",
+        "local": " ",
+        "name": "Velas / Artesanales ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-03/8468_companysubsidiaryImage1_1710430662773.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1937,
+        "reference": "zion_16004",
+        "local": " ",
+        "name": "Becas",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8604_companysubsidiaryImage1_1718208287968.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1819,
+        "reference": "zion_15233",
+        "local": "104",
+        "name": "C104",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8233_companysubsidiaryImage1_1681324415614.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1820,
+        "reference": "zion_15234",
+        "local": "105",
+        "name": "C105",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8234_companysubsidiaryImage1_1681324558582.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1821,
+        "reference": "zion_15235",
+        "local": "106",
+        "name": "C106",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8235_companysubsidiaryImage1_1681324717102.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1822,
+        "reference": "zion_15236",
+        "local": "107",
+        "name": "C107",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8236_companysubsidiaryImage1_1681324797286.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1823,
+        "reference": "zion_15237",
+        "local": "108",
+        "name": "C108",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8237_companysubsidiaryImage1_1681324882078.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1827,
+        "reference": "zion_15241",
+        "local": "202",
+        "name": "C202",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8245_companysubsidiaryImage1_1681326469201.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1828,
+        "reference": "zion_15242",
+        "local": "203",
+        "name": "C203",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8246_companysubsidiaryImage1_1681326647582.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1882,
+        "reference": "zion_15304",
+        "local": "203",
+        "name": "203",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8301_companysubsidiaryImage1_1681423570739.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1829,
+        "reference": "zion_15244",
+        "local": "204",
+        "name": "C204",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8247_companysubsidiaryImage1_1681326759195.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1830,
+        "reference": "zion_15245",
+        "local": "205",
+        "name": "C205",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8248_companysubsidiaryImage1_1681326849265.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1831,
+        "reference": "zion_15246",
+        "local": "206",
+        "name": "C206",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8249_companysubsidiaryImage1_1681326957829.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1833,
+        "reference": "zion_15248",
+        "local": "210",
+        "name": "C210",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8251_companysubsidiaryImage1_1681327269418.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1834,
+        "reference": "zion_15249",
+        "local": "211",
+        "name": "C211",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8252_companysubsidiaryImage1_1681327366880.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1835,
+        "reference": "zion_15250",
+        "local": "212",
+        "name": "C212",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8253_companysubsidiaryImage1_1681327532868.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1836,
+        "reference": "zion_15251",
+        "local": "213",
+        "name": "C213",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8254_companysubsidiaryImage1_1681327623420.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1837,
+        "reference": "zion_15253",
+        "local": "301",
+        "name": "C301",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8255_companysubsidiaryImage1_1681327802654.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1838,
+        "reference": "zion_15254",
+        "local": "302",
+        "name": "C302",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8256_companysubsidiaryImage1_1681327920025.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1839,
+        "reference": "zion_15255",
+        "local": "303",
+        "name": "C303",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8257_companysubsidiaryImage1_1681328038640.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1840,
+        "reference": "zion_15256",
+        "local": "304",
+        "name": "C304",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8258_companysubsidiaryImage1_1681340667654.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1841,
+        "reference": "zion_15257",
+        "local": "305",
+        "name": "C305",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8259_companysubsidiaryImage1_1681340990697.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1842,
+        "reference": "zion_15258",
+        "local": "306",
+        "name": "C306",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8260_companysubsidiaryImage1_1681341103741.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1843,
+        "reference": "zion_15259",
+        "local": "307",
+        "name": "C307",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8261_companysubsidiaryImage1_1681341199628.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1844,
+        "reference": "zion_15261",
+        "local": "308",
+        "name": "C308",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8262_companysubsidiaryImage1_1681341384469.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1845,
+        "reference": "zion_15262",
+        "local": "309",
+        "name": "C309",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8263_companysubsidiaryImage1_1681342099564.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1847,
+        "reference": "zion_15265",
+        "local": "401",
+        "name": "C401",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8265_companysubsidiaryImage1_1681342400550.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1848,
+        "reference": "zion_15266",
+        "local": "402",
+        "name": "C402",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8266_companysubsidiaryImage1_1681342533858.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1849,
+        "reference": "zion_15267",
+        "local": "403",
+        "name": "C403",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8267_companysubsidiaryImage1_1681342647103.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1850,
+        "reference": "zion_15268",
+        "local": "404",
+        "name": "C404",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8268_companysubsidiaryImage1_1681342829374.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1851,
+        "reference": "zion_15269",
+        "local": "405",
+        "name": "C405",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8269_companysubsidiaryImage1_1681342952079.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1852,
+        "reference": "zion_15270",
+        "local": "407",
+        "name": "C407",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8270_companysubsidiaryImage1_1681343062942.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1853,
+        "reference": "zion_15271",
+        "local": "408",
+        "name": "C408",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8271_companysubsidiaryImage1_1681343157496.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1854,
+        "reference": "zion_15272",
+        "local": "409a",
+        "name": "C409a",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8272_companysubsidiaryImage1_1681343283391.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1855,
+        "reference": "zion_15273",
+        "local": "409b",
+        "name": "C409b",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8273_companysubsidiaryImage1_1681343433983.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1856,
+        "reference": "zion_15274",
+        "local": "410",
+        "name": "C410",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8274_companysubsidiaryImage1_1681343809089.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1857,
+        "reference": "zion_15275",
+        "local": "411",
+        "name": "C411",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8275_companysubsidiaryImage1_1681343909220.jpeg",
+        "area": {
+          "id": 157,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1858,
+        "reference": "zion_15276",
+        "local": "501",
+        "name": "C501",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8276_companysubsidiaryImage1_1681344021793.jpeg",
+        "area": {
+          "id": 158,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1859,
+        "reference": "zion_15277",
+        "local": "502",
+        "name": "C502",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8277_companysubsidiaryImage1_1681344106579.jpeg",
+        "area": {
+          "id": 158,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1860,
+        "reference": "zion_15278",
+        "local": "503",
+        "name": "C503",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8278_companysubsidiaryImage1_1681344194902.jpeg",
+        "area": {
+          "id": 158,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1861,
+        "reference": "zion_15280",
+        "local": "505",
+        "name": "C505",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8279_companysubsidiaryImage1_1681344314144.jpeg",
+        "area": {
+          "id": 158,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1862,
+        "reference": "zion_15281",
+        "local": "506",
+        "name": "C506",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8280_companysubsidiaryImage1_1681344399290.jpeg",
+        "area": {
+          "id": 158,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1863,
+        "reference": "zion_15282",
+        "local": "507",
+        "name": "C507",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8281_companysubsidiaryImage1_1681344500713.jpeg",
+        "area": {
+          "id": 158,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1864,
+        "reference": "zion_15283",
+        "local": "508",
+        "name": "C508",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8282_companysubsidiaryImage1_1681345363387.jpeg",
+        "area": {
+          "id": 158,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1866,
+        "reference": "zion_15286",
+        "local": "605",
+        "name": "C605",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8284_companysubsidiaryImage1_1681346191577.jpeg",
+        "area": {
+          "id": 159,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1867,
+        "reference": "zion_15287",
+        "local": "606",
+        "name": "C606",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8285_companysubsidiaryImage1_1681346276161.jpeg",
+        "area": {
+          "id": 159,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1868,
+        "reference": "zion_15288",
+        "local": "607",
+        "name": "C607",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8286_companysubsidiaryImage1_1681346369878.jpeg",
+        "area": {
+          "id": 159,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1869,
+        "reference": "zion_15289",
+        "local": "608",
+        "name": "C608",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8287_companysubsidiaryImage1_1681346532934.jpeg",
+        "area": {
+          "id": 159,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1870,
+        "reference": "zion_15290",
+        "local": "609",
+        "name": "C609",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8288_companysubsidiaryImage1_1681346611672.jpeg",
+        "area": {
+          "id": 159,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1871,
+        "reference": "zion_15291",
+        "local": "610",
+        "name": "C610",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8289_companysubsidiaryImage1_1681346749673.jpeg",
+        "area": {
+          "id": 159,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1790,
+        "reference": "zion_12985",
+        "local": "Atención",
+        "name": "Recepción",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 149,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1779,
+        "reference": "zion_11703",
+        "local": "Atención médica",
+        "name": "Deportólogo",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 145,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1780,
+        "reference": "zion_11714",
+        "local": "Bienestar",
+        "name": "Sala de Capacitaciones ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 146,
+          "name": "Piso 6"
+        },
+        "floor": {
+          "id": 6,
+          "name": "Piso 6"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1781,
+        "reference": "zion_11715",
+        "local": "Billar",
+        "name": "Billar - Juegos de mesa",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 144,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1797,
+        "reference": "zion_12996",
+        "local": "Cafetería",
+        "name": "Cafetería",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6474_companysubsidiaryImage1_1688065742716.jpeg",
+        "area": {
+          "id": 150,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1787,
+        "reference": "zion_12981",
+        "local": "Cafetería",
+        "name": "Cafetería",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1782,
+        "reference": "zion_11716",
+        "local": "Cancha",
+        "name": "Cancha Gata",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/5157_companysubsidiaryImage1_1681861824032.jpeg",
+        "area": {
+          "id": 141,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1775,
+        "reference": "zion_11686",
+        "local": "Cardio",
+        "name": "Sala de Spinning",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 143,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1794,
+        "reference": "zion_12989",
+        "local": "CedEx",
+        "name": "Soluciones Académicas",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 148,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1804,
+        "reference": "zion_13010",
+        "local": "CedEx",
+        "name": "Fondo Uniandes",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1783,
+        "reference": "zion_12975",
+        "local": "CedEx",
+        "name": "Colaboración ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1784,
+        "reference": "zion_12976",
+        "local": "CedEx",
+        "name": "Comunicaciones ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1785,
+        "reference": "zion_12978",
+        "local": "CedEx",
+        "name": "Interconexión",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1786,
+        "reference": "zion_12980",
+        "local": "CedEx",
+        "name": "Investigación ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1809,
+        "reference": "zion_13016",
+        "local": "Ch",
+        "name": "Bloque CH",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6484_companysubsidiaryImage1_1688065973240.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1778,
+        "reference": "zion_11702",
+        "local": "Danzas",
+        "name": "Salón Danzas",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 144,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1798,
+        "reference": "zion_12998",
+        "local": "Dirección",
+        "name": "Directora",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6472_companysubsidiaryImage1_1688065957090.jpeg",
+        "area": {
+          "id": 150,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1789,
+        "reference": "zion_12983",
+        "local": "Estandarización",
+        "name": "Estandarización",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 148,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1810,
+        "reference": "zion_13017",
+        "local": "Ga",
+        "name": "Gata Golosa ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/6485_companysubsidiaryImage1_1681861835333.jpeg",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1799,
+        "reference": "zion_12999",
+        "local": "Habilitación",
+        "name": "Habilitación Tecnológica",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6473_companysubsidiaryImage1_1688066026050.jpeg",
+        "area": {
+          "id": 150,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1773,
+        "reference": "zion_11668",
+        "local": "Juegos",
+        "name": "Tenis de mesa ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 141,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1826,
+        "reference": "zion_15240",
+        "local": "Medialab",
+        "name": "C201",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8244_companysubsidiaryImage1_1681326361070.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1832,
+        "reference": "zion_15247",
+        "local": "Oficina",
+        "name": "Préstamo de Portátiles ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8250_companysubsidiaryImage1_1681327116701.jpeg",
+        "area": {
+          "id": 155,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1776,
+        "reference": "zion_11691",
+        "local": "Peso",
+        "name": "Gimnasio de Fuerza ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 142,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1774,
+        "reference": "zion_11684",
+        "local": "Piscina",
+        "name": "Piscina Semiolímpica ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 142,
+          "name": "Piso 5"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1777,
+        "reference": "zion_11701",
+        "local": "Pista",
+        "name": "Pista de Atletismo",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+        "area": {
+          "id": 144,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1796,
+        "reference": "zion_12995",
+        "local": "Presupuesto",
+        "name": "Presupuesto",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1846,
+        "reference": "zion_15264",
+        "local": "Privado",
+        "name": "Oficinas",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8264_companysubsidiaryImage1_1681342223169.jpeg",
+        "area": {
+          "id": 156,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1793,
+        "reference": "zion_12988",
+        "local": "Proveedores ",
+        "name": "Sala de Reuniones",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 147,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1788,
+        "reference": "zion_12982",
+        "local": "Proyectos",
+        "name": "Proyectos ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 148,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1803,
+        "reference": "zion_13003",
+        "local": "Recepción",
+        "name": "Recepción",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6467_companysubsidiaryImage1_1688066086549.jpeg",
+        "area": {
+          "id": 150,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1795,
+        "reference": "zion_12990",
+        "local": "Relaciones",
+        "name": "Relaciones TIE Académicas ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 148,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1800,
+        "reference": "zion_13000",
+        "local": "Relaciones TI",
+        "name": "Jefe de relaciones TI",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6471_companysubsidiaryImage1_1688066057272.jpeg",
+        "area": {
+          "id": 150,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1791,
+        "reference": "zion_12986",
+        "local": "RGB 202",
+        "name": "Sala RGB 202",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 148,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1792,
+        "reference": "zion_12987",
+        "local": "RGB 205",
+        "name": "Sala RGB 205",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2023-04/722_companyImage_1681857079011.jpeg",
+        "area": {
+          "id": 148,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1873,
+        "reference": "zion_15295",
+        "local": "RGD",
+        "name": "113",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8292_companysubsidiaryImage1_1681420749219.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1874,
+        "reference": "zion_15296",
+        "local": "RGD",
+        "name": "112",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8293_companysubsidiaryImage1_1681420811272.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1875,
+        "reference": "zion_15297",
+        "local": "RGD",
+        "name": "111",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8294_companysubsidiaryImage1_1681420971722.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1876,
+        "reference": "zion_15298",
+        "local": "RGD",
+        "name": "110",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8295_companysubsidiaryImage1_1681422359742.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1878,
+        "reference": "zion_15300",
+        "local": "RGD",
+        "name": "107",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8297_companysubsidiaryImage1_1681422593720.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1879,
+        "reference": "zion_15301",
+        "local": "RGD",
+        "name": "106",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8298_companysubsidiaryImage1_1681422715281.jpeg",
+        "area": {
+          "id": 160,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1880,
+        "reference": "zion_15302",
+        "local": "RGD",
+        "name": "201",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8299_companysubsidiaryImage1_1681422854217.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1881,
+        "reference": "zion_15303",
+        "local": "RGD",
+        "name": "202",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8300_companysubsidiaryImage1_1681422952502.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1884,
+        "reference": "zion_15307",
+        "local": "RGD",
+        "name": "206",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8304_companysubsidiaryImage1_1681424158810.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1885,
+        "reference": "zion_15308",
+        "local": "RGD",
+        "name": "207",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8305_companysubsidiaryImage1_1681424514251.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1888,
+        "reference": "zion_15311",
+        "local": "RGD",
+        "name": "210",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8308_companysubsidiaryImage1_1681427111657.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1889,
+        "reference": "zion_15312",
+        "local": "RGD",
+        "name": "212",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8310_companysubsidiaryImage1_1681427279701.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1892,
+        "reference": "zion_15316",
+        "local": "RGD",
+        "name": "312",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8315_companysubsidiaryImage1_1681427814755.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1893,
+        "reference": "zion_15318",
+        "local": "RGD",
+        "name": "309",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8317_companysubsidiaryImage1_1681428093666.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1894,
+        "reference": "zion_15319",
+        "local": "RGD",
+        "name": "308",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8318_companysubsidiaryImage1_1681428200115.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1895,
+        "reference": "zion_15320",
+        "local": "RGD",
+        "name": "307",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8319_companysubsidiaryImage1_1681428286363.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1896,
+        "reference": "zion_15321",
+        "local": "RGD",
+        "name": "306",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8320_companysubsidiaryImage1_1681428364375.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1898,
+        "reference": "zion_15323",
+        "local": "RGD",
+        "name": "Terraza",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8322_companysubsidiaryImage1_1681428548352.jpeg",
+        "area": {
+          "id": 163,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 5,
+          "name": "Piso 5"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1914,
+        "reference": "zion_15367",
+        "local": "RGD",
+        "name": "313",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8314_companysubsidiaryImage1_1681427742515.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1918,
+        "reference": "zion_15382",
+        "local": "RGD",
+        "name": "213",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8311_companysubsidiaryImage1_1681427379030.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1919,
+        "reference": "zion_15383",
+        "local": "RGD",
+        "name": "211",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8309_companysubsidiaryImage1_1681427199980.jpeg",
+        "area": {
+          "id": 161,
+          "name": "Piso 2"
+        },
+        "floor": {
+          "id": 2,
+          "name": "Piso 2"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1920,
+        "reference": "zion_15384",
+        "local": "RGD",
+        "name": "310",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/8359_companysubsidiaryImage1_1687881525757.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1921,
+        "reference": "zion_15385",
+        "local": "RGD",
+        "name": "311",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8316_companysubsidiaryImage1_1681427898626.jpeg",
+        "area": {
+          "id": 162,
+          "name": "Piso 3"
+        },
+        "floor": {
+          "id": 3,
+          "name": "Piso 3"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1801,
+        "reference": "zion_13001",
+        "local": "Sala",
+        "name": "Sala de Juntas",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6476_companysubsidiaryImage1_1688066132431.jpeg",
+        "area": {
+          "id": 150,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1811,
+        "reference": "zion_13021",
+        "local": "Tienda",
+        "name": "Speedo",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_696_1473451938.png",
+        "area": {
+          "id": 141,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1802,
+        "reference": "zion_13002",
+        "local": "Transformación ",
+        "name": "Transformación Digital ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6475_companysubsidiaryImage1_1688066162744.jpeg",
+        "area": {
+          "id": 150,
+          "name": "Piso 4"
+        },
+        "floor": {
+          "id": 4,
+          "name": "Piso 4"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1824,
+        "reference": "zion_15238",
+        "local": "Workshop",
+        "name": "C109 ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8242_companysubsidiaryImage1_1681325407754.jpeg",
+        "area": {
+          "id": 154,
+          "name": "Piso 1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      }
+    ]
+  }
+}
