@@ -2,11 +2,12 @@
   "data": {
     "places": [
       {
-        "id": 310,
-        "reference": "zion_16005",
+        "id": 327,
+        "reference": "zion_16025",
         "local": " ",
-        "name": "Oma",
-        "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/580_companysubsidiaryImage1_1627427785001.jpeg",
+        "name": "Bancolombia",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_408_1473018482.png",
+        "category": "Entidades Financieras",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -23,14 +24,15 @@
         }
       },
       {
-        "id": 311,
-        "reference": "zion_16006",
+        "id": 326,
+        "reference": "zion_16024",
         "local": " ",
-        "name": "Tostao",
-        "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/7536_companysubsidiaryImage1_1624931777614.jpeg",
+        "name": "Play Kids",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8612_companysubsidiaryImage1_1718821294542.jpeg",
+        "category": "Entretenimiento",
         "area": {
-          "id": 1,
-          "name": "Plaza Perú N1"
+          "id": 12,
+          "name": "Plaza Ecuador N1"
         },
         "floor": {
           "id": 1,
@@ -44,14 +46,15 @@
         }
       },
       {
-        "id": 312,
-        "reference": "zion_16007",
+        "id": 331,
+        "reference": "zion_16030",
         "local": " ",
-        "name": "Juan Valdez Café",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/2636_companysubsidiaryImage1_1688664634701.jpeg",
+        "name": "Samsung",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_490_1473178739.png",
+        "category": "Tecnología y Comunicaciones",
         "area": {
-          "id": 11,
-          "name": "Plaza Colombia N1"
+          "id": 3,
+          "name": "Plaza Francia N1"
         },
         "floor": {
           "id": 1,
@@ -69,7 +72,8 @@
         "reference": "zion_16008",
         "local": " ",
         "name": "Popsy ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/1_1461028111_.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/1_1461028111_.png",
+        "category": "Repostería",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -86,14 +90,15 @@
         }
       },
       {
-        "id": 314,
-        "reference": "zion_16010",
-        "local": " ",
-        "name": "Deli",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1644_1479766822.jpg",
+        "id": 329,
+        "reference": "zion_16028",
+        "local": "  ",
+        "name": "Obleas La Villa",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3019_1496336415.png",
+        "category": "Delikatessen",
         "area": {
-          "id": 10,
-          "name": "Plaza Venezuela N1"
+          "id": 1,
+          "name": "Plaza Perú N1"
         },
         "floor": {
           "id": 1,
@@ -107,14 +112,37 @@
         }
       },
       {
-        "id": 315,
-        "reference": "zion_16011",
+        "id": 333,
+        "reference": "zion_16032",
         "local": " ",
-        "name": "Cotopaxi",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8607_companysubsidiaryImage1_1718749260408.jpeg",
+        "name": "Starbucks Coffee",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_822_1473804940.png",
+        "category": "Delikatessen",
         "area": {
-          "id": 12,
-          "name": "Plaza Ecuador N1"
+          "id": 3,
+          "name": "Plaza Francia N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 322,
+        "reference": "zion_16020",
+        "local": " ",
+        "name": "Goyurt",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3366_1512586706.png",
+        "category": "Delikatessen",
+        "area": {
+          "id": 11,
+          "name": "Plaza Colombia N1"
         },
         "floor": {
           "id": 1,
@@ -133,156 +161,10 @@
         "local": " ",
         "name": "Punto de Información",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8605_companysubsidiaryImage1_1718748241001.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 317,
-        "reference": "zion_16015",
-        "local": " ",
-        "name": "Aventuras Santafe",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8608_companysubsidiaryImage1_1718818366723.jpeg",
-        "area": {
-          "id": 12,
-          "name": "Plaza Ecuador N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 318,
-        "reference": "zion_16016",
-        "local": " ",
-        "name": "KFC Postres",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8609_companysubsidiaryImage1_1718818786565.jpeg",
-        "area": {
-          "id": 10,
-          "name": "Plaza Venezuela N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 319,
-        "reference": "zion_16017",
-        "local": " ",
-        "name": "L'Bel",
-        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1263_1476214465.png",
-        "area": {
-          "id": 10,
-          "name": "Plaza Venezuela N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 320,
-        "reference": "zion_16018",
-        "local": " ",
-        "name": "Dluchi",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8610_companysubsidiaryImage1_1718819436329.jpeg",
-        "area": {
-          "id": 10,
-          "name": "Plaza Venezuela N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 321,
-        "reference": "zion_16019",
-        "local": " ",
-        "name": "Cinnabon",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_624_1473085656.png",
-        "area": {
-          "id": 11,
-          "name": "Plaza Colombia N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 322,
-        "reference": "zion_16020",
-        "local": " ",
-        "name": "Goyurt",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3366_1512586706.png",
-        "area": {
-          "id": 11,
-          "name": "Plaza Colombia N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 323,
-        "reference": "zion_16021",
-        "local": " ",
-        "name": "Maiz Kernel",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8611_companysubsidiaryImage1_1718820214685.jpeg",
-        "area": {
-          "id": 11,
-          "name": "Plaza Colombia N1"
         },
         "floor": {
           "id": 1,
@@ -315,11 +197,56 @@
         }
       },
       {
+        "id": 318,
+        "reference": "zion_16016",
+        "local": " ",
+        "name": "KFC Postres",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8609_companysubsidiaryImage1_1718818786565.jpeg",
+        "category": "Repostería",
+        "area": {
+          "id": 10,
+          "name": "Plaza Venezuela N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 311,
+        "reference": "zion_16006",
+        "local": " ",
+        "name": "Tostao",
+        "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/7536_companysubsidiaryImage1_1624931777614.jpeg",
+        "category": "Repostería",
+        "area": {
+          "id": 1,
+          "name": "Plaza Perú N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
         "id": 325,
         "reference": "zion_16023",
         "local": " ",
         "name": "Mc Donald's Heladería",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_419_1473436908.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_419_1473436908.png",
+        "category": "Delikatessen",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -336,14 +263,15 @@
         }
       },
       {
-        "id": 326,
-        "reference": "zion_16024",
+        "id": 335,
+        "reference": "zion_16034",
         "local": " ",
-        "name": "Play Kids",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8612_companysubsidiaryImage1_1718821294542.jpeg",
+        "name": "Mc Café",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_797_1473797576.jpg",
+        "category": "Delikatessen",
         "area": {
-          "id": 12,
-          "name": "Plaza Ecuador N1"
+          "id": 2,
+          "name": "Plaza Italia N1"
         },
         "floor": {
           "id": 1,
@@ -357,14 +285,37 @@
         }
       },
       {
-        "id": 327,
-        "reference": "zion_16025",
+        "id": 312,
+        "reference": "zion_16007",
         "local": " ",
-        "name": "Bancolombia",
-        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_408_1473018482.png",
+        "name": "Juan Valdez Café",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/2636_companysubsidiaryImage1_1688664634701.jpeg",
+        "category": "Repostería",
         "area": {
+          "id": 11,
+          "name": "Plaza Colombia N1"
+        },
+        "floor": {
           "id": 1,
-          "name": "Plaza Perú N1"
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 320,
+        "reference": "zion_16018",
+        "local": " ",
+        "name": "Dluchi",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8610_companysubsidiaryImage1_1718819436329.jpeg",
+        "category": "Belleza y Salud",
+        "area": {
+          "id": 10,
+          "name": "Plaza Venezuela N1"
         },
         "floor": {
           "id": 1,
@@ -383,72 +334,10 @@
         "local": " ",
         "name": "Tecno Cell",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/3207_companysubsidiaryImage1_1718821586267.jpeg",
+        "category": "Accesorios",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 329,
-        "reference": "zion_16028",
-        "local": "  ",
-        "name": "Obleas La Villa",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3019_1496336415.png",
-        "area": {
-          "id": 1,
-          "name": "Plaza Perú N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 330,
-        "reference": "zion_16029",
-        "local": " ",
-        "name": "Senthia",
-        "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2020-06/1_cs_426_profile_1591734862.jpeg",
-        "area": {
-          "id": 1,
-          "name": "Plaza Perú N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 331,
-        "reference": "zion_16030",
-        "local": " ",
-        "name": "Samsung",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_490_1473178739.png",
-        "area": {
-          "id": 3,
-          "name": "Plaza Francia N1"
         },
         "floor": {
           "id": 1,
@@ -466,7 +355,8 @@
         "reference": "zion_16031",
         "local": " ",
         "name": "Ésika",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2119_1486590354.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2119_1486590354.png",
+        "category": "Belleza y Salud",
         "area": {
           "id": 3,
           "name": "Plaza Francia N1"
@@ -483,18 +373,19 @@
         }
       },
       {
-        "id": 333,
-        "reference": "zion_16032",
+        "id": 337,
+        "reference": "zion_16036",
         "local": " ",
-        "name": "Starbucks Coffee",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_822_1473804940.png",
+        "name": "Dogger",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/7966_1557517600_profile.jpeg",
+        "category": "Delikatessen",
         "area": {
-          "id": 3,
-          "name": "Plaza Francia N1"
+          "id": 15,
+          "name": "Plaza Colombia N2"
         },
         "floor": {
-          "id": 1,
-          "name": "Piso 1"
+          "id": 2,
+          "name": "Piso 2"
         },
         "company": {
           "id": 1,
@@ -504,35 +395,15 @@
         }
       },
       {
-        "id": 334,
-        "reference": "zion_16033",
+        "id": 321,
+        "reference": "zion_16019",
         "local": " ",
-        "name": "Lácteos Levelma",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8613_companysubsidiaryImage1_1718822576757.jpeg",
+        "name": "Cinnabon",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_624_1473085656.png",
+        "category": "Repostería",
         "area": {
-          "id": 2,
-          "name": "Plaza Italia N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 335,
-        "reference": "zion_16034",
-        "local": " ",
-        "name": "Mc Café",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_797_1473797576.jpg",
-        "area": {
-          "id": 2,
-          "name": "Plaza Italia N1"
+          "id": 11,
+          "name": "Plaza Colombia N1"
         },
         "floor": {
           "id": 1,
@@ -551,6 +422,7 @@
         "local": " ",
         "name": "Davivienda Corresponsal Bancario",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8614_companysubsidiaryImage1_1718823322915.jpeg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -567,18 +439,173 @@
         }
       },
       {
-        "id": 337,
-        "reference": "zion_16036",
+        "id": 330,
+        "reference": "zion_16029",
         "local": " ",
-        "name": "Dogger",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/7966_1557517600_profile.jpeg",
+        "name": "Senthia",
+        "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2020-06/1_cs_426_profile_1591734862.jpeg",
+        "category": "Belleza y Salud",
         "area": {
-          "id": 15,
-          "name": "Plaza Colombia N2"
+          "id": 1,
+          "name": "Plaza Perú N1"
         },
         "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 315,
+        "reference": "zion_16011",
+        "local": " ",
+        "name": "Cotopaxi",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8607_companysubsidiaryImage1_1718749260408.jpeg",
+        "category": "Entretenimiento",
+        "area": {
+          "id": 12,
+          "name": "Plaza Ecuador N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 323,
+        "reference": "zion_16021",
+        "local": " ",
+        "name": "Maiz Kernel",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8611_companysubsidiaryImage1_1718820214685.jpeg",
+        "category": "Delikatessen",
+        "area": {
+          "id": 11,
+          "name": "Plaza Colombia N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 314,
+        "reference": "zion_16010",
+        "local": " ",
+        "name": "Deli",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1644_1479766822.jpg",
+        "category": "Repostería",
+        "area": {
+          "id": 10,
+          "name": "Plaza Venezuela N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 310,
+        "reference": "zion_16005",
+        "local": " ",
+        "name": "Oma",
+        "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/580_companysubsidiaryImage1_1627427785001.jpeg",
+        "category": "Repostería",
+        "area": {
+          "id": 1,
+          "name": "Plaza Perú N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 317,
+        "reference": "zion_16015",
+        "local": " ",
+        "name": "Aventuras Santafe",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8608_companysubsidiaryImage1_1718818366723.jpeg",
+        "category": "Entretenimiento",
+        "area": {
+          "id": 12,
+          "name": "Plaza Ecuador N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 334,
+        "reference": "zion_16033",
+        "local": " ",
+        "name": "Lácteos Levelma",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8613_companysubsidiaryImage1_1718822576757.jpeg",
+        "category": "Delikatessen",
+        "area": {
           "id": 2,
-          "name": "Piso 2"
+          "name": "Plaza Italia N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 319,
+        "reference": "zion_16017",
+        "local": " ",
+        "name": "L'Bel",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1263_1476214465.png",
+        "category": "Belleza y Salud",
+        "area": {
+          "id": 10,
+          "name": "Plaza Venezuela N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
         },
         "company": {
           "id": 1,
@@ -592,7 +619,8 @@
         "reference": "zion_15634",
         "local": "1-003",
         "name": "Banco Davivienda",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_520_1473092918.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_520_1473092918.jpg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -614,6 +642,7 @@
         "local": "1-004",
         "name": "Banco Popular",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-06/606_companysubsidiaryImage1_1654046278351.jpeg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -634,7 +663,8 @@
         "reference": "zion_15636",
         "local": "1-005",
         "name": "Pat Primo",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_394_1473805058.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_394_1473805058.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -655,7 +685,8 @@
         "reference": "zion_15637",
         "local": "1-006 y 1-007",
         "name": "Adidas Kids",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1057_1475185213.jpg",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_1057_1728063959095.png",
+        "category": "Deporte",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -677,6 +708,7 @@
         "local": "1-008",
         "name": "Louis Barton",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/1270_companysubsidiaryImage1_1624894862666.jpeg",
+        "category": "Moda Caballero",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -697,7 +729,8 @@
         "reference": "zion_15640",
         "local": "1-009",
         "name": "Viajes Falabella",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1352_1476978996.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1352_1476978996.jpg",
+        "category": "Servicios",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -718,7 +751,8 @@
         "reference": "zion_15578",
         "local": "1-010",
         "name": "oBoticário",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_673_1473438124.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_673_1473438124.png",
+        "category": "Belleza y Salud",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -740,6 +774,7 @@
         "local": "1-011",
         "name": "Mario Hernández",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/749_companysubsidiaryImage1_1626895627826.jpeg",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -761,6 +796,7 @@
         "local": "1-012",
         "name": "Opticentro Internacional",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/675_companysubsidiaryImage1_1627066735872.jpeg",
+        "category": "Opticas ",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -781,7 +817,8 @@
         "reference": "zion_15581",
         "local": "1-013",
         "name": "Luber ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_933_1474494769.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_933_1474494769.jpg",
+        "category": "Moda Unisex",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -802,7 +839,8 @@
         "reference": "zion_15582",
         "local": "1-014",
         "name": "Rtm Ropa Masculina",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3015_1496174408.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3015_1496174408.png",
+        "category": "Moda Caballero",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -823,7 +861,8 @@
         "reference": "zion_15583",
         "local": "1-015",
         "name": "Opticalia",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1002_1474930734.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1002_1474930734.jpg",
+        "category": "Opticas ",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -845,6 +884,7 @@
         "local": "1-016",
         "name": "Ponto Hair Club",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-08/7736_companysubsidiaryImage1_1628190032158.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -866,6 +906,7 @@
         "local": "1-017",
         "name": "Moma",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/563_companysubsidiaryImage1_1624748390797.jpeg",
+        "category": "Accesorios",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -887,6 +928,7 @@
         "local": "1-018",
         "name": "Be Gafas",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8488_companysubsidiaryImage1_1716222017049.jpeg",
+        "category": "Opticas ",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -907,7 +949,8 @@
         "reference": "zion_15587",
         "local": "1-019, 1-020 y 1-021",
         "name": "Movistar",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_384_1473176922.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_384_1473176922.png",
+        "category": "Telefonía",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -928,7 +971,8 @@
         "reference": "zion_15590",
         "local": "1-022",
         "name": "Claro",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_470_1475616240.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_470_1475616240.jpg",
+        "category": "Tecnología y Comunicaciones",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -949,7 +993,8 @@
         "reference": "zion_15591",
         "local": "1-023",
         "name": "Payless",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_690_1476997066.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_690_1476997066.jpg",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -970,7 +1015,8 @@
         "reference": "zion_15592",
         "local": "1-024",
         "name": "Adrenalina",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_951_1474581130.jpg",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_951_1728064215917.png",
+        "category": "Calzado",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -991,7 +1037,8 @@
         "reference": "zion_15593",
         "local": "1-025",
         "name": "Movies",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_457_1485535651.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_457_1485535651.png",
+        "category": "Entretenimiento",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1013,6 +1060,7 @@
         "local": "1-026",
         "name": "WOM",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7610_companysubsidiaryImage1_1627075219711.jpeg",
+        "category": "Telefonía",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1033,7 +1081,8 @@
         "reference": "zion_15595",
         "local": "1-027",
         "name": "Fiorenzi",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_742_1485468066.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_742_1485468066.png",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1054,7 +1103,8 @@
         "reference": "zion_15596",
         "local": "1-028 y 1-029",
         "name": "Librería Nacional",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_885_1473958768.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_885_1473958768.png",
+        "category": "Libros y Música",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1075,7 +1125,8 @@
         "reference": "zion_15598",
         "local": "1-030",
         "name": "Villa Romana",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_935_1474551354.jpeg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_935_1474551354.jpeg",
+        "category": "Moda Caballero",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1097,6 +1148,7 @@
         "local": "1-031",
         "name": "Case Store",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8489_companysubsidiaryImage1_1716222500960.jpeg",
+        "category": "Accesorios",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1117,7 +1169,8 @@
         "reference": "zion_15600",
         "local": "1-032",
         "name": "Brahma ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_737_1473738409.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_737_1473738409.jpg",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1138,7 +1191,8 @@
         "reference": "zion_15601",
         "local": "1-033",
         "name": "Lafam",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/1_1464068558_.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/1_1464068558_.png",
+        "category": "Opticas ",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1159,7 +1213,8 @@
         "reference": "zion_15602",
         "local": "1-034",
         "name": "Bon·Bonite",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_733_1473737721.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_733_1473737721.png",
+        "category": "Variedades",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -1180,7 +1235,8 @@
         "reference": "zion_15612",
         "local": "1-035",
         "name": "La Riviera",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/1_1464068472_.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/1_1464068472_.jpg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1201,7 +1257,8 @@
         "reference": "zion_15613",
         "local": "1-036",
         "name": "Santorini",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_705_1473454835.JPG",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_705_1473454835.JPG",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1222,7 +1279,8 @@
         "reference": "zion_15614",
         "local": "1-037",
         "name": "San Polos",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2647_1493934907.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2647_1493934907.png",
+        "category": "Calzado",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1244,6 +1302,7 @@
         "local": "1-038",
         "name": "Promatic",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8490_companysubsidiaryImage1_1716223994177.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1264,7 +1323,8 @@
         "reference": "zion_15616",
         "local": "1-039",
         "name": "Calzado Shoker",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_631_1473091134.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_631_1473091134.jpg",
+        "category": "Calzado",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1285,7 +1345,8 @@
         "reference": "zion_15617",
         "local": "1-040 y 1-041",
         "name": "Spring Step",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_420_1473116055.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_420_1473116055.jpg",
+        "category": "Calzado",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1307,6 +1368,7 @@
         "local": "1-042",
         "name": "Cruz Verde",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/1364_companysubsidiaryImage1_1627055238342.jpeg",
+        "category": "Hipermercado",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1327,7 +1389,8 @@
         "reference": "zion_15620",
         "local": "1-044",
         "name": "Outdoor Adventure",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1507_1479232337.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1507_1479232337.png",
+        "category": "Artículos Deportivos",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1348,7 +1411,8 @@
         "reference": "zion_15621",
         "local": "1-045",
         "name": "Banco Av Villas",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_615_1473018211.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_615_1473018211.jpg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1369,7 +1433,8 @@
         "reference": "zion_15622",
         "local": "1-046, 1-047, 1-048, 1-049 y 1-050",
         "name": "Banco de Bogotá",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_448_1473017873.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_448_1473017873.jpg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1391,6 +1456,7 @@
         "local": "1-052 y 1-053",
         "name": "Seven seven",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2020-06/1_cs_464_profile_1591828001.jpeg",
+        "category": "Moda Unisex",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1411,7 +1477,8 @@
         "reference": "zion_15629",
         "local": "1-055",
         "name": "Bata",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_335_1477080757.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_335_1477080757.png",
+        "category": "Calzado",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1433,6 +1500,7 @@
         "local": "1-056",
         "name": "Titinos",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-03/7908_companysubsidiaryImage1_1648508511048.jpeg",
+        "category": "Moda Infantil",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1454,6 +1522,7 @@
         "local": "1-057",
         "name": "Barthon",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8491_companysubsidiaryImage1_1716224768765.jpeg",
+        "category": "Hogar",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1475,6 +1544,7 @@
         "local": "1-058",
         "name": "Droguería Colsubsidio",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/1005_companysubsidiaryImage1_1624738855007.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -1496,6 +1566,7 @@
         "local": "1-064",
         "name": "Crepes y Waffles Heladería",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7660_companysubsidiaryImage1_1627580536259.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -1516,7 +1587,8 @@
         "reference": "zion_15641",
         "local": "1-073, 1-074, 1-075 y 1-076",
         "name": "Koaj",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_655_1473351825.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_655_1473351825.png",
+        "category": "Vestuario",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -1538,6 +1610,7 @@
         "local": "1-077 y 1-078",
         "name": "Skechers",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-08/1292_companysubsidiaryImage1_1628204709334.jpeg",
+        "category": "Calzado",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -1558,7 +1631,8 @@
         "reference": "zion_15547",
         "local": "1-080",
         "name": "Naf Naf",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_564_1477069810.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_564_1477069810.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1580,6 +1654,7 @@
         "local": "1-081",
         "name": "Clonadas",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8479_companysubsidiaryImage1_1716216911078.jpeg",
+        "category": "Moda Unisex",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1601,6 +1676,7 @@
         "local": "1-082",
         "name": "New York Money",
         "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1268_1476221727.png",
+        "category": "Financieros",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1622,6 +1698,7 @@
         "local": "1-083",
         "name": "Paga Todo",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-08/1213_companysubsidiaryImage1_1628136845753.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1642,7 +1719,8 @@
         "reference": "zion_15551",
         "local": "1-084",
         "name": "Navissi",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1063_1486056200.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1063_1486056200.png",
+        "category": "Moda Dama",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1664,6 +1742,7 @@
         "local": "1-085 y 1-086",
         "name": "Medipiel",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7605_companysubsidiaryImage1_1627065284896.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1684,7 +1763,8 @@
         "reference": "zion_15554",
         "local": "1-087",
         "name": "Marquis",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2013_1487363265.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2013_1487363265.png",
+        "category": "Moda Unisex",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1706,6 +1786,7 @@
         "local": "1-088",
         "name": "IN LASH",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8481_companysubsidiaryImage1_1716219109636.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1727,6 +1808,7 @@
         "local": "1-089",
         "name": "ST. EVEN",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8480_companysubsidiaryImage1_1716218864781.jpeg",
+        "category": "Vestuario",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1747,7 +1829,8 @@
         "reference": "zion_15557",
         "local": "1-090 y 1-091",
         "name": "Azucar",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_431_1473113218.jpg",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_431_1728339237120.png",
+        "category": "Moda Unisex",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1769,6 +1852,7 @@
         "local": "1-093",
         "name": "Jade Pimont ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8482_companysubsidiaryImage1_1716219493362.jpeg",
+        "category": "Restaurantes a Mantel",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1790,6 +1874,7 @@
         "local": "1-095",
         "name": "Tania",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/793_companysubsidiaryImage1_1624895677075.jpeg",
+        "category": "Vestuario",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1811,6 +1896,7 @@
         "local": "1-096",
         "name": "Gaes",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8483_companysubsidiaryImage1_1716219961832.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1831,7 +1917,8 @@
         "reference": "zion_15563",
         "local": "1-097 y 1-098",
         "name": "Leonisa",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_379_1477081157.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_379_1477081157.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1853,6 +1940,7 @@
         "local": "1-100, 1-101, 1-102, 1-103, 1-104, 1-105, 1-106, 1-107 y 1-108",
         "name": "H&M",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8500_companysubsidiaryImage1_1716233595938.jpeg",
+        "category": "Vestuario",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1873,7 +1961,8 @@
         "reference": "zion_15574",
         "local": "1-109",
         "name": "Colchones El Dorado",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_636_1473093622.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_636_1473093622.jpg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1895,6 +1984,7 @@
         "local": "1-110",
         "name": "DIANA & GEORGE",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8486_companysubsidiaryImage1_1716221181500.jpeg",
+        "category": "Moda Unisex",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1915,7 +2005,8 @@
         "reference": "zion_15576",
         "local": "1-111",
         "name": "Colchones Comodísimos ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_620_1477083668.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_620_1477083668.jpg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1936,7 +2027,8 @@
         "reference": "zion_15577",
         "local": "1-112",
         "name": "New Balance",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_872_1473953261.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_872_1473953261.jpg",
+        "category": "Artículos Deportivos",
         "area": {
           "id": 10,
           "name": "Plaza Venezuela N1"
@@ -1957,7 +2049,8 @@
         "reference": "zion_15649",
         "local": "1-114",
         "name": "Inkanta",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/1_1464067036_.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/1_1464067036_.jpg",
+        "category": "Variedades",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -1979,6 +2072,7 @@
         "local": "1-115",
         "name": "Bella Piel",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/602_companysubsidiaryImage1_1627050444073.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -1999,7 +2093,8 @@
         "reference": "zion_15651",
         "local": "1-116",
         "name": "Kenzo Jeans",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_555_1473351700.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_555_1473351700.png",
+        "category": "Moda Unisex",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -2020,7 +2115,8 @@
         "reference": "zion_15652",
         "local": "1-118",
         "name": "Everlast",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3362_1512509146.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3362_1512509146.png",
+        "category": "Artículos Deportivos",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -2042,6 +2138,7 @@
         "local": "1-121",
         "name": "BBVA",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-06/447_companysubsidiaryImage1_1654121158267.jpeg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -2063,6 +2160,7 @@
         "local": "1-123",
         "name": "Línea Estética",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7667_companysubsidiaryImage1_1627597893090.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -2083,7 +2181,8 @@
         "reference": "zion_15984",
         "local": "1-125 y 1-126",
         "name": "Chevignon",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_504_1473086811.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_504_1473086811.jpg",
+        "category": "Moda Unisex",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2104,7 +2203,8 @@
         "reference": "zion_15605",
         "local": "1-127",
         "name": "Baskin Robbins",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2139_1486668034.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2139_1486668034.png",
+        "category": "Delikatessen",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2125,7 +2225,8 @@
         "reference": "zion_15606",
         "local": "1-128",
         "name": "Dunkin' Donuts ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_355_1473092314.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_355_1473092314.jpg",
+        "category": "Repostería",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2146,7 +2247,8 @@
         "reference": "zion_15607",
         "local": "1-129",
         "name": "Hush Puppies ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_650_1485397605.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_650_1485397605.png",
+        "category": "Calzado",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2167,7 +2269,8 @@
         "reference": "zion_15608",
         "local": "1-130",
         "name": "Nicolukas",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_670_1473437398.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_670_1473437398.jpg",
+        "category": "Delikatessen",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2188,7 +2291,8 @@
         "reference": "zion_15609",
         "local": "1-131",
         "name": "Thermos",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1632_1479763925.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1632_1479763925.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2209,7 +2313,8 @@
         "reference": "zion_15633",
         "local": "1-132",
         "name": "Pepe Ganga",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_400_1474928274.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_400_1474928274.png",
+        "category": "Variedades",
         "area": {
           "id": 1,
           "name": "Plaza Perú N1"
@@ -2230,7 +2335,8 @@
         "reference": "zion_15656",
         "local": "1-134, 1-135 y 1-136",
         "name": "Totto",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1472850764_.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/2_1472850764_.png",
+        "category": "Variedades",
         "area": {
           "id": 11,
           "name": "Plaza Colombia N1"
@@ -2251,7 +2357,8 @@
         "reference": "zion_15610",
         "local": "1-141",
         "name": "Arturo Calle",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_581_1473010858.jpg",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_581_1728338279139.png",
+        "category": "Moda Caballero",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2272,7 +2379,8 @@
         "reference": "zion_15611",
         "local": "1-141",
         "name": "Arturo Calle Leather",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2662_1494270832.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_2662_1728338494471.png",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 12,
           "name": "Plaza Ecuador N1"
@@ -2294,6 +2402,7 @@
         "local": "1-142, 1-143, 1-144, 1-145 y 1-146",
         "name": "Miniso",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-12/4315_companysubsidiaryImage1_1703792240772.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2314,7 +2423,8 @@
         "reference": "zion_15665",
         "local": "1-147",
         "name": "Fajas M&D",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1870_1481127723.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1870_1481127723.png",
+        "category": "Belleza y Salud",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2336,6 +2446,7 @@
         "local": "1-148",
         "name": "Xiaomi Store",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-06/8038_companysubsidiaryImage1_1654540874757.jpeg",
+        "category": "Tecnología y Comunicaciones",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2356,7 +2467,8 @@
         "reference": "zion_15667",
         "local": "1-149, 1-150, 1-151, 1-152, 1-153 y 1-155",
         "name": "Falabella",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_643_1473097051.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_643_1727999184247.png",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2378,6 +2490,7 @@
         "local": "1-154",
         "name": "Adidas",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/396_companysubsidiaryImage1_1625712677688.jpeg",
+        "category": "Deporte",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2399,6 +2512,7 @@
         "local": "1-159",
         "name": "Spring",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/524_companysubsidiaryImage1_1627076337352.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 3,
           "name": "Plaza Francia N1"
@@ -2419,7 +2533,30 @@
         "reference": "zion_15674",
         "local": "1-159",
         "name": "Fxa Shop",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_478_1474560445.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_478_1474560445.jpg",
+        "category": "Variedades",
+        "area": {
+          "id": 2,
+          "name": "Plaza Italia N1"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 1,
+          "name": "CC Santafé Bogotá",
+          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
+          "primary_color": "#1348d6"
+        }
+      },
+      {
+        "id": 87,
+        "reference": "zion_15675",
+        "local": "1-160",
+        "name": "Cafam Droguería",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1598_1479410040.png",
+        "category": "Hipermercado",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2440,31 +2577,11 @@
         "reference": "zion_16039",
         "local": "1-160",
         "name": "Bubble Gummers",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_339_1485967445.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_339_1485967445.png",
+        "category": "Moda Infantil",
         "area": {
           "id": 3,
           "name": "Plaza Francia N1"
-        },
-        "floor": {
-          "id": 1,
-          "name": "Piso 1"
-        },
-        "company": {
-          "id": 1,
-          "name": "CC Santafé Bogotá",
-          "logo": "http://sasiteit.blob.core.windows.net/tockall/companies/2_1476831300.png",
-          "primary_color": "#1348d6"
-        }
-      },
-      {
-        "id": 87,
-        "reference": "zion_15675",
-        "local": "1-160",
-        "name": "Cafam Droguería",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1598_1479410040.png",
-        "area": {
-          "id": 2,
-          "name": "Plaza Italia N1"
         },
         "floor": {
           "id": 1,
@@ -2482,7 +2599,8 @@
         "reference": "zion_16038",
         "local": "1-161",
         "name": "CAT Store",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1565_1479251697.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1565_1479251697.png",
+        "category": "Moda Unisex",
         "area": {
           "id": 3,
           "name": "Plaza Francia N1"
@@ -2504,6 +2622,7 @@
         "local": "1-161 y 1-162",
         "name": "Planeta Sport",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/875_companysubsidiaryImage1_1626978686329.jpeg",
+        "category": "Artículos Deportivos",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2525,6 +2644,7 @@
         "local": "1-162",
         "name": "Tigo",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/441_companysubsidiaryImage1_1716226063513.jpeg",
+        "category": "Tecnología y Comunicaciones",
         "area": {
           "id": 3,
           "name": "Plaza Francia N1"
@@ -2545,7 +2665,8 @@
         "reference": "zion_15678",
         "local": "1-163, 1-164 y 1-165",
         "name": "Nike",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_389_1473178139.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_389_1473178139.jpg",
+        "category": "Moda Unisex",
         "area": {
           "id": 2,
           "name": "Plaza Italia N1"
@@ -2567,6 +2688,7 @@
         "local": "1-172, 1-173, 1-174, 1-175, 1-176 y 1-177",
         "name": "Cajero Scotiabank",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8207_companysubsidiaryImage1_1682114438177.jpeg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2588,6 +2710,7 @@
         "local": "1-178",
         "name": "Meikerim ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8493_companysubsidiaryImage1_1716227729906.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2609,6 +2732,7 @@
         "local": "1-179",
         "name": "Sotavento",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-08/7747_companysubsidiaryImage1_1628205372607.jpeg",
+        "category": "Accesorios",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2629,7 +2753,8 @@
         "reference": "zion_15693",
         "local": "1-180, 1-181, 1-182 y 1-183",
         "name": "Bosi",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_338_1473018686.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_338_1473018686.png",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2651,6 +2776,7 @@
         "local": "1-184 y 1-185",
         "name": "Loca By Ponto",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8494_companysubsidiaryImage1_1716229304046.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2672,6 +2798,7 @@
         "local": "1-186 y 1-187",
         "name": "Calzatodo",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/409_companysubsidiaryImage1_1624898993817.jpeg",
+        "category": "Calzado",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2692,7 +2819,8 @@
         "reference": "zion_15701",
         "local": "1-188",
         "name": "Óptica GMO",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_721_1476909733.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_721_1476909733.jpg",
+        "category": "Opticas ",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2713,7 +2841,8 @@
         "reference": "zion_15703",
         "local": "1-194, 1-195, 1-196 y 1-197",
         "name": "M N G",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/1_1464069369_.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/1_1464069369_.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2734,7 +2863,8 @@
         "reference": "zion_15707",
         "local": "1-198 y 1-199",
         "name": "American Eagle Outfitters",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_592_1485800583.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_592_1728065159109.png",
+        "category": "Moda Unisex",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2755,7 +2885,8 @@
         "reference": "zion_15709",
         "local": "1-200",
         "name": "Carlos Nieto",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_929_1474491221.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_929_1474491221.jpg",
+        "category": "Moda Caballero",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2776,7 +2907,8 @@
         "reference": "zion_15710",
         "local": "1-201",
         "name": "Lili Pink",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_372_1473193517.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_372_1473193517.jpg",
+        "category": "Moda Dama",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2798,6 +2930,7 @@
         "local": "1-206, 1-207, 1-208 y 1-209 ",
         "name": "La Gran Manzana",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8497_companysubsidiaryImage1_1716230030729.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2819,6 +2952,7 @@
         "local": "1-211",
         "name": "Salgueros Café",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8498_companysubsidiaryImage1_1716232965977.jpeg",
+        "category": "Repostería",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2840,6 +2974,7 @@
         "local": "1-212",
         "name": "Alma",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8499_companysubsidiaryImage1_1716233282089.jpeg",
+        "category": "Moda Dama",
         "area": {
           "id": 18,
           "name": "Plaza Met N1"
@@ -2860,7 +2995,8 @@
         "reference": "zion_15740",
         "local": "2-004",
         "name": "Má Maternity",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2649_1494259473.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2649_1494259473.png",
+        "category": "Vestuario",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -2881,7 +3017,8 @@
         "reference": "zion_15741",
         "local": "2-005",
         "name": "Levi's",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_63_1475612860.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_63_1475612860.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -2903,6 +3040,7 @@
         "local": "2-006",
         "name": "Tech Store",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8505_companysubsidiaryImage1_1716237447287.jpeg",
+        "category": "Tecnología y Comunicaciones",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -2923,7 +3061,8 @@
         "reference": "zion_15743",
         "local": "2-007",
         "name": "Puro cuero",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_924_1477082895.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_924_1477082895.jpg",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -2944,7 +3083,8 @@
         "reference": "zion_15744",
         "local": "2-008",
         "name": "Droguería Rosas",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2445_1490200536.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2445_1490200536.png",
+        "category": "Belleza y Salud",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -2965,7 +3105,8 @@
         "reference": "zion_15745",
         "local": "2-010",
         "name": "Chamela",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2002_1484858832.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2002_1484858832.png",
+        "category": "Vestuario",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -2987,6 +3128,7 @@
         "local": "2-011",
         "name": "Opticas Retinos ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8506_companysubsidiaryImage1_1716237809803.jpeg",
+        "category": "Opticas ",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3008,6 +3150,7 @@
         "local": "2-013",
         "name": "Óptica Italiana",
         "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1284_1476378180.png",
+        "category": "Opticas ",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3028,7 +3171,8 @@
         "reference": "zion_15748",
         "local": "2-019",
         "name": "Fájate",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_641_1473096239.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_641_1473096239.png",
+        "category": "Belleza y Salud",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3050,6 +3194,7 @@
         "local": "2-020",
         "name": "Gaviota Hogar",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8507_companysubsidiaryImage1_1716238386870.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3071,6 +3216,7 @@
         "local": "2-021",
         "name": "Madecentro",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8508_companysubsidiaryImage1_1716238621589.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3092,6 +3238,7 @@
         "local": "2-022",
         "name": "Evano",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8509_companysubsidiaryImage1_1716238776033.jpeg",
+        "category": "Calzado",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3112,7 +3259,8 @@
         "reference": "zion_15752",
         "local": "2-024",
         "name": "Dormi luna",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1363_1476993418.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1363_1476993418.jpg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3134,6 +3282,7 @@
         "local": "2-025",
         "name": "Optica Colombiana",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/1001_companysubsidiaryImage1_1627065651201.jpeg",
+        "category": "Opticas ",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3155,6 +3304,7 @@
         "local": "2-026",
         "name": "Súper Wow",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7554_companysubsidiaryImage1_1626233749449.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -3175,7 +3325,8 @@
         "reference": "zion_15763",
         "local": "2-027",
         "name": "Brissa",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_600_1486414792.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_600_1486414792.png",
+        "category": "Hogar",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3196,7 +3347,8 @@
         "reference": "zion_15764",
         "local": "2-028 y 2-029",
         "name": "Xuss",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_755_1473745502.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_755_1473745502.jpg",
+        "category": "Moda Dama",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3218,6 +3370,7 @@
         "local": "2-030",
         "name": "Allten",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8512_companysubsidiaryImage1_1716240986239.jpeg",
+        "category": "Deporte",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3238,7 +3391,8 @@
         "reference": "zion_15767",
         "local": "2-031",
         "name": "Decameron",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1078_1475254881.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1078_1475254881.jpg",
+        "category": "Servicios",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3260,6 +3414,7 @@
         "local": "2-033",
         "name": "Euro Mattress",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7663_companysubsidiaryImage1_1627585952491.jpeg",
+        "category": "Financieros",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3280,7 +3435,8 @@
         "reference": "zion_15769",
         "local": "2-034",
         "name": "Mussi",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_385_1473114455.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_385_1473114455.png",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3301,7 +3457,8 @@
         "reference": "zion_15770",
         "local": "2-035 y 2-036",
         "name": "Iluminata",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1042_1475168868.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1042_1475168868.jpg",
+        "category": "Variedades",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3323,6 +3480,7 @@
         "local": "2-038 y 2-039",
         "name": "Freeport Store",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/642_companysubsidiaryImage1_1624889266708.jpeg",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -3343,7 +3501,8 @@
         "reference": "zion_15794",
         "local": "2-040",
         "name": "Súperdry",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_702_1485463205.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_702_1485463205.png",
+        "category": "Moda Unisex",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3364,7 +3523,8 @@
         "reference": "zion_15795",
         "local": "2-041 y 2-042",
         "name": "Diesel",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/1_1464066202_.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/1_1464066202_.jpg",
+        "category": "Moda Unisex",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3386,6 +3546,7 @@
         "local": "2-043 y 2-044",
         "name": "Kevin's Joyeros",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2020-06/1_cs_501_profile_1591826403.jpeg",
+        "category": "Joyería y Relojería",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3407,6 +3568,7 @@
         "local": "2-045",
         "name": "Colchones Soñaty",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8524_companysubsidiaryImage1_1716250258529.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -3428,6 +3590,7 @@
         "local": "2-048",
         "name": "Nap",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8517_companysubsidiaryImage1_1716243078756.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3449,6 +3612,7 @@
         "local": "2-052",
         "name": "Bahama",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8518_companysubsidiaryImage1_1716243493228.jpeg",
+        "category": "Moda Dama",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3470,6 +3634,7 @@
         "local": "2-053",
         "name": "Elis Joyeria y Platería",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8519_companysubsidiaryImage1_1716243786616.jpeg",
+        "category": "Joyería y Relojería",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3490,7 +3655,8 @@
         "reference": "zion_15803",
         "local": "2-055",
         "name": "Aquiles",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_587_1472855079.jpg",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_587_1728324634714.png",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3512,6 +3678,7 @@
         "local": "2-056",
         "name": "Tiendas Enforma",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8520_companysubsidiaryImage1_1716244184961.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3532,7 +3699,8 @@
         "reference": "zion_15805",
         "local": "2-057",
         "name": "Derek",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_543_1485789133.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_543_1485789133.png",
+        "category": "Moda Dama",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3554,6 +3722,7 @@
         "local": "2-058",
         "name": "Setenta Cuarenta",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8521_companysubsidiaryImage1_1716245055619.jpeg",
+        "category": "Moda Dama",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -3575,6 +3744,7 @@
         "local": "2-059 y 2-060",
         "name": "Boral",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8514_companysubsidiaryImage1_1716241841361.jpeg",
+        "category": "Moda Dama",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -3595,7 +3765,8 @@
         "reference": "zion_15780",
         "local": "2-061 y 2-062",
         "name": "iShop",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_479_1473285661.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_479_1473285661.png",
+        "category": "Tecnología",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -3616,7 +3787,8 @@
         "reference": "zion_15782",
         "local": "2-063",
         "name": "Marruecos ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_667_1485459405.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_667_1485459405.png",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -3638,6 +3810,7 @@
         "local": "2-064",
         "name": "Europiel",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8515_companysubsidiaryImage1_1716242150013.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -3658,7 +3831,8 @@
         "reference": "zion_15784",
         "local": "2-065",
         "name": "InterAmerican Money",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2642_1493918587.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2642_1493918587.png",
+        "category": "Financieros",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -3680,6 +3854,7 @@
         "local": "2-066",
         "name": "Beauty Market ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8503_companysubsidiaryImage1_1716236774763.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3700,7 +3875,8 @@
         "reference": "zion_15736",
         "local": "2-067",
         "name": "Bogobeth",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2615_1493325158.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2615_1493325158.png",
+        "category": "Variedades",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3721,7 +3897,8 @@
         "reference": "zion_15735",
         "local": "2-068",
         "name": "Coltefinanciera S.A.",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2146_1486675383.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2146_1486675383.png",
+        "category": "Financieros",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3742,7 +3919,8 @@
         "reference": "zion_15734",
         "local": "2-069",
         "name": "Tennis",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_404_1475613489.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_404_1475613489.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3763,7 +3941,8 @@
         "reference": "zion_15733",
         "local": "2-070",
         "name": "Magazine",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1022_1475100452.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1022_1475100452.jpg",
+        "category": "Variedades",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3784,7 +3963,8 @@
         "reference": "zion_15732",
         "local": "2-071",
         "name": "Nauty Blue",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_388_1473437895.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_388_1473437895.png",
+        "category": "Moda Infantil",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3805,7 +3985,8 @@
         "reference": "zion_15731",
         "local": "2-072",
         "name": "Cine Colombia",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_552_1485793420.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_552_1485793420.png",
+        "category": "Entretenimiento",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3826,7 +4007,8 @@
         "reference": "zion_15730",
         "local": "2-075",
         "name": "Lego Store",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_720_1485465776.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_720_1485465776.png",
+        "category": "Entretenimiento",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3847,7 +4029,8 @@
         "reference": "zion_15729",
         "local": "2-076",
         "name": "Mic",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_352_1475552213.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_352_1475552213.jpg",
+        "category": "Juguetería",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3869,6 +4052,7 @@
         "local": "2-078",
         "name": "Little Mic",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8502_companysubsidiaryImage1_1716235611974.jpeg",
+        "category": "Moda Infantil",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3889,7 +4073,8 @@
         "reference": "zion_15727",
         "local": "2-079",
         "name": "Offcorss",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_517_1475615798.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_517_1475615798.jpg",
+        "category": "Moda Infantil",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3930,7 +4115,8 @@
         "reference": "zion_15725",
         "local": "2-081",
         "name": "Americanino",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_595_1473009151.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_595_1728065531926.png",
+        "category": "Moda Unisex",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3951,7 +4137,8 @@
         "reference": "zion_15723",
         "local": "2-083",
         "name": "Banco Caja Social",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_614_1473018005.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_614_1473018005.jpg",
+        "category": "Entidades Financieras",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3972,7 +4159,8 @@
         "reference": "zion_15722",
         "local": "2-084",
         "name": "Punto Blanco",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_686_1473441391.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_686_1473441391.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -3994,6 +4182,7 @@
         "local": "2-085",
         "name": "Jardín Gastronómico ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8501_companysubsidiaryImage1_1716234438347.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -4014,7 +4203,8 @@
         "reference": "zion_15720",
         "local": "2-086",
         "name": "Caprino",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_630_1473090029.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_630_1473090029.png",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -4035,7 +4225,8 @@
         "reference": "zion_15719",
         "local": "2-087, 2-088 y 2-089",
         "name": "People Plays",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_874_1473953761.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_874_1473953761.jpg",
+        "category": "Artículos Deportivos",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -4056,7 +4247,8 @@
         "reference": "zion_15785",
         "local": "2-090, 2-091 y 2-092",
         "name": "Vélez",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_405_1473116934.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_405_1473116934.jpg",
+        "category": "Calzado y Marroquinería",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4077,7 +4269,8 @@
         "reference": "zion_15788",
         "local": "2-093",
         "name": "Samsonite",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1007_1475007440.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1007_1475007440.jpg",
+        "category": "Accesorios",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4099,6 +4292,7 @@
         "local": "2-094",
         "name": "Cascos Store",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7657_companysubsidiaryImage1_1627521848604.jpeg",
+        "category": "Accesorios",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4120,6 +4314,7 @@
         "local": "2-095",
         "name": "Pet Dynasty",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8510_companysubsidiaryImage1_1716239089669.jpeg",
+        "category": "Tienda mascotas",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -4140,7 +4335,8 @@
         "reference": "zion_15756",
         "local": "2-096",
         "name": "Plica",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1960_1484251236.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1960_1484251236.png",
+        "category": "Vestuario",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -4162,6 +4358,7 @@
         "local": "2-097",
         "name": "HEPTA",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8511_companysubsidiaryImage1_1716240139340.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -4183,6 +4380,7 @@
         "local": "2-098",
         "name": "Pio XII",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8476_companysubsidiaryImage1_1715884539586.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -4203,7 +4401,8 @@
         "reference": "zion_15759",
         "local": "2-099 y 2-100",
         "name": "Tall",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_712_1473455928.JPG",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_712_1473455928.JPG",
+        "category": "Vestuario",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -4224,7 +4423,8 @@
         "reference": "zion_15761",
         "local": "2-101",
         "name": "Hojas",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1222_1476133837.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1222_1476133837.png",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -4245,7 +4445,8 @@
         "reference": "zion_15774",
         "local": "2-102",
         "name": "Studio F",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_397_1473116718.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_397_1473116718.png",
+        "category": "Moda Dama",
         "area": {
           "id": 13,
           "name": "Plaza Perú N2"
@@ -4267,6 +4468,7 @@
         "local": "2-103",
         "name": "Free Spirit",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8522_companysubsidiaryImage1_1716245608054.jpeg",
+        "category": "Moda Dama",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -4287,7 +4489,8 @@
         "reference": "zion_15792",
         "local": "2-104",
         "name": "Fuera De Serie",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_640_1473096069.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_640_1473096069.png",
+        "category": "Moda Dama",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4309,6 +4512,7 @@
         "local": "2-105",
         "name": "Óptica Kairós ",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7552_companysubsidiaryImage1_1626226433673.jpeg",
+        "category": "Opticas ",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4330,6 +4534,7 @@
         "local": "2-106",
         "name": "Travesuras",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2020-06/1_cs_709_profile_1591743948.jpeg",
+        "category": "Moda Infantil",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4350,7 +4555,8 @@
         "reference": "zion_15777",
         "local": "2-107",
         "name": "Pierre D' Agostiny",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_486_1486497664.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_486_1486497664.png",
+        "category": "Moda Caballero",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4372,6 +4578,7 @@
         "local": "2-108",
         "name": "Explora",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8516_companysubsidiaryImage1_1716242662706.jpeg",
+        "category": "Artículos Deportivos",
         "area": {
           "id": 15,
           "name": "Plaza Colombia N2"
@@ -4392,7 +4599,8 @@
         "reference": "zion_15739",
         "local": "2-111",
         "name": "Pan Pa' Ya",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3888_1507838195.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3888_1507838195.png",
+        "category": "Repostería",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -4414,6 +4622,7 @@
         "local": "2-112",
         "name": "Friend and beer",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8504_companysubsidiaryImage1_1716237067841.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 9,
           "name": "Plaza Venezuela N2"
@@ -4435,6 +4644,7 @@
         "local": "2-113 y 2-114",
         "name": "Magic Nails & Spa",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8523_companysubsidiaryImage1_1716246103372.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -4456,6 +4666,7 @@
         "local": "2-115 y 2-116",
         "name": "Calzado BUCARAMANGA",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-02/7805_companysubsidiaryImage1_1645625617378.jpeg",
+        "category": "Calzado",
         "area": {
           "id": 5,
           "name": "Plaza Francia N2"
@@ -4476,7 +4687,8 @@
         "reference": "zion_15762",
         "local": "2-122",
         "name": "Ela",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_357_1473095455.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_357_1473095455.png",
+        "category": "Moda Dama",
         "area": {
           "id": 14,
           "name": "Plaza Ecuador N2"
@@ -4497,7 +4709,8 @@
         "reference": "zion_15815",
         "local": "2-123",
         "name": "Ópticas ABC",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3991_1510684824.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3991_1510684824.png",
+        "category": "Opticas ",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4519,6 +4732,7 @@
         "local": "2-124",
         "name": "Catalina Jaramillo",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8525_companysubsidiaryImage1_1716250674423.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4539,7 +4753,8 @@
         "reference": "zion_15817",
         "local": "2-125",
         "name": "Arena",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_401_1485964255.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_401_1728325442090.png",
+        "category": "Deporte",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4561,6 +4776,7 @@
         "local": "2-129",
         "name": "Tutti",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-06/7513_companysubsidiaryImage1_1624897078039.jpeg",
+        "category": "Moda Infantil",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4582,6 +4798,7 @@
         "local": "2-133 y 2-134",
         "name": "Toysmart",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7624_companysubsidiaryImage1_1627346365103.jpeg",
+        "category": "Entretenimiento",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4602,7 +4819,8 @@
         "reference": "zion_15823",
         "local": "2-136, 2-137 y 2-138",
         "name": "Cosmetic Shop",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_621_1473020015.JPG",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_621_1473020015.JPG",
+        "category": "Belleza y Salud",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4624,6 +4842,7 @@
         "local": "2-142",
         "name": "Gamer 4 Ever",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8526_companysubsidiaryImage1_1716251569839.jpeg",
+        "category": "Entretenimiento",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4644,7 +4863,8 @@
         "reference": "zion_15827",
         "local": "2-147 y 2-148",
         "name": "Fiotti Muebles",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1968_1484258907.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1968_1484258907.png",
+        "category": "Moda Dama",
         "area": {
           "id": 4,
           "name": "Plaza Italia N2"
@@ -4666,6 +4886,7 @@
         "local": "2-150",
         "name": "Samsara",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7677_companysubsidiaryImage1_1627674302750.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4687,6 +4908,7 @@
         "local": "2-151",
         "name": "Super Color ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8477_companysubsidiaryImage1_1715897825077.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4707,7 +4929,8 @@
         "reference": "zion_15832",
         "local": "2-154, 2-155 y 2-156 ",
         "name": "Colmédica",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3579_1512423788.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_3579_1512423788.png",
+        "category": "Servicios",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4729,6 +4952,7 @@
         "local": "2-166",
         "name": "COLOMBIAN PRESERVED FLOWERS",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-02/7809_companysubsidiaryImage1_1645724145924.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4750,6 +4974,7 @@
         "local": "2-167",
         "name": "Atma ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8527_companysubsidiaryImage1_1716252389378.jpeg",
+        "category": "Moda Unisex",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4770,7 +4995,8 @@
         "reference": "zion_15838",
         "local": "2-172",
         "name": "Souk",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_4000_1510763883.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_4000_1510763883.png",
+        "category": "Restaurantes",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4791,7 +5017,8 @@
         "reference": "zion_15839",
         "local": "2-173 y 2-174",
         "name": "Americana De Colchones",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_495_1485472367.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_495_1728065381880.png",
+        "category": "Hogar",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4813,6 +5040,7 @@
         "local": "2-176",
         "name": "Dentix",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2020-06/1_cs_1267_profile_1591741826.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4834,6 +5062,7 @@
         "local": "2-179 y 2-180",
         "name": "Dollarcity",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-03/7882_companysubsidiaryImage1_1648077959252.jpeg",
+        "category": "Hipermercado",
         "area": {
           "id": 19,
           "name": "Plaza Met N2"
@@ -4855,6 +5084,7 @@
         "local": "3-001",
         "name": "Estimularte Juguetería",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8537_companysubsidiaryImage1_1716420115441.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -4875,7 +5105,8 @@
         "reference": "zion_15878",
         "local": "3-003",
         "name": "Churrisimos",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2302_1487876857.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2302_1487876857.png",
+        "category": "Repostería",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -4897,6 +5128,7 @@
         "local": "3-009",
         "name": "Roll’s",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8538_companysubsidiaryImage1_1716422446437.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -4918,6 +5150,7 @@
         "local": "3-010",
         "name": "Rápido y Sabroso",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8539_companysubsidiaryImage1_1716422567664.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -4939,6 +5172,7 @@
         "local": "3-011",
         "name": "La Mordida Ocañera",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8540_companysubsidiaryImage1_1716423012938.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -4960,6 +5194,7 @@
         "local": "3-013",
         "name": "Oro laminado 18k",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8541_companysubsidiaryImage1_1716423183893.jpeg",
+        "category": "Joyería y Relojería",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -4980,7 +5215,8 @@
         "reference": "zion_15883",
         "local": "3-017",
         "name": "Banco Union",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_472_1473117593.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_472_1473117593.png",
+        "category": "Entidades Financieras",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -5002,6 +5238,7 @@
         "local": "3-020",
         "name": "Peluquería John Jairo",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8542_companysubsidiaryImage1_1716423535880.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -5023,6 +5260,7 @@
         "local": "3-021",
         "name": "Viatges Exclusive",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8543_companysubsidiaryImage1_1716423658704.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -5044,6 +5282,7 @@
         "local": "3-023",
         "name": "Sibarita Style",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8544_companysubsidiaryImage1_1716423777544.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -5065,6 +5304,7 @@
         "local": "3-024",
         "name": " Claudia Lozano Boutique",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8565_companysubsidiaryImage1_1716427983382.jpeg",
+        "category": "Moda Dama",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5086,6 +5326,7 @@
         "local": "3-025",
         "name": "Tumatera",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8566_companysubsidiaryImage1_1716428144231.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5107,6 +5348,7 @@
         "local": "3-026",
         "name": "Janell",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8567_companysubsidiaryImage1_1716428373951.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5128,6 +5370,7 @@
         "local": "3-027",
         "name": "Dolce & Panini",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8568_companysubsidiaryImage1_1716428580285.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5149,6 +5392,7 @@
         "local": "3-028",
         "name": "Ifans",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8569_companysubsidiaryImage1_1716428713352.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5170,6 +5414,7 @@
         "local": "3-029",
         "name": "Farmatodo",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/639_companysubsidiaryImage1_1627060655233.jpeg",
+        "category": "Hipermercado",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5191,6 +5436,7 @@
         "local": "3-030",
         "name": "Marlon Becerra",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/3379_companysubsidiaryImage1_1716309266228.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5212,6 +5458,7 @@
         "local": "3-031 y 3-163",
         "name": "Ostu",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8570_companysubsidiaryImage1_1716428858808.jpeg",
+        "category": "Vestuario",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5233,6 +5480,7 @@
         "local": "3-033",
         "name": " La Rosconeria ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8571_companysubsidiaryImage1_1716429173576.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5253,7 +5501,8 @@
         "reference": "zion_15902",
         "local": "3-034",
         "name": "T-Shirt Lab",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1320_1485900273.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1320_1485900273.png",
+        "category": "Variedades",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -5275,6 +5524,7 @@
         "local": "3-036",
         "name": "Music Box",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8579_companysubsidiaryImage1_1716430727954.jpeg",
+        "category": "Libros y Música",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5295,7 +5545,8 @@
         "reference": "zion_15944",
         "local": "3-037",
         "name": "Health Company",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1030_1475162207.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1030_1475162207.jpg",
+        "category": "Vestuario",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5317,6 +5568,7 @@
         "local": "3-038",
         "name": "Papeles Cell",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8580_companysubsidiaryImage1_1716430919520.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5338,6 +5590,7 @@
         "local": "3-039",
         "name": "Pelillos ",
         "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1281_1476376035.jpg",
+        "category": "Servicios",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5358,7 +5611,8 @@
         "reference": "zion_15947",
         "local": "3-040",
         "name": "Cosechas",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_617_1473019123.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_617_1473019123.jpg",
+        "category": "Delikatessen",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5380,6 +5634,7 @@
         "local": "3-041",
         "name": "Chimeneas de Colombia",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-02/7807_companysubsidiaryImage1_1645716907723.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5401,6 +5656,7 @@
         "local": "3-042",
         "name": "Amaría Accesorios",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8581_companysubsidiaryImage1_1716431021232.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5421,7 +5677,8 @@
         "reference": "zion_15950",
         "local": "3-043",
         "name": "Cascabel",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/users/1_1464063968_.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/users/1_1464063968_.jpg",
+        "category": "Delikatessen",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5443,6 +5700,7 @@
         "local": "3-044",
         "name": "ESM Music Store",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8582_companysubsidiaryImage1_1716431151240.jpeg",
+        "category": "Entretenimiento",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5464,6 +5722,7 @@
         "local": "3-045",
         "name": "Dogma",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8583_companysubsidiaryImage1_1716431437019.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5485,6 +5744,7 @@
         "local": "3-048",
         "name": "Aviatur.",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-05/1216_companysubsidiaryImage1_1654033195259.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5504,8 +5764,9 @@
         "id": 286,
         "reference": "zion_15954",
         "local": "3-049",
-        "name": "ARBÓREA",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-02/7795_companysubsidiaryImage1_1645464361849.jpeg",
+        "name": "Arbórea.",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_7795_1728325028061.png",
+        "category": "Variedades",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5527,6 +5788,7 @@
         "local": "3-050",
         "name": "T4",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7633_companysubsidiaryImage1_1627360097593.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5548,6 +5810,7 @@
         "local": "3-051",
         "name": "TV Novedades ",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7619_companysubsidiaryImage1_1627339307556.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5569,6 +5832,7 @@
         "local": "3-052",
         "name": "Distribuidora Nacional de Sombreros",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8585_companysubsidiaryImage1_1716431729408.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -5590,6 +5854,7 @@
         "local": "3-053",
         "name": "Lexus Kids",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8578_companysubsidiaryImage1_1716430416394.jpeg",
+        "category": "Moda Infantil",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -5630,7 +5895,8 @@
         "reference": "zion_15985",
         "local": "3-058",
         "name": "Crepes & Waffles...",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_576_1473089253.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_576_1473089253.jpg",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5652,6 +5918,7 @@
         "local": "3-060 y 3-061",
         "name": "Subway",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/410_companysubsidiaryImage1_1627680381881.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5692,7 +5959,8 @@
         "reference": "zion_15853",
         "local": "3-063 y 3-064",
         "name": "Archies",
-        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-02/7796_companysubsidiaryImage1_1645467395086.jpeg",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_7796_1728325191168.png",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5713,7 +5981,8 @@
         "reference": "zion_15855",
         "local": "3-065",
         "name": "Casino Panema",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2375_1489417625.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_2375_1489417625.png",
+        "category": "Entretenimiento",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5734,7 +6003,8 @@
         "reference": "zion_15857",
         "local": "3-066",
         "name": "Sarku Japan",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_699_1473453584.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_699_1473453584.png",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5756,6 +6026,7 @@
         "local": "3-068",
         "name": "Home Burgers",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-08/7709_companysubsidiaryImage1_1628017332508.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5776,7 +6047,8 @@
         "reference": "zion_15860",
         "local": "3-069",
         "name": "Ambiente Gourmet",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_4_1477083085.JPG",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_4_1728064682360.png",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5797,7 +6069,8 @@
         "reference": "zion_15861",
         "local": "3-070",
         "name": "Whopper King",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1645_1479767583.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1645_1479767583.png",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5818,7 +6091,8 @@
         "reference": "zion_15862",
         "local": "3-071 y 3-072",
         "name": "KFC",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1071_1486057523.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1071_1486057523.png",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5840,6 +6114,7 @@
         "local": "3-073",
         "name": "Toro Mac Coy",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-12/8434_companysubsidiaryImage1_1703798803592.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5861,6 +6136,7 @@
         "local": "3-074 y 3-075",
         "name": "Café Artesanal",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-03/7928_companysubsidiaryImage1_1648651478211.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5881,7 +6157,8 @@
         "reference": "zion_15867",
         "local": "3-076",
         "name": "Evacol",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_363_1475551877.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_363_1475551877.jpg",
+        "category": "Calzado",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5902,7 +6179,8 @@
         "reference": "zion_15868",
         "local": "3-077",
         "name": "American Cheesecakes ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_598_1488914759.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_598_1728064996421.png",
+        "category": "Delikatessen",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -5924,6 +6202,7 @@
         "local": "3-078",
         "name": "Al Carbón",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7655_companysubsidiaryImage1_1627514753931.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -5944,7 +6223,8 @@
         "reference": "zion_15913",
         "local": "3-079",
         "name": "PPC",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_678_1473439435.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_678_1473439435.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -5965,7 +6245,8 @@
         "reference": "zion_15914",
         "local": "3-080",
         "name": "3/4 Parrilla ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_772_1489077666.png",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_772_1728063466472.png",
+        "category": "Plazoleta de Comidas",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -5986,7 +6267,8 @@
         "reference": "zion_15916",
         "local": "3-082",
         "name": "Sandwich Gourmet",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1180_1476119796.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1180_1476119796.png",
+        "category": "Repostería",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6007,7 +6289,8 @@
         "reference": "zion_15917",
         "local": "3-083",
         "name": "Randy's",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_784_1473785090.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_784_1473785090.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6029,6 +6312,7 @@
         "local": "3-084",
         "name": "Montolivo",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7669_companysubsidiaryImage1_1627599419060.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6049,7 +6333,8 @@
         "reference": "zion_15919",
         "local": "3-085",
         "name": "Frisby",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_366_1473095556.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_366_1473095556.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6071,6 +6356,7 @@
         "local": "3-086",
         "name": "La Parrilla La Original",
         "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1291_1476379620.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6092,6 +6378,7 @@
         "local": "3-087",
         "name": "Fillet Station ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8564_companysubsidiaryImage1_1716426631362.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6113,6 +6400,7 @@
         "local": "3-088",
         "name": "Sr. Wok",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/821_companysubsidiaryImage1_1627359928514.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6133,7 +6421,8 @@
         "reference": "zion_15924",
         "local": "3-090",
         "name": "Mister Lee",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_799_1473798981.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_799_1473798981.jpg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6154,7 +6443,8 @@
         "reference": "zion_15925",
         "local": "3-091",
         "name": "Sipote",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_818_1473804280.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_818_1473804280.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6175,7 +6465,8 @@
         "reference": "zion_15926",
         "local": "3-092",
         "name": "La Brasa Roja",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_788_1473786679.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_788_1473786679.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6196,7 +6487,8 @@
         "reference": "zion_15927",
         "local": "3-093",
         "name": "Sandwich Qbano",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_456_1473453298.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_456_1473453298.png",
+        "category": "Repostería",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6218,6 +6510,7 @@
         "local": "3-094",
         "name": "SHIKOKO",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8563_companysubsidiaryImage1_1716426497978.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6238,7 +6531,8 @@
         "reference": "zion_15929",
         "local": "3-095",
         "name": "El Carnal ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_778_1473782462.JPG",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_778_1473782462.JPG",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6259,7 +6553,8 @@
         "reference": "zion_15930",
         "local": "3-096",
         "name": "Presto",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_556_1473439999.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_556_1473439999.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6281,6 +6576,7 @@
         "local": "3-097",
         "name": "Carbón & Xilvestre",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-07/7626_companysubsidiaryImage1_1627350623908.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6302,6 +6598,7 @@
         "local": "3-098",
         "name": "Steak Station",
         "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1299_1476387218.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6322,7 +6619,8 @@
         "reference": "zion_15933",
         "local": "3-099",
         "name": "Spoleto",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_819_1485980835.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_819_1485980835.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6344,6 +6642,7 @@
         "local": "3-101",
         "name": "Nueva Felicidad",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8562_companysubsidiaryImage1_1716426338049.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6364,7 +6663,8 @@
         "reference": "zion_15935",
         "local": "3-102",
         "name": "Hamburguesas El Corral ",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_356_1473088895.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_356_1473088895.png",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6386,6 +6686,7 @@
         "local": "3-104",
         "name": "Ambos",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-02/7794_companysubsidiaryImage1_1645459895621.jpeg",
+        "category": "Moda Dama",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6406,7 +6707,8 @@
         "reference": "zion_15937",
         "local": "3-105",
         "name": "Foto Japón",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_894_1474295886.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_894_1474295886.png",
+        "category": "Fotografía",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6428,6 +6730,7 @@
         "local": "3-106",
         "name": "Sweet Store",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8545_companysubsidiaryImage1_1716423896115.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -6449,6 +6752,7 @@
         "local": "3-107",
         "name": "Gafas & Gafas",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8546_companysubsidiaryImage1_1716424019039.jpeg",
+        "category": "Opticas ",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -6470,6 +6774,7 @@
         "local": "3-108",
         "name": "ICase Colombia ",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/3208_companysubsidiaryImage1_1716308911385.jpeg",
+        "category": "Accesorios",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -6491,6 +6796,7 @@
         "local": "3-109",
         "name": "Talone",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8547_companysubsidiaryImage1_1716424179607.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -6512,6 +6818,7 @@
         "local": "3-110",
         "name": "Tejiendo Sueños",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8548_companysubsidiaryImage1_1716424291758.jpeg",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -6533,6 +6840,7 @@
         "local": "3-112",
         "name": "Chaopelos",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8573_companysubsidiaryImage1_1716429607828.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -6554,6 +6862,7 @@
         "local": "3-113",
         "name": "Siesua depilación láser",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8574_companysubsidiaryImage1_1716429752005.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -6575,6 +6884,7 @@
         "local": "3-114",
         "name": "Maria Guapa",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8575_companysubsidiaryImage1_1716429926018.jpeg",
+        "category": "Vestuario",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -6596,6 +6906,7 @@
         "local": "3-115",
         "name": "The Baby Shop",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8576_companysubsidiaryImage1_1716430107273.jpeg",
+        "category": "Moda Infantil",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -6617,6 +6928,7 @@
         "local": "3-119",
         "name": "Azahar Emeralds",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2022-02/7800_companysubsidiaryImage1_1645492056575.jpeg",
+        "category": "Joyería y Relojería",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -6637,7 +6949,8 @@
         "reference": "zion_15959",
         "local": "3-120",
         "name": "Burger King",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_610_1473017148.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_610_1473017148.jpg",
+        "category": "Restaurantes",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -6659,6 +6972,7 @@
         "local": "3-121",
         "name": "Mc Donald's",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-12/522_companysubsidiaryImage1_1703790363198.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 21,
           "name": "Plaza Francia N3"
@@ -6680,6 +6994,7 @@
         "local": "3-122",
         "name": "Bogati Helados",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8561_companysubsidiaryImage1_1716426242876.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6701,6 +7016,7 @@
         "local": "3-123 y 3-124",
         "name": "Rock’N Stop",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8560_companysubsidiaryImage1_1716426076647.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6721,7 +7037,8 @@
         "reference": "zion_15869",
         "local": "3-125",
         "name": "Playland",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_689_1473444503.JPG",
+        "image": "https://sasiteit.blob.core.windows.net:443/zion/subsidiaries/2024-10/picture_689_1727999285078.png",
+        "category": "Entretenimiento",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -6742,7 +7059,8 @@
         "reference": "zion_15871",
         "local": "3-127",
         "name": "Mis Carnes Parrilla",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_666_1475615966.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_666_1475615966.jpg",
+        "category": "Restaurantes",
         "area": {
           "id": 17,
           "name": "Plaza Venezuela N3"
@@ -6764,6 +7082,7 @@
         "local": "3-128",
         "name": "Buffalo Wings",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2021-08/1999_companysubsidiaryImage1_1627949493977.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 16,
           "name": "Plaza Colombia N3"
@@ -6805,6 +7124,7 @@
         "local": "3-135",
         "name": "Medias y Más",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8577_companysubsidiaryImage1_1716430210205.jpeg",
+        "category": "Vestuario",
         "area": {
           "id": 7,
           "name": "Plaza Perú N3"
@@ -6826,6 +7146,7 @@
         "local": "3-137",
         "name": "Funky Chic",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8559_companysubsidiaryImage1_1716425976853.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 6,
           "name": "Plaza Italia N3"
@@ -6846,7 +7167,8 @@
         "reference": "zion_15962",
         "local": "3-138, 3-139 y 3-140",
         "name": "Colchones pullman",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1123_1487365540.png",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1123_1487365540.png",
+        "category": "Variedades y Hogar",
         "area": {
           "id": 6,
           "name": "Plaza Italia N3"
@@ -6868,6 +7190,7 @@
         "local": "3-141",
         "name": "Ana María Cosméticos",
         "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_1266_1476215896.png",
+        "category": "Belleza y Salud",
         "area": {
           "id": 6,
           "name": "Plaza Italia N3"
@@ -6889,6 +7212,7 @@
         "local": "3-149",
         "name": "Action Black",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8557_companysubsidiaryImage1_1716425477155.jpeg",
+        "category": "Entretenimiento",
         "area": {
           "id": 6,
           "name": "Plaza Italia N3"
@@ -6910,6 +7234,7 @@
         "local": "3-151",
         "name": "Ingenio Destreza Mental",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8558_companysubsidiaryImage1_1716425632566.jpeg",
+        "category": "Entretenimiento",
         "area": {
           "id": 6,
           "name": "Plaza Italia N3"
@@ -6931,6 +7256,7 @@
         "local": "3-154",
         "name": "Luxzanna",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8478_companysubsidiaryImage1_1715900550948.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 6,
           "name": "Plaza Italia N3"
@@ -6952,6 +7278,7 @@
         "local": "3-164",
         "name": "BrassaNova",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8549_companysubsidiaryImage1_1716424439791.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 8,
           "name": "Plaza Ecuador N3"
@@ -6973,6 +7300,7 @@
         "local": "3-165",
         "name": "Protein Go",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8556_companysubsidiaryImage1_1716425401416.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -6994,6 +7322,7 @@
         "local": "3-166",
         "name": "ServiFitness",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8555_companysubsidiaryImage1_1716425321587.jpeg",
+        "category": "Belleza y Salud",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -7015,6 +7344,7 @@
         "local": "3-167",
         "name": "Mas Turismo",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8554_companysubsidiaryImage1_1716425174965.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -7036,6 +7366,7 @@
         "local": "3-179",
         "name": "Vending / 24",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8553_companysubsidiaryImage1_1716425081300.jpeg",
+        "category": "Servicios",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -7057,6 +7388,7 @@
         "local": "3-180",
         "name": "Mora Dulce",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8552_companysubsidiaryImage1_1716424960636.jpeg",
+        "category": "Delikatessen",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -7078,6 +7410,7 @@
         "local": "3-184",
         "name": "Virtual Room",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8551_companysubsidiaryImage1_1716424826649.jpeg",
+        "category": "Entretenimiento",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -7099,6 +7432,7 @@
         "local": "3-185",
         "name": "Academia de Idiomas Smart",
         "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-05/8550_companysubsidiaryImage1_1716424652048.jpeg",
+        "category": "Variedades",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -7120,6 +7454,7 @@
         "local": "3-186, 3-187, 3-188 y 3-189",
         "name": "El Corral Gourmet",
         "image": "https://sasiteit.blob.core.windows.net/container1/multimedia/cs/2020-06/1_cs_628_profile_1591824977.jpeg",
+        "category": "Restaurantes",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"
@@ -7140,7 +7475,8 @@
         "reference": "zion_15983",
         "local": "3-190",
         "name": "La Plaza de Andrés",
-        "image": "http://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_122_1477085388.jpg",
+        "image": "https://sasiteit.blob.core.windows.net/tockall/companies/csimagen1_122_1477085388.jpg",
+        "category": "Restaurantes",
         "area": {
           "id": 20,
           "name": "Plaza Met N3"

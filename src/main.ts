@@ -21,6 +21,7 @@ const labelContainerElem = document.querySelector( '#labelsScene' );
 const scene = new Scene();
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
 const BASE_URL = `${window.location.origin}${basePath}/models/`;
+const companyId = new URLSearchParams(window.location.search).get('placeId') || "0";
 //let animationArray = [] as THREE.AnimationAction[];
 const renderer = new WebGLRenderer({ antialias: true, alpha: true, canvas: document.querySelector('canvas')! });
 renderer.setClearColor(0x000000, 0);
@@ -87,7 +88,11 @@ function updateLabelVisibility() {
   const labelData: LabelData[] = [];
 
   labelsScene.forEach((elem, position) => {
-    if(elem.classList.contains('NoHide') || elem.classList.contains('HideFromFloor')) return;
+    if(elem.classList.contains('HideFromFloor')
+      || elem.classList.contains('HideFromCategory')){
+        elem.style.display = 'none';
+        return;
+      } 
     tempV.copy(position);
     tempV.project(camera);
 
@@ -220,14 +225,14 @@ function GetPlacesReal(companyId: string){
     });
     updateLabelPositions();
     updateLabelVisibility();
-    //CreateButtonFilters();
+    initCategorySelector();
   }).catch((error) => {
     console.error("Error al obtener los lugares:", error);
   });
 }
 
 function GetPlacesFake(){
-  fetch('src/response_uniandes.json')
+  fetch(`src/response_${companyId}.json`)
   .then(json => {
     if (!json.ok) {
       console.log('Network response was not ok');
@@ -250,7 +255,7 @@ function GetPlacesFake(){
         places[i].company_name = json.data.places[i].company.name;
       }
     }else{
-      places = json.data_place.places;
+      places = json.response.data_place.places;
     }
     places.forEach((place) => {
     const object = scene.getObjectByName(place.place_id.toString());
@@ -266,7 +271,7 @@ function GetPlacesFake(){
     });
     updateLabelPositions();
     updateLabelVisibility();
-    //CreateButtonFilters();
+    initCategorySelector();
   });
 }
 
@@ -279,13 +284,11 @@ function findFloorObject(object: Object3D): Object3D | null {
   return null;
 }
 
-function CreateTextForPlace(place: Place, placeObject: Object3D, fontSize = 1, isNoHide = false) {
+function CreateTextForPlace(textName: Place, placeObject: Object3D, fontSize = 1) {
   const elem = document.createElement( 'div' );
-  const formattedKey = place.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
+  const formattedKey = textName.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
   elem.textContent = formattedKey;
   elem.style.fontSize = fontSize + 'em';
-  if(isNoHide)
-    elem.classList.add('NoHide');
   labelContainerElem!.appendChild( elem );
   const { size, center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
   const topCenterPosition = new Vector3(center.x, center.y + size.y, center.z);
@@ -293,43 +296,8 @@ function CreateTextForPlace(place: Place, placeObject: Object3D, fontSize = 1, i
   const floorObj = findFloorObject(placeObject);
   const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
   elem.dataset.floorIndex = floorIndex.toString();
+  elem.dataset.category = textName.place_category_name;
 }
-
-/*function CreateButtonFilters() {
-    const loader = new GLTFLoader();
-    loader.load('./models/ButtonFilterPrefab.glb', (gltf) => {
-        const prefab = gltf.scene;
-        const backgroundSphere = scene.getObjectByName('backgroundSphere');
-        if (backgroundSphere) {
-            scene.remove(backgroundSphere);
-        }
-        const { size } = GetBoundingBoxSizeAndCenterOfObject(scene);      
-
-        if (backgroundSphere) {
-            scene.add(backgroundSphere);
-        }
-        let zPosition = size.z / 2;
-        for (const key in MapObjectsListByCategoryName) {
-          const button = prefab.clone(true).children[0];
-          button.userData.place_category_name = key;
-          button.position.set((size.x / 2) + 3.5, 0, zPosition / 2);
-          const mixer = new AnimationMixer(button);
-          const animationClips = gltf.animations.map(clip => clip.clone());
-          allAvailableAnimationClipsMap.set(button, animationClips);
-          animationClips.forEach((clip) => {
-              mixer.clipAction(clip);
-          });
-          mixers.push(mixer);
-          button.visible = true;
-          scene.add(button);
-
-          const formattedKey = key.replace(/ /g, '\n');
-          CreateTextForPlace(formattedKey, button, 2, true);
-
-          zPosition -= 10;
-      }
-    });
-}*/
 
 let hasUserInteracted = false;
 
@@ -511,9 +479,7 @@ loader.load(
     if(floorLevels.length > 0){
       initFloorSelector();
     }
-    
-    const companyId = new URLSearchParams(window.location.search).get('placeId') || "0";
-    
+      
     if (companyId === "0" || window.location.hostname === "localhost") {
       GetPlacesFake();
     }else{
@@ -538,6 +504,7 @@ loader.load(
 );
 
 function initFloorSelector() {
+  document.getElementById('floor-selector-title')!.style.display = 'block';
   const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
   floorSelector.style.display = 'block';
 
@@ -582,6 +549,53 @@ function showFloor(index: number) {
       elem.classList.add('HideFromFloor');
     }
   });
+  updateLabelPositions();
+  updateLabelVisibility();
+}
+
+function initCategorySelector() {
+  document.getElementById('category-selector-title')!.style.display = 'block';
+  const categorySelector = document.getElementById('category-selector') as HTMLSelectElement;
+  categorySelector.style.display = 'block';
+
+  // Add default option
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '-1';
+  defaultOption.text = 'Todas las Categorías';
+  categorySelector.appendChild(defaultOption);
+
+  for (const key in MapObjectsListByCategoryName) {
+    if(key === 'undefined') continue;
+    const option = document.createElement('option');
+    option.value = key;
+    option.text = key;
+    categorySelector.appendChild(option);
+  }
+
+  categorySelector.addEventListener('change', () => {
+    showCategory((categorySelector.value));
+  });
+}
+
+function showCategory(category: string) {
+  labelsScene.forEach((elem) => {
+    if(category === '-1' || elem.dataset.category === category){
+      elem.style.display = 'block';
+      elem.classList.remove('HideFromCategory');
+    }else{
+      elem.style.display = 'none';
+      elem.classList.add('HideFromCategory');
+    }
+  });
+
+  // Restore all original colors first
+  RestoreOriginalColors();
+
+  // If category is not "-1", color only that category
+  if (category !== '-1') {
+    ChangeObjectColorsByCategory(category, COLOR_SELECTED);
+  }
+
   updateLabelPositions();
   updateLabelVisibility();
 }
