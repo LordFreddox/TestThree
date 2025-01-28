@@ -8,7 +8,7 @@
             "runtimeArgs": [
                 "--remote-debugging-port=9222"
             ],
-            "url": "http://localhost:3000/index.html?placeId=1&project=bot", // Provide your project's url to finish configuring
+            "url": "http://localhost:3000/index.html?placeId=13&project=bot&Start=1927&Place=1925&ServType=1", // Provide your project's url to finish configuring
             "presentation": {
                 "hidden": true
             }
@@ -17,7 +17,7 @@
             "type": "vscode-edge-devtools.debug",
             "name": "Open Edge DevTools",
             "request": "attach",
-            "url": "http://localhost:3000/index.html?placeId=1&project=bot", // Provide your project's url to finish configuring
+            "url": "http://localhost:3000/index.html?placeId=13&project=bot&Start=1927&Place=1925&ServType=1", // Provide your project's url to finish configuring
             "presentation": {
                 "hidden": true
             }

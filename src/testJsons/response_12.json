@@ -1,0 +1,552 @@
+{
+  "data": {
+    "places": [
+      {
+        "id": 1662,
+        "reference": "triptrapp_14043",
+        "local": "  ",
+        "name": "Patinódromo",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/245_companysubsidiaryImage1_1723571975700.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1646,
+        "reference": "triptrapp_14022",
+        "local": " ",
+        "name": "Piscina Recreativa",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/225_companysubsidiaryImage1_1715289135358.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1655,
+        "reference": "triptrapp_14031",
+        "local": " ",
+        "name": "Parqueadero Entrada 68",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/233_companysubsidiaryImage1_1715292768429.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1664,
+        "reference": "triptrapp_14046",
+        "local": " ",
+        "name": "Bloque F",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/247_companysubsidiaryImage1_1723572217495.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1648,
+        "reference": "triptrapp_14024",
+        "local": " ",
+        "name": "Vestier Caballeros ",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/227_companysubsidiaryImage1_1715289587065.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1657,
+        "reference": "triptrapp_14033",
+        "local": " ",
+        "name": "Pista de Patinaje ",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/235_companysubsidiaryImage1_1715294892432.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1666,
+        "reference": "triptrapp_14048",
+        "local": " ",
+        "name": "Piscinas",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/249_companysubsidiaryImage1_1723572057125.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1650,
+        "reference": "triptrapp_14026",
+        "local": " ",
+        "name": "Vestier Infantil",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/228_companysubsidiaryImage1_1715289726524.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1659,
+        "reference": "triptrapp_14040",
+        "local": " ",
+        "name": "Centro de Desarrollo Empresarial",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/242_companysubsidiaryImage1_1723572520773.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1668,
+        "reference": "triptrapp_14050",
+        "local": " ",
+        "name": "Coliseo Polideportivo",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/251_companysubsidiaryImage1_1723572587359.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1652,
+        "reference": "triptrapp_14028",
+        "local": " ",
+        "name": "Centro de Convenciones ",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/230_companysubsidiaryImage1_1715291561193.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1661,
+        "reference": "triptrapp_14042",
+        "local": " ",
+        "name": "Plaza de Júbileo",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/244_companysubsidiaryImage1_1723572127183.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1645,
+        "reference": "triptrapp_14021",
+        "local": " ",
+        "name": "Piscina Olimpica",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/223_companysubsidiaryImage1_1715288663605.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1654,
+        "reference": "triptrapp_14030",
+        "local": " ",
+        "name": "Cancha Multiple",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/232_companysubsidiaryImage1_1715292429916.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1663,
+        "reference": "triptrapp_14045",
+        "local": " ",
+        "name": "Bolera",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/246_companysubsidiaryImage1_1723572367929.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1647,
+        "reference": "triptrapp_14023",
+        "local": " ",
+        "name": "Piscina Semiolimpica ",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/224_companysubsidiaryImage1_1715288944245.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1656,
+        "reference": "triptrapp_14032",
+        "local": " ",
+        "name": "Salón de Juegos ",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/234_companysubsidiaryImage1_1715293744632.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1665,
+        "reference": "triptrapp_14047",
+        "local": " ",
+        "name": "Bloque G",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/248_companysubsidiaryImage1_1723572274368.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1649,
+        "reference": "triptrapp_14025",
+        "local": " ",
+        "name": "Vestier Damas ",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/226_companysubsidiaryImage1_1715289423213.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1658,
+        "reference": "triptrapp_14034",
+        "local": " ",
+        "name": "Pista de Bolos",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/236_companysubsidiaryImage1_1715295181416.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1667,
+        "reference": "triptrapp_14049",
+        "local": " ",
+        "name": "Ludoteca",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/250_companysubsidiaryImage1_1723571904745.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1651,
+        "reference": "triptrapp_14027",
+        "local": " ",
+        "name": "GYM",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/229_companysubsidiaryImage1_1715290056514.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1660,
+        "reference": "triptrapp_14041",
+        "local": " ",
+        "name": "Canchas de Fútbol",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-08/243_companysubsidiaryImage1_1723572459182.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1644,
+        "reference": "triptrapp_13934",
+        "local": " ",
+        "name": "Zona Principal ",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1772,
+        "reference": "triptrapp_14169",
+        "local": " ",
+        "name": "Parqueadero Calle 49A",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2025-01/368_companysubsidiaryImage1_1736787443886.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1653,
+        "reference": "triptrapp_14029",
+        "local": " ",
+        "name": "Restaurante Fusión Parrilla",
+        "image": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-05/231_companysubsidiaryImage1_1715292050021.jpeg",
+        "area": {
+          "id": 123,
+          "name": "CUR"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 12,
+          "name": "CUR Compensar",
+          "logo": "https://satriptrapp.blob.core.windows.net/container1/multimedia/cs/2024-07/136_companysubsidiaryImage1_1720632051332.jpeg",
+          "primary_color": "#4b4848"
+        }
+      }
+    ]
+  }
+}

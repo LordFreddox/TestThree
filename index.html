@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="CSS/style.css">
   </head>
 
-  <body style="background-color: black;padding: 0;">
-    <div id="containerLabels">
+  <body style="background-color: black;padding: 0;" oncontextmenu="return false;">
       <canvas id="canvas"></canvas>
       <div id="labelsScene" class="unselectable"></div>
     </div>
@@ -47,11 +46,13 @@
         </div>
     </div>
 
-    <p id="floor-selector-title" style="color:rgb(0, 0, 0);position:absolute;top:5vh;left:5vw;margin:0;display:none;">Filtrar por Pisos</p>
+    <p id="floor-selector-title" style="color:rgb(0, 0, 0);position:absolute;top:5vh;left:5vw;margin:0;display:none;"
+      class="unselectable">Filtrar por Pisos</p>
     <select id="floor-selector" class="floor-selector" title="Select Floor">
     </select>
 
-    <p id="category-selector-title" style="color:rgb(0, 0, 0);position:absolute;top:10vh;left:5vw;margin:0;display:none;">Filtrar por Categoria</p>
+    <p id="category-selector-title" style="color:rgb(0, 0, 0);position:absolute;top:10vh;left:5vw;margin:0;display:none;"
+      class="unselectable">Filtrar por Categoria</p>
     <select id="category-selector" class="category-selector" title="Select Category" style="display:none;">
     </select>
 

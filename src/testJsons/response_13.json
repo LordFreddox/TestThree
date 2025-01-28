@@ -1,0 +1,468 @@
+{
+  "data": {
+    "places": [
+      {
+        "id": 1927,
+        "reference": "zion_15391",
+        "local": " ",
+        "name": "Edificio Pedro Navas ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8365_companysubsidiaryImage1_1688653215052.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1936,
+        "reference": "zion_15514",
+        "local": " ",
+        "name": "Velas / Artesanales ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-03/8468_companysubsidiaryImage1_1710430662773.jpeg",
+        "category": "Emprendimientos",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1812,
+        "reference": "zion_13740",
+        "local": "  ",
+        "name": "Administración ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/7179_companysubsidiaryImage1_1681856272946.jpeg",
+        "category": "Facultades ",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1929,
+        "reference": "zion_15393",
+        "local": " ",
+        "name": "Facultad Ciencias Sociales ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8367_companysubsidiaryImage1_1688661142206.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1912,
+        "reference": "zion_15345",
+        "local": " ",
+        "name": "Edificio RGD ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8335_companysubsidiaryImage1_1681430656432.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1931,
+        "reference": "zion_15395",
+        "local": " ",
+        "name": "Juan Valdez Café",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/2636_companysubsidiaryImage1_1688664634701.jpeg",
+        "category": "Restaurantes",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1924,
+        "reference": "zion_15388",
+        "local": " ",
+        "name": "Edificio Alberto Lleras",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8362_companysubsidiaryImage1_1688594229930.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1933,
+        "reference": "zion_15397",
+        "local": " ",
+        "name": "Bloque E",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8370_companysubsidiaryImage1_1688667800451.jpeg",
+        "category": "Bloques",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1807,
+        "reference": "zion_13014",
+        "local": " ",
+        "name": "Bloque RGB",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6483_companysubsidiaryImage1_1688066644928.jpeg",
+        "category": "Bloques",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1926,
+        "reference": "zion_15390",
+        "local": " ",
+        "name": "Gestión Humana y Desarrollo",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8364_companysubsidiaryImage1_1688661762848.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1935,
+        "reference": "zion_15399",
+        "local": " ",
+        "name": "City U",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8372_companysubsidiaryImage1_1688673146112.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1928,
+        "reference": "zion_15392",
+        "local": " ",
+        "name": "Edificio Centro del Japón",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8366_companysubsidiaryImage1_1688658627667.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1937,
+        "reference": "zion_16004",
+        "local": " ",
+        "name": "Becas",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2024-06/8604_companysubsidiaryImage1_1718208287968.jpeg",
+        "category": "Comercial",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1911,
+        "reference": "zion_15344",
+        "local": " ",
+        "name": "Edificio C Arquitectura",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/8230_companysubsidiaryImage1_1681323168173.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1930,
+        "reference": "zion_15394",
+        "local": " ",
+        "name": "Facultad de Educación Uniandes",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8368_companysubsidiaryImage1_1688664145865.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1923,
+        "reference": "zion_15387",
+        "local": " ",
+        "name": "Edificio Mario Laserna ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8361_companysubsidiaryImage1_1688592870512.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1932,
+        "reference": "zion_15396",
+        "local": " ",
+        "name": "Edif. Roberto Franco",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8369_companysubsidiaryImage1_1688665753727.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1925,
+        "reference": "zion_15389",
+        "local": " ",
+        "name": "Edificio Aulas ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8363_companysubsidiaryImage1_1688595376923.jpeg",
+        "category": "Edificios",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1934,
+        "reference": "zion_15398",
+        "local": " ",
+        "name": "Artesanías Colombianas Uniandes",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-07/8371_companysubsidiaryImage1_1688668541686.jpeg",
+        "category": "Comercial",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1809,
+        "reference": "zion_13016",
+        "local": "Ch",
+        "name": "Bloque CH",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-06/6484_companysubsidiaryImage1_1688065973240.jpeg",
+        "category": "Bloques",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      },
+      {
+        "id": 1810,
+        "reference": "zion_13017",
+        "local": "Ga",
+        "name": "Gata Golosa ",
+        "image": "https://sasiteit.blob.core.windows.net/zion/multimedia/cs/2023-04/6485_companysubsidiaryImage1_1681861835333.jpeg",
+        "category": "Centro Deportivo",
+        "area": {
+          "id": 153,
+          "name": "Campus"
+        },
+        "floor": {
+          "id": 1,
+          "name": "Piso 1"
+        },
+        "company": {
+          "id": 13,
+          "name": "Universidad de los Andes",
+          "logo": "https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2024-03/139_companyImage_1710435500018.jpeg",
+          "primary_color": "#4b4848"
+        }
+      }
+    ]
+  }
+}
