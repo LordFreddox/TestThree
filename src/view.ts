@@ -121,7 +121,6 @@ async function checkAndDownloadJSON() {
         }
 
         const url = BASE_URL_PATH_DESCRIPTION + `${companyId}-${new URLSearchParams(window.location.search).get('project')?.toUpperCase()}` + "/resumen-" + startPlaceId + "_" + endPlaceId + ".json";
-        SetNewPathNavmesh(startPlaceId, endPlaceId);
 
         try {
             const response = await fetch(url);
@@ -131,8 +130,10 @@ async function checkAndDownloadJSON() {
             const data = await response.json();
             const description = data.description;
             document.getElementById('description-path')!.innerHTML = description;
+            document.getElementById("fullviewButton")!.style.display = "inline-flex";
+            SetNewPathNavmesh(startPlaceId, endPlaceId);
         } catch (error) {
-            console.error('There has been a problem with your fetch operation:', error);
+            document.getElementById("fullviewButton")!.style.display = "none";
         }
     }
 }

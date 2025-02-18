@@ -1,4 +1,4 @@
-import { Object3D, Box3,Vector3 } from 'three'
+import { Object3D, Box3,Vector3 } from 'three';
 
 function GetBoundingBoxSizeAndCenterOfObject(object: Object3D) {
     const box = new Box3().setFromObject(object);

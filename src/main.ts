@@ -141,7 +141,7 @@ function Start() {
 }
 
 function SetNewPathNavmesh(idPlaceStart: string, idPlaceEnd: string) {
-  if (urlParams.get('ServType') == '1')//if servType 1 then calculate navmesh
+  if (urlParams.get('ServType') == "1")//if servType 1 then calculate navmesh
   {
     const navmeshObj = scene.getObjectByName('navmesh');
     if (navmeshObj) {
