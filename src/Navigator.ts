@@ -1,6 +1,6 @@
 import { Pathfinding } from 'three-pathfinding';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { BufferGeometry, LineBasicMaterial, Line, Object3D, Mesh, Group, Scene, MeshBasicMaterial, Vector3 } from 'three';
+import { Object3D, Mesh, Scene, Vector3, ArrowHelper } from 'three';
 
 const your_zone_id = 'my_navmesh_zone';
 
@@ -14,7 +14,7 @@ let modelStart: Object3D | null = null;
 let modelEnd: Object3D | null = null;
 
 function loadModels(scene: Scene): Promise<void> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const loader = new GLTFLoader();
     let loadCount = 0;
     loader.load('models/StartPath.glb', (gltf) => {
@@ -31,20 +31,17 @@ function loadModels(scene: Scene): Promise<void> {
   });
 }
 
-export async function createNavMeshAndDisplayPath(your_mesh: Mesh, scene: Scene, startPosition: Vector3, endPosition: Vector3): Promise<void> {
-  await loadModels(scene); // Wait for models to be loaded
-
+async function createNavMeshAndDisplayPath(your_mesh: Mesh, scene: Scene, startPosition: Vector3, endPosition: Vector3): Promise<void> {
+  await loadModels(scene);
   const zone = Pathfinding.createZone(your_mesh.geometry);
   const pathfinder = new Pathfinding();
-  pathfinder.setZoneData(your_zone_id, zone); // Set the zone data here
+  pathfinder.setZoneData(your_zone_id, zone);
 
   const config: NavMeshConfig = {
     pathfinder,
     zoneId: your_zone_id,
-    groupId: 0, // Set a default group ID
+    groupId: 0,
   };
-
-  //DebugNavMesh(your_mesh, scene);
 
   if (modelStart === null || modelEnd === null) {
     throw new Error('Models for start or end points have not been loaded yet.');
@@ -53,13 +50,13 @@ export async function createNavMeshAndDisplayPath(your_mesh: Mesh, scene: Scene,
   const navmeshObj = scene.getObjectByName('navmesh');
   if (navmeshObj) {
     navmeshObj.visible = false;
-    getPathAndDisplay(startPosition, endPosition, scene, config);
+    await getPathAndDisplay(startPosition, endPosition, scene, config);
   } else {
     console.error('Navmesh object not found in the scene.');
   }
 }
 
-export function getPathAndDisplay(startPosition: Vector3, endPosition: Vector3, scene: Scene, config: NavMeshConfig): void {
+async function getPathAndDisplay(startPosition: Vector3, endPosition: Vector3, scene: Scene, config: NavMeshConfig): Promise<void> {
   const { pathfinder, zoneId, groupId } = config;
 
   const startNode = pathfinder.getClosestNode(startPosition, zoneId, groupId);
@@ -88,36 +85,34 @@ export function getPathAndDisplay(startPosition: Vector3, endPosition: Vector3, 
     groupId
   );
 
-  if (path && path.length) {
-    const lineMaterial = new LineBasicMaterial({ color: 0xff0000, linewidth: 1000 });
-    const pathLines = [];
-
-    // Adding pathlines for the very first line from adjustedStart to the first point in the path
-    const firstPointInPath = path[0];
-    const adjustedFirstPointInPath = new Vector3(firstPointInPath.x, firstPointInPath.y, firstPointInPath.z);
-    const firstLineGeometry = new BufferGeometry().setFromPoints([adjustedStart, adjustedFirstPointInPath]);
-    const firstLine = new Line(firstLineGeometry, lineMaterial);
-    pathLines.push(firstLine);
+  if (path && path.length > 1) {
 
     for (let i = 0; i < path.length - 1; i++) {
       const start = path[i];
       const end = path[i + 1];
 
-      const adjustedStart = new Vector3(start.x, start.y, start.z);
-      const adjustedEnd = new Vector3(end.x, end.y, end.z);
+      // Calculate midpoint of the segment
+      const midpoint = new Vector3()
+        .addVectors(start, end)
+        .divideScalar(2);
 
-      const geometry = new BufferGeometry().setFromPoints([adjustedStart, adjustedEnd]);
-      const line = new Line(geometry, lineMaterial);
-      pathLines.push(line);
+      // Create an ArrowHelper for this segment
+      const arrowHelper = new ArrowHelper(
+        new Vector3(end.x - start.x, end.y - start.y, end.z - start.z), // dir
+        midpoint, // origin
+        0.75, // Length
+        0xff0000, // hex color
+        0.2, // head length
+        0.2 // head width
+      );
+
+      // Add the arrow helper to the scene
+      scene.add(arrowHelper);
     }
-
-    pathLines.forEach(line => scene.add(line));
-  } else {
-    console.warn("Path is too short to draw lines.");
   }
 }
 
-function DebugNavMesh(your_mesh: Mesh, scene: Scene) {
+/*function DebugNavMesh(your_mesh: Mesh, scene: Scene) {
   const content = new Group();
   scene.add(content);
   content.clear();
@@ -135,4 +130,8 @@ function DebugNavMesh(your_mesh: Mesh, scene: Scene) {
       transparent: true
     }))
   );
-}
+}*/
+
+export{
+  createNavMeshAndDisplayPath, getPathAndDisplay
+};

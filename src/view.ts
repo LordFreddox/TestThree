@@ -1,16 +1,41 @@
 import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 import { camera, canvas } from './Renderer';
+import { Place } from './http-service.js';
+import { companyId, SetNewPathNavmesh } from './main.ts';
+import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts'
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
 let MapObjectPlacesText = {} as { [key: string]: Object3D[] };
 const originalColors = new Map<Object3D, Color>();
 const tempV = new Vector3();
 const paddingBetweenText = 30;
+const BASE_URL_PATH_DESCRIPTION = 'https://strg01tockall.blob.core.windows.net/container-unity/ResumenRecorridos/';
 const searchBar = document.getElementById('search-bar') as HTMLInputElement;
+const placeSelectorStart = document.getElementById('placeStart') as HTMLSelectElement;
+const placeSelectorEnd = document.getElementById('placeEnd') as HTMLSelectElement;
+let labelsScene = new Map<Vector3, HTMLDivElement>();
+const labelContainerElem = document.querySelector('#labelsScene');
+
 searchBar?.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
     filterCarouselItems(searchTerm);
 });
+
+(document.getElementById("previewButton") as HTMLButtonElement).onclick = async () => {
+    document.getElementById('div3DView')!.style.display = 'block';
+    document.getElementById('search-section')!.style.display = 'none';
+};
+
+(document.getElementById("fullviewButton") as HTMLButtonElement).onclick = async () => {
+    const startPlaceId = placeSelectorStart.options[placeSelectorStart.selectedIndex].dataset.idPlace;
+    const endPlaceId = placeSelectorEnd.options[placeSelectorEnd.selectedIndex].dataset.idPlace;
+    if (startPlaceId === undefined || endPlaceId === undefined) return;
+
+    const baseUrl = `https://strg01tockall.blob.core.windows.net/container-unity/UnityBundles/webgl/3DExperiences/index.html`;
+    const urlParams = new URLSearchParams({ BigSurfaceId: companyId, Start: startPlaceId, Place: endPlaceId, ServType: "1" });
+    const url = `${baseUrl}?${urlParams.toString()}`;
+    window.open(url, '_blank');
+};
 
 function AddCarouselItem(imageUrl: string, description: string,
     object: Object3D, floorLevels: Object3D[], labelsScene: Map<Vector3, HTMLDivElement>) {
@@ -43,6 +68,68 @@ function filterCarouselItems(searchTerm: string) {
             (item as HTMLElement).classList.add('hidden');
         }
     });
+}
+
+function SetupPlacesForSearch(places: Place[]) {
+
+    places.forEach((_, index) => {
+        placeSelectorEnd.appendChild(
+            ReturnOptionsPlaces(
+                places[index].companysubsidiary_name,
+                index.toString(),
+                places[index].place_id));
+        placeSelectorStart.appendChild(
+            ReturnOptionsPlaces(
+                places[index].companysubsidiary_name,
+                index.toString(),
+                places[index].place_id));
+    });
+
+    placeSelectorStart.addEventListener('change', () => {
+        checkAndDownloadJSON();
+    });
+
+    placeSelectorEnd.addEventListener('change', () => {
+        checkAndDownloadJSON();
+    });
+}
+
+function ReturnOptionsPlaces(name: string, index: string, idPlace: number): HTMLOptionElement {
+    const option = document.createElement('option');
+    option.value = index;
+    option.text = name;
+    option.dataset.idPlace = idPlace.toString();
+    return option;
+}
+
+async function checkAndDownloadJSON() {
+    if (placeSelectorStart && placeSelectorEnd) {
+        const startPlaceId = placeSelectorStart.options[placeSelectorStart.selectedIndex].dataset.idPlace;
+        const endPlaceId = placeSelectorEnd.options[placeSelectorEnd.selectedIndex].dataset.idPlace;
+
+        if (!startPlaceId || !endPlaceId) {
+            return;
+        }
+
+        if (placeSelectorEnd.selectedIndex == -1 || placeSelectorStart.selectedIndex == -1 || placeSelectorEnd.selectedIndex == placeSelectorStart.selectedIndex) {
+            return;
+        }
+
+        const url = BASE_URL_PATH_DESCRIPTION + `${companyId}-${new URLSearchParams(window.location.search).get('project')?.toUpperCase()}` + "/resumen-" + startPlaceId + "_" + endPlaceId + ".json";
+        SetNewPathNavmesh(startPlaceId, endPlaceId);
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            const data = await response.json();
+            const description = data.description;
+            document.getElementById('description-path')!.innerHTML = description;
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        }
+    }
 }
 
 function findFloorObject(object: Object3D, floorLevels: Object3D[]): Object3D | null {
@@ -100,8 +187,8 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
             elem.classList.add('HideFromFloor');
         }
     });
-    updateLabelPositions(labelsScene);
-    updateLabelVisibility(labelsScene);
+    updateLabelPositions();
+    updateLabelVisibility();
 }
 
 function initCategorySelector(labelsScene: Map<Vector3, HTMLDivElement>) {
@@ -147,11 +234,11 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
         ChangeObjectColorsByCategory(category, COLOR_SELECTED);
     }
 
-    updateLabelPositions(labelsScene);
-    updateLabelVisibility(labelsScene);
+    updateLabelPositions();
+    updateLabelVisibility();
 }
 
-function updateLabelPositions(labelsScene: Map<Vector3, HTMLDivElement>) {
+function updateLabelPositions(/*labelsScene: Map<Vector3, HTMLDivElement>*/) {
     labelsScene.forEach((elem, position) => {
         if (elem.style.display == 'none') return;
         tempV.copy(position);
@@ -165,7 +252,7 @@ function updateLabelPositions(labelsScene: Map<Vector3, HTMLDivElement>) {
     });
 }
 
-function updateLabelVisibility(labelsScene: Map<Vector3, HTMLDivElement>) {
+function updateLabelVisibility(/*labelsScene: Map<Vector3, HTMLDivElement>*/) {
     const labelData: LabelData[] = [];
 
     labelsScene.forEach((elem, position) => {
@@ -249,6 +336,23 @@ function RestoreOriginalColors() {
     originalColors.clear();
 }
 
+function CreateTextForPlace(
+    textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1, )
+    {
+    const elem = document.createElement('div');
+    const formattedKey = textName.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
+    elem.textContent = formattedKey;
+    elem.style.fontSize = fontSize + 'em';
+    labelContainerElem!.appendChild(elem);
+    const { size, center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
+    const topCenterPosition = new Vector3(center.x, center.y + size.y, center.z);
+    labelsScene.set(topCenterPosition, elem);
+    const floorObj = findFloorObject(placeObject, floorLevels);
+    const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
+    elem.dataset.floorIndex = floorIndex.toString();
+    elem.dataset.category = textName.place_category_name;
+}
+
 interface LabelData {
     elem: HTMLDivElement;
     x: number;
@@ -258,6 +362,7 @@ interface LabelData {
 
 export {
     initFloorSelector, initCategorySelector, AddCarouselItem,
-    updateLabelPositions, updateLabelVisibility, findFloorObject,
-    MapObjectsListByCategoryName
+    updateLabelPositions, updateLabelVisibility,
+    MapObjectsListByCategoryName, labelsScene, labelContainerElem,
+    SetupPlacesForSearch, CreateTextForPlace
 };

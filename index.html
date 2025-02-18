@@ -1,63 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mapas</title>
-    <script type="module" src="/src/main.ts"></script>
-    <link rel="stylesheet" href="CSS/style.css">
-  </head>
 
-  <body style="background-color: black;padding: 0;" oncontextmenu="return false;">
-      <canvas id="canvas"></canvas>
-      <div id="labelsScene" class="unselectable"></div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapas</title>
+  <script type="module" src="/src/main.ts"></script>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body style="background-color: black;padding: 0;" oncontextmenu="return false;">
+  <!--Search place-->>
+  <div id="search-section" style="display: none;" class="MainSettings">
+    <div id="search-div">
+      <img src="/img/search.svg" alt="Search Icon">
+      <h1>¡Ahora es más fácil!</h1>
+      <span class="description-title"> Selecciona donde estas y tu destino <br> para poder guiarte. </span>
+      <select id="placeStart" name="place1" title="Busca el primer lugar:">
+        <option value="" disabled selected>Busca el primer lugar</option>
+      </select>
+
+      <select id="placeEnd" name="place2" title="Busca el segundo lugar:">
+        <option value="" disabled selected>Busca el segundo lugar</option>
+      </select>
+
+      <div id="description-path">
+      </div>
+
+      <div>
+        <button id="previewButton" type="button" style="margin-right: 3vw;">Preview</button>
+        <button id="fullviewButton" type="button" style="margin-left: 3vw;">Fullview</button>
+      </div>
     </div>
+  </div>
 
-    <img id="tutorial" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
-      height: 10vh;margin-top: 75vw;" 
-      src="/img/zoomout.webp" 
-      autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
-      pointer-events: none;"/>
+  <!--3D View-->>
+  <div id="div3DView" style="display: none;" class="MainSettings">
+    <img id="tutorial" alt="Zoom Out" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
+    height: 10vh;margin-top: 75vw;" src="/img/zoomout.webp" autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
+    pointer-events: none;" />
 
-    <script>
-      function toggleVisibility(id) {
-        var element = document.getElementById(id);
-        element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
-      }
-
-      function logText(text) {
-        console.log(text);
-      }
-    </script>
-
-    <div id="loadingMain" style="position: absolute;
-        width: 100vw;
-        height: 100vh;
-        background-color: black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;">
-        <div class="load-4">
-          <div class="ring-1"></div>
-        </div>
-        <div id="loading-container" style="width: 80%; background-color: #ccc; border-radius: 20%; margin-top: 10vh;">
-          <div id="loading-bar" style="width: 0%; height: 20px; background-color: #4caf50; border-radius: 20%;"></div>
-        </div>
-    </div>
+    <!--div id="loadingMain" style="position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;">
+  <div class="load-4">
+    <div class="ring-1"></div>
+  </div>
+  <div id="loading-container" style="width: 80%; background-color: #ccc; border-radius: 20%; margin-top: 10vh;">
+    <div id="loading-bar" style="width: 0%; height: 20px; background-color: #4caf50; border-radius: 20%;"></div>
+  </div>
+</div-->
 
     <p id="floor-selector-title" style="color:rgb(0, 0, 0);position:absolute;top:5vh;left:5vw;margin:0;display:none;"
       class="unselectable">Filtrar por Pisos</p>
     <select id="floor-selector" class="floor-selector" title="Select Floor">
     </select>
 
-    <p id="category-selector-title" style="color:rgb(0, 0, 0);position:absolute;top:10vh;left:5vw;margin:0;display:none;"
-      class="unselectable">Filtrar por Categoria</p>
-    <select id="category-selector" class="category-selector" title="Select Category" style="display:none;">
-    </select>
+    <div id="category-selector-parent" style="display: block;">
+      <p id="category-selector-title"
+        style="color:rgb(0, 0, 0);position:absolute;top:10vh;left:5vw;margin:0;display:none;" class="unselectable">
+        Filtrar
+        por Categoria</p>
+      <select id="category-selector" class="category-selector" title="Select Category" style="display:none;">
+      </select>
+    </div>
 
-    <footer id="footer" class="footer show" style="display: none;">
-      <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..."/>
+    <footer id="footer" class="footer show" style="display: block;">
+      <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..." />
       <div class="carousel">
         <div class="carousel-container unselectable">
         </div>
@@ -66,40 +80,54 @@
     </footer>
 
     <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div>
-    
-    <script>
-      const carouselContainer = document.querySelector('.carousel-container');
 
-      function disableSnap() {
-        carouselContainer.style.scrollSnapType = 'none';
+    <canvas id="canvas"></canvas>
+    <div id="labelsScene" class="unselectable"></div>
+  </div>
+
+  <script>
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    function disableSnap() {
+      carouselContainer.style.scrollSnapType = 'none';
+    }
+
+    function enableSnap() {
+      carouselContainer.style.scrollSnapType = 'x mandatory';
+    }
+
+    carouselContainer.addEventListener('touchstart', disableSnap);
+    carouselContainer.addEventListener('touchend', enableSnap);
+    carouselContainer.addEventListener('pointerdown', disableSnap);
+    carouselContainer.addEventListener('pointerup', enableSnap);
+
+    function showFooter() {
+      const footer = document.querySelector('.footer');
+      footer.classList.add('show');
+      document.getElementById('footer-button').style.display = 'none';
+    }
+
+    function hideFooter() {
+      const footer = document.querySelector('.footer');
+      footer.classList.remove('show');
+      document.getElementById('footer-button').style.display = 'block';
+    }
+
+    document.addEventListener('pointerup', (event) => {
+      if (!event.target.closest('.footer') && !event.target.closest('.footer-button')) {
+        hideFooter();
       }
+    });
 
-      function enableSnap() {
-        carouselContainer.style.scrollSnapType = 'x mandatory';
-      }
+    function toggleVisibility(id) {
+      var element = document.getElementById(id);
+      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
+    }
 
-      carouselContainer.addEventListener('touchstart', disableSnap);
-      carouselContainer.addEventListener('touchend', enableSnap);
-      carouselContainer.addEventListener('pointerdown', disableSnap);
-      carouselContainer.addEventListener('pointerup', enableSnap);
+    function logText(text) {
+      console.log(text);
+    }
+  </script>
+</body>
 
-      function showFooter() {
-        const footer = document.querySelector('.footer');
-        footer.classList.add('show');
-        document.getElementById('footer-button').style.display = 'none';
-      }
-
-      function hideFooter() {
-        const footer = document.querySelector('.footer');
-        footer.classList.remove('show');
-        document.getElementById('footer-button').style.display = 'block';
-      }
-
-      document.addEventListener('pointerup', (event) => {
-        if (!event.target.closest('.footer') && !event.target.closest('.footer-button')) {
-          hideFooter();
-        }
-      });
-    </script>
-  </body>
 </html>

@@ -8,7 +8,7 @@
             "runtimeArgs": [
                 "--remote-debugging-port=9222"
             ],
-            "url": "http://localhost:3000/index.html?placeId=13&project=bot&Start=1927&Place=1925&ServType=1", // Provide your project's url to finish configuring
+            "url": "http://localhost:4200/index.html?ServType=1&project=zyon_pru&placeId=482", // https://strg01tockall.blob.core.windows.net/container-unity/Maps3D/index.html?ServType=3&project=zyon
             "presentation": {
                 "hidden": true
             }
@@ -17,7 +17,7 @@
             "type": "vscode-edge-devtools.debug",
             "name": "Open Edge DevTools",
             "request": "attach",
-            "url": "http://localhost:3000/index.html?placeId=13&project=bot&Start=1927&Place=1925&ServType=1", // Provide your project's url to finish configuring
+            "url": "http://localhost:4200/index.html?ServType=1&project=zyon_pru&placeId=482",
             "presentation": {
                 "hidden": true
             }

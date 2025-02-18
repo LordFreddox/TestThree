@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -15,7 +16,7 @@ html, body {
     user-select: none;
 }
 
-.MainSettings{
+.MainSettings {
     position: absolute;
     top: 0%;
     left: 0%;
@@ -24,7 +25,7 @@ html, body {
     display: none;
 }
 
-.Centered{
+.Centered {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -34,39 +35,101 @@ html, body {
 #canvas {
     width: 100%;
     height: 100%;
-    width: 100%;  
+    width: 100%;
     height: 100%;
     display: block;
 }
+
 #containerLabels {
-    position: absolute;  
+    position: absolute;
     width: 100%;
     overflow: hidden;
 }
 
 #labelsScene {
-    position: absolute;  
-    z-index: 0;          
-    left: 0;            
+    position: absolute;
+    z-index: 0;
+    left: 0;
     top: 0;
     color: black;
     z-index: 0;
 }
+
 #labelsScene>div {
-    position: absolute;  
-    left: 0;             
+    position: absolute;
+    left: 0;
     top: 0;
     font-size: 1em;
     text-align: center;
-    text-shadow:         
+    text-shadow:
         -1px -1px 0 #ffffff,
-        0   -1px 0 #ffffff,
+        0 -1px 0 #ffffff,
         1px -1px 0 #ffffff,
-        1px  0   0 #ffffff,
-        1px  1px 0 #ffffff,
-        0    1px 0 #ffffff,
-        -1px  1px 0 #ffffff,
-        -1px  0   0 #ffffff;
+        1px 0 0 #ffffff,
+        1px 1px 0 #ffffff,
+        0 1px 0 #ffffff,
+        -1px 1px 0 #ffffff,
+        -1px 0 0 #ffffff;
+}
+
+#search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: #f0f0f0;
+}
+
+#search-section img {
+    width: 10rem;
+    height: 12rem;
+    margin-top: 2rem;
+}
+
+#search-section h3 {
+    margin: 0;
+    color: #373737;
+    font-size: 1.5em;
+}
+
+#search-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+#search-section select {
+    margin-top: 2vh;
+    padding: 14.5px 32px;
+    border-radius: 24px;
+    box-shadow: 0 1px 6px #00000021;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline: none;
+    border: none;
+}
+
+#description-path{
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 3vh;
+    white-space: pre-wrap;
+    text-overflow: clip;
+    overflow: auto;
+    height: 45vh;
+}
+
+#search-section button {
+    margin-top: 4vh;
+    background-color: transparent;
+    border: 2px solid #000;
+    padding: .6rem 1rem;
+    border-radius: 2rem;
+    color: #000;
+    font-weight: 700;
 }
 
 .floor-selector {
@@ -93,16 +156,16 @@ html, body {
 
 .footer {
     position: fixed;
-    bottom: -100%; 
+    bottom: -100%;
     width: 100%;
     background-color: #333;
     padding: 10px;
     text-align: center;
-    transition: bottom 0.3s ease-in-out; 
+    transition: bottom 0.3s ease-in-out;
 }
 
-.show{
-    bottom: 0; 
+.show {
+    bottom: 0;
 }
 
 .footer-button {
@@ -110,10 +173,10 @@ html, body {
     bottom: 1vh;
     right: 45%;
     background-image: url('/img/ico_menu.png');
-    background-size: contain; 
-    background-repeat: no-repeat; 
+    background-size: contain;
+    background-repeat: no-repeat;
     cursor: pointer;
-    z-index: 1000; 
+    z-index: 1000;
     width: 8vw;
     height: 5vh;
     rotate: 90deg;
@@ -142,13 +205,13 @@ html, body {
     gap: 10px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; 
+    scrollbar-width: none;
     bottom: 0;
-    
+
 }
 
 .carousel-container::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 
 .carousel-item {
@@ -158,7 +221,7 @@ html, body {
     text-align: center;
     color: white;
     scroll-snap-align: start;
-    flex: 0 0 20%; 
+    flex: 0 0 20%;
     display: block;
     height: 15vh;
 }
@@ -201,9 +264,11 @@ html, body {
     0% {
         transform: rotate(0deg);
     }
+
     50% {
         transform: rotate(180deg);
     }
+
     100% {
         transform: rotate(360deg);
     }

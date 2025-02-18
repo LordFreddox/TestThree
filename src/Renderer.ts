@@ -1,6 +1,7 @@
 import { Scene, AmbientLight, WebGLRenderer, Color,
     OrthographicCamera, DirectionalLight, 
 } from 'three';
+import { updateLabelPositions } from './view';
 
 let scene: Scene;
 let renderer: WebGLRenderer;
@@ -23,5 +24,16 @@ camera = new OrthographicCamera(
 const light = new DirectionalLight(0xffffff, 1);
 const ambientLight = new AmbientLight(0xffffff, 1.5); // Luz blanca suave
 scene.add(ambientLight, light);
+
+window.addEventListener('resize', onWindowResize, false);
+function onWindowResize() {
+    camera.left = -20 * (window.innerWidth / window.innerHeight) / 2;
+    camera.right = 20 * (window.innerWidth / window.innerHeight) / 2;
+    camera.top = 20 / 2;
+    camera.bottom = -20 / 2;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    updateLabelPositions();
+}
 
 export { scene, camera, renderer, canvas };
