@@ -132,6 +132,15 @@ body {
     font-weight: 700;
 }
 
+#back3D{
+    position: absolute; 
+    top: 6vh; 
+    left: 6vw; 
+    border-radius: 5px; 
+    padding: 5px; 
+    display: none;
+}
+
 .floor-selector {
     position: absolute;
     display: none;

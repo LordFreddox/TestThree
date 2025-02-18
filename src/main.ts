@@ -216,6 +216,7 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
   switch (servType) {
     case "1":
       document.getElementById('search-section')!.style.display = 'block';
+      document.getElementById("back3D")!.style.display = 'block';
       SetupPlacesForSearch(places);
       break;
     case "3":

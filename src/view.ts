@@ -21,6 +21,11 @@ searchBar?.addEventListener('input', () => {
     filterCarouselItems(searchTerm);
 });
 
+(document.getElementById("back3D") as HTMLButtonElement).addEventListener('click', () => {
+    document.getElementById('div3DView')!.style.display = 'none';
+    document.getElementById('search-section')!.style.display = 'block';
+});
+
 (document.getElementById("previewButton") as HTMLButtonElement).onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'block';
     document.getElementById('search-section')!.style.display = 'none';
