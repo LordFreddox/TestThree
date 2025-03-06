@@ -99,6 +99,7 @@ button{
 
 #search-section {
     height: 100%;
+    /* position: absolute; */
     background-color: #eeeeee;
 }
 
@@ -114,10 +115,12 @@ button{
 }
 
 #search-div {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
+    width: 100%;
 }
 
 #search-section select {
@@ -633,7 +636,7 @@ button{
 }
 
 #backgroundimage-street {
-    opacity: 0.2;
+    /* opacity: 0.2; */
     display: block;
     position: absolute;
     border-bottom-left-radius: 20vw;
@@ -642,7 +645,7 @@ button{
     height: 25vh;
     /* z-index: 1; */
     background-image: url('/img/streetMaskBackground.svg');
-    background-color: black;
+    background-color: var(--button-enable-color);
     background-size: cover; /* Cover the entire area */
     background-position: center; /* Center the image */
 }
