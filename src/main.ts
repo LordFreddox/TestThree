@@ -7,14 +7,14 @@ import {
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { GetPlaces, Place } from './http-service.js';
+import { GetPlaces, Place, PROJECT } from './http-service.js';
 import { scene, camera, renderer } from './Renderer.ts';
 import {
   initFloorSelector, initCategorySelector, AddCarouselItem,
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearch
 } from './view.ts';
-import { createNavMeshAndDisplayPath } from './Navigator.ts';
+import { createNavMesh } from './Navigator.ts'
 import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts'
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -43,9 +43,9 @@ var _v = new Vector3();
 
 let modelUrl: string;
 if (window.location.hostname === "localhost") {
-  modelUrl = './models/' + companyId + '.glb';
+  modelUrl = `./models/${companyId}_${PROJECT.toLowerCase()}.glb`;
 } else {
-  modelUrl = companyId === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + companyId + '.glb';
+  modelUrl = companyId === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + `${companyId}_${PROJECT.toLowerCase()}.glb`;
 }
 
 if (companyId === "0" || window.location.hostname === "localhost") {
@@ -116,15 +116,20 @@ function Start() {
         initFloorSelector(floorLevels, labelsScene);
       }
 
-      //find all objects whos name end with _objetivo and set visible.false
       const objetivoParent = scene.getObjectByName("objetivos");
       if (objetivoParent) {
-        const objetivoObjects = objetivoParent.children.filter(child => child.name.endsWith('_objetivo'));
-        objetivoObjects.forEach(obj => obj.visible = false);
+        objetivoParent.children.forEach(child => {
+          child.visible = false;
+        });
       }
 
       //loadingscreen.style.display = "none";
-      //if (urlParams.get('ServType') == "3")
+      if (urlParams.get('ServType') == "1"){
+        const navmeshObj = scene.getObjectByName('navmesh');
+        if (navmeshObj) {
+          createNavMesh(navmeshObj as Mesh)
+        }
+      }
       SetupPlacesOnScene(places);
     },
     (xhr) => {
@@ -138,20 +143,6 @@ function Start() {
       console.error('An error happened', error);
     }
   );
-}
-
-function SetNewPathNavmesh(idPlaceStart: string, idPlaceEnd: string) {
-  if (urlParams.get('ServType') == "1")//if servType 1 then calculate navmesh
-  {
-    const navmeshObj = scene.getObjectByName('navmesh');
-    if (navmeshObj) {
-      const startPosition = scene.getObjectByName(`${idPlaceStart}_objetivo`);
-      const endPosition = scene.getObjectByName(`${idPlaceEnd}_objetivo`);
-      if (startPosition && endPosition)
-        createNavMeshAndDisplayPath(navmeshObj as Mesh, scene,
-          startPosition.position, endPosition.position);
-    }
-  }
 }
 
 controls.addEventListener('change', () => {
@@ -178,7 +169,7 @@ function GetPlacesReal(companyId: string) {
 }
 
 function GetPlacesFake() {
-  fetch(`src/testJsons/response_${companyId}.json`)
+  fetch(`src/testJsons/response_${companyId}_${PROJECT.toLowerCase()}.json`)
     .then(json => {
       if (!json.ok) {
         console.log('Network response was not ok');
@@ -196,7 +187,7 @@ function SetupPlacesOnScene(places: Place[]) {
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
       AddCarouselItem(place.companysubsidiary_image_url, place.companysubsidiary_name, object,
-        floorLevels, labelsScene);
+        floorLevels);
       object.userData = place;
       if (!MapObjectsListByCategoryName[place.place_category_name]) {
         MapObjectsListByCategoryName[place.place_category_name] = [];
@@ -207,7 +198,7 @@ function SetupPlacesOnScene(places: Place[]) {
   });
   updateLabelPositions();
   updateLabelVisibility();
-  initCategorySelector(labelsScene);
+  initCategorySelector();
 }
 
 function SetupExplorerOrVirtualtour(places: Place[]) {
@@ -217,6 +208,8 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
     case "1":
       document.getElementById('search-section')!.style.display = 'block';
       document.getElementById("back3D")!.style.display = 'block';
+      if(places[0])
+        document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
       SetupPlacesForSearch(places);
       break;
     case "3":
@@ -280,5 +273,5 @@ function animate() {
 animate();
 
 export {
-  SetNewPathNavmesh, companyId
+  companyId
 };

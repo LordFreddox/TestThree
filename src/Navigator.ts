@@ -1,17 +1,16 @@
 import { Pathfinding } from 'three-pathfinding';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Object3D, Mesh, Scene, Vector3, ArrowHelper } from 'three';
+import { scene } from './Renderer';
+// import { DebugNavMesh } from './Utils';
 
-const your_zone_id = 'my_navmesh_zone';
-
-export type NavMeshConfig = {
-  pathfinder: Pathfinding;
-  zoneId: string;
-  groupId: number;
-};
+const zoneId: string = 'VirtualTour';
+const groupId: number = 0;
+let pathfinder: Pathfinding | null = null;
 
 let modelStart: Object3D | null = null;
 let modelEnd: Object3D | null = null;
+let arrowHelpers: ArrowHelper[] = [];
 
 function loadModels(scene: Scene): Promise<void> {
   return new Promise((resolve) => {
@@ -19,48 +18,54 @@ function loadModels(scene: Scene): Promise<void> {
     let loadCount = 0;
     loader.load('models/StartPath.glb', (gltf) => {
       modelStart = gltf.scene;
+      modelStart.visible = false;
       scene.add(modelStart);
       if (++loadCount === 2) resolve();
     });
 
     loader.load('models/FinishPath.glb', (gltf) => {
       modelEnd = gltf.scene;
+      modelEnd.visible = false;
       scene.add(modelEnd);
       if (++loadCount === 2) resolve();
     });
   });
 }
 
-async function createNavMeshAndDisplayPath(your_mesh: Mesh, scene: Scene, startPosition: Vector3, endPosition: Vector3): Promise<void> {
+async function createNavMesh(navMesh: Mesh): Promise<void> {
   await loadModels(scene);
-  const zone = Pathfinding.createZone(your_mesh.geometry);
-  const pathfinder = new Pathfinding();
-  pathfinder.setZoneData(your_zone_id, zone);
-
-  const config: NavMeshConfig = {
-    pathfinder,
-    zoneId: your_zone_id,
-    groupId: 0,
-  };
-
-  if (modelStart === null || modelEnd === null) {
-    throw new Error('Models for start or end points have not been loaded yet.');
+  const zone = Pathfinding.createZone(navMesh.geometry);
+  pathfinder = new Pathfinding();
+  pathfinder.setZoneData(zoneId, zone);
+  console.log("path baked");
+  if (!modelStart || !modelEnd) {
+    console.error('Models for start or end points have not been loaded yet');
+    return;
   }
-
-  const navmeshObj = scene.getObjectByName('navmesh');
+  const navmeshObj = navMesh as Object3D;
   if (navmeshObj) {
     navmeshObj.visible = false;
-    await getPathAndDisplay(startPosition, endPosition, scene, config);
   } else {
     console.error('Navmesh object not found in the scene.');
   }
+  // DebugNavMesh(navMesh);
 }
 
-async function getPathAndDisplay(startPosition: Vector3, endPosition: Vector3, scene: Scene, config: NavMeshConfig): Promise<void> {
-  const { pathfinder, zoneId, groupId } = config;
+async function getPathAndDisplay(startPlace: string, endPlace: string): Promise<void> {
+  clearArrows();
 
-  const startNode = pathfinder.getClosestNode(startPosition, zoneId, groupId);
-  const endNode = pathfinder.getClosestNode(endPosition, zoneId, groupId);
+  if (pathfinder === null) return;
+
+  const startPosition = scene.getObjectByName(startPlace + "_objetivo");
+  const endPosition = scene.getObjectByName(endPlace + "_objetivo");
+
+  if (!startPosition || !endPosition) {
+    console.error('Could not find the specified object in the scene');
+    return;
+  }
+
+  const startNode = pathfinder.getClosestNode(startPosition.position, zoneId, groupId);
+  const endNode = pathfinder.getClosestNode(endPosition.position, zoneId, groupId);
 
   if (!startNode || !endNode) {
     console.error('Could not find valid start or end points on navmesh');
@@ -69,14 +74,16 @@ async function getPathAndDisplay(startPosition: Vector3, endPosition: Vector3, s
 
   const adjustedStart = new Vector3().copy(startNode.centroid);
   const adjustedEnd = new Vector3().copy(endNode.centroid);
+  // const adjustedStart = startPosition.position;
+  // const adjustedEnd = endPosition.position;
 
-  if (modelStart === null || modelEnd === null) {
-    console.error('Models for start or end points have not been loaded yet.');
-    return;
+  if (!modelStart || !modelEnd || adjustedStart == adjustedEnd) {
+  } else {
+    modelStart.position.copy(adjustedStart);
+    modelEnd.position.copy(adjustedEnd);
+    modelStart.visible = true;
+    modelEnd.visible = true;
   }
-
-  modelStart.position.copy(adjustedStart);
-  modelEnd.position.copy(adjustedEnd);
 
   const path = pathfinder.findPath(
     adjustedStart,
@@ -86,17 +93,14 @@ async function getPathAndDisplay(startPosition: Vector3, endPosition: Vector3, s
   );
 
   if (path && path.length > 1) {
-
     for (let i = 0; i < path.length - 1; i++) {
       const start = path[i];
       const end = path[i + 1];
 
-      // Calculate midpoint of the segment
       const midpoint = new Vector3()
         .addVectors(start, end)
         .divideScalar(2);
 
-      // Create an ArrowHelper for this segment
       const arrowHelper = new ArrowHelper(
         new Vector3(end.x - start.x, end.y - start.y, end.z - start.z), // dir
         midpoint, // origin
@@ -106,32 +110,19 @@ async function getPathAndDisplay(startPosition: Vector3, endPosition: Vector3, s
         0.2 // head width
       );
 
-      // Add the arrow helper to the scene
       scene.add(arrowHelper);
+      arrowHelpers.push(arrowHelper);
     }
   }
 }
 
-/*function DebugNavMesh(your_mesh: Mesh, scene: Scene) {
-  const content = new Group();
-  scene.add(content);
-  content.clear();
-  content.add(your_mesh);
-  content.add(
-    new Mesh(
-      your_mesh.geometry,
-      new MeshBasicMaterial({ color: 0xff00ff, wireframe: true })
-    )
-  );
-  content.add(
-    new Mesh(your_mesh.geometry, new MeshBasicMaterial({
-      color: 0xFFFFFF,
-      opacity: 0.75,
-      transparent: true
-    }))
-  );
-}*/
+function clearArrows() {
+  for (const arrow of arrowHelpers) {
+    scene.remove(arrow);
+  }
+  arrowHelpers = [];
+}
 
 export{
-  createNavMeshAndDisplayPath, getPathAndDisplay
+  createNavMesh, getPathAndDisplay
 };

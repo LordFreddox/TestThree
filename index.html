@@ -3,46 +3,105 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Mapas</title>
   <script type="module" src="/src/main.ts"></script>
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body style="background-color: black;padding: 0;" oncontextmenu="return false;">
-  <!--Search place-->>
-  <div id="search-section" style="display: none;" class="MainSettings">
+  <div id="backgroundimage-street" src="/img/streetMaskBackground.svg" alt="StreetMaskBackground"></div>
+
+  <div id="search-section" style="display: none;">
+    
     <div id="search-div">
-      <img src="/img/search.svg" alt="Search Icon">
-      <h1>¡Ahora es más fácil!</h1>
-      <span class="description-title"> Selecciona donde estas y tu destino <br> para poder guiarte. </span>
-      <select id="placeStart" name="place1" title="Busca el primer lugar:">
-        <option value="" disabled selected>Busca el primer lugar</option>
-      </select>
+      <img id="imageSearchSprite" src="/img/search.svg" alt="Search Icon">
+      <h1>Déjanos guiarte paso a paso</h1>
+      <span id="description-title">Encuentra tu destino con la mejor guía interactiva</span>
 
-      <select id="placeEnd" name="place2" title="Busca el segundo lugar:">
-        <option value="" disabled selected>Busca el segundo lugar</option>
-      </select>
+      <div class="container-searchButtons">
+        <img src="/img/CONST_searchbar.png" alt="CONST" style="height: 100px;">
 
-      <div id="description-path">
+        <div id="div-searchButtons">
+          <div id="buttonStart" class="container-input" type="button">
+            <div id="container-textSearch">
+              <span id="name-place" class="text-input">Selecciona tu punto de partida</span>
+              <span id="subname-place" class="text-input"></span>
+            </div>
+            <img alt="" class="icon"></img>
+          </div>
+
+          <div id="buttonDestination" class="container-input" type="button">
+            <div id="container-textSearch">
+              <span id="name-place" class="text-input">Selecciona tu destino</span>
+              <span id="subname-place" class="text-input"></span>
+            </div>
+            <img alt="" class="icon"></img>
+          </div>
+
+          <div style="display: none;" id="buttonPerson" class="container-input" type="button">
+            <div id="container-textSearch">
+              <span id="name-place" class="text-input">Escribe un nombre</span>
+              <span id="subname-place" class="text-input"></span>
+            </div>
+            <img alt="" class="icon"></img>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <button id="previewButton" type="button" style="margin-right: 3vw;">Preview</button>
-        <button id="fullviewButton" type="button" style="margin-left: 3vw;">Fullview</button>
+      <button class="buttonTogglePlacePerson">
+        <span id="SearchPlacePersonText">Buscar lugares</span>
+        <img src="/img/BUSCAR_LUGARES.svg" alt="search">
+      </button>
+
+      <div id="description-path" style="visibility: hidden;">
+        <span id="descriptionSpan"></span>
+        <button title="displayResumen" type="button" onclick="showSidebar()">
+          <img src="/img/icon-arrow-right.svg" alt="Info icon" />
+        </button>
+      </div>
+
+      <div id="containerButtonPreviewFull">
+        <button id="previewButton" class="redirect3DButtons buttonThreeJS" type="button">Vista rápida</button>
+        <button disabled id="fullviewButton" class="redirect3DButtons buttonUnity" type="button">Modo inmersivo</button>
       </div>
     </div>
   </div>
 
-  <!--3D View-->>
+  <div id="QRDisplay">
+    <div class="card-select-place">
+      <span style="font-size: 1.5rem; font-weight: bold;">Lleva la experiencia a tu celular</span>
+      <span class="QRMarginElements">Abre la cámara de tu teléfono, escanea el código y sigue la ruta en AR.</span>
+      <img id="qrcode" class="QRMarginElements" title="qr"></img>
+      <!-- <button id="ExitQR" class="redirect3DButtons buttonThreeJS" type="button" onclick='ExitQRPanel()'>Salir</button> -->
+      <button id="ExitQR" class="redirect3DButtons buttonThreeJS" type="button">Abrir</button>
+    </div>
+  </div>
+
+  <div class="container-select-place">
+    <div class="card-select-place">
+      <div class="container-search">
+        <div class="container-icon-search">
+          <img src="/img/icon-lupa.svg" alt="" class="icon-search">
+        </div>
+        <input autocomplete="off" placeholder="Buscar lugar" type="text" id="input_searcher" class="search-input">
+        <button id="deleteSearch" type="button" title="filter" class="container-icon-search">
+          <img src="/img/icon-close.svg" alt="" class="icon-search">
+        </button>
+      </div>
+      <div id="placesList" class="list-places-searcher">
+      </div>
+      <div style="display: none;" id="personList" class="list-places-searcher">
+      </div>
+    </div>
+  </div>
+
   <div id="div3DView" style="display: none;" class="MainSettings">
+    <div id="labelsScene" class="unselectable"></div>
+
     <img id="tutorial" alt="Zoom Out" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
     height: 10vh;margin-top: 75vw;" src="/img/zoomout.webp" autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
     pointer-events: none;" />
-
-    <div>
-      <button id="back3D" type="button">Regresar</button>
-    </div>
 
     <!--div id="loadingMain" style="position: absolute;
       width: 100vw;
@@ -60,18 +119,20 @@
   </div>
 </div-->
 
-    <p id="floor-selector-title" style="color:rgb(0, 0, 0);position:absolute;top:5vh;left:5vw;margin:0;display:none;"
-      class="unselectable">Filtrar por Pisos</p>
-    <select id="floor-selector" class="floor-selector" title="Select Floor">
-    </select>
+    <div>
+      <button id="back3D" type="button">Regresar</button>
 
-    <div id="category-selector-parent" style="display: block;">
-      <p id="category-selector-title"
-        style="color:rgb(0, 0, 0);position:absolute;top:10vh;left:5vw;margin:0;display:none;" class="unselectable">
-        Filtrar
-        por Categoria</p>
-      <select id="category-selector" class="category-selector" title="Select Category" style="display:none;">
+      <p id="floor-selector-title" style="top: 16vh" class="unselectable textConstFilters">Filtrar por Pisos</p>
+      <select id="floor-selector" style="top: 18vh;" class="floor-selector" title="Select Floor">
       </select>
+
+      <div id="category-selector-parent" style="display: block;">
+        <p id="category-selector-title" class="unselectable textConstFilters">
+          Filtrar
+          por Categoria</p>
+        <select id="category-selector" class="category-selector" title="Select Category" style="display:none;">
+        </select>
+      </div>
     </div>
 
     <footer id="footer" class="footer show" style="display: block;">
@@ -80,17 +141,18 @@
         <div class="carousel-container unselectable">
         </div>
       </div>
-
     </footer>
 
     <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div>
 
     <canvas id="canvas"></canvas>
-    <div id="labelsScene" class="unselectable"></div>
   </div>
 
   <script>
     const carouselContainer = document.querySelector('.carousel-container');
+    const buttonSidebar = document.querySelector('#description-path button');
+    const sidebar = document.querySelector('#descriptionSpan');
+    const QRDisplay = document.getElementById('QRDisplay');
 
     function disableSnap() {
       carouselContainer.style.scrollSnapType = 'none';
@@ -115,6 +177,24 @@
       const footer = document.querySelector('.footer');
       footer.classList.remove('show');
       document.getElementById('footer-button').style.display = 'block';
+    }
+
+    function showSidebar() {
+      sidebar.style.width = '70vw';
+      sidebar.style.padding = '20px';
+      buttonSidebar.removeEventListener('click', showSidebar);
+      buttonSidebar.addEventListener('click', hideSidebar);
+    }
+
+    function hideSidebar() {
+      sidebar.style.width = '0vw';
+      sidebar.style.padding = '0px';
+      buttonSidebar.removeEventListener('click', hideSidebar);
+      buttonSidebar.addEventListener('click', showSidebar);
+    }
+
+    function ExitQRPanel() {
+      QRDisplay.style.display = 'none';
     }
 
     document.addEventListener('pointerup', (event) => {

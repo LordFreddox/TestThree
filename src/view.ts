@@ -1,8 +1,11 @@
 import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 import { camera, canvas } from './Renderer';
-import { Place } from './http-service.js';
-import { companyId, SetNewPathNavmesh } from './main.ts';
+import { Place, PROJECT } from './http-service.js';
+import { companyId } from './main.ts';
+import { getPathAndDisplay } from './Navigator.ts'
 import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts'
+import * as QRCode from 'qrcode';
+
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
 let MapObjectPlacesText = {} as { [key: string]: Object3D[] };
@@ -11,39 +14,143 @@ const tempV = new Vector3();
 const paddingBetweenText = 30;
 const BASE_URL_PATH_DESCRIPTION = 'https://strg01tockall.blob.core.windows.net/container-unity/ResumenRecorridos/';
 const searchBar = document.getElementById('search-bar') as HTMLInputElement;
-const placeSelectorStart = document.getElementById('placeStart') as HTMLSelectElement;
-const placeSelectorEnd = document.getElementById('placeEnd') as HTMLSelectElement;
+const input_searcher = document.getElementById('input_searcher') as HTMLInputElement;
+const placeSelectors = document.getElementsByClassName('container-input');
 let labelsScene = new Map<Vector3, HTMLDivElement>();
 const labelContainerElem = document.querySelector('#labelsScene');
+let startPlaceId: string | undefined;
+let endPlaceId: string | undefined
+const searchPanel = GetHTMLElementByClass('container-select-place');
+const descriptionPathPanel = document.getElementById('description-path');
+const placesList = GetHTMLElementByID('placesList');
+const personList = GetHTMLElementByID('personList');
+const SearchPlacePersonText = GetHTMLElementByID('SearchPlacePersonText');
+let currentSelectedSearchButton: HTMLElement;
+
+input_searcher.addEventListener('input', () => {
+    const searchTerm = input_searcher.value.toLowerCase(); // Corrected line
+    filterPlaceSearchItem(searchTerm);
+});
+
+GetHTMLElementByID('deleteSearch').onclick = () => {
+    if (input_searcher.value === '') {
+        searchPanel.style.display = 'none';
+        return;
+    }
+
+    input_searcher.value = '';
+    const event = new Event('input', { bubbles: true });
+    input_searcher.dispatchEvent(event);
+};
 
 searchBar?.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
     filterCarouselItems(searchTerm);
 });
 
-(document.getElementById("back3D") as HTMLButtonElement).addEventListener('click', () => {
+GetHTMLElementByClass('buttonTogglePlacePerson').onclick = () => {
+    const buttonTogglePlacePerson = GetHTMLElementByClass('buttonTogglePlacePerson');
+    if (SearchPlacePersonText.innerHTML === 'Buscar lugares') {
+        SearchPlacePersonText.innerHTML = 'Buscar personas';
+        GetHTMLElementByID('buttonDestination').style.display = 'none';
+        GetHTMLElementByID('buttonPerson').style.display = 'flex';
+        buttonTogglePlacePerson.style.flexDirection = 'row-reverse';
+        buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_PERSONAS.svg';
+        buttonTogglePlacePerson.style.backgroundColor = 'var(--button-enable-color)';
+    }
+    else {
+        SearchPlacePersonText.innerHTML = 'Buscar lugares';
+        GetHTMLElementByID('buttonPerson').style.display = 'none';
+        GetHTMLElementByID('buttonDestination').style.display = 'flex';
+        buttonTogglePlacePerson.style.flexDirection = 'row';
+        buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_LUGARES.svg';
+        buttonTogglePlacePerson.style.backgroundColor = '#ffffff';
+    }
+};
+
+//add onclick event to all elements inside placeSelectors
+for (let i = 0; i < placeSelectors.length; i++) {
+    const element = placeSelectors[i] as HTMLElement;
+    element.querySelector('#container-textSearch')!.addEventListener('click', () => {
+        searchPanel.style.display = 'grid'; //active search panel
+        if (element.id === 'buttonPerson') { //clicked button for person search
+            placesList.style.display = 'none';
+            personList.style.display = 'flex';
+        } else { //clicked button any place search
+            placesList.style.display = 'flex';
+            personList.style.display = 'none';
+        }
+        currentSelectedSearchButton = element;
+        SetClearXIcon(currentSelectedSearchButton);
+    });
+}
+
+function SetClearXIcon(currentSelectedSearchButton: HTMLElement) {
+    currentSelectedSearchButton.querySelector('.icon')!.addEventListener('click', () => {
+        switch (currentSelectedSearchButton.id) {
+            case 'buttonStart':
+                currentSelectedSearchButton.querySelector('#name-place')!.innerHTML =
+                    'Selecciona tu punto de partida';
+                break;
+            case 'buttonDestination':
+                currentSelectedSearchButton.querySelector('#name-place')!.innerHTML =
+                    'Selecciona tu destino';
+                break;
+            case 'buttonPerson':
+                currentSelectedSearchButton.querySelector('#name-place')!.innerHTML =
+                    'Escribe un nombre';
+                break;
+        }
+        currentSelectedSearchButton.querySelector('#subname-place')!.innerHTML =
+            '';
+        currentSelectedSearchButton.querySelector('.icon')!.classList.remove('icon-x');
+        DisableTourState();
+    });
+}
+
+GetHTMLElementByID('back3D').onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'none';
     document.getElementById('search-section')!.style.display = 'block';
-});
+};
 
-(document.getElementById("previewButton") as HTMLButtonElement).onclick = async () => {
+GetHTMLElementByID('previewButton').onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'block';
     document.getElementById('search-section')!.style.display = 'none';
+    updateLabelPositions();
+    if (!startPlaceId || !endPlaceId) return;
+    getPathAndDisplay(startPlaceId, endPlaceId);
 };
 
-(document.getElementById("fullviewButton") as HTMLButtonElement).onclick = async () => {
-    const startPlaceId = placeSelectorStart.options[placeSelectorStart.selectedIndex].dataset.idPlace;
-    const endPlaceId = placeSelectorEnd.options[placeSelectorEnd.selectedIndex].dataset.idPlace;
-    if (startPlaceId === undefined || endPlaceId === undefined) return;
+GetHTMLElementByID('fullviewButton').onclick = async () => {
+    if (!startPlaceId || !endPlaceId) return;
+    if (startPlaceId === endPlaceId) return;
+    const QRElement = GetHTMLElementByID('QRDisplay') as HTMLImageElement;
+    QRElement.style.display = 'block';
+    const urlQR = ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase());
+    QRCode.toDataURL(urlQR).then((dataUrl) => {
+        const qrCodeImage = document.getElementById('qrcode') as HTMLImageElement;
+        qrCodeImage.src = dataUrl;
+        qrCodeImage.style.height = window.getComputedStyle(qrCodeImage).width;
+    });
+};
 
+GetHTMLElementByID('ExitQR').onclick = () => {
+    if (!startPlaceId || !endPlaceId) return;
+    if (startPlaceId === endPlaceId) return;
+    window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
+        '_blank');
+};
+
+function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, endPlaceId: string, project: string): string {
     const baseUrl = `https://strg01tockall.blob.core.windows.net/container-unity/UnityBundles/webgl/3DExperiences/index.html`;
-    const urlParams = new URLSearchParams({ BigSurfaceId: companyId, Start: startPlaceId, Place: endPlaceId, ServType: "1" });
-    const url = `${baseUrl}?${urlParams.toString()}`;
-    window.open(url, '_blank');
-};
+    const urlParams = new URLSearchParams({ BigSurfaceId: companyId, Start: startPlaceId, Place: endPlaceId, ServType: "1", project: project });
+    return `${baseUrl}?${urlParams.toString()}`;
+
+    //TODO: Parse in unity the project type
+}
 
 function AddCarouselItem(imageUrl: string, description: string,
-    object: Object3D, floorLevels: Object3D[], labelsScene: Map<Vector3, HTMLDivElement>) {
+    object: Object3D, floorLevels: Object3D[]) {
     const carouselContainer = document.querySelector('.carousel-container');
     const newItem = document.createElement('div');
     newItem.classList.add('carousel-item');
@@ -75,67 +182,78 @@ function filterCarouselItems(searchTerm: string) {
     });
 }
 
-function SetupPlacesForSearch(places: Place[]) {
-
-    places.forEach((_, index) => {
-        placeSelectorEnd.appendChild(
-            ReturnOptionsPlaces(
-                places[index].companysubsidiary_name,
-                index.toString(),
-                places[index].place_id));
-        placeSelectorStart.appendChild(
-            ReturnOptionsPlaces(
-                places[index].companysubsidiary_name,
-                index.toString(),
-                places[index].place_id));
-    });
-
-    placeSelectorStart.addEventListener('change', () => {
-        checkAndDownloadJSON();
-    });
-
-    placeSelectorEnd.addEventListener('change', () => {
-        checkAndDownloadJSON();
+function filterPlaceSearchItem(searchTerm: string) {
+    const carouselItems = document.querySelectorAll('.place-item');
+    carouselItems.forEach((item) => {
+        const description = item.getElementsByClassName('name-place')![0].innerHTML.toLowerCase();
+        if (description.includes(searchTerm)) {
+            (item as HTMLElement).style.display = 'flex';
+        } else {
+            (item as HTMLElement).style.display = 'none';
+        }
     });
 }
 
-function ReturnOptionsPlaces(name: string, index: string, idPlace: number): HTMLOptionElement {
-    const option = document.createElement('option');
-    option.value = index;
-    option.text = name;
-    option.dataset.idPlace = idPlace.toString();
-    return option;
+function SetupPlacesForSearch(places: Place[]) {
+    // const panelListSearch = document.getElementById('placesList') as HTMLElement;
+    // const panelListSearchPerson = document.get
+    places.forEach((_, index) => {
+        placesList.appendChild(CreateOptionItemSearchPanel(places[index]));
+    });
+    //setup personlist aswell for testing purpouse
+    personList.appendChild(CreateOptionItemSearchPanelPerson());
+
 }
 
 async function checkAndDownloadJSON() {
-    if (placeSelectorStart && placeSelectorEnd) {
-        const startPlaceId = placeSelectorStart.options[placeSelectorStart.selectedIndex].dataset.idPlace;
-        const endPlaceId = placeSelectorEnd.options[placeSelectorEnd.selectedIndex].dataset.idPlace;
-
-        if (!startPlaceId || !endPlaceId) {
-            return;
-        }
-
-        if (placeSelectorEnd.selectedIndex == -1 || placeSelectorStart.selectedIndex == -1 || placeSelectorEnd.selectedIndex == placeSelectorStart.selectedIndex) {
-            return;
-        }
-
-        const url = BASE_URL_PATH_DESCRIPTION + `${companyId}-${new URLSearchParams(window.location.search).get('project')?.toUpperCase()}` + "/resumen-" + startPlaceId + "_" + endPlaceId + ".json";
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            const data = await response.json();
-            const description = data.description;
-            document.getElementById('description-path')!.innerHTML = description;
-            document.getElementById("fullviewButton")!.style.display = "inline-flex";
-            SetNewPathNavmesh(startPlaceId, endPlaceId);
-        } catch (error) {
-            document.getElementById("fullviewButton")!.style.display = "none";
-        }
+    if (!startPlaceId || !endPlaceId) {
+        // document.getElementById("fullviewButton")!.style.display = "none";
+        return;
     }
+
+    if (startPlaceId === endPlaceId) {
+        // document.getElementById("fullviewButton")!.style.display = "none";
+        return;
+    }
+
+    const url = BASE_URL_PATH_DESCRIPTION + `${companyId}-${new URLSearchParams(window.location.search).get('project')?.toUpperCase()}` + "/resumen-" + startPlaceId + "_" + endPlaceId + ".json";
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        EnableTourState(data.description);
+    } catch (error) {
+        DisableTourState();
+    }
+}
+
+function EnableTourState(description: string) {
+    GetHTMLElementByID('previewButton').style.color = 'var(--button-enable-color)';
+    GetHTMLElementByID('previewButton').style.borderColor = 'var(--button-enable-color)';
+    GetHTMLElementByID('fullviewButton').style.backgroundColor = 'var(--button-enable-color)';
+    GetHTMLElementByID('fullviewButton').style.borderColor = 'var(--button-enable-color)';
+    descriptionPathPanel!.querySelector('span')!.innerHTML = description;
+    descriptionPathPanel!.style.visibility = 'visible';
+    // document.getElementById("fullviewButton")!.style.display = "inline-block";
+    document.getElementById("fullviewButton")!.removeAttribute('disabled');
+    descriptionPathPanel!.querySelector('span')!.style.width = '0vw';
+    descriptionPathPanel!.querySelector('span')!.style.padding = '0px';
+
+}
+
+function DisableTourState() {
+    GetHTMLElementByID('previewButton').style.color = 'var(--button-disable-color)';
+    GetHTMLElementByID('previewButton').style.borderColor = 'var(--button-disable-color)';
+    GetHTMLElementByID('fullviewButton').style.backgroundColor = 'var(--button-disable-color)';
+    GetHTMLElementByID('fullviewButton').style.borderColor = 'var(--button-disable-color)';
+    // document.getElementById("fullviewButton")!.style.display = "none";
+    descriptionPathPanel!.style.visibility = 'hidden';
+    document.getElementById("fullviewButton")!.setAttribute('disabled', '');
+    descriptionPathPanel!.querySelector('span')!.style.left = '-100%';
+
 }
 
 function findFloorObject(object: Object3D, floorLevels: Object3D[]): Object3D | null {
@@ -197,7 +315,7 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
     updateLabelVisibility();
 }
 
-function initCategorySelector(labelsScene: Map<Vector3, HTMLDivElement>) {
+function initCategorySelector() {
     document.getElementById('category-selector-title')!.style.display = 'block';
     const categorySelector = document.getElementById('category-selector') as HTMLSelectElement;
     categorySelector.style.display = 'block';
@@ -343,8 +461,7 @@ function RestoreOriginalColors() {
 }
 
 function CreateTextForPlace(
-    textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1, )
-    {
+    textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1,) {
     const elem = document.createElement('div');
     const formattedKey = textName.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
     elem.textContent = formattedKey;
@@ -357,6 +474,92 @@ function CreateTextForPlace(
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
     elem.dataset.floorIndex = floorIndex.toString();
     elem.dataset.category = textName.place_category_name;
+}
+
+function CreateOptionItemSearchPanelPerson() {
+    let newButton = document.createElement('button');
+    newButton.classList.add('place-item');
+    newButton.type = 'button';
+    let place: Place = {
+        place_id: 15387,
+        companysubsidiary_name: 'Jesus Marsel Garcia Blanco',
+        place_area_name: 'Ingenieria de sistemas',
+        companysubsidiary_image_url: 'https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2025-01/139_companyImage_1737038911430.jpeg',
+        company_id: 1,
+        company_name: 'Sample Company',
+        company_picture_url: 'https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2025-01/139_companyImage_1737038911430.jpeg',
+        place_category_name: 'Edificio Mario Laserna, Piso 2',
+        place_area_id: 1
+    };
+
+    newButton.onclick = () => { ButtonActionItemSearchPanel(place) };
+
+    const html = `
+            <img alt="" class="image-place" src="${place.companysubsidiary_image_url}">
+            <div class="info">
+                <span class="name-place">${place.companysubsidiary_name}</span>
+                <span class="subname-place">${place.place_area_name}</span>
+                <span class="building-place">${place.place_category_name}</span>
+            </div>
+            <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
+
+    newButton.innerHTML = html;
+    return newButton; // Return the HTML string for use elsewhere if needed
+}
+
+function CreateOptionItemSearchPanel(place: Place) {
+    let newButton = document.createElement('button');
+    newButton.classList.add('place-item');
+    newButton.type = 'button';
+    newButton.onclick = () => { ButtonActionItemSearchPanel(place) };
+
+    const html = `
+            <img alt="" class="image-place" src="${place.companysubsidiary_image_url}">
+            <div class="info">
+                <span class="name-place">${place.companysubsidiary_name}</span>
+                <span class="subname-place">${place.place_area_name}</span>
+            </div>
+            <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
+
+    newButton.innerHTML = html;
+    return newButton; // Return the HTML string for use elsewhere if needed
+}
+
+function ButtonActionItemSearchPanel(place: Place) {
+    personList.style.display = 'none';
+    placesList.style.display = 'flex';
+    (searchPanel as HTMLElement).style.display = 'none';
+
+    //clear previous search
+    input_searcher.value = '';
+    const event = new Event('input', { bubbles: true });
+    input_searcher.dispatchEvent(event);
+
+    currentSelectedSearchButton.querySelector('.icon')!.classList.add('icon-x');
+    currentSelectedSearchButton.querySelector('#name-place')!.innerHTML = place.companysubsidiary_name;
+    if (currentSelectedSearchButton.id === 'buttonPerson')
+        currentSelectedSearchButton.querySelector('#subname-place')!.innerHTML = place.place_category_name;
+    else
+        currentSelectedSearchButton.querySelector('#subname-place')!.innerHTML = place.place_area_name;
+
+    switch (currentSelectedSearchButton.id) {
+        case 'buttonStart':
+            startPlaceId = place.place_id.toString();
+            break;
+        case 'buttonDestination':
+        case 'buttonPerson':
+            endPlaceId = place.place_id.toString();
+            break;
+    }
+    checkAndDownloadJSON();
+}
+
+function GetHTMLElementByID(idElement: string): HTMLElement{
+    return document.getElementById(idElement) as HTMLElement;
+}
+
+function GetHTMLElementByClass(classElement: string): HTMLElement{
+    return document.getElementsByClassName(classElement)[0] as HTMLElement;
 }
 
 interface LabelData {
