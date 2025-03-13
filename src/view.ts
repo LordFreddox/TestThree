@@ -2,9 +2,9 @@ import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 import { camera, canvas } from './Renderer';
 import { Place, PROJECT } from './http-service.js';
 import { companyId } from './main.ts';
-import { getPathAndDisplay } from './Navigator.ts'
-import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts'
-import * as QRCode from 'qrcode';
+import { getPathAndDisplay } from './Navigator.ts';
+import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts';
+// import * as QRCode from 'qrcode';
 
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
@@ -24,11 +24,15 @@ const searchPanel = GetHTMLElementByClass('container-select-place');
 const descriptionPathPanel = document.getElementById('description-path');
 const placesList = GetHTMLElementByID('placesList');
 const personList = GetHTMLElementByID('personList');
-const SearchPlacePersonText = GetHTMLElementByID('SearchPlacePersonText');
+// const SearchPlacePersonText = GetHTMLElementByID('SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
 
+function normalizeString(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove all diacritical marks
+}
+
 input_searcher.addEventListener('input', () => {
-    const searchTerm = input_searcher.value.toLowerCase(); // Corrected line
+    const searchTerm = normalizeString(input_searcher.value.toLowerCase());
     filterPlaceSearchItem(searchTerm);
 });
 
@@ -48,25 +52,25 @@ searchBar?.addEventListener('input', () => {
     filterCarouselItems(searchTerm);
 });
 
-GetHTMLElementByClass('buttonTogglePlacePerson').onclick = () => {
-    const buttonTogglePlacePerson = GetHTMLElementByClass('buttonTogglePlacePerson');
-    if (SearchPlacePersonText.innerHTML === 'Buscar lugares') {
-        SearchPlacePersonText.innerHTML = 'Buscar personas';
-        GetHTMLElementByID('buttonDestination').style.display = 'none';
-        GetHTMLElementByID('buttonPerson').style.display = 'flex';
-        buttonTogglePlacePerson.style.flexDirection = 'row-reverse';
-        buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_PERSONAS.svg';
-        buttonTogglePlacePerson.style.backgroundColor = 'var(--button-enable-color)';
-    }
-    else {
-        SearchPlacePersonText.innerHTML = 'Buscar lugares';
-        GetHTMLElementByID('buttonPerson').style.display = 'none';
-        GetHTMLElementByID('buttonDestination').style.display = 'flex';
-        buttonTogglePlacePerson.style.flexDirection = 'row';
-        buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_LUGARES.svg';
-        buttonTogglePlacePerson.style.backgroundColor = '#ffffff';
-    }
-};
+// GetHTMLElementByClass('buttonTogglePlacePerson').onclick = () => {
+//     const buttonTogglePlacePerson = GetHTMLElementByClass('buttonTogglePlacePerson');
+//     if (SearchPlacePersonText.innerHTML === 'Buscar lugares') {
+//         SearchPlacePersonText.innerHTML = 'Buscar personas';
+//         GetHTMLElementByID('buttonDestination').style.display = 'none';
+//         GetHTMLElementByID('buttonPerson').style.display = 'flex';
+//         buttonTogglePlacePerson.style.flexDirection = 'row-reverse';
+//         buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_PERSONAS.svg';
+//         buttonTogglePlacePerson.style.backgroundColor = 'var(--button-enable-color)';
+//     }
+//     else {
+//         SearchPlacePersonText.innerHTML = 'Buscar lugares';
+//         GetHTMLElementByID('buttonPerson').style.display = 'none';
+//         GetHTMLElementByID('buttonDestination').style.display = 'flex';
+//         buttonTogglePlacePerson.style.flexDirection = 'row';
+//         buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_LUGARES.svg';
+//         buttonTogglePlacePerson.style.backgroundColor = '#ffffff';
+//     }
+// };
 
 //add onclick event to all elements inside placeSelectors
 for (let i = 0; i < placeSelectors.length; i++) {
@@ -124,14 +128,17 @@ GetHTMLElementByID('previewButton').onclick = async () => {
 GetHTMLElementByID('fullviewButton').onclick = async () => {
     if (!startPlaceId || !endPlaceId) return;
     if (startPlaceId === endPlaceId) return;
-    const QRElement = GetHTMLElementByID('QRDisplay') as HTMLImageElement;
-    QRElement.style.display = 'block';
-    const urlQR = ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase());
-    QRCode.toDataURL(urlQR).then((dataUrl) => {
-        const qrCodeImage = document.getElementById('qrcode') as HTMLImageElement;
-        qrCodeImage.src = dataUrl;
-        qrCodeImage.style.height = window.getComputedStyle(qrCodeImage).width;
-    });
+    window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
+    '_blank'); //CHANGE BOT TEST 3/7/2025
+
+    // const QRElement = GetHTMLElementByID('QRDisplay');
+    // QRElement.style.display = 'block';
+    // const urlQR = ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase());
+    // QRCode.toDataURL(urlQR).then((dataUrl) => {
+    //     const qrCodeImage = document.getElementById('qrcode') as HTMLImageElement;
+    //     qrCodeImage.src = dataUrl;
+    //     qrCodeImage.style.height = window.getComputedStyle(qrCodeImage).width;
+    // });
 };
 
 GetHTMLElementByID('ExitQR').onclick = () => {
@@ -139,6 +146,7 @@ GetHTMLElementByID('ExitQR').onclick = () => {
     if (startPlaceId === endPlaceId) return;
     window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
         '_blank');
+    GetHTMLElementByID('QRDisplay').style.display = 'none';
 };
 
 function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, endPlaceId: string, project: string): string {
@@ -185,7 +193,7 @@ function filterCarouselItems(searchTerm: string) {
 function filterPlaceSearchItem(searchTerm: string) {
     const carouselItems = document.querySelectorAll('.place-item');
     carouselItems.forEach((item) => {
-        const description = item.getElementsByClassName('name-place')![0].innerHTML.toLowerCase();
+        const description = normalizeString(item.getElementsByClassName('name-place')![0].innerHTML.toLowerCase());
         if (description.includes(searchTerm)) {
             (item as HTMLElement).style.display = 'flex';
         } else {
@@ -230,17 +238,21 @@ async function checkAndDownloadJSON() {
     }
 }
 
+function formatDescription(description: string): string {
+    return description.replace(/Paso (\d+):/g, '<b>Paso $1:</b>');
+}
+
 function EnableTourState(description: string) {
     GetHTMLElementByID('previewButton').style.color = 'var(--button-enable-color)';
     GetHTMLElementByID('previewButton').style.borderColor = 'var(--button-enable-color)';
     GetHTMLElementByID('fullviewButton').style.backgroundColor = 'var(--button-enable-color)';
     GetHTMLElementByID('fullviewButton').style.borderColor = 'var(--button-enable-color)';
-    descriptionPathPanel!.querySelector('span')!.innerHTML = description;
+    descriptionPathPanel!.querySelector('span')!.innerHTML = formatDescription(description);
     descriptionPathPanel!.style.visibility = 'visible';
     // document.getElementById("fullviewButton")!.style.display = "inline-block";
     document.getElementById("fullviewButton")!.removeAttribute('disabled');
-    descriptionPathPanel!.querySelector('span')!.style.width = '0vw';
-    descriptionPathPanel!.querySelector('span')!.style.padding = '0px';
+    // descriptionPathPanel!.querySelector('span')!.style.width = '0vw';
+    // descriptionPathPanel!.querySelector('span')!.style.padding = '0px';
 
 }
 
@@ -271,10 +283,10 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
     floorSelector.style.display = 'block';
 
     // Add default option
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '-1';
-    defaultOption.text = 'Todos los Pisos';
-    floorSelector.appendChild(defaultOption);
+    // const defaultOption = document.createElement('option');
+    // defaultOption.value = '-1';
+    // defaultOption.text = 'Todos los Pisos';
+    // floorSelector.appendChild(defaultOption);
 
     floorLevels.forEach((_, index) => {
         const option = document.createElement('option');
@@ -362,7 +374,7 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
     updateLabelVisibility();
 }
 
-function updateLabelPositions(/*labelsScene: Map<Vector3, HTMLDivElement>*/) {
+function updateLabelPositions() {
     labelsScene.forEach((elem, position) => {
         if (elem.style.display == 'none') return;
         tempV.copy(position);
@@ -376,7 +388,7 @@ function updateLabelPositions(/*labelsScene: Map<Vector3, HTMLDivElement>*/) {
     });
 }
 
-function updateLabelVisibility(/*labelsScene: Map<Vector3, HTMLDivElement>*/) {
+function updateLabelVisibility() {
     const labelData: LabelData[] = [];
 
     labelsScene.forEach((elem, position) => {
@@ -414,7 +426,7 @@ function updateLabelVisibility(/*labelsScene: Map<Vector3, HTMLDivElement>*/) {
             }
         }
 
-        if (overlap || (i > 0 && labelData[i - 1].zIndex === zIndex)) {
+        if (overlap || (i > 0 && labelData[i - 1].zIndex === zIndex) || zIndex < 0) {
             elem.style.display = 'none';
         } else {
             elem.style.display = 'block';
@@ -461,11 +473,12 @@ function RestoreOriginalColors() {
 }
 
 function CreateTextForPlace(
-    textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1,) {
+    textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1.1,) {
     const elem = document.createElement('div');
     const formattedKey = textName.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
     elem.textContent = formattedKey;
     elem.style.fontSize = fontSize + 'em';
+    elem.style.fontWeight = 'bold';
     labelContainerElem!.appendChild(elem);
     const { size, center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
     const topCenterPosition = new Vector3(center.x, center.y + size.y, center.z);

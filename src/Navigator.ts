@@ -1,6 +1,8 @@
 import { Pathfinding } from 'three-pathfinding';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { Object3D, Mesh, Scene, Vector3, ArrowHelper } from 'three';
+import { Object3D, Mesh, Scene, Vector3, ArrowHelper,
+  CatmullRomCurve3,TubeGeometry, MeshStandardMaterial,
+  DoubleSide } from 'three';
 import { scene } from './Renderer';
 // import { DebugNavMesh } from './Utils';
 
@@ -93,26 +95,32 @@ async function getPathAndDisplay(startPlace: string, endPlace: string): Promise<
   );
 
   if (path && path.length > 1) {
-    for (let i = 0; i < path.length - 1; i++) {
-      const start = path[i];
-      const end = path[i + 1];
+    const curve = new CatmullRomCurve3(path, false, "catmullrom", 0);
+    const tubeGeometry = new TubeGeometry(curve, 200, 0.1, 8, false);
+    const tubeMaterial = new MeshStandardMaterial({ color: 0x00BFFF, side: DoubleSide });
+    const tube = new Mesh(tubeGeometry, tubeMaterial);
+    scene.add(tube);
 
-      const midpoint = new Vector3()
-        .addVectors(start, end)
-        .divideScalar(2);
+    // for (let i = 0; i < path.length - 1; i++) {
+    //   const start = path[i];
+    //   const end = path[i + 1];
 
-      const arrowHelper = new ArrowHelper(
-        new Vector3(end.x - start.x, end.y - start.y, end.z - start.z), // dir
-        midpoint, // origin
-        0.75, // Length
-        0xff0000, // hex color
-        0.2, // head length
-        0.2 // head width
-      );
+    //   const midpoint = new Vector3()
+    //     .addVectors(start, end)
+    //     .divideScalar(2);
 
-      scene.add(arrowHelper);
-      arrowHelpers.push(arrowHelper);
-    }
+    //   const arrowHelper = new ArrowHelper(
+    //     new Vector3(end.x - start.x, end.y - start.y, end.z - start.z), // dir
+    //     midpoint, // origin
+    //     0.75, // Length
+    //     0xff0000, // hex color
+    //     0.2, // head length
+    //     0.2 // head width
+    //   );
+
+    //   scene.add(arrowHelper);
+    //   arrowHelpers.push(arrowHelper);
+    // }
   }
 }
 
@@ -123,6 +131,6 @@ function clearArrows() {
   arrowHelpers = [];
 }
 
-export{
+export {
   createNavMesh, getPathAndDisplay
 };

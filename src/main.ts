@@ -1,6 +1,6 @@
 import {
   AnimationMixer, Object3D, Clock,
-  AnimationClip, MeshBasicMaterial,
+  /*AnimationClip,*/ MeshBasicMaterial,
   Mesh, BackSide, Vector3,
   SphereGeometry
 } from 'three';
@@ -25,11 +25,11 @@ const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
 const BASE_URL = `${window.location.origin}${basePath}/models/`;
 const companyId = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
 let mixers: AnimationMixer[] = [];
-let allAvailableAnimationClipsMap = new Map<Object3D, AnimationClip[]>();
+// let allAvailableAnimationClipsMap = new Map<Object3D, AnimationClip[]>();
 const clock = new Clock();
 let lookAtCamera: Object3D[] = [];
 let floorLevels: Object3D[] = [];
-let interactObjects = [] as Object3D[];
+// let interactObjects = [] as Object3D[];
 const loader = new GLTFLoader();
 let places: Place[];
 
@@ -64,8 +64,10 @@ function Start() {
       scene.add(gltf.scene);
       const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
       camera.position.set(size.x + 10, center.y + size.y + 13, 0);
-      camera.far = size.length() * 10;
-      camera.zoom = -size.length() / 10;
+      // camera.far = size.length() * 10;
+      // camera.zoom = -size.length() / 10;
+      controls.minDistance = size.length() / 20;
+      controls.maxDistance = size.length();
       const mediam = (size.x + size.z) / 2;
       minPan = new Vector3(-size.length() / 2, 0, -size.length() / 4);
       maxPan = new Vector3(size.length() / 2, 0, size.length() / 4);
@@ -86,19 +88,19 @@ function Start() {
         size.length() + 100, size.length() + 100, size.length() + 100);
 
       //populate animation array
-      const mixer = new AnimationMixer(gltf.scene);
-      allAvailableAnimationClipsMap.set(gltf.scene, gltf.animations);
-      let animationClips = gltf.animations;
-      animationClips.forEach((clip) => {
-        mixer.clipAction(clip).play();
-      });
-      mixers.push(mixer);
+      // const mixer = new AnimationMixer(gltf.scene);
+      // allAvailableAnimationClipsMap.set(gltf.scene, gltf.animations);
+      // let animationClips = gltf.animations;
+      // animationClips.forEach((clip) => {
+      //   mixer.clipAction(clip).play();
+      // });
+      // mixers.push(mixer);
 
-      gltf.scene.traverse(child => {
-        if (child.name.includes('INTERACT_')) {
-          interactObjects.push(child);
-        }
-      });
+      // gltf.scene.traverse(child => {
+      //   if (child.name.includes('INTERACT_')) {
+      //     interactObjects.push(child);
+      //   }
+      // });
 
       //populate floorLevels array with the objects that has the following name piso1, piso2, piso3 and so on
       let index = 1;
@@ -124,13 +126,19 @@ function Start() {
       }
 
       //loadingscreen.style.display = "none";
-      if (urlParams.get('ServType') == "1"){
+      if (urlParams.get('ServType') == "1") {
         const navmeshObj = scene.getObjectByName('navmesh');
         if (navmeshObj) {
           createNavMesh(navmeshObj as Mesh)
         }
       }
       SetupPlacesOnScene(places);
+
+      //Set selected floor to 1
+      const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
+      floorSelector.selectedIndex = 0;
+      const event = new Event('change', { bubbles: true });
+      floorSelector.dispatchEvent(event);
     },
     (xhr) => {
       const progress = (xhr.loaded / xhr.total) * 100;
@@ -208,8 +216,21 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
     case "1":
       document.getElementById('search-section')!.style.display = 'block';
       document.getElementById("back3D")!.style.display = 'block';
-      if(places[0])
-        document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
+      if (places[0]) {
+        const imageElement = document.getElementById('imageSearchSprite');
+        if (imageElement) {
+          imageElement.setAttribute('src', places[0].company_picture_url);
+
+          imageElement.onerror = function () {
+            imageElement.style.visibility = 'hidden';
+          };
+
+          imageElement.onload = function () {
+            imageElement.style.visibility = 'visible';
+          };
+        }
+      }
+      // document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
       SetupPlacesForSearch(places);
       break;
     case "3":
