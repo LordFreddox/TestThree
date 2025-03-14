@@ -29,10 +29,9 @@ let mixers: AnimationMixer[] = [];
 const clock = new Clock();
 let lookAtCamera: Object3D[] = [];
 let floorLevels: Object3D[] = [];
-// let interactObjects = [] as Object3D[];
+let rotateObjects = [] as Object3D[];
 const loader = new GLTFLoader();
 let places: Place[];
-
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
 controls.maxPolarAngle = Math.PI / 2.1;    // Limitar angulo de camara
@@ -96,11 +95,11 @@ function Start() {
       // });
       // mixers.push(mixer);
 
-      // gltf.scene.traverse(child => {
-      //   if (child.name.includes('INTERACT_')) {
-      //     interactObjects.push(child);
-      //   }
-      // });
+       gltf.scene.traverse(child => {
+         if (child.name.includes('ROTATE_')) {
+          lookAtCamera.push(child);
+         }
+       });
 
       //populate floorLevels array with the objects that has the following name piso1, piso2, piso3 and so on
       let index = 1;
@@ -242,6 +241,8 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
   Start();
 }
 
+
+
 let hasUserInteracted = false;
 
 controls.addEventListener('start', () => {
@@ -278,7 +279,7 @@ controls.addEventListener('start', () => {
   //line.name = 'rayLine';
   //scene.add(line);
 });*/
-
+const cameraRotationZ = camera.rotation.z;
 function animate() {
   controls.update();
   mixers.forEach((mixer) =>
