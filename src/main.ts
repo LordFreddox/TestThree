@@ -2,7 +2,8 @@ import {
   AnimationMixer, Object3D, Clock,
   /*AnimationClip,*/ MeshBasicMaterial,
   Mesh, BackSide, Vector3,
-  SphereGeometry
+  SphereGeometry, Vector2,
+  Raycaster, Intersection
 } from 'three';
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
@@ -12,7 +13,8 @@ import { scene, camera, renderer } from './Renderer.ts';
 import {
   initFloorSelector, initCategorySelector, AddCarouselItem,
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
-  MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearch
+  MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearch,
+  SetupDescriptionCardForPlace, isPlaceCardShowing
 } from './view.ts';
 import { createNavMesh } from './Navigator.ts'
 import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts'
@@ -29,9 +31,12 @@ let mixers: AnimationMixer[] = [];
 const clock = new Clock();
 let lookAtCamera: Object3D[] = [];
 let floorLevels: Object3D[] = [];
-let rotateObjects = [] as Object3D[];
+let interactObjects = [] as Object3D[];
 const loader = new GLTFLoader();
 let places: Place[];
+const mouse = new Vector2();
+const raycaster = new Raycaster();
+
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
 controls.maxPolarAngle = Math.PI / 2.1;    // Limitar angulo de camara
@@ -115,6 +120,9 @@ function Start() {
 
       if (floorLevels.length > 1) {
         initFloorSelector(floorLevels, labelsScene);
+      }else{
+        document.getElementById('floor-selector-title')!.style.display = 'none';
+        document.getElementById('floor-selector')!.style.display = 'none';
       }
 
       const objetivoParent = scene.getObjectByName("objetivos");
@@ -195,12 +203,14 @@ function SetupPlacesOnScene(places: Place[]) {
     if (object) {
       AddCarouselItem(place.companysubsidiary_image_url, place.companysubsidiary_name, object,
         floorLevels);
-      object.userData = place;
+      object.userData.place = place;
+      object.userData.isPlaceObject = true;
       if (!MapObjectsListByCategoryName[place.place_category_name]) {
         MapObjectsListByCategoryName[place.place_category_name] = [];
       }
       MapObjectsListByCategoryName[place.place_category_name].push(object);
       CreateTextForPlace(place, object, floorLevels);
+      interactObjects.push(object);
     }
   });
   updateLabelPositions();
@@ -252,19 +262,23 @@ controls.addEventListener('start', () => {
   }
 });
 
-/*window.addEventListener('pointerup', (event) => {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+window.addEventListener('touchend', (event) => {
+  const touch = event.changedTouches[0];
+  mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
 
   // Remove the previous debug line if it exists
   //scene.remove(scene.getObjectByName('rayLine')!);
 
-  const intersects: Intersection[] = raycaster.intersectObjects(scene.children, true);
+  const intersects: Intersection[] = raycaster.intersectObjects(interactObjects, true);
   if (intersects.length > 0) {
     for (let i = 0; i < intersects.length; i++) {
-      if (intersects[i].object.userData.isInteractable) {
-        //const intersectedInteract = intersects[i].object;
+      if (intersects[i].object.userData.isPlaceObject &&
+          intersects[i].object.parent?.visible === true) {
+          if(isPlaceCardShowing) break;
+          SetupDescriptionCardForPlace(intersects[i].object);
+          break;
       }
     }
   }
@@ -278,8 +292,8 @@ controls.addEventListener('start', () => {
   //const line = new THREE.Line(geometry, material);
   //line.name = 'rayLine';
   //scene.add(line);
-});*/
-const cameraRotationZ = camera.rotation.z;
+});
+
 function animate() {
   controls.update();
   mixers.forEach((mixer) =>

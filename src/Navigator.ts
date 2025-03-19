@@ -12,7 +12,7 @@ let pathfinder: Pathfinding | null = null;
 
 let modelStart: Object3D | null = null;
 let modelEnd: Object3D | null = null;
-let arrowHelpers: ArrowHelper[] = [];
+let arrowHelpers: Mesh[] = [];
 
 function loadModels(scene: Scene): Promise<void> {
   return new Promise((resolve) => {
@@ -100,7 +100,8 @@ async function getPathAndDisplay(startPlace: string, endPlace: string): Promise<
     const tubeMaterial = new MeshStandardMaterial({ color: 0x00BFFF, side: DoubleSide });
     const tube = new Mesh(tubeGeometry, tubeMaterial);
     scene.add(tube);
-
+    arrowHelpers.push(tube);
+    
     // for (let i = 0; i < path.length - 1; i++) {
     //   const start = path[i];
     //   const end = path[i + 1];

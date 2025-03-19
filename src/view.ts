@@ -24,6 +24,9 @@ const searchPanel = GetHTMLElementByClass('container-select-place');
 const descriptionPathPanel = document.getElementById('description-path');
 const placesList = GetHTMLElementByID('placesList');
 const personList = GetHTMLElementByID('personList');
+const divCardPlace = GetHTMLElementByID('divCardPlace');
+let isPlaceCardShowing: boolean = false;
+
 // const SearchPlacePersonText = GetHTMLElementByID('SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
 
@@ -51,6 +54,15 @@ searchBar?.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
     filterCarouselItems(searchTerm);
 });
+
+GetHTMLElementByID('closePlaceCard').onclick = () => {
+    ClosePlaceCard();
+};
+
+function ClosePlaceCard(){
+    divCardPlace.style.visibility = 'hidden';
+    isPlaceCardShowing = false;
+}
 
 // GetHTMLElementByClass('buttonTogglePlacePerson').onclick = () => {
 //     const buttonTogglePlacePerson = GetHTMLElementByClass('buttonTogglePlacePerson');
@@ -157,6 +169,10 @@ function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, e
     //TODO: Parse in unity the project type
 }
 
+function DisplayChatAI(){
+    GetHTMLElementByClass('msger').style.display = 'flex';
+  }
+
 function AddCarouselItem(imageUrl: string, description: string,
     object: Object3D, floorLevels: Object3D[]) {
     const carouselContainer = document.querySelector('.carousel-container');
@@ -168,6 +184,7 @@ function AddCarouselItem(imageUrl: string, description: string,
     `;
     carouselContainer!.appendChild(newItem);
     newItem.addEventListener('click', () => {
+        SetupDescriptionCardForPlace(object);
         RestoreOriginalColors();
         ChangeColorOfSingleObject(object, COLOR_SELECTED);
         const floorObj = findFloorObject(object, floorLevels);
@@ -489,6 +506,21 @@ function CreateTextForPlace(
     elem.dataset.category = textName.place_category_name;
 }
 
+function SetupDescriptionCardForPlace(object: Object3D){
+    isPlaceCardShowing = true;
+    RestoreOriginalColors();
+    ChangeColorOfSingleObject(object, COLOR_SELECTED);
+    divCardPlace.style.visibility = 'visible';
+    (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = object.userData.place.companysubsidiary_image_url;
+    divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${object.userData.place.companysubsidiary_name}`;
+    divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;
+    divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${object.userData.place.place_area_name}`;
+    (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
+        DisplayChatAI();
+        ClosePlaceCard();
+    };
+}
+
 function CreateOptionItemSearchPanelPerson() {
     let newButton = document.createElement('button');
     newButton.classList.add('place-item');
@@ -584,7 +616,7 @@ interface LabelData {
 
 export {
     initFloorSelector, initCategorySelector, AddCarouselItem,
-    updateLabelPositions, updateLabelVisibility,
+    updateLabelPositions, updateLabelVisibility, isPlaceCardShowing,
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
-    SetupPlacesForSearch, CreateTextForPlace
+    SetupPlacesForSearch, CreateTextForPlace, SetupDescriptionCardForPlace
 };
