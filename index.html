@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Mapas</title>
   <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/chat.ts"></script>
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 
@@ -13,7 +14,7 @@
   <div id="backgroundimage-street" src="/img/streetMaskBackground.svg" alt="StreetMaskBackground"></div>
 
   <div id="search-section" style="display: none;">
-    
+
     <div id="search-div">
       <img id="imageSearchSprite" src="/img/search.svg" alt="Search Icon">
       <h1 style="text-align: center;">¡Déjanos guiarte paso a paso!</h1>
@@ -135,46 +136,6 @@
       </div>
     </div>
 
-    <section class="msger">
-      <main class="msger-chat">
-          <div class="msg left-msg">
-              <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)">
-              </div>
-  
-              <div class="msg-bubble">
-                  <div class="msg-info">
-                      <div class="msg-info-name">BOT</div>
-                  </div>
-  
-                  <div class="msg-text">
-                      Hola, bienvenido. ¿En que puedo ayudarte hoy?.
-                  </div>
-              </div>
-          </div>
-  
-          <div class="msg right-msg">
-              <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)">
-              </div>
-  
-              <div class="msg-bubble">
-                  <div class="msg-info">
-                      <div class="msg-info-name">Sajad</div>
-                      <div class="msg-info-time">12:46</div>
-                  </div>
-  
-                  <div class="msg-text">
-                      You can change your name in JS section!
-                  </div>
-              </div>
-          </div>
-      </main>
-  
-      <form class="msger-inputarea">
-          <input type="text" class="msger-input" placeholder="Escribe algo...">
-          <button type="submit" class="msger-send-btn">Enviar</button>
-      </form>
-    </section>
-
     <footer id="footer" class="footer show" style="display: block;">
       <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..." />
       <div class="carousel">
@@ -195,11 +156,42 @@
       <span id="placeCardCategory" class="PlaceCardBasicDescription"></span>
       <span id="placeCardArea" class="PlaceCardBasicDescription"></span>
       <span id="placeCardDescription" class="PlaceCardBasicDescription PlaceCardLongDescription">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum.
       </span>
       <button id="ecommerce-redirect" title="ecommerce" type="button" class="placeCard-ecommerce">Chat</button>
     </div>
 
+    <section class="msger">
+      <header class="msger-header">
+        <img id="CloseChatHeaderButton" type="button" title="close"
+        src="/img/icon-close.svg">
+      </header>
+      <main class="msger-chat">
+        <div class="msg left-msg">
+          <!-- <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)">
+          </div> -->
+
+          <div class="msg-bubble">
+            <div class="msg-info">
+              <div class="msg-info-name">Guía Zyon</div>
+            </div>
+
+            <div class="msg-text">
+              Hola, bienvenido. ¿En que puedo ayudarte hoy?.
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div class="msger-inputarea">
+        <input type="text" class="msger-input" placeholder="Escribe algo...">
+        <button type="button" class="msger-send-btn">Enviar</button>
+      </div>
+    </section>
     <canvas id="canvas"></canvas>
   </div>
 
@@ -208,6 +200,7 @@
     const buttonSidebar = document.querySelector('#description-path button');
     const sidebar = document.querySelector('#descriptionSpan');
     const QRDisplay = document.getElementById('QRDisplay');
+    const msger = document.querySelector('.msger');
 
     function disableSnap() {
       carouselContainer.style.scrollSnapType = 'none';
@@ -253,7 +246,9 @@
     }
 
     document.addEventListener('pointerup', (event) => {
-      if (!event.target.closest('.footer') && !event.target.closest('.footer-button')) {
+      if (!event.target.closest('.footer') && 
+        !event.target.closest('.footer-button') &&
+        msger.style.display !== 'flex') {
         hideFooter();
       }
     });

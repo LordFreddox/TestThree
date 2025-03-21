@@ -3,7 +3,8 @@ import { camera, canvas } from './Renderer';
 import { Place, PROJECT } from './http-service.js';
 import { companyId } from './main.ts';
 import { getPathAndDisplay } from './Navigator.ts';
-import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts';
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
+import { ResetChatBot } from './chat.ts';
 // import * as QRCode from 'qrcode';
 
 const COLOR_SELECTED = new Color(0x733D96);
@@ -20,14 +21,14 @@ let labelsScene = new Map<Vector3, HTMLDivElement>();
 const labelContainerElem = document.querySelector('#labelsScene');
 let startPlaceId: string | undefined;
 let endPlaceId: string | undefined
-const searchPanel = GetHTMLElementByClass('container-select-place');
+const searchPanel = GetHTMLElement('.container-select-place');
 const descriptionPathPanel = document.getElementById('description-path');
-const placesList = GetHTMLElementByID('placesList');
-const personList = GetHTMLElementByID('personList');
-const divCardPlace = GetHTMLElementByID('divCardPlace');
+const placesList = GetHTMLElement('#placesList');
+const personList = GetHTMLElement('#personList');
+const divCardPlace = GetHTMLElement('#divCardPlace');
 let isPlaceCardShowing: boolean = false;
 
-// const SearchPlacePersonText = GetHTMLElementByID('SearchPlacePersonText');
+// const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
 
 function normalizeString(str: string): string {
@@ -39,7 +40,7 @@ input_searcher.addEventListener('input', () => {
     filterPlaceSearchItem(searchTerm);
 });
 
-GetHTMLElementByID('deleteSearch').onclick = () => {
+GetHTMLElement('#deleteSearch').onclick = () => {
     if (input_searcher.value === '') {
         searchPanel.style.display = 'none';
         return;
@@ -55,7 +56,7 @@ searchBar?.addEventListener('input', () => {
     filterCarouselItems(searchTerm);
 });
 
-GetHTMLElementByID('closePlaceCard').onclick = () => {
+GetHTMLElement('#closePlaceCard').onclick = () => {
     ClosePlaceCard();
 };
 
@@ -64,20 +65,26 @@ function ClosePlaceCard(){
     isPlaceCardShowing = false;
 }
 
-// GetHTMLElementByClass('buttonTogglePlacePerson').onclick = () => {
-//     const buttonTogglePlacePerson = GetHTMLElementByClass('buttonTogglePlacePerson');
+GetHTMLElement('#CloseChatHeaderButton').onclick = () => {
+    ResetChatBot('Eres un guía profesional de diferentes lugares llamado "Guía Zyon". Tu tarea como Guía Zyon es ayudar a las personas a encontrar promociones o lugares de interés alrededor. Siempre respondes en español. No tienes otros nombres a parte de Guía Zyon.');
+    GetHTMLElement('.msger').style.display = 'none';
+    GetHTMLElement('#footer-button').style.display = 'block';
+}
+
+// GetHTMLElement('.buttonTogglePlacePerson').onclick = () => {
+//     const buttonTogglePlacePerson = GetHTMLElement('.buttonTogglePlacePerson');
 //     if (SearchPlacePersonText.innerHTML === 'Buscar lugares') {
 //         SearchPlacePersonText.innerHTML = 'Buscar personas';
-//         GetHTMLElementByID('buttonDestination').style.display = 'none';
-//         GetHTMLElementByID('buttonPerson').style.display = 'flex';
+//         GetHTMLElement('#buttonDestination').style.display = 'none';
+//         GetHTMLElement('#buttonPerson').style.display = 'flex';
 //         buttonTogglePlacePerson.style.flexDirection = 'row-reverse';
 //         buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_PERSONAS.svg';
 //         buttonTogglePlacePerson.style.backgroundColor = 'var(--button-enable-color)';
 //     }
 //     else {
 //         SearchPlacePersonText.innerHTML = 'Buscar lugares';
-//         GetHTMLElementByID('buttonPerson').style.display = 'none';
-//         GetHTMLElementByID('buttonDestination').style.display = 'flex';
+//         GetHTMLElement('#buttonPerson').style.display = 'none';
+//         GetHTMLElement('#buttonDestination').style.display = 'flex';
 //         buttonTogglePlacePerson.style.flexDirection = 'row';
 //         buttonTogglePlacePerson.getElementsByTagName('img')[0].src = '/img/BUSCAR_LUGARES.svg';
 //         buttonTogglePlacePerson.style.backgroundColor = '#ffffff';
@@ -124,12 +131,12 @@ function SetClearXIcon(currentSelectedSearchButton: HTMLElement) {
     });
 }
 
-GetHTMLElementByID('back3D').onclick = async () => {
+GetHTMLElement('#back3D').onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'none';
     document.getElementById('search-section')!.style.display = 'block';
 };
 
-GetHTMLElementByID('previewButton').onclick = async () => {
+GetHTMLElement('#previewButton').onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'block';
     document.getElementById('search-section')!.style.display = 'none';
     updateLabelPositions();
@@ -137,7 +144,7 @@ GetHTMLElementByID('previewButton').onclick = async () => {
     getPathAndDisplay(startPlaceId, endPlaceId);
 };
 
-GetHTMLElementByID('fullviewButton').onclick = async () => {
+GetHTMLElement('#fullviewButton').onclick = async () => {
     if (!startPlaceId || !endPlaceId) return;
     if (startPlaceId === endPlaceId) return;
     window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
@@ -153,12 +160,12 @@ GetHTMLElementByID('fullviewButton').onclick = async () => {
     // });
 };
 
-GetHTMLElementByID('ExitQR').onclick = () => {
+GetHTMLElement('#ExitQR').onclick = () => {
     if (!startPlaceId || !endPlaceId) return;
     if (startPlaceId === endPlaceId) return;
     window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
         '_blank');
-    GetHTMLElementByID('QRDisplay').style.display = 'none';
+    GetHTMLElement('#QRDisplay').style.display = 'none';
 };
 
 function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, endPlaceId: string, project: string): string {
@@ -170,8 +177,9 @@ function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, e
 }
 
 function DisplayChatAI(){
-    GetHTMLElementByClass('msger').style.display = 'flex';
-  }
+    GetHTMLElement('.msger').style.display = 'flex';
+    GetHTMLElement('#footer-button').style.display = 'none';
+}
 
 function AddCarouselItem(imageUrl: string, description: string,
     object: Object3D, floorLevels: Object3D[]) {
@@ -260,10 +268,10 @@ function formatDescription(description: string): string {
 }
 
 function EnableTourState(description: string) {
-    GetHTMLElementByID('previewButton').style.color = 'var(--button-enable-color)';
-    GetHTMLElementByID('previewButton').style.borderColor = 'var(--button-enable-color)';
-    GetHTMLElementByID('fullviewButton').style.backgroundColor = 'var(--button-enable-color)';
-    GetHTMLElementByID('fullviewButton').style.borderColor = 'var(--button-enable-color)';
+    GetHTMLElement('#previewButton').style.color = 'var(--button-enable-color)';
+    GetHTMLElement('#previewButton').style.borderColor = 'var(--button-enable-color)';
+    GetHTMLElement('#fullviewButton').style.backgroundColor = 'var(--button-enable-color)';
+    GetHTMLElement('#fullviewButton').style.borderColor = 'var(--button-enable-color)';
     descriptionPathPanel!.querySelector('span')!.innerHTML = formatDescription(description);
     descriptionPathPanel!.style.visibility = 'visible';
     // document.getElementById("fullviewButton")!.style.display = "inline-block";
@@ -274,10 +282,10 @@ function EnableTourState(description: string) {
 }
 
 function DisableTourState() {
-    GetHTMLElementByID('previewButton').style.color = 'var(--button-disable-color)';
-    GetHTMLElementByID('previewButton').style.borderColor = 'var(--button-disable-color)';
-    GetHTMLElementByID('fullviewButton').style.backgroundColor = 'var(--button-disable-color)';
-    GetHTMLElementByID('fullviewButton').style.borderColor = 'var(--button-disable-color)';
+    GetHTMLElement('#previewButton').style.color = 'var(--button-disable-color)';
+    GetHTMLElement('#previewButton').style.borderColor = 'var(--button-disable-color)';
+    GetHTMLElement('#fullviewButton').style.backgroundColor = 'var(--button-disable-color)';
+    GetHTMLElement('#fullviewButton').style.borderColor = 'var(--button-disable-color)';
     // document.getElementById("fullviewButton")!.style.display = "none";
     descriptionPathPanel!.style.visibility = 'hidden';
     document.getElementById("fullviewButton")!.setAttribute('disabled', '');
@@ -597,14 +605,6 @@ function ButtonActionItemSearchPanel(place: Place) {
             break;
     }
     checkAndDownloadJSON();
-}
-
-function GetHTMLElementByID(idElement: string): HTMLElement{
-    return document.getElementById(idElement) as HTMLElement;
-}
-
-function GetHTMLElementByClass(classElement: string): HTMLElement{
-    return document.getElementsByClassName(classElement)[0] as HTMLElement;
 }
 
 interface LabelData {

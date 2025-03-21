@@ -30,4 +30,8 @@ function DebugNavMesh(navMesh: Mesh) {
     );
 }
 
-export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh }
+function GetHTMLElement(element: string): HTMLElement{
+    return document.querySelector(element) as HTMLElement;
+}
+
+export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh, GetHTMLElement }
