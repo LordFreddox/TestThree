@@ -1,5 +1,6 @@
 import { GetHTMLElement } from './Utils';
 import { InitContextWithSystemPrompt, ChatRequest, ResetContext } from './AI';
+import { sysPromt } from './AI_Tools';
 
 // const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 // const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
@@ -8,10 +9,10 @@ const PERSON_NAME = "Marsel";
 const msgerForm = GetHTMLElement(".msger-send-btn");
 const msgerInput = GetHTMLElement(".msger-input") as HTMLInputElement;
 const msgerChat = GetHTMLElement(".msger-chat");
-let isStreamText: boolean = true;
+let isStreamText: boolean = false;
 
 const messagesMap = new Map<string, string>(); // Map to store messages for each chat ID
-ResetChatBot('Eres un guía profesional de diferentes lugares llamado "Guía Zyon". Tu tarea como Guía Zyon es ayudar a las personas a encontrar promociones o lugares de interés alrededor. Siempre respondes en español. No tienes otros nombres a parte de Guía Zyon.');
+ResetChatBot(sysPromt);
 
 async function sendMessage(message: string) {
   appendMessage(PERSON_NAME, "right", message, '');

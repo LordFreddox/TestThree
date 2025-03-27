@@ -55,7 +55,7 @@ if (window.location.hostname === "localhost") {
 if (companyId === "0" || window.location.hostname === "localhost") {
   GetPlacesFake();
 } else {
-  GetPlacesReal(companyId);
+  GetPlacesReal();
 }
 //GetPlacesReal(companyId);
 
@@ -196,8 +196,8 @@ controls.addEventListener('end', () => {
 
 controls.update();
 
-function GetPlacesReal(companyId: string) {
-  GetPlaces(companyId).then(json => {
+function GetPlacesReal() {
+  GetPlaces().then(json => {
     places = json.data_place.places;
     SetupExplorerOrVirtualtour(places);
   }).catch((error) => {
