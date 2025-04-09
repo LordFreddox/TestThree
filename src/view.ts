@@ -5,7 +5,6 @@ import { companyId } from './main.ts';
 import { getPathAndDisplay } from './Navigator.ts';
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
 import { ResetChatBot } from './chat.ts';
-import { debug } from 'three/src/nodes/TSL.js';
 // import * as QRCode from 'qrcode';
 
 const COLOR_SELECTED = new Color(0x733D96);
@@ -28,7 +27,7 @@ const placesList = GetHTMLElement('#placesList');
 const personList = GetHTMLElement('#personList');
 const divCardPlace = GetHTMLElement('#divCardPlace');
 let isPlaceCardShowing: boolean = false;
-const footer = document.querySelector('.footer');
+
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
 
@@ -62,9 +61,8 @@ GetHTMLElement('#closePlaceCard').onclick = () => {
 };
 
 function ClosePlaceCard(){
-    isPlaceCardShowing = false;
     divCardPlace.style.visibility = 'hidden';
-    footer?.classList.add('show');
+    isPlaceCardShowing = false;
 }
 
 GetHTMLElement('#CloseChatHeaderButton').onclick = () => {
@@ -514,15 +512,12 @@ function CreateTextForPlace(
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
     elem.dataset.floorIndex = floorIndex.toString();
     elem.dataset.category = textName.place_category_name;
-    debug(size);
 }
 
 function SetupDescriptionCardForPlace(object: Object3D){
     isPlaceCardShowing = true;
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
-    
-    footer?.classList.remove('show');
     divCardPlace.style.visibility = 'visible';
     (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = object.userData.place.companysubsidiary_image_url;
     divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${object.userData.place.companysubsidiary_name}`;

@@ -69,25 +69,25 @@ function Start() {
       const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
 
       const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
-              gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
+        gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
 
-if (spawn) {
-  // Obtener posición mundial del objeto "spawn"
-  const spawnPosition = new Vector3();
-  spawn.getWorldPosition(spawnPosition);
+      if (spawn) {
+        // Obtener posición mundial del objeto "spawn"
+        const spawnPosition = new Vector3();
+        spawn.getWorldPosition(spawnPosition);
 
-  // Posiciona la cámara relativa al spawn
-  camera.position.set(
-    spawnPosition.x + 5,
-    spawnPosition.y + 10,
-    spawnPosition.z + 0 // puedes ajustar este valor si quieres moverla también en Z
-  );
+        // Posiciona la cámara relativa al spawn
+        camera.position.set(
+          spawnPosition.x + 5,
+          spawnPosition.y + 10,
+          spawnPosition.z + 0 // puedes ajustar este valor si quieres moverla también en Z
+        );
 
-  camera.lookAt(spawnPosition);
-} else {
-  console.warn('No se encontró un objeto con nombre que incluya "spawn".');
-  camera.position.set(size.x + 10, center.y + size.y + 13, 0);
-}
+        camera.lookAt(spawnPosition);
+      } else {
+        console.warn('No se encontró un objeto con nombre que incluya "spawn".');
+        camera.position.set(size.x + 10, center.y + size.y + 13, 0);
+      }
       //camera.position.set(size.x + 10, center.y + size.y + 13, 0);
       //camera.position.set(50, 50, 0);
       // camera.far = size.length() * 10;
@@ -122,11 +122,11 @@ if (spawn) {
       // });
       // mixers.push(mixer);
 
-       gltf.scene.traverse(child => {
-         if (child.name.includes('ROTATE_')) {
+      gltf.scene.traverse(child => {
+        if (child.name.includes('ROTATE_')) {
           lookAtCamera.push(child);
-         }
-       });
+        }
+      });
 
       //populate floorLevels array with the objects that has the following name piso1, piso2, piso3 and so on
       let index = 1;
@@ -142,7 +142,7 @@ if (spawn) {
 
       if (floorLevels.length > 1) {
         initFloorSelector(floorLevels, labelsScene);
-      }else{
+      } else {
         document.getElementById('floor-selector-title')!.style.display = 'none';
         document.getElementById('floor-selector')!.style.display = 'none';
       }
@@ -297,10 +297,10 @@ window.addEventListener('touchend', (event) => {
   if (intersects.length > 0) {
     for (let i = 0; i < intersects.length; i++) {
       if (intersects[i].object.userData.isPlaceObject &&
-          intersects[i].object.parent?.visible === true) {
-          if(isPlaceCardShowing) break;
-          SetupDescriptionCardForPlace(intersects[i].object);
-          break;
+        intersects[i].object.parent?.visible === true) {
+        if (isPlaceCardShowing) break;
+        SetupDescriptionCardForPlace(intersects[i].object);
+        break;
       }
     }
   }

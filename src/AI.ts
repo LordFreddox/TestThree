@@ -1,66 +1,38 @@
-import { appendMessage } from "./chat";
+import { appendMessage } from "./chat.ts";
 
 let fullConversation: string = '';
-let lastStreamedResponse: string = '';
-let lastRole: string = '';
 
 function InitContextWithSystemPrompt(sysPromt: string) {
     AppendJsonToContext(sysPromt, "system");
 }
 
-async function ChatRequest(message: string, botName: string, role: string, isStreamText: boolean) {
+async function ChatRequest(message: string, botName: string, role: string) {
     AppendJsonToContext(message, role);
-    const requestBody = {
-        model: "llama-3.2-3b-instruct",
-        messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`), // Remove the last comma and parse as array
-        temperature: 0.4,
-        max_tokens: -1,
-        stream: isStreamText
-    };
-
-    try {
-        const response = await fetch('http://localhost:1234/v1/chat/completions', {
+    // try {
+        const body = {
+            messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`)
+        };
+        const response = await fetch('http://localhost:3000/chat', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
             },
-            body: JSON.stringify(requestBody)
+            body: JSON.stringify(body)
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        const botResponseMessage = await response.json();
+        appendMessage(botName, "left",
+            botResponseMessage.response.message, botResponseMessage.response.id);
+        AppendJsonToContext(botResponseMessage.response.message, botResponseMessage.response.role);
 
-        if(!response.body) return;
-
-        for await (const data of splitStream(response.body)) {
-            // let data = new TextDecoder().decode(chunk);
-            if (data.startsWith("data:")) {
-                const json = data.substring("data:".length).trimStart();
-                if (json.startsWith("[DONE]")) {
-                    return;
-                }
-                const parseData = JSON.parse(json);
-                if (parseData.choices[0].finish_reason === 'stop') {
-                    AppendJsonToContext(lastStreamedResponse, lastRole);
-                    lastStreamedResponse = '';
-                    return;
-                }
-
-                const botResponseMessage = parseData.choices[0].delta.content;
-                const role = parseData.choices[0].delta.role;
-                lastStreamedResponse += botResponseMessage;
-                lastRole = role;
-                appendMessage(botName, "left", botResponseMessage, parseData.id);
-
-            }
-        }
-
-    } catch (error) {
-        console.error('Error fetching bot response:', error);
-        //TODO: delete last message if error ocurrs
-        appendMessage(botName, "left", 'Lo siento, ocurrió un error.', '');
-    }
+    // } catch (error) {
+    //     console.error('Error fetching bot response:', error);
+    //     appendMessage(botName, "left", 'Lo siento, ocurrió un error.', '');
+    // } 
 }
 
 async function* splitStream(body: ReadableStream<Uint8Array>) {
@@ -101,27 +73,6 @@ function AppendJsonToContext(message: string, role: string) {
 
 function ResetContext(){
     fullConversation = '';
-    lastStreamedResponse = '';
-    lastRole = '';
 }
-
-/*interface DataStreamResponse {
-    "id": string,
-    "object": string,
-    "created": number,
-    "model": string,
-    "system_fingerprint": string,
-    "choices": [
-        {
-            "index": number,
-            "delta": {
-                "role": string,
-                "content": string
-            },
-            "logprobs": null,
-            "finish_reason": string
-        }
-    ]
-}*/
 
 export { InitContextWithSystemPrompt, ChatRequest, ResetContext };

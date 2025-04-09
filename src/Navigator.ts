@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Object3D, Mesh, Scene, Vector3, /*ArrowHelper,*/
   CatmullRomCurve3,TubeGeometry, MeshStandardMaterial,
   DoubleSide } from 'three';
-import { scene } from './Renderer';
+import { scene } from './Renderer.ts';
 // import { DebugNavMesh } from './Utils';
 
 const zoneId: string = 'VirtualTour';

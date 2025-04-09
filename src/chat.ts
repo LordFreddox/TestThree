@@ -1,6 +1,5 @@
-import { GetHTMLElement } from './Utils';
-import { InitContextWithSystemPrompt, ChatRequest, ResetContext } from './AI';
-import { sysPromt } from './AI_Tools';
+import { GetHTMLElement } from './Utils.ts';
+import { ChatRequest, ResetContext } from './AI.ts';
 
 // const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 // const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
@@ -9,14 +8,13 @@ const PERSON_NAME = "Marsel";
 const msgerForm = GetHTMLElement(".msger-send-btn");
 const msgerInput = GetHTMLElement(".msger-input") as HTMLInputElement;
 const msgerChat = GetHTMLElement(".msger-chat");
-let isStreamText: boolean = false;
 
 const messagesMap = new Map<string, string>(); // Map to store messages for each chat ID
-ResetChatBot(sysPromt);
+ResetChatBot();
 
 async function sendMessage(message: string) {
   appendMessage(PERSON_NAME, "right", message, '');
-  ChatRequest(message, "Guía Zyon", "user", isStreamText);
+  ChatRequest(message, "Guía Zyon", "user");
 }
 
 msgerForm.onclick = () => {
@@ -57,9 +55,8 @@ function appendMessage(name: string, side: string, text: string, id: string) {
   msgerInput.value = '';
 }
 
-function ResetChatBot(sysPromt: string){
+function ResetChatBot(){
   ResetContext();
-  InitContextWithSystemPrompt(sysPromt);
   while (msgerChat.firstChild) {
     if(msgerChat.childElementCount === 1) return;
     msgerChat.removeChild(msgerChat.lastChild!);

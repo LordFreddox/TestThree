@@ -9,7 +9,7 @@
                 "--remote-debugging-port=9222",
                 "--window-size=720,1520"
             ],
-            "url": "http://localhost:4200/index.html?ServType=1&project=zyon&placeId=139", // https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-dev/index.html?ServType=3&project=zyon
+            "url": "http://localhost:4200/index.html?ServType=1&project=zyon&placeId=139", // https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/index.html?ServType=3&project=zyon&placeId=139
             "presentation": {
                 "hidden": true
             }
