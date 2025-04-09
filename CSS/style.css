@@ -513,7 +513,87 @@ button {
 }
 
 /*#endregion */
+/*#region CardPlace*/
+.hidden {
+    position: fixed; /* Fijo para asegurarse de que empieza fuera de la pantalla */
+    bottom: -100%; /* Lo mueve fuera de la pantalla */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: bottom 0.8s ease-out, opacity 0.8s ease-out;
+  }
+  
+  .visible {
+    bottom: 10%; /* Ajusta según la posición donde debe aparecer */
+    opacity: 1;
+  }
+.PlaceCardBasicDescription{
+    
+    text-align: left;
+    display: block;
+    margin: 0;
+    float: left;
+}
+.review-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea los elementos a la derecha */
+    width: 100%;
+    margin-right: 2rem;
+    margin-top: -3rem;
+}
+.review{
+    width: 5rem;
+    height: 1.5rem;
+    margin-bottom: 5px;
+}
+.PlaceCardLongDescription{
+    height: 100%;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    overflow-y: auto;
+}
+#gradient-text{
+    position: absolute;
+    background-image: linear-gradient(180deg,rgba(255, 255, 255, 0.5), white);
+    width: 100%;
+    height: 7rem;
+    bottom: 6rem;
+}
+#divCardPlace{
+    width: 90%;
+    padding-bottom: 1rem;
+}
+#logo_place_card{
+    display: block;
+}
+#description_place_card{
+    display: inline-block;
+    width: 100%;
+}
 
+.placeCard-ecommerce{
+    height: 5rem;
+    margin-bottom: 1rem;
+    background-color: #257ecc;
+    border-radius: 40px;
+    border-style:none ;
+    padding: 1em;
+    width: 200px;
+}
+#closePlaceCard{
+    display: inline-block;
+    background: url(/img/icon-close-card.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    width: 5rem;
+    height: 5rem;
+    padding: 0;
+    margin-top: -3em;
+}
+/*#endregion */
 .buttonTogglePlacePerson {
     visibility: hidden;
     display: flex;
@@ -708,18 +788,7 @@ button {
     /* margin-top: 25px; */
 }
 
-.PlaceCardBasicDescription{
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 1rem;
-    text-align: center;
-}
 
-.PlaceCardLongDescription{
-    height: 100%;
-    margin-bottom: 1rem;
-    overflow-y: auto;
-}
 
 .closeButton{
     background: url(/img/icon-close.svg);
@@ -734,10 +803,7 @@ button {
     padding: 0;
 }
 
-.placeCard-ecommerce{
-    height: 5rem;
-    margin-bottom: 1rem;
-}
+
 
 .BtnDisplayAI{
     position: absolute; display: block; right: 5vw; top: 5vh;

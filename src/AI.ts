@@ -105,7 +105,7 @@ function ResetContext(){
     lastRole = '';
 }
 
-interface DataStreamResponse {
+/*interface DataStreamResponse {
     "id": string,
     "object": string,
     "created": number,
@@ -122,6 +122,6 @@ interface DataStreamResponse {
             "finish_reason": string
         }
     ]
-}
+}*/
 
 export { InitContextWithSystemPrompt, ChatRequest, ResetContext };

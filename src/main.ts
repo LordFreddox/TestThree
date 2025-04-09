@@ -67,7 +67,29 @@ function Start() {
       gltf.scene.position.set(0, 0, 0);
       scene.add(gltf.scene);
       const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
-      camera.position.set(size.x + 10, center.y + size.y + 13, 0);
+
+      const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
+              gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
+
+if (spawn) {
+  // Obtener posición mundial del objeto "spawn"
+  const spawnPosition = new Vector3();
+  spawn.getWorldPosition(spawnPosition);
+
+  // Posiciona la cámara relativa al spawn
+  camera.position.set(
+    spawnPosition.x + 5,
+    spawnPosition.y + 10,
+    spawnPosition.z + 0 // puedes ajustar este valor si quieres moverla también en Z
+  );
+
+  camera.lookAt(spawnPosition);
+} else {
+  console.warn('No se encontró un objeto con nombre que incluya "spawn".');
+  camera.position.set(size.x + 10, center.y + size.y + 13, 0);
+}
+      //camera.position.set(size.x + 10, center.y + size.y + 13, 0);
+      //camera.position.set(50, 50, 0);
       // camera.far = size.length() * 10;
       // camera.zoom = -size.length() / 10;
       controls.minDistance = size.length() / 20;
