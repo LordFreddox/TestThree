@@ -1,10 +1,11 @@
 import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
-import { camera, canvas } from './Renderer';
+import { camera, canvas } from './Renderer.ts';
 import { Place, PROJECT } from './http-service.js';
 import { companyId } from './main.ts';
 import { getPathAndDisplay } from './Navigator.ts';
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
-import { ResetChatBot } from './chat.ts';
+import { setCurrentAgent } from './chat.ts';
+import { UpdateDescription } from './AI.ts';
 // import * as QRCode from 'qrcode';
 
 const COLOR_SELECTED = new Color(0x733D96);
@@ -65,8 +66,14 @@ function ClosePlaceCard(){
     isPlaceCardShowing = false;
 }
 
-GetHTMLElement('#CloseChatHeaderButton').onclick = () => {
-    ResetChatBot('Eres un guía profesional de diferentes lugares llamado "Guía Zyon". Tu tarea como Guía Zyon es ayudar a las personas a encontrar promociones o lugares de interés alrededor. Siempre respondes en español. No tienes otros nombres a parte de Guía Zyon.');
+function DisplayChatAI(idPlace: string){
+    //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
+    setCurrentAgent(idPlace);
+    GetHTMLElement('.msger').style.display = 'flex';
+    GetHTMLElement('#footer-button').style.display = 'none';
+}
+
+GetHTMLElement('#CloseChatHeaderButton').onclick = (event) => {
     GetHTMLElement('.msger').style.display = 'none';
     GetHTMLElement('#footer-button').style.display = 'block';
 }
@@ -174,11 +181,6 @@ function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, e
     return `${baseUrl}?${urlParams.toString()}`;
 
     //TODO: Parse in unity the project type
-}
-
-function DisplayChatAI(){
-    GetHTMLElement('.msger').style.display = 'flex';
-    GetHTMLElement('#footer-button').style.display = 'none';
 }
 
 function AddCarouselItem(imageUrl: string, description: string,
@@ -514,7 +516,7 @@ function CreateTextForPlace(
     elem.dataset.category = textName.place_category_name;
 }
 
-function SetupDescriptionCardForPlace(object: Object3D){
+async function SetupDescriptionCardForPlace(object: Object3D){
     isPlaceCardShowing = true;
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
@@ -524,9 +526,12 @@ function SetupDescriptionCardForPlace(object: Object3D){
     divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;
     divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${object.userData.place.place_area_name}`;
     (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
-        DisplayChatAI();
+        DisplayChatAI(object.userData.place.id);
         ClosePlaceCard();
     };
+    divCardPlace.querySelector('#placeCardDescription')!.innerHTML = 'Cargando informacion...';
+    const descriptionUpdate = await UpdateDescription(object.userData.place.company_id)
+    divCardPlace.querySelector('#placeCardDescription')!.innerHTML = descriptionUpdate;
 }
 
 function CreateOptionItemSearchPanelPerson() {

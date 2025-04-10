@@ -1,18 +1,17 @@
 import { appendMessage } from "./chat.ts";
-
+const URL_MCPCLIENT = 'http://localhost:3000';
 let fullConversation: string = '';
 
 function InitContextWithSystemPrompt(sysPromt: string) {
     AppendJsonToContext(sysPromt, "system");
 }
 
-async function ChatRequest(message: string, botName: string, role: string) {
-    AppendJsonToContext(message, role);
-    // try {
+export async function UpdateDescription(placeId: string): Promise<string> {
+    try {
         const body = {
-            messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`)
+            placeId: placeId
         };
-        const response = await fetch('http://localhost:3000/chat', {
+        const response = await fetch(`${URL_MCPCLIENT}/update`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,17 +21,45 @@ async function ChatRequest(message: string, botName: string, role: string) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            console.error(`error updating description`);
+            return 'No se pudo actualizar los eventos recientes';
+        }
+
+        const postResponse = await response.json();
+        return postResponse.postResponse.message.content
+    } catch (error) {
+        console.error(`error updating description ${error}`);
+        return 'No se pudo actualizar los eventos recientes';
+    }
+}
+
+async function ChatRequest(message: string, botName: string, role: string, agentId: string) {
+    AppendJsonToContext(message, role);
+    try {
+        const body = {
+            messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`)
+        };
+        const response = await fetch(`${URL_MCPCLIENT}/chat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (!response.ok) {
+            appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', '');
         }
         const botResponseMessage = await response.json();
-        appendMessage(botName, "left",
+        appendMessage(agentId, botName, "left",
             botResponseMessage.response.message, botResponseMessage.response.id);
         AppendJsonToContext(botResponseMessage.response.message, botResponseMessage.response.role);
 
-    // } catch (error) {
-    //     console.error('Error fetching bot response:', error);
-    //     appendMessage(botName, "left", 'Lo siento, ocurrió un error.', '');
-    // } 
+    } catch (error) {
+        console.error('Error fetching bot response:', error);
+        appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', '');
+    }
 }
 
 async function* splitStream(body: ReadableStream<Uint8Array>) {
@@ -71,7 +98,7 @@ function AppendJsonToContext(message: string, role: string) {
     fullConversation += `${messageToSent},`;
 }
 
-function ResetContext(){
+function ResetContext() {
     fullConversation = '';
 }
 

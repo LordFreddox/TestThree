@@ -1,29 +1,27 @@
 import { GetHTMLElement } from './Utils.ts';
-import { ChatRequest, ResetContext } from './AI.ts';
+import { ChatRequest } from './AI.ts';
 
-// const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
-// const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const PERSON_NAME = "Marsel";
+let currentAgentID: string;
+let waitForBotResponse: boolean;
 
-const msgerForm = GetHTMLElement(".msger-send-btn");
-const msgerInput = GetHTMLElement(".msger-input") as HTMLInputElement;
-const msgerChat = GetHTMLElement(".msger-chat");
+// Function to get the chatbot element based on agent ID
+// function getChatbotElement(agentId: string): HTMLElement {
+//   return GetHTMLElement(`.msger[data-agent="${agentId}"]`);
+// }
 
-const messagesMap = new Map<string, string>(); // Map to store messages for each chat ID
-ResetChatBot();
-
-async function sendMessage(message: string) {
-  appendMessage(PERSON_NAME, "right", message, '');
-  ChatRequest(message, "Guía Zyon", "user");
+export function setCurrentAgent(agentId: string){
+  currentAgentID = agentId;
 }
 
-msgerForm.onclick = () => {
-  const msgText = msgerInput.value;
-  if (!msgText) return;
+// Function to send a message to a specific chatbot
+async function sendMessage(agentId: string, message: string) {
+  appendMessage(agentId, PERSON_NAME, "right", message, '');
+  ChatRequest(message, "Guía Zyon", "user", agentId);
+  waitForBotResponse = true;
+}
 
-  sendMessage(msgText);
-};
-
+// Function to create a message element
 function createMessageElement(name: string, side: string, text: string, id: string): string {
   let msgHTML = `
     <div class="msg ${side}-msg">
@@ -38,29 +36,45 @@ function createMessageElement(name: string, side: string, text: string, id: stri
   return msgHTML;
 }
 
-function appendMessage(name: string, side: string, text: string, id: string) {
-  if (messagesMap.has(id) && id !== '') {
+// Function to append a message to the correct chatbot
+export function appendMessage(agentId: string, name: string, side: string, text: string, id: string) {
+  // const msgerChat = getChatbotElement(agentId).querySelector(".msger-chat")!;
+  const msgerChat = GetHTMLElement(".msger-chat")!;
+
+  if (id !== '') {
     // Update existing chat with the new message
-    const currentMessages = messagesMap.get(id);
-    const updatedMessages = `${currentMessages}${text}`;
-    messagesMap.set(id, updatedMessages);
-    msgerChat.querySelector(`#${id}`)!.innerHTML = updatedMessages; // Update the inner HTML of the message element with the new text
+    const currentMessages = msgerChat.querySelector(`#${id}`)!;
+    currentMessages.innerHTML += text; 
   } else {
     // Create a new chat with the new message
     const messageElement = createMessageElement(name, side, text, id);
-    messagesMap.set(id, text); // Store the message in the map
     msgerChat.insertAdjacentHTML("beforeend", messageElement);
   }
+  
   msgerChat.scrollTop += 500;
-  msgerInput.value = '';
+  waitForBotResponse = false;
 }
 
-function ResetChatBot(){
-  ResetContext();
-  while (msgerChat.firstChild) {
-    if(msgerChat.childElementCount === 1) return;
-    msgerChat.removeChild(msgerChat.lastChild!);
-  }
-}
+// Function to reset a specific chatbot
+// export function ResetChatBot(agentId: string) {
+//   const msgerChat = getChatbotElement(agentId).querySelector(".msger-chat")!;
+//   while (msgerChat.firstChild) {
+//     if(msgerChat.childElementCount === 1) return;
+//     msgerChat.removeChild(msgerChat.lastChild!);
+//   }
+// }
 
-export { appendMessage, ResetChatBot };
+document.querySelectorAll('.msger-send-btn').forEach((button, index) => {
+  button.addEventListener('click', () => {
+    if(waitForBotResponse) return;
+
+    // const agentId = (button.closest('.msger') as HTMLElement).dataset.agent!;
+    const msgText = (button.previousElementSibling as HTMLInputElement);
+    if (msgText.value === '') return;
+
+    sendMessage(currentAgentID, msgText.value);
+    msgText.value = '';
+    const event = new Event('input', { bubbles: true });
+    msgText.dispatchEvent(event);
+  });
+});
