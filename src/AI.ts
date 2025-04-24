@@ -1,36 +1,80 @@
 import { appendMessage } from "./chat.ts";
-const URL_MCPCLIENT = 'http://localhost:3000';
+
 let fullConversation: string = '';
+let messageAmount: number = 1;
+const URL_MCPCLIENT = 'http://localhost:3000';
+// const URL_MCPCLIENT = 'https://4055-181-59-2-70.ngrok-free.app';
+let controller = new AbortController();
+let DescriptionsMap: Map<string, string> = new Map();
 
 function InitContextWithSystemPrompt(sysPromt: string) {
     AppendJsonToContext(sysPromt, "system");
 }
 
-export async function UpdateDescription(placeId: string): Promise<string> {
-    try {
-        const body = {
-            placeId: placeId
-        };
-        const response = await fetch(`${URL_MCPCLIENT}/update`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'accept': 'application/json'
-            },
-            body: JSON.stringify(body)
-        });
+export function UpdateDescription(placeId: string, description: HTMLElement): AbortController {
+    if(DescriptionsMap.has(placeId)){
+        description.innerHTML = DescriptionsMap.get(placeId)!;
+        return controller;
+    }
+    const body = {
+        placeId: placeId
+    };
+    description.innerHTML = 'Cargando informacion...';
+    // controller = new AbortController();
+    fetch(`${URL_MCPCLIENT}/update`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify(body),
+        signal: controller.signal
+    })
+        .then(response => handleStreamResponse(response, description, placeId))
+        .catch(handleStreamError);
+    return controller; // Return the controller for external abort access
+}
 
-        if (!response.ok) {
-            console.error(`error updating description`);
-            return 'No se pudo actualizar los eventos recientes';
+function handleStreamResponse(response: Response, description: HTMLElement, placeId: string) {
+    if (!response.body) return;
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let fullText = '';
+    processStream(reader, decoder, fullText, description, placeId);
+}
+
+function handleStreamError(err: any) {
+    if (err.name === 'AbortError') {
+        console.log('Fetch aborted');
+        controller = new AbortController();
+    } else {
+        console.error('Fetch error:', err);
+    }
+}
+
+function processStream(reader: ReadableStreamDefaultReader<Uint8Array<ArrayBufferLike>>,
+    decoder: TextDecoder, fullText: string, description: HTMLElement, placeId: string) {
+    reader.read().then(({ done, value }) => {
+        if (done) {
+            console.log('Stream complete');
+            controller = new AbortController();
+            return;
         }
 
-        const postResponse = await response.json();
-        return postResponse.postResponse.message.content
-    } catch (error) {
-        console.error(`error updating description ${error}`);
-        return 'No se pudo actualizar los eventos recientes';
-    }
+        const chunk = decoder.decode(value);
+        fullText += chunk;
+        description.innerHTML = fullText; // Function to update your UI with the text
+        DescriptionsMap.set(placeId, fullText);
+        processStream(reader, decoder, fullText, description, placeId); // Continue reading
+    }).catch(err => {
+        if (err.name === 'AbortError') {
+            console.log('Stream aborted');
+            controller = new AbortController();
+        } else {
+            console.error('Stream error:', err);
+        }
+    });
 }
 
 async function ChatRequest(message: string, botName: string, role: string, agentId: string) {
@@ -49,44 +93,41 @@ async function ChatRequest(message: string, botName: string, role: string, agent
         });
 
         if (!response.ok) {
-            appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', '');
+            appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', -1);
         }
-        const botResponseMessage = await response.json();
-        appendMessage(agentId, botName, "left",
-            botResponseMessage.response.message, botResponseMessage.response.id);
-        AppendJsonToContext(botResponseMessage.response.message, botResponseMessage.response.role);
+
+        if (!response.body) {
+            appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', -1);
+            return 'Lo siento, ocurrió un error';
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break; //exit condition of while loop
+
+            const chunk = decoder.decode(value, { stream: true });
+            const messages = chunk.trim().split('\n');
+            messages.forEach(message => {
+                if (message) {
+                    const data = JSON.parse(message);
+                    appendMessage(agentId, botName, "left",
+                        data.message, messageAmount);
+                    AppendJsonToContext(data.message, 'assistant');
+                }
+            });
+        }
+        messageAmount++;
+        // const botResponseMessage = await response.json();
+        // appendMessage(agentId, botName, "left",
+        //     botResponseMessage.response.message, botResponseMessage.response.id);
+        // AppendJsonToContext(botResponseMessage.response.message, botResponseMessage.response.role);
 
     } catch (error) {
         console.error('Error fetching bot response:', error);
-        appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', '');
-    }
-}
-
-async function* splitStream(body: ReadableStream<Uint8Array>) {
-    const reader = body.getReader();
-    let lastFragment = "";
-    try {
-        while (true) {
-            const { value, done } = await reader.read();
-            if (done) {
-                // Flush the last fragment now that we're done
-                if (lastFragment !== "") {
-                    yield lastFragment;
-                }
-                break;
-            }
-            const data = new TextDecoder().decode(value);
-            lastFragment += data;
-            const parts = lastFragment.split("\n\n");
-            // Yield all except for the last part
-            for (let i = 0; i < parts.length - 1; i += 1) {
-                yield parts[i];
-            }
-            // Save the last part as the new last fragment
-            lastFragment = parts[parts.length - 1];
-        }
-    } finally {
-        reader.releaseLock();
+        appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', -1);
     }
 }
 

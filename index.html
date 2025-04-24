@@ -7,10 +7,13 @@
   <title>Mapas</title>
   <script type="module" src="/src/main.ts"></script>
   <script type="module" src="/src/chat.ts"></script>
+  <!-- <script type="module" src="/src/CallManager/CallView.ts"></script> -->
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body style="background-color: black;padding: 0;" oncontextmenu="return false;">
+  <div style="display: block" id="hideAll"></div>
+
   <div id="backgroundimage-street" src="/img/streetMaskBackground.svg" alt="StreetMaskBackground"></div>
 
   <div id="search-section" style="display: none;">
@@ -104,22 +107,6 @@
     height: 10vh;margin-top: 75vw;" src="/img/zoomout.webp" autoplay loop muted playsinline style="position: fixed; top: 10px; left: 10px; width: 300px;
     pointer-events: none;" />
 
-    <!--div id="loadingMain" style="position: absolute;
-      width: 100vw;
-      height: 100vh;
-      background-color: black;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;">
-  <div class="load-4">
-    <div class="ring-1"></div>
-  </div>
-  <div id="loading-container" style="width: 80%; background-color: #ccc; border-radius: 20%; margin-top: 10vh;">
-    <div id="loading-bar" style="width: 0%; height: 20px; background-color: #4caf50; border-radius: 20%;"></div>
-  </div>
-</div-->
-
     <div class="container-3DView-options">
       <button id="back3D" type="button">Regresar</button>
 
@@ -136,6 +123,8 @@
       </div>
     </div>
 
+    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D">
+
     <footer id="footer" class="footer show" style="display: block;">
       <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..." />
       <div class="carousel">
@@ -146,45 +135,42 @@
 
     <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div>
 
-    <div id="divCardPlace" class="card-select-place Centered" style="visibility: hidden;">
+    <div id="divCardPlace" class="card-select-place Centered raycast-blocker" style="visibility: hidden;">
       <div id="header-container">
         <img id="logo_place_card" title="logo">
-      <div id="description_place_card">    
-      <h3 id="placeCardName" class="PlaceCardBasicDescription"></h3>
-      <span id="placeCardCategory" class="PlaceCardBasicDescription"></span>
-      <span id="placeCardArea" class="PlaceCardBasicDescription"></span>
-    </div> 
-      <button id="closePlaceCard" type="button" title="close" >
-      </button>
-    </div>
-    <div class="review-container">
-    <span id="cnt-reviews" class="review">+15 reseñas</span>
-    <img class="review" title="estrellas" src="/img/icon-stars.svg">
-    <img class="review" title="estrellas" src="/img/icon-bot-IA.svg">
-    
-  </div>
-  <h4 style="align-self: flex-start; margin-top: auto; margin-left:1rem;margin-top: 0; margin-bottom: 0;">Mas Información...</h4>
+        <div id="description_place_card">
+          <h3 id="placeCardName" class="PlaceCardBasicDescription"></h3>
+          <span id="placeCardCategory" class="PlaceCardBasicDescription"></span>
+          <span id="placeCardArea" class="PlaceCardBasicDescription"></span>
+        </div>
+        <button id="closePlaceCard" type="button" title="close">
+        </button>
+      </div>
+      <div class="review-container">
+        <span id="cnt-reviews" class="review">+15 reseñas</span>
+        <img class="review" title="estrellas" src="/img/icon-stars.svg">
+        <img class="review" title="estrellas" src="/img/icon-bot-IA.svg">
+
+      </div>
+      <h4 style="align-self: flex-start; margin-top: auto; margin-left:1rem;margin-top: 0; margin-bottom: 0;">Mas
+        Información...</h4>
       <span id="placeCardDescription" class="PlaceCardBasicDescription PlaceCardLongDescription">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
+        Cargando informacion...
       </span>
-      
-      <button id="ecommerce-redirect" title="ecommerce" type="button" class="placeCard-ecommerce">Chatear con la IA</button>
+
+      <button id="ecommerce-redirect" title="ecommerce" type="button" class="placeCard-ecommerce">Chatear con la
+        IA</button>
       <!--<div id="gradient-text"></div>-->
+    </div>
+
+    <div id="AICallCard" class="card-select-place Centered raycast-blocker" style="visibility: hidden;">
+      <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatar">
+      <img src="/img/end_call.png" alt="end_call" class="EndCallButton">
     </div>
 
     <section class="msger">
       <header class="msger-header">
-        <img id="CloseChatHeaderButton" type="button" title="close"
-        src="/img/icon-close.svg">
+        <img id="CloseChatHeaderButton" type="button" title="close" src="/img/icon-close.svg">
       </header>
       <main class="msger-chat">
         <div class="msg left-msg">
@@ -214,6 +200,7 @@
     const sidebar = document.querySelector('#descriptionSpan');
     const QRDisplay = document.getElementById('QRDisplay');
     const msger = document.querySelector('.msger');
+    // const AICallCard = document.querySelector('#AICallCard');
 
     function disableSnap() {
       carouselContainer.style.scrollSnapType = 'none';
@@ -259,9 +246,11 @@
     }
 
     document.addEventListener('pointerup', (event) => {
-      if (!event.target.closest('.footer') && 
-        !event.target.closest('.footer-button') &&
-        msger.style.display !== 'flex') {
+      if (!event.target.closest('.footer')
+        && !event.target.closest('.footer-button')
+        && msger.style.display !== 'flex'
+        // && AICallCard.style.display !== 'block'
+      ) {
         hideFooter();
       }
     });

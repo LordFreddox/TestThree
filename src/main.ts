@@ -14,12 +14,13 @@ import {
   initFloorSelector, initCategorySelector, AddCarouselItem,
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearch,
-  SetupDescriptionCardForPlace, isPlaceCardShowing
+  SetupDescriptionCardForPlace
 } from './view.ts';
-import { createNavMesh } from './Navigator.ts'
-import { GetBoundingBoxSizeAndCenterOfObject } from './Utils.ts'
+// import { createNavMesh } from './Navigator.ts'
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock } from './Utils.ts'
 
 const urlParams = new URLSearchParams(window.location.search);
+const ServType = urlParams.get('ServType');
 //const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
 const tutorial = document.getElementById('tutorial') as HTMLElement;
@@ -60,126 +61,129 @@ if (companyId === "0" || window.location.hostname === "localhost") {
 //GetPlacesReal(companyId);
 
 function Start() {
-  loader.load(
-    modelUrl,
-    (gltf) => {
-      //tutorial.style.display = 'flex';
-      gltf.scene.position.set(0, 0, 0);
-      scene.add(gltf.scene);
-      const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
-
-      const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
-        gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
-
-      if (spawn) {
-        // Obtener posición mundial del objeto "spawn"
-        const spawnPosition = new Vector3();
-        spawn.getWorldPosition(spawnPosition);
-
-        // Posiciona la cámara relativa al spawn
-        camera.position.set(
-          spawnPosition.x + 5,
-          spawnPosition.y + 10,
-          spawnPosition.z + 0 // puedes ajustar este valor si quieres moverla también en Z
-        );
-
-        camera.lookAt(spawnPosition);
-      } else {
-        console.warn('No se encontró un objeto con nombre que incluya "spawn".');
-        camera.position.set(size.x + 10, center.y + size.y + 13, 0);
-      }
-      //camera.position.set(size.x + 10, center.y + size.y + 13, 0);
-      //camera.position.set(50, 50, 0);
-      // camera.far = size.length() * 10;
-      // camera.zoom = -size.length() / 10;
-      controls.minDistance = size.length() / 20;
-      controls.maxDistance = size.length();
-      const mediam = (size.x + size.z) / 2;
-      minPan = new Vector3(-size.length() / 2, 0, -size.length() / 4);
-      maxPan = new Vector3(size.length() / 2, 0, size.length() / 4);
-      controls.minZoom = mediam / 75;
-      controls.maxZoom = mediam / 2.5;
-      controls.update();
-
-      //create skybox
-      const geometry = new SphereGeometry(1, 60, 40);
-      const material = new MeshBasicMaterial({
-        color: 0xCBCBCB,
-        side: BackSide,
-      });
-      const backgroundSphere = new Mesh(geometry, material);
-      backgroundSphere.name = 'backgroundSphere';
-      scene.add(backgroundSphere);
-      backgroundSphere.scale.set(
-        size.length() + 100, size.length() + 100, size.length() + 100);
-
-      //populate animation array
-      // const mixer = new AnimationMixer(gltf.scene);
-      // allAvailableAnimationClipsMap.set(gltf.scene, gltf.animations);
-      // let animationClips = gltf.animations;
-      // animationClips.forEach((clip) => {
-      //   mixer.clipAction(clip).play();
-      // });
-      // mixers.push(mixer);
-
-      gltf.scene.traverse(child => {
-        if (child.name.includes('ROTATE_')) {
-          lookAtCamera.push(child);
-        }
-      });
-
-      //populate floorLevels array with the objects that has the following name piso1, piso2, piso3 and so on
-      let index = 1;
-      while (true) {
-        const object = gltf.scene.getObjectByName('piso' + index);
-        if (object) {
-          floorLevels.push(object);
-          index++;
+  if(ServType === '3'){
+    loader.load(
+      modelUrl,
+      (gltf) => {
+        //tutorial.style.display = 'flex';
+        gltf.scene.position.set(0, 0, 0);
+        scene.add(gltf.scene);
+        const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
+  
+        const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
+          gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
+  
+        if (spawn) {
+          // Obtener posición mundial del objeto "spawn"
+          const spawnPosition = new Vector3();
+          spawn.getWorldPosition(spawnPosition);
+  
+          // Posiciona la cámara relativa al spawn
+          camera.position.set(
+            spawnPosition.x + 5,
+            spawnPosition.y + 10,
+            spawnPosition.z + 0 // puedes ajustar este valor si quieres moverla también en Z
+          );
+  
+          camera.lookAt(spawnPosition);
         } else {
-          break;
+          console.warn('No se encontró un objeto con nombre que incluya "spawn".');
+          camera.position.set(size.x + 10, center.y + size.y + 13, 0);
         }
-      }
-
-      if (floorLevels.length > 1) {
-        initFloorSelector(floorLevels, labelsScene);
-      } else {
-        document.getElementById('floor-selector-title')!.style.display = 'none';
-        document.getElementById('floor-selector')!.style.display = 'none';
-      }
-
-      const objetivoParent = scene.getObjectByName("objetivos");
-      if (objetivoParent) {
-        objetivoParent.children.forEach(child => {
-          child.visible = false;
+        //camera.position.set(size.x + 10, center.y + size.y + 13, 0);
+        //camera.position.set(50, 50, 0);
+        // camera.far = size.length() * 10;
+        // camera.zoom = -size.length() / 10;
+        controls.minDistance = size.length() / 20;
+        controls.maxDistance = size.length();
+        const mediam = (size.x + size.z) / 2;
+        minPan = new Vector3(-size.length() / 2, 0, -size.length() / 4);
+        maxPan = new Vector3(size.length() / 2, 0, size.length() / 4);
+        controls.minZoom = mediam / 75;
+        controls.maxZoom = mediam / 2.5;
+        controls.update();
+  
+        //create skybox
+        const geometry = new SphereGeometry(1, 60, 40);
+        const material = new MeshBasicMaterial({
+          color: 0xCBCBCB,
+          side: BackSide,
         });
-      }
-
-      //loadingscreen.style.display = "none";
-      if (urlParams.get('ServType') == "1") {
-        const navmeshObj = scene.getObjectByName('navmesh');
-        if (navmeshObj) {
-          createNavMesh(navmeshObj as Mesh)
+        const backgroundSphere = new Mesh(geometry, material);
+        backgroundSphere.name = 'backgroundSphere';
+        scene.add(backgroundSphere);
+        backgroundSphere.scale.set(
+          size.length() + 100, size.length() + 100, size.length() + 100);
+  
+        //populate animation array
+        // const mixer = new AnimationMixer(gltf.scene);
+        // allAvailableAnimationClipsMap.set(gltf.scene, gltf.animations);
+        // let animationClips = gltf.animations;
+        // animationClips.forEach((clip) => {
+        //   mixer.clipAction(clip).play();
+        // });
+        // mixers.push(mixer);
+  
+        gltf.scene.traverse(child => {
+          if (child.name.includes('ROTATE_')) {
+            lookAtCamera.push(child);
+          }
+        });
+  
+        //populate floorLevels array with the objects that has the following name piso1, piso2, piso3 and so on
+        let index = 1;
+        while (true) {
+          const object = gltf.scene.getObjectByName('piso' + index);
+          if (object) {
+            floorLevels.push(object);
+            index++;
+          } else {
+            break;
+          }
         }
-      }
-      SetupPlacesOnScene(places);
+  
+        if (floorLevels.length > 1) {
+          initFloorSelector(floorLevels, labelsScene);
+        } else {
+          document.getElementById('floor-selector-title')!.style.display = 'none';
+          document.getElementById('floor-selector')!.style.display = 'none';
+        }
+  
+        const objetivoParent = scene.getObjectByName("objetivos");
+        if (objetivoParent) {
+          objetivoParent.children.forEach(child => {
+            child.visible = false;
+          });
+        }
+  
+        //loadingscreen.style.display = "none";
+        // const navmeshObj = scene.getObjectByName('navmesh');
+        // if (navmeshObj) {
+        //   createNavMesh(navmeshObj as Mesh)
+        // }
 
-      //Set selected floor to 1
-      const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-      floorSelector.selectedIndex = 0;
-      const event = new Event('change', { bubbles: true });
-      floorSelector.dispatchEvent(event);
-    },
-    (xhr) => {
-      const progress = (xhr.loaded / xhr.total) * 100;
-
-      if (loadingBar) {
-        loadingBar.style.width = `${progress}%`;
+        SetupPlacesOnScene(places);
+  
+        //Set selected floor to 1
+        const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
+        floorSelector.selectedIndex = 0;
+        const event = new Event('change', { bubbles: true });
+        floorSelector.dispatchEvent(event);
+  
+        GetHTMLElement('#hideAll').style.display = "none";
+      },
+      (xhr) => {
+        const progress = (xhr.loaded / xhr.total) * 100;
+  
+        if (loadingBar) {
+          loadingBar.style.width = `${progress}%`;
+        }
+      },
+      (error) => {
+        console.error('An error happened', error);
       }
-    },
-    (error) => {
-      console.error('An error happened', error);
-    }
-  );
+    );
+  }
 }
 
 controls.addEventListener('change', () => {
@@ -241,9 +245,7 @@ function SetupPlacesOnScene(places: Place[]) {
 }
 
 function SetupExplorerOrVirtualtour(places: Place[]) {
-  const servType = urlParams.get('ServType');
-
-  switch (servType) {
+  switch (ServType) {
     case "1":
       document.getElementById('search-section')!.style.display = 'block';
       document.getElementById("back3D")!.style.display = 'block';
@@ -263,6 +265,7 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
       }
       // document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
       SetupPlacesForSearch(places);
+      GetHTMLElement('#hideAll').style.display = "none";
       break;
     case "3":
       document.getElementById('div3DView')!.style.display = 'block';
@@ -272,8 +275,6 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
 
   Start();
 }
-
-
 
 let hasUserInteracted = false;
 
@@ -285,6 +286,9 @@ controls.addEventListener('start', () => {
 });
 
 window.addEventListener('touchend', (event) => {
+  //disable raycast 
+  if(shouldBlock(event)) return; 
+
   const touch = event.changedTouches[0];
   mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
@@ -298,7 +302,6 @@ window.addEventListener('touchend', (event) => {
     for (let i = 0; i < intersects.length; i++) {
       if (intersects[i].object.userData.isPlaceObject &&
         intersects[i].object.parent?.visible === true) {
-        if (isPlaceCardShowing) break;
         SetupDescriptionCardForPlace(intersects[i].object);
         break;
       }

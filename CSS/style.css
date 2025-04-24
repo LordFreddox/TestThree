@@ -26,6 +26,16 @@
     --button-enable-color: #be3ad9;
 }
 
+#hideAll {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: white;
+    z-index: 99;
+}
+
 html,
 body {
     margin: 0;
@@ -388,6 +398,8 @@ button {
 }
 
 .card-select-place {
+    width: 90%;
+    padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
     height: 60vh;
@@ -395,7 +407,7 @@ button {
     box-shadow: 2px 5px 11px 0px #00000029;
     background-color: #fff;
     align-items: center;
-    /* overflow-y: auto; */
+    place-content: space-evenly;
 }
 
 .card-select-place #header-container {
@@ -558,10 +570,6 @@ button {
 .PlaceCardLongDescription {
     height: 100%;
     margin: 1rem;
-    /* margin-top: 1rem; */
-    /* margin-bottom: 1rem; */
-    /* margin-left: 1rem; */
-    /* margin-right: 1rem; */
     overflow-y: auto;
     width: 90%;
     white-space: pre-line;
@@ -573,11 +581,6 @@ button {
     width: 100%;
     height: 7rem;
     bottom: 6rem;
-}
-
-#divCardPlace {
-    width: 90%;
-    padding-bottom: 1rem;
 }
 
 #logo_place_card {
@@ -754,6 +757,22 @@ button {
     padding-bottom: 10px;
 }
 
+.BotButton3D {
+    position: absolute;
+    right: 2rem;
+    top: 3rem;
+    width: 5rem;
+}
+
+.EndCallButton {
+    width: 5rem;
+}
+
+.avatar {
+    width: 50%;
+    height: 60%;
+}
+
 #backgroundimage-street {
     /* opacity: 0.2; */
     display: block;
@@ -806,8 +825,6 @@ button {
     /* margin-top: 25px; */
 }
 
-
-
 .closeButton {
     background: url(/img/icon-close.svg);
     background-size: 1rem 1rem;
@@ -820,8 +837,6 @@ button {
     height: 3rem;
     padding: 0;
 }
-
-
 
 .BtnDisplayAI {
     position: absolute;

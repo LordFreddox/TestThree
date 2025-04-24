@@ -5,6 +5,7 @@ import { companyId } from './main.ts';
 import { getPathAndDisplay } from './Navigator.ts';
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
 import { setCurrentAgent } from './chat.ts';
+import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import * as QRCode from 'qrcode';
 
@@ -27,7 +28,7 @@ const descriptionPathPanel = document.getElementById('description-path');
 const placesList = GetHTMLElement('#placesList');
 const personList = GetHTMLElement('#personList');
 const divCardPlace = GetHTMLElement('#divCardPlace');
-let isPlaceCardShowing: boolean = false;
+let currentController: AbortController | null = null;
 
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
@@ -63,7 +64,10 @@ GetHTMLElement('#closePlaceCard').onclick = () => {
 
 function ClosePlaceCard(){
     divCardPlace.style.visibility = 'hidden';
-    isPlaceCardShowing = false;
+    if(currentController){
+        currentController.abort();
+        currentController = null;
+    }
 }
 
 function DisplayChatAI(idPlace: string){
@@ -73,7 +77,7 @@ function DisplayChatAI(idPlace: string){
     GetHTMLElement('#footer-button').style.display = 'none';
 }
 
-GetHTMLElement('#CloseChatHeaderButton').onclick = (event) => {
+GetHTMLElement('#CloseChatHeaderButton').onclick = () => {
     GetHTMLElement('.msger').style.display = 'none';
     GetHTMLElement('#footer-button').style.display = 'block';
 }
@@ -141,6 +145,7 @@ function SetClearXIcon(currentSelectedSearchButton: HTMLElement) {
 GetHTMLElement('#back3D').onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'none';
     document.getElementById('search-section')!.style.display = 'block';
+    EndCallView();
 };
 
 GetHTMLElement('#previewButton').onclick = async () => {
@@ -507,7 +512,7 @@ function CreateTextForPlace(
     elem.style.fontSize = fontSize + 'em';
     elem.style.fontWeight = 'bold';
     labelContainerElem!.appendChild(elem);
-    const { size, center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
+    const { center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
     const topCenterPosition = new Vector3(center.x, 1, center.z);
     labelsScene.set(topCenterPosition, elem);
     const floorObj = findFloorObject(placeObject, floorLevels);
@@ -517,7 +522,6 @@ function CreateTextForPlace(
 }
 
 async function SetupDescriptionCardForPlace(object: Object3D){
-    isPlaceCardShowing = true;
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     divCardPlace.style.visibility = 'visible';
@@ -526,12 +530,12 @@ async function SetupDescriptionCardForPlace(object: Object3D){
     divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;
     divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${object.userData.place.place_area_name}`;
     (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
+        EndCallView();
         DisplayChatAI(object.userData.place.id);
         ClosePlaceCard();
     };
-    divCardPlace.querySelector('#placeCardDescription')!.innerHTML = 'Cargando informacion...';
-    const descriptionUpdate = await UpdateDescription(object.userData.place.company_id)
-    divCardPlace.querySelector('#placeCardDescription')!.innerHTML = descriptionUpdate;
+    const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
+    currentController = UpdateDescription(object.userData.place.company_id, description);
 }
 
 function CreateOptionItemSearchPanelPerson() {
@@ -621,7 +625,7 @@ interface LabelData {
 
 export {
     initFloorSelector, initCategorySelector, AddCarouselItem,
-    updateLabelPositions, updateLabelVisibility, isPlaceCardShowing,
+    updateLabelPositions, updateLabelVisibility, 
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
     SetupPlacesForSearch, CreateTextForPlace, SetupDescriptionCardForPlace
 };

@@ -2,7 +2,7 @@ import { Scene, AmbientLight, WebGLRenderer, Color,
     /* OrthographicCamera,*/ DirectionalLight,
     PerspectiveCamera, 
 } from 'three';
-import { updateLabelPositions } from './view';
+import { updateLabelPositions } from './view.ts';
 
 let scene: Scene;
 let renderer: WebGLRenderer;
