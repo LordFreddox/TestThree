@@ -247,6 +247,7 @@ function SetupPlacesOnScene(places: Place[]) {
 function SetupExplorerOrVirtualtour(places: Place[]) {
   switch (ServType) {
     case "1":
+      GetHTMLElement('#previewButton').style.display = 'none';
       document.getElementById('search-section')!.style.display = 'block';
       document.getElementById("back3D")!.style.display = 'block';
       if (places[0]) {

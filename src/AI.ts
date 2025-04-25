@@ -2,8 +2,8 @@ import { appendMessage } from "./chat.ts";
 
 let fullConversation: string = '';
 let messageAmount: number = 1;
-const URL_MCPCLIENT = 'http://localhost:3000';
-// const URL_MCPCLIENT = 'https://4055-181-59-2-70.ngrok-free.app';
+// const URL_MCPCLIENT = 'http://localhost:3000';
+const URL_MCPCLIENT = 'https://f4d9-181-59-2-70.ngrok-free.app';
 let controller = new AbortController();
 let DescriptionsMap: Map<string, string> = new Map();
 
