@@ -62,6 +62,17 @@ if (companyId === "0" || window.location.hostname === "localhost") {
 }
 //GetPlacesReal(companyId);
 
+
+document.addEventListener('wheel', function(e) {
+  if (e.ctrlKey) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+document.addEventListener('gesturestart', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
 function Start() {
   if(ServType === '3'){
     loader.load(
