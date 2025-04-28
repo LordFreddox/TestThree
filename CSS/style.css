@@ -549,6 +549,7 @@ button {
     display: block;
     margin: 0;
     float: left;
+    width: 100%;
 }
 
 .review-container {
@@ -598,7 +599,6 @@ button {
     background-color: #257ecc;
     border-radius: 40px;
     border-style: none;
-    padding: 1em;
     width: 200px;
 }
 

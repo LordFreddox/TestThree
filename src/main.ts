@@ -46,6 +46,8 @@ var minPan = new Vector3();
 var maxPan = new Vector3();
 var _v = new Vector3();
 
+let contador = 0;//valor a cambiar en el temporizador
+
 let modelUrl: string;
 if (window.location.hostname === "localhost") {
   modelUrl = `./models/${companyId}_${PROJECT.toLowerCase()}.glb`;
@@ -196,6 +198,22 @@ controls.addEventListener('change', () => {
 
 controls.addEventListener('end', () => {
   updateLabelVisibility();
+  contador = 2;//valor a cambiar en el temporizador
+  const duracion = 1; // 1 segundo
+  const intervalos = 100; // cada 100ms
+  const pasos = duracion / intervalos;
+  const decremento = contador / pasos;
+
+  const intervalo = setInterval(() => {
+    contador -= decremento;
+    if (contador <= 0) {
+      contador = 0;
+      clearInterval(intervalo);
+      console.log("¡Terminó! Valor:", contador);
+    } else {
+      console.log("Valor:", contador.toFixed(2));
+    }
+  }, intervalos);
 });
 
 controls.update();
@@ -289,7 +307,7 @@ controls.addEventListener('start', () => {
 window.addEventListener('touchend', (event) => {
   //disable raycast 
   if(shouldBlock(event)) return; 
-
+  if(contador!== 0) return;
   const touch = event.changedTouches[0];
   mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
