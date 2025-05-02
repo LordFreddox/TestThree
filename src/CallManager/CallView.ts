@@ -7,6 +7,22 @@ const StartCallButton = GetHTMLElement('.BotButton3D');
 const footerButton = GetHTMLElement('#footer-button');
 let isOnCall: boolean = false;
 
+export async function loadAvatar() {
+    try {
+        const response = await fetch('public/avatars/139.json');
+        const data = await response.json();
+        const avatarUrl = data.data.avatar.picture_url;
+        
+        const avatarElements = Array.from(document.getElementsByClassName('avatarImgScript')) as HTMLImageElement[];
+        for (let i = 0; i < avatarElements.length; i++) {
+            avatarElements[i].src = avatarUrl;
+        }
+
+    } catch (error) {
+        console.error('Error loading avatar:', error);
+    }
+}
+
 StartCallButton.onclick = () => {
     StartCallView();
 };

@@ -251,6 +251,17 @@ button {
     background-color: #fff;
 }
 
+.searchPlace3D{
+    /* width: 100%; */
+    margin: 0;
+    height: 1.8rem;
+    /* outline: none; */
+    border-radius: 1rem;
+    border: none;
+    /* background-color: transparent; */
+    /* font-size: 1.3rem; */
+}
+
 .textConstFilters {}
 
 /*#region footer and carousel*/
@@ -390,7 +401,7 @@ button {
 }
 
 .container-select-place {
-    display: none;
+    /* display: none; */
     position: absolute;
     top: 18vh;
     left: 9vw;
@@ -539,7 +550,7 @@ button {
 
 .visible {
     bottom: 10%;
-    /* Ajusta según la posición donde debe aparecer */
+    /* Ajusta segÃƒÂºn la posiciÃƒÂ³n donde debe aparecer */
     opacity: 1;
 }
 
@@ -557,14 +568,14 @@ button {
     flex-direction: column;
     align-items: flex-end;
     /* Alinea los elementos a la derecha */
-    width: 100%;
+    /* width: 100%; */
     margin-right: 2rem;
     margin-top: -3rem;
 }
 
 .review {
     width: 5rem;
-    height: 1.5rem;
+    /* height: 1.5rem; */
     margin-bottom: 5px;
 }
 
@@ -770,8 +781,8 @@ button {
 }
 
 .avatar {
-    width: 50%;
-    height: 60%;
+    /* width: 50%; */
+    height: 40%;
 }
 
 #backgroundimage-street {

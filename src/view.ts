@@ -188,27 +188,27 @@ function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, e
     //TODO: Parse in unity the project type
 }
 
-function AddCarouselItem(imageUrl: string, description: string,
-    object: Object3D, floorLevels: Object3D[]) {
-    const carouselContainer = document.querySelector('.carousel-container');
-    const newItem = document.createElement('div');
-    newItem.classList.add('carousel-item');
-    newItem.innerHTML = `
-        <img src="${imageUrl}" alt="${description}">
-        <p>${description}</p>
-    `;
-    carouselContainer!.appendChild(newItem);
-    newItem.addEventListener('click', () => {
-        SetupDescriptionCardForPlace(object);
-        RestoreOriginalColors();
-        ChangeColorOfSingleObject(object, COLOR_SELECTED);
-        const floorObj = findFloorObject(object, floorLevels);
-        const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
-        const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-        floorSelector.value = floorIndex.toString();
-        showFloor(floorIndex, floorLevels, labelsScene);
-    });
-}
+// function AddCarouselItem(imageUrl: string, description: string,
+//     object: Object3D, floorLevels: Object3D[]) {
+//     const carouselContainer = document.querySelector('.carousel-container');
+//     const newItem = document.createElement('div');
+//     newItem.classList.add('carousel-item');
+//     newItem.innerHTML = `
+//         <img src="${imageUrl}" alt="${description}">
+//         <p>${description}</p>
+//     `;
+//     carouselContainer!.appendChild(newItem);
+//     newItem.addEventListener('click', () => {
+//         SetupDescriptionCardForPlace(object);
+//         RestoreOriginalColors();
+//         ChangeColorOfSingleObject(object, COLOR_SELECTED);
+//         const floorObj = findFloorObject(object, floorLevels);
+//         const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
+//         const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
+//         floorSelector.value = floorIndex.toString();
+//         showFloor(floorIndex, floorLevels, labelsScene);
+//     });
+// }
 
 function filterCarouselItems(searchTerm: string) {
     const carouselItems = document.querySelectorAll('.carousel-item');
@@ -624,7 +624,7 @@ interface LabelData {
 }
 
 export {
-    initFloorSelector, initCategorySelector, AddCarouselItem,
+    initFloorSelector, initCategorySelector, /*AddCarouselItem,*/
     updateLabelPositions, updateLabelVisibility, 
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
     SetupPlacesForSearch, CreateTextForPlace, SetupDescriptionCardForPlace

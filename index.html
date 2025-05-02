@@ -121,19 +121,21 @@
         <select id="category-selector" class="category-selector" title="Select Category" style="display:none;">
         </select>
       </div>
+
+      <input autocomplete="off" placeholder="Buscar lugar" type="text" id="searchPlace3D" class="searchPlace3D">
     </div>
 
-    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D">
+    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript">
 
-    <footer id="footer" class="footer show" style="display: block;">
+    <!-- <footer id="footer" class="footer show" style="display: block;">
       <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..." />
       <div class="carousel">
         <div class="carousel-container unselectable">
         </div>
       </div>
-    </footer>
+    </footer> -->
 
-    <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div>
+    <!-- <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div> -->
 
     <div id="divCardPlace" class="card-select-place Centered raycast-blocker" style="visibility: hidden;">
       <div id="header-container">
@@ -146,12 +148,12 @@
         <button id="closePlaceCard" type="button" title="close">
         </button>
       </div>
-      <div class="review-container">
+      <!-- <div class="review-container">
         <span id="cnt-reviews" class="review">+15 reseñas</span>
         <img class="review" title="estrellas" src="/img/icon-stars.svg">
-        <img class="review" title="estrellas" src="/img/icon-bot-IA.svg">
+        <img class="review avatarImgScript" title="estrellas" src="/img/icon-bot-IA.svg">
 
-      </div>
+      </div> -->
       <h4 style="align-self: flex-start; margin-top: auto; margin-left:1rem;margin-top: 0; margin-bottom: 0;">Mas
         Información...</h4>
       <span id="placeCardDescription" class="PlaceCardBasicDescription PlaceCardLongDescription">
@@ -164,7 +166,10 @@
     </div>
 
     <div id="AICallCard" class="card-select-place Centered raycast-blocker" style="visibility: hidden;">
-      <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatar">
+      <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatar avatarImgScript">
+      <b style="font-size: x-large;">¿Tienes dudas?</b>
+      <span style="font-size: large;">Estoy aquí para guiarte</span>
+      <span style="font-size: small; text-align: center; margin-left: 3rem; margin-right: 3rem; color: #2e2e2e">Puedes preguntarme por edificos, facultades o zonas específicas. También te ayudo a encontrar baños, cafeterías o salidas.</span>
       <img src="/img/end_call.png" alt="end_call" class="EndCallButton">
     </div>
 
@@ -200,7 +205,6 @@
     const sidebar = document.querySelector('#descriptionSpan');
     const QRDisplay = document.getElementById('QRDisplay');
     const msger = document.querySelector('.msger');
-    // const AICallCard = document.querySelector('#AICallCard');
 
     function disableSnap() {
       carouselContainer.style.scrollSnapType = 'none';
@@ -215,17 +219,17 @@
     carouselContainer.addEventListener('pointerdown', disableSnap);
     carouselContainer.addEventListener('pointerup', enableSnap);
 
-    function showFooter() {
-      const footer = document.querySelector('.footer');
-      footer.classList.add('show');
-      document.getElementById('footer-button').style.display = 'none';
-    }
+    // function showFooter() {
+    //   const footer = document.querySelector('.footer');
+    //   footer.classList.add('show');
+    //   document.getElementById('footer-button').style.display = 'none';
+    // }
 
-    function hideFooter() {
-      const footer = document.querySelector('.footer');
-      footer.classList.remove('show');
-      document.getElementById('footer-button').style.display = 'block';
-    }
+    // function hideFooter() {
+    //   const footer = document.querySelector('.footer');
+    //   footer.classList.remove('show');
+    //   document.getElementById('footer-button').style.display = 'block';
+    // }
 
     function showSidebar() {
       sidebar.style.width = '70vw';
@@ -245,20 +249,14 @@
       QRDisplay.style.display = 'none';
     }
 
-    document.addEventListener('pointerup', (event) => {
-      if (!event.target.closest('.footer')
-        && !event.target.closest('.footer-button')
-        && msger.style.display !== 'flex'
-        // && AICallCard.style.display !== 'block'
-      ) {
-        hideFooter();
-      }
-    });
-
-    function toggleVisibility(id) {
-      var element = document.getElementById(id);
-      element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
-    }
+    // document.addEventListener('pointerup', (event) => {
+    //   if (!event.target.closest('.footer')
+    //     && !event.target.closest('.footer-button')
+    //     && msger.style.display !== 'flex'
+    //   ) {
+    //     hideFooter();
+    //   }
+    // });
 
     function logText(text) {
       console.log(text);

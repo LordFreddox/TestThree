@@ -11,13 +11,14 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GetPlaces, Place, PROJECT } from './http-service.js';
 import { scene, camera, renderer } from './Renderer.ts';
 import {
-  initFloorSelector, initCategorySelector, AddCarouselItem,
+  initFloorSelector, initCategorySelector, /*AddCarouselItem,*/
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearch,
   SetupDescriptionCardForPlace
 } from './view.ts';
 // import { createNavMesh } from './Navigator.ts'
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock } from './Utils.ts'
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock } from './Utils.ts';
+import { loadAvatar } from './CallManager/CallView.ts';
 
 const urlParams = new URLSearchParams(window.location.search);
 const ServType = urlParams.get('ServType');
@@ -256,8 +257,8 @@ function SetupPlacesOnScene(places: Place[]) {
   places.forEach((place) => {
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
-      AddCarouselItem(place.companysubsidiary_image_url, place.companysubsidiary_name, object,
-        floorLevels);
+      // AddCarouselItem(place.companysubsidiary_image_url, place.companysubsidiary_name, object,
+      //   floorLevels);
       object.userData.place = place;
       object.userData.isPlaceObject = true;
       if (!MapObjectsListByCategoryName[place.place_category_name]) {
@@ -298,6 +299,7 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
       GetHTMLElement('#hideAll').style.display = "none";
       break;
     case "3":
+      loadAvatar();
       document.getElementById('div3DView')!.style.display = 'block';
       document.getElementById('search-section')!.style.display = 'none';
       break;
