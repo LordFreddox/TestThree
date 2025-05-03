@@ -22,7 +22,7 @@ import { loadAvatar } from './CallManager/CallView.ts';
 
 const urlParams = new URLSearchParams(window.location.search);
 const ServType = urlParams.get('ServType');
-//const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
+const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
 const tutorial = document.getElementById('tutorial') as HTMLElement;
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
@@ -170,7 +170,7 @@ function Start() {
           });
         }
   
-        //loadingscreen.style.display = "none";
+        loadingscreen.style.display = "none";
         // const navmeshObj = scene.getObjectByName('navmesh');
         // if (navmeshObj) {
         //   createNavMesh(navmeshObj as Mesh)
@@ -184,7 +184,7 @@ function Start() {
         const event = new Event('change', { bubbles: true });
         floorSelector.dispatchEvent(event);
   
-        GetHTMLElement('#hideAll').style.display = "none";
+        GetHTMLElement('#loadingMain').style.display = "none";
       },
       (xhr) => {
         const progress = (xhr.loaded / xhr.total) * 100;
@@ -296,7 +296,7 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
       }
       // document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
       SetupPlacesForSearch(places);
-      GetHTMLElement('#hideAll').style.display = "none";
+      GetHTMLElement('#loadingMain').style.display = "none";
       break;
     case "3":
       loadAvatar();

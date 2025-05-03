@@ -12,7 +12,27 @@
 </head>
 
 <body style="background-color: black;padding: 0;" oncontextmenu="return false;">
-  <div style="display: block" id="hideAll"></div>
+  <!-- <div style="display: block" id="hideAll"></div> -->
+
+  <div id="loadingMain" style="
+      z-index: 99;
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;">
+    <div class="load-4">
+      <div class="ring-1"></div>
+    </div>
+    <div id="loading-container" style="width: 80%; background-color: #ccc; border-radius: 20%; margin-top: 10vh;">
+      <div id="loading-bar" style="width: 0%; height: 20px; background-color: #4caf50; border-radius: 20%;"></div>
+    </div>
+  </div>
 
   <div id="backgroundimage-street" src="/img/streetMaskBackground.svg" alt="StreetMaskBackground"></div>
 
