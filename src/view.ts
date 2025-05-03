@@ -4,9 +4,9 @@ import { Place, PROJECT } from './http-service.js';
 import { companyId } from './main.ts';
 import { getPathAndDisplay } from './Navigator.ts';
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
-import { setCurrentAgent } from './chat.ts';
-import { EndCallView } from './CallManager/CallView.ts';
-import { UpdateDescription } from './AI.ts';
+// import { setCurrentAgent } from './chat.ts';
+// import { EndCallView } from './CallManager/CallView.ts';
+// import { UpdateDescription } from './AI.ts';
 // import * as QRCode from 'qrcode';
 
 const COLOR_SELECTED = new Color(0x733D96);
@@ -70,12 +70,12 @@ function ClosePlaceCard(){
     }
 }
 
-function DisplayChatAI(idPlace: string){
-    //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
-    setCurrentAgent(idPlace);
-    GetHTMLElement('.msger').style.display = 'flex';
-    GetHTMLElement('#footer-button').style.display = 'none';
-}
+// function DisplayChatAI(idPlace: string){
+//     //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
+//     setCurrentAgent(idPlace);
+//     GetHTMLElement('.msger').style.display = 'flex';
+//     GetHTMLElement('#footer-button').style.display = 'none';
+// }
 
 GetHTMLElement('#CloseChatHeaderButton').onclick = () => {
     GetHTMLElement('.msger').style.display = 'none';
@@ -145,7 +145,7 @@ function SetClearXIcon(currentSelectedSearchButton: HTMLElement) {
 GetHTMLElement('#back3D').onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'none';
     document.getElementById('search-section')!.style.display = 'block';
-    EndCallView();
+    // EndCallView();
 };
 
 GetHTMLElement('#previewButton').onclick = async () => {
@@ -188,27 +188,27 @@ function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, e
     //TODO: Parse in unity the project type
 }
 
-// function AddCarouselItem(imageUrl: string, description: string,
-//     object: Object3D, floorLevels: Object3D[]) {
-//     const carouselContainer = document.querySelector('.carousel-container');
-//     const newItem = document.createElement('div');
-//     newItem.classList.add('carousel-item');
-//     newItem.innerHTML = `
-//         <img src="${imageUrl}" alt="${description}">
-//         <p>${description}</p>
-//     `;
-//     carouselContainer!.appendChild(newItem);
-//     newItem.addEventListener('click', () => {
-//         SetupDescriptionCardForPlace(object);
-//         RestoreOriginalColors();
-//         ChangeColorOfSingleObject(object, COLOR_SELECTED);
-//         const floorObj = findFloorObject(object, floorLevels);
-//         const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
-//         const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-//         floorSelector.value = floorIndex.toString();
-//         showFloor(floorIndex, floorLevels, labelsScene);
-//     });
-// }
+function AddCarouselItem(imageUrl: string, description: string,
+    object: Object3D, floorLevels: Object3D[]) {
+    const carouselContainer = document.querySelector('.carousel-container');
+    const newItem = document.createElement('div');
+    newItem.classList.add('carousel-item');
+    newItem.innerHTML = `
+        <img src="${imageUrl}" alt="${description}">
+        <p>${description}</p>
+    `;
+    carouselContainer!.appendChild(newItem);
+    newItem.addEventListener('click', () => {
+        SetupDescriptionCardForPlace(object);
+        RestoreOriginalColors();
+        ChangeColorOfSingleObject(object, COLOR_SELECTED);
+        const floorObj = findFloorObject(object, floorLevels);
+        const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
+        const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
+        floorSelector.value = floorIndex.toString();
+        showFloor(floorIndex, floorLevels, labelsScene);
+    });
+}
 
 function filterCarouselItems(searchTerm: string) {
     const carouselItems = document.querySelectorAll('.carousel-item');
@@ -524,18 +524,18 @@ function CreateTextForPlace(
 async function SetupDescriptionCardForPlace(object: Object3D){
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
-    divCardPlace.style.visibility = 'visible';
-    (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = object.userData.place.companysubsidiary_image_url;
-    divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${object.userData.place.companysubsidiary_name}`;
-    divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;
-    divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${object.userData.place.place_area_name}`;
-    (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
-        EndCallView();
-        DisplayChatAI(object.userData.place.id);
-        ClosePlaceCard();
-    };
-    const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
-    currentController = UpdateDescription(object.userData.place.company_id, description);
+    // divCardPlace.style.visibility = 'visible';
+    // (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = object.userData.place.companysubsidiary_image_url;
+    // divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${object.userData.place.companysubsidiary_name}`;
+    // divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;
+    // divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${object.userData.place.place_area_name}`;
+    // (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
+    //     EndCallView();
+    //     DisplayChatAI(object.userData.place.id);
+    //     ClosePlaceCard();
+    // };
+    // const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
+    // currentController = UpdateDescription(object.userData.place.company_id, description);
 }
 
 function CreateOptionItemSearchPanelPerson() {
@@ -624,7 +624,7 @@ interface LabelData {
 }
 
 export {
-    initFloorSelector, initCategorySelector, /*AddCarouselItem,*/
+    initFloorSelector, initCategorySelector, AddCarouselItem,    
     updateLabelPositions, updateLabelVisibility, 
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
     SetupPlacesForSearch, CreateTextForPlace, SetupDescriptionCardForPlace

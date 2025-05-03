@@ -6,13 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Mapas</title>
   <script type="module" src="/src/main.ts"></script>
-  <script type="module" src="/src/chat.ts"></script>
+  <!-- <script type="module" src="/src/chat.ts"></script> -->
   <!-- <script type="module" src="/src/CallManager/CallView.ts"></script> -->
   <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body style="background-color: black;padding: 0;" oncontextmenu="return false;">
-  <div style="display: block" id="hideAll"></div>
+  <!-- <div style="display: block" id="hideAll"></div> -->
+
+  <div id="loadingMain" style="
+      z-index: 99;
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;">
+    <div class="load-4">
+      <div class="ring-1"></div>
+    </div>
+    <div id="loading-container" style="width: 80%; background-color: #ccc; border-radius: 20%; margin-top: 10vh;">
+      <div id="loading-bar" style="width: 0%; height: 20px; background-color: #4caf50; border-radius: 20%;"></div>
+    </div>
+  </div>
 
   <div id="backgroundimage-street" src="/img/streetMaskBackground.svg" alt="StreetMaskBackground"></div>
 
@@ -122,20 +142,20 @@
         </select>
       </div>
 
-      <input autocomplete="off" placeholder="Buscar lugar" type="text" id="searchPlace3D" class="searchPlace3D">
+      <!-- <input autocomplete="off" placeholder="Buscar lugar" type="text" id="searchPlace3D" class="searchPlace3D"> -->
     </div>
 
-    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript">
+    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript" style="display: none;">
 
-    <!-- <footer id="footer" class="footer show" style="display: block;">
+    <footer id="footer" class="footer show" style="display: block;">
       <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..." />
       <div class="carousel">
         <div class="carousel-container unselectable">
         </div>
       </div>
-    </footer> -->
+    </footer>
 
-    <!-- <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div> -->
+    <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div>
 
     <div id="divCardPlace" class="card-select-place Centered raycast-blocker" style="visibility: hidden;">
       <div id="header-container">
@@ -169,7 +189,9 @@
       <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatar avatarImgScript">
       <b style="font-size: x-large;">¿Tienes dudas?</b>
       <span style="font-size: large;">Estoy aquí para guiarte</span>
-      <span style="font-size: small; text-align: center; margin-left: 3rem; margin-right: 3rem; color: #2e2e2e">Puedes preguntarme por edificos, facultades o zonas específicas. También te ayudo a encontrar baños, cafeterías o salidas.</span>
+      <span style="font-size: small; text-align: center; margin-left: 3rem; margin-right: 3rem; color: #2e2e2e">Puedes
+        preguntarme por edificos, facultades o zonas específicas. También te ayudo a encontrar baños, cafeterías o
+        salidas.</span>
       <img src="/img/end_call.png" alt="end_call" class="EndCallButton">
     </div>
 
@@ -219,17 +241,17 @@
     carouselContainer.addEventListener('pointerdown', disableSnap);
     carouselContainer.addEventListener('pointerup', enableSnap);
 
-    // function showFooter() {
-    //   const footer = document.querySelector('.footer');
-    //   footer.classList.add('show');
-    //   document.getElementById('footer-button').style.display = 'none';
-    // }
+    function showFooter() {
+      const footer = document.querySelector('.footer');
+      footer.classList.add('show');
+      document.getElementById('footer-button').style.display = 'none';
+    }
 
-    // function hideFooter() {
-    //   const footer = document.querySelector('.footer');
-    //   footer.classList.remove('show');
-    //   document.getElementById('footer-button').style.display = 'block';
-    // }
+    function hideFooter() {
+      const footer = document.querySelector('.footer');
+      footer.classList.remove('show');
+      document.getElementById('footer-button').style.display = 'block';
+    }
 
     function showSidebar() {
       sidebar.style.width = '70vw';
@@ -249,14 +271,14 @@
       QRDisplay.style.display = 'none';
     }
 
-    // document.addEventListener('pointerup', (event) => {
-    //   if (!event.target.closest('.footer')
-    //     && !event.target.closest('.footer-button')
-    //     && msger.style.display !== 'flex'
-    //   ) {
-    //     hideFooter();
-    //   }
-    // });
+    document.addEventListener('pointerup', (event) => {
+      if (!event.target.closest('.footer')
+        && !event.target.closest('.footer-button')
+        && msger.style.display !== 'flex'
+      ) {
+        hideFooter();
+      }
+    });
 
     function logText(text) {
       console.log(text);

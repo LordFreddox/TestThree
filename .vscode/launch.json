@@ -18,7 +18,7 @@
             "type": "vscode-edge-devtools.debug",
             "name": "Open Edge DevTools",
             "request": "attach",
-            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=139",
+            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=139", //60901 como puerto para servicios?
             "presentation": {
                 "hidden": true
             }
