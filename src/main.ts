@@ -11,17 +11,17 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GetPlaces, Place, PROJECT } from './http-service.js';
 import { scene, camera, renderer } from './Renderer.ts';
 import {
-  initFloorSelector, initCategorySelector, /*AddCarouselItem,*/
+  initFloorSelector, initCategorySelector, CreateOptionItemSearchPanel,
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
-  MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearch,
-  SetupDescriptionCardForPlace
+  MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
+  SetupDescriptionCardForPlace, SetupPlacesForSearchMap3D
 } from './view.ts';
 // import { createNavMesh } from './Navigator.ts'
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock } from './Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
 
 const urlParams = new URLSearchParams(window.location.search);
-const ServType = urlParams.get('ServType');
+const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
 const tutorial = document.getElementById('tutorial') as HTMLElement;
@@ -257,8 +257,7 @@ function SetupPlacesOnScene(places: Place[]) {
   places.forEach((place) => {
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
-      // AddCarouselItem(place.companysubsidiary_image_url, place.companysubsidiary_name, object,
-      //   floorLevels);
+      SetupPlacesForSearchMap3D(place, object, floorLevels);
       object.userData.place = place;
       object.userData.isPlaceObject = true;
       if (!MapObjectsListByCategoryName[place.place_category_name]) {
@@ -279,7 +278,7 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
     case "1":
       GetHTMLElement('#previewButton').style.display = 'none';
       document.getElementById('search-section')!.style.display = 'block';
-      document.getElementById("back3D")!.style.display = 'block';
+      // document.getElementById("back3D")!.style.display = 'block';
       if (places[0]) {
         const imageElement = document.getElementById('imageSearchSprite');
         if (imageElement) {
@@ -295,7 +294,7 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
         }
       }
       // document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
-      SetupPlacesForSearch(places);
+      SetupPlacesForSearchVirtualTour(places);
       GetHTMLElement('#loadingMain').style.display = "none";
       break;
     case "3":

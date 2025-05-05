@@ -16,7 +16,7 @@ const originalColors = new Map<Object3D, Color>();
 const tempV = new Vector3();
 const paddingBetweenText = 30;
 const BASE_URL_PATH_DESCRIPTION = 'https://strg01tockall.blob.core.windows.net/container-unity/ResumenRecorridos/';
-const searchBar = document.getElementById('search-bar') as HTMLInputElement;
+const searchBar = document.getElementById('searchPlace3D') as HTMLInputElement;
 const input_searcher = document.getElementById('input_searcher') as HTMLInputElement;
 const placeSelectors = document.getElementsByClassName('container-input');
 let labelsScene = new Map<Vector3, HTMLDivElement>();
@@ -24,6 +24,7 @@ const labelContainerElem = document.querySelector('#labelsScene');
 let startPlaceId: string | undefined;
 let endPlaceId: string | undefined
 const searchPanel = GetHTMLElement('.container-select-place');
+const containerSearch = GetHTMLElement('#container-search');
 const descriptionPathPanel = document.getElementById('description-path');
 const placesList = GetHTMLElement('#placesList');
 const personList = GetHTMLElement('#personList');
@@ -53,24 +54,29 @@ GetHTMLElement('#deleteSearch').onclick = () => {
     input_searcher.dispatchEvent(event);
 };
 
+GetHTMLElement('#searchPlace3D').onclick = () => {
+    searchPanel.style.display = 'block';
+    containerSearch.style.display = 'none';
+};
+
 searchBar?.addEventListener('input', () => {
-    const searchTerm = searchBar.value.toLowerCase();
-    filterCarouselItems(searchTerm);
+    const searchTerm = normalizeString(searchBar.value.toLowerCase());
+    filterPlaceSearchItem(searchTerm);
 });
 
 GetHTMLElement('#closePlaceCard').onclick = () => {
     ClosePlaceCard();
 };
 
-function ClosePlaceCard(){
+function ClosePlaceCard() {
     divCardPlace.style.visibility = 'hidden';
-    if(currentController){
+    if (currentController) {
         currentController.abort();
         currentController = null;
     }
 }
 
-function DisplayChatAI(idPlace: string){
+function DisplayChatAI(idPlace: string) {
     //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
     setCurrentAgent(idPlace);
     GetHTMLElement('.msger').style.display = 'flex';
@@ -142,11 +148,11 @@ function SetClearXIcon(currentSelectedSearchButton: HTMLElement) {
     });
 }
 
-GetHTMLElement('#back3D').onclick = async () => {
-    document.getElementById('div3DView')!.style.display = 'none';
-    document.getElementById('search-section')!.style.display = 'block';
-    EndCallView();
-};
+// GetHTMLElement('#back3D').onclick = async () => {
+//     document.getElementById('div3DView')!.style.display = 'none';
+//     document.getElementById('search-section')!.style.display = 'block';
+//     EndCallView();
+// };
 
 GetHTMLElement('#previewButton').onclick = async () => {
     document.getElementById('div3DView')!.style.display = 'block';
@@ -160,7 +166,7 @@ GetHTMLElement('#fullviewButton').onclick = async () => {
     if (!startPlaceId || !endPlaceId) return;
     if (startPlaceId === endPlaceId) return;
     window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
-    '_blank'); //CHANGE BOT TEST 3/7/2025
+        '_blank'); //CHANGE BOT TEST 3/7/2025
 
     // const QRElement = GetHTMLElementByID('QRDisplay');
     // QRElement.style.display = 'block';
@@ -210,17 +216,17 @@ function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, e
 //     });
 // }
 
-function filterCarouselItems(searchTerm: string) {
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    carouselItems.forEach((item) => {
-        const description = item.querySelector('p')!.textContent!.toLowerCase();
-        if (description.includes(searchTerm)) {
-            (item as HTMLElement).classList.remove('hidden');
-        } else {
-            (item as HTMLElement).classList.add('hidden');
-        }
-    });
-}
+// function filterCarouselItems(searchTerm: string) {
+//     const carouselItems = document.querySelectorAll('.itemPlaceSearchClass');
+//     carouselItems.forEach((item) => {
+//         const description = normalizeString(item.getElementsByClassName('name-place')![0].innerHTML.toLowerCase());
+//         if (description.includes(searchTerm)) {
+//             (item as HTMLElement).style.display = 'flex';
+//         } else {
+//             (item as HTMLElement).style.display = 'none';
+//         }
+//     });
+// }
 
 function filterPlaceSearchItem(searchTerm: string) {
     const carouselItems = document.querySelectorAll('.place-item');
@@ -234,15 +240,31 @@ function filterPlaceSearchItem(searchTerm: string) {
     });
 }
 
-function SetupPlacesForSearch(places: Place[]) {
-    // const panelListSearch = document.getElementById('placesList') as HTMLElement;
-    // const panelListSearchPerson = document.get
+function SetupPlacesForSearchVirtualTour(places: Place[]) {
     places.forEach((_, index) => {
         placesList.appendChild(CreateOptionItemSearchPanel(places[index]));
     });
     //setup personlist aswell for testing purpouse
     personList.appendChild(CreateOptionItemSearchPanelPerson());
+}
 
+function SetupPlacesForSearchMap3D(place: Place, object: Object3D, floorLevels: Object3D[]) {
+        let newButton = document.createElement('button');
+        newButton.classList.add('place-item');
+        newButton.type = 'button';
+        // newButton.classList.add('itemPlaceSearchClass');
+        newButton.onclick = () => { ButtonActionItemSearchPanelMap3D(object, floorLevels) };
+
+        const html = `
+            <img alt="" class="image-place" src="${place.companysubsidiary_image_url}">
+            <div class="info">
+                <span class="name-place">${place.companysubsidiary_name}</span>
+                <span class="subname-place">${place.place_area_name}</span>
+            </div>
+            <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
+
+        newButton.innerHTML = html;
+        placesList.appendChild(newButton);
 }
 
 async function checkAndDownloadJSON() {
@@ -521,7 +543,7 @@ function CreateTextForPlace(
     elem.dataset.category = textName.place_category_name;
 }
 
-async function SetupDescriptionCardForPlace(object: Object3D){
+async function SetupDescriptionCardForPlace(object: Object3D) {
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     divCardPlace.style.visibility = 'visible';
@@ -616,6 +638,21 @@ function ButtonActionItemSearchPanel(place: Place) {
     checkAndDownloadJSON();
 }
 
+function ButtonActionItemSearchPanelMap3D(object: Object3D, floorLevels: Object3D[]) {
+    SetupDescriptionCardForPlace(object);
+    RestoreOriginalColors();
+    ChangeColorOfSingleObject(object, COLOR_SELECTED);
+    const floorObj = findFloorObject(object, floorLevels);
+    const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
+    const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
+    floorSelector.value = floorIndex.toString();
+    showFloor(floorIndex, floorLevels, labelsScene);
+    searchPanel.style.display = 'none';
+    searchBar.value = '';
+    const event = new Event('input', { bubbles: true });
+    searchBar.dispatchEvent(event);
+}
+
 interface LabelData {
     elem: HTMLDivElement;
     x: number;
@@ -624,8 +661,9 @@ interface LabelData {
 }
 
 export {
-    initFloorSelector, initCategorySelector, /*AddCarouselItem,*/
-    updateLabelPositions, updateLabelVisibility, 
+    initFloorSelector, initCategorySelector, CreateOptionItemSearchPanel,
+    updateLabelPositions, updateLabelVisibility,
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
-    SetupPlacesForSearch, CreateTextForPlace, SetupDescriptionCardForPlace
+    SetupPlacesForSearchVirtualTour, SetupPlacesForSearchMap3D,
+    CreateTextForPlace, SetupDescriptionCardForPlace
 };

@@ -233,7 +233,7 @@ button {
     margin-top: 10%;
     margin-left: 5%;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 #back3D {
@@ -253,7 +253,7 @@ button {
 
 .searchPlace3D{
     /* width: 100%; */
-    margin: 0;
+    margin-top: 1rem;
     height: 1.8rem;
     /* outline: none; */
     border-radius: 1rem;
@@ -261,8 +261,6 @@ button {
     /* background-color: transparent; */
     /* font-size: 1.3rem; */
 }
-
-.textConstFilters {}
 
 /*#region footer and carousel*/
 
@@ -401,11 +399,13 @@ button {
 }
 
 .container-select-place {
-    /* display: none; */
+    display: none;
     position: absolute;
+    width: 90%;
     top: 18vh;
     left: 9vw;
-    right: 9vw;
+    /* right: 9vw; */
+    z-index: 1;
 }
 
 .card-select-place {
@@ -476,6 +476,7 @@ button {
 }
 
 .container-select-place .card-select-place .list-places-searcher {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -550,7 +551,6 @@ button {
 
 .visible {
     bottom: 10%;
-    /* Ajusta segÃƒÂºn la posiciÃƒÂ³n donde debe aparecer */
     opacity: 1;
 }
 

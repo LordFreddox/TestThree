@@ -102,9 +102,9 @@
     </div>
   </div>
 
-  <div class="container-select-place">
+  <div class="container-select-place raycast-blocker">
     <div class="card-select-place">
-      <div class="container-search">
+      <div class="container-search" id="container-search">
         <div class="container-icon-search">
           <img src="/img/icon-lupa.svg" alt="" class="icon-search">
         </div>
@@ -128,14 +128,14 @@
     pointer-events: none;" />
 
     <div class="container-3DView-options">
-      <button id="back3D" type="button">Regresar</button>
+      <!-- <button id="back3D" type="button">Regresar</button> -->
 
-      <p id="floor-selector-title" style="top: 16vh" class="unselectable textConstFilters">Filtrar por Pisos</p>
+      <p id="floor-selector-title" style="top: 16vh" class="unselectable">Filtrar por Pisos</p>
       <select id="floor-selector" style="top: 18vh;" class="category-selector" title="Select Floor">
       </select>
 
       <div id="category-selector-parent" style="display: block;">
-        <p id="category-selector-title" class="unselectable textConstFilters">
+        <p id="category-selector-title" class="unselectable">
           Filtrar
           por Categoria</p>
         <select id="category-selector" class="category-selector" title="Select Category" style="display:none;">
