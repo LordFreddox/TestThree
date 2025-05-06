@@ -31,7 +31,11 @@ export function UpdateDescription(placeId: string, description: HTMLElement): Ab
         signal: controller.signal
     })
         .then(response => handleStreamResponse(response, description, placeId))
-        .catch(handleStreamError);
+        .catch(()=>{
+                console.log('Fetch aborted or error');
+                controller = new AbortController();
+                description.innerHTML = 'No se pudo actualizar en estos momentos, intente mas tarde.';
+        });
     return controller; // Return the controller for external abort access
 }
 
@@ -42,15 +46,6 @@ function handleStreamResponse(response: Response, description: HTMLElement, plac
     const decoder = new TextDecoder();
     let fullText = '';
     processStream(reader, decoder, fullText, description, placeId);
-}
-
-function handleStreamError(err: any) {
-    if (err.name === 'AbortError') {
-        console.log('Fetch aborted');
-        controller = new AbortController();
-    } else {
-        console.error('Fetch error:', err);
-    }
 }
 
 function processStream(reader: ReadableStreamDefaultReader<Uint8Array<ArrayBufferLike>>,

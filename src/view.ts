@@ -69,7 +69,8 @@ GetHTMLElement('#closePlaceCard').onclick = () => {
 };
 
 function ClosePlaceCard() {
-    divCardPlace.style.visibility = 'hidden';
+    divCardPlace.classList.remove('showTop');
+    divCardPlace.classList.add('hideTop');
     if (currentController) {
         currentController.abort();
         currentController = null;
@@ -80,12 +81,10 @@ function DisplayChatAI(idPlace: string) {
     //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
     setCurrentAgent(idPlace);
     GetHTMLElement('.msger').style.display = 'flex';
-    GetHTMLElement('#footer-button').style.display = 'none';
 }
 
 GetHTMLElement('#CloseChatHeaderButton').onclick = () => {
     GetHTMLElement('.msger').style.display = 'none';
-    GetHTMLElement('#footer-button').style.display = 'block';
 }
 
 // GetHTMLElement('.buttonTogglePlacePerson').onclick = () => {
@@ -546,7 +545,9 @@ function CreateTextForPlace(
 async function SetupDescriptionCardForPlace(object: Object3D) {
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
-    divCardPlace.style.visibility = 'visible';
+    divCardPlace.classList.remove('hideTop');
+    divCardPlace.classList.add('showTop');
+
     (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = object.userData.place.companysubsidiary_image_url;
     divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${object.userData.place.companysubsidiary_name}`;
     divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;

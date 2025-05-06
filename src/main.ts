@@ -221,9 +221,6 @@ controls.addEventListener('end', () => {
     if (contador <= 0) {
       contador = 0;
       clearInterval(intervalo);
-      console.log("¡Terminó! Valor:", contador);
-    } else {
-      console.log("Valor:", contador.toFixed(2));
     }
   }, intervalos);
 });

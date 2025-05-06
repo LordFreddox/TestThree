@@ -147,17 +147,7 @@
 
     <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript">
 
-    <!-- <footer id="footer" class="footer show" style="display: block;">
-      <input id="search-bar" type="text" class="search-bar" placeholder="Buscar..." />
-      <div class="carousel">
-        <div class="carousel-container unselectable">
-        </div>
-      </div>
-    </footer> -->
-
-    <!-- <div id="footer-button" class="footer-button" style="display: none;" onclick="showFooter()"></div> -->
-
-    <div id="divCardPlace" class="card-select-place Centered raycast-blocker" style="visibility: hidden;">
+    <div id="divCardPlace" class="card-select-place raycast-blocker hideTop">
       <div id="header-container">
         <img id="logo_place_card" title="logo">
         <div id="description_place_card">
@@ -185,7 +175,7 @@
       <!--<div id="gradient-text"></div>-->
     </div>
 
-    <div id="AICallCard" class="card-select-place Centered raycast-blocker" style="visibility: hidden;">
+    <div id="AICallCard" class="card-select-place raycast-blocker hideTop">
       <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatar avatarImgScript">
       <b style="font-size: x-large;">¿Tienes dudas?</b>
       <span style="font-size: large;">Estoy aquí para guiarte</span>
@@ -220,36 +210,10 @@
   </div>
 
   <script>
-    const carouselContainer = document.querySelector('.carousel-container');
     const buttonSidebar = document.querySelector('#description-path button');
     const sidebar = document.querySelector('#descriptionSpan');
     const QRDisplay = document.getElementById('QRDisplay');
     const msger = document.querySelector('.msger');
-
-    function disableSnap() {
-      carouselContainer.style.scrollSnapType = 'none';
-    }
-
-    function enableSnap() {
-      carouselContainer.style.scrollSnapType = 'x mandatory';
-    }
-
-    carouselContainer.addEventListener('touchstart', disableSnap);
-    carouselContainer.addEventListener('touchend', enableSnap);
-    carouselContainer.addEventListener('pointerdown', disableSnap);
-    carouselContainer.addEventListener('pointerup', enableSnap);
-
-    // function showFooter() {
-    //   const footer = document.querySelector('.footer');
-    //   footer.classList.add('show');
-    //   document.getElementById('footer-button').style.display = 'none';
-    // }
-
-    // function hideFooter() {
-    //   const footer = document.querySelector('.footer');
-    //   footer.classList.remove('show');
-    //   document.getElementById('footer-button').style.display = 'block';
-    // }
 
     function showSidebar() {
       sidebar.style.width = '70vw';
@@ -267,19 +231,6 @@
 
     function ExitQRPanel() {
       QRDisplay.style.display = 'none';
-    }
-
-    // document.addEventListener('pointerup', (event) => {
-    //   if (!event.target.closest('.footer')
-    //     && !event.target.closest('.footer-button')
-    //     && msger.style.display !== 'flex'
-    //   ) {
-    //     hideFooter();
-    //   }
-    // });
-
-    function logText(text) {
-      console.log(text);
     }
   </script>
 </body>

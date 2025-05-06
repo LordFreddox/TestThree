@@ -4,7 +4,6 @@ import { CreateCall, EndCall } from './CallController.ts';
 const EndCallButton = GetHTMLElement('.EndCallButton');
 const AICallCard = GetHTMLElement('#AICallCard');
 const StartCallButton = GetHTMLElement('.BotButton3D');
-const footerButton = GetHTMLElement('#footer-button');
 let isOnCall: boolean = false;
 
 export async function loadAvatar() {
@@ -31,20 +30,31 @@ EndCallButton.onclick = () => {
     EndCallView();
 };
 
-function StartCallView(){
+function StartCallView() {
     CreateCall();
     isOnCall = true;
-    AICallCard.style.visibility = 'visible';
+    
+    // Remove any existing animation classes
+    AICallCard.classList.remove('hideTop');
+    
+    // Add the showTop class to trigger the slideDown animation
+    AICallCard.classList.add('showTop');
+    
     StartCallButton.style.display = 'none';
-    footerButton.style.display = 'none';
 }
 
-export function EndCallView(){
-    if(isOnCall){
+export function EndCallView() {
+    if (isOnCall) {
         EndCall();
-        AICallCard.style.visibility = 'hidden';
+        
+        // Remove any existing animation classes
+        AICallCard.classList.remove('showTop');
+        
+        // Add the hideTop class to trigger the slideUp animation
+        AICallCard.classList.add('hideTop');
+        
         StartCallButton.style.display = 'block';
-        footerButton.style.display = 'block';
+        
         isOnCall = false;
     }
 }

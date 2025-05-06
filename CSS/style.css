@@ -72,10 +72,10 @@ button {
 }
 
 .Centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
 }
 
 #canvas {
@@ -262,34 +262,34 @@ button {
     /* font-size: 1.3rem; */
 }
 
-/*#region footer and carousel*/
-
-.footer {
-    position: fixed;
-    bottom: -100%;
-    width: 100%;
-    background-color: #333;
-    padding: 10px;
-    text-align: center;
-    transition: bottom 0.3s ease-in-out;
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.show {
-    bottom: 0;
+@keyframes slideUp {
+    0% {
+        transform: translateY(0vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
 }
 
-.footer-button {
-    position: absolute;
-    bottom: 1vh;
-    right: 45%;
-    background-image: url('/img/ico_menu.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    z-index: 1000;
-    width: 8vw;
-    height: 5vh;
-    rotate: 90deg;
+.showTop {
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+.hideTop {
+    animation: slideUp 0.5s ease-out forwards;
 }
 
 .search-bar {
@@ -402,13 +402,14 @@ button {
     display: none;
     position: absolute;
     width: 90%;
-    top: 18vh;
-    left: 9vw;
+    /* top: 18vh; */
+    left: 5vw;
     /* right: 9vw; */
     z-index: 1;
 }
 
 .card-select-place {
+    position: absolute;
     width: 90%;
     padding-bottom: 1rem;
     display: flex;
@@ -419,6 +420,9 @@ button {
     background-color: #fff;
     align-items: center;
     place-content: space-evenly;
+    transition: all 0.3s ease-out;
+    top: 20vh;
+    left: 5vw;
 }
 
 .card-select-place #header-container {
@@ -540,9 +544,7 @@ button {
 /*#region CardPlace*/
 .hidden {
     position: fixed;
-    /* Fijo para asegurarse de que empieza fuera de la pantalla */
     bottom: -100%;
-    /* Lo mueve fuera de la pantalla */
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
