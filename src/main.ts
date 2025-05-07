@@ -11,7 +11,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GetPlaces, Place, PROJECT } from './http-service.js';
 import { scene, camera, renderer } from './Renderer.ts';
 import {
-  initFloorSelector, initCategorySelector, CreateOptionItemSearchPanel,
+  initFloorSelector, initCategorySelector,
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
   SetupDescriptionCardForPlace, SetupPlacesForSearchMap3D
@@ -75,7 +75,7 @@ document.addEventListener('gesturestart', function(e) {
 }, { passive: false });
 
 function Start() {
-  if(ServType === '3'){
+  if(ServType === '3'||ServType === '2'){ 
     loader.load(
       modelUrl,
       (gltf) => {
@@ -94,8 +94,8 @@ function Start() {
   
           // Posiciona la cámara relativa al spawn
           camera.position.set(
-            spawnPosition.x + 5,
-            spawnPosition.y + 10,
+            spawnPosition.x + 2,
+            spawnPosition.y + 5,
             spawnPosition.z + 0 // puedes ajustar este valor si quieres moverla también en Z
           );
   
@@ -294,6 +294,12 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
       SetupPlacesForSearchVirtualTour(places);
       GetHTMLElement('#loadingMain').style.display = "none";
       break;
+    case "2":
+        loadAvatar();
+        document.getElementById('div3DView')!.style.display = 'block';
+        document.getElementById('search-section')!.style.display = 'none';
+        document.getElementById('ecommerce-redirect')!.style.display = 'none';
+    break;
     case "3":
       loadAvatar();
       document.getElementById('div3DView')!.style.display = 'block';

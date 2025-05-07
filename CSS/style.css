@@ -1022,7 +1022,20 @@ button {
 
 /*#endregion*/
 @media screen and (width: 1080px) and (height: 1920px) {
-    
+   
+    .container-3DView-options
+    {
+        font-size: 25px;
+    }
+    .category-selector {
+        font-size: 25px;
+    }
+
+    .searchPlace3D{
+        font-size: 25px;
+        height: 3rem;
+        width: 50%;
+    }
     .card-select-place #header-container {
         display: flex;
         place-content: space-evenly;
