@@ -7,7 +7,6 @@ import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts'
 import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
-// import * as QRCode from 'qrcode';
 
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
@@ -153,28 +152,19 @@ function SetClearXIcon(currentSelectedSearchButton: HTMLElement) {
 //     EndCallView();
 // };
 
-GetHTMLElement('#previewButton').onclick = async () => {
-    document.getElementById('div3DView')!.style.display = 'block';
-    document.getElementById('search-section')!.style.display = 'none';
-    updateLabelPositions();
-    if (!startPlaceId || !endPlaceId) return;
-    getPathAndDisplay(startPlaceId, endPlaceId);
-};
+// GetHTMLElement('#previewButton').onclick = async () => {
+//     document.getElementById('div3DView')!.style.display = 'block';
+//     document.getElementById('search-section')!.style.display = 'none';
+//     updateLabelPositions();
+//     if (!startPlaceId || !endPlaceId) return;
+//     getPathAndDisplay(startPlaceId, endPlaceId);
+// };
 
 GetHTMLElement('#fullviewButton').onclick = async () => {
     if (!startPlaceId || !endPlaceId) return;
     if (startPlaceId === endPlaceId) return;
     window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
         '_blank'); //CHANGE BOT TEST 3/7/2025
-
-    // const QRElement = GetHTMLElementByID('QRDisplay');
-    // QRElement.style.display = 'block';
-    // const urlQR = ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase());
-    // QRCode.toDataURL(urlQR).then((dataUrl) => {
-    //     const qrCodeImage = document.getElementById('qrcode') as HTMLImageElement;
-    //     qrCodeImage.src = dataUrl;
-    //     qrCodeImage.style.height = window.getComputedStyle(qrCodeImage).width;
-    // });
 };
 
 GetHTMLElement('#ExitQR').onclick = () => {

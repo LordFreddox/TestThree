@@ -1,0 +1,49 @@
+{
+    "data": {
+        "services": [
+            {
+                "id": 67,
+                "name": "Billetera",
+                "description": "Recarga y paga con ella",
+                "type": "WEB",
+                "url": "https://minitienda.pages.dev/#/proyecto/un",
+                "icon": "https://strg01tockall.blob.core.windows.net/zion/global/zt/walletpca.svg"
+            },
+            {
+                "id": 68,
+                "name": "Juan",
+                "description": "Nuestro asistente virtual está para ayudarte",
+                "type": "WEB",
+                "url": "https://as-chatbots-ia-v4.azurewebsites.net/#/project/puZJop_tLWEvdXlX4gg1q/chat",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-01/3e33b2cf68a391c437a0e46437f169-removebg-preview.png_1737053557610.png"
+            },
+            {
+                "id": 105,
+                "name": "Mapa",
+                "description": "Te presentamos nuestras instalaciones",
+                "type": "LAUNCH-WEB",
+                "url": "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D/index.html?ServType=3&project=zyon&placeId=139&userId=0",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-04/map-svgrepo-com_(5).png_1745442818255.png"
+            },
+            {
+                "id": 113,
+                "name": "Premios AR",
+                "description": "Juega Ahora",
+                "type": "LAUNCH-WEB",
+                "url": "https://strg01tockall.blob.core.windows.net/container-unity/ARGPS/gps.html?isAround=true&project=zyon&placeId=139&userId=0",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-03/game-svgrepo-com.png_1742932470391.png"
+            },
+            {
+                "id": 110,
+                "name": "Recorridos Virtuales",
+                "description": "Te ubicamos en tiempo real",
+                "type": "LAUNCH-WEB",
+                "url": "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D/index.html?ServType=1&project=zyon&placeId=139&userId=0",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-03/map-location-svgrepo-com_(1).png_1742247439277.png"
+            }
+        ],
+        "total": 5,
+        "prev_page": null,
+        "next_page": null
+    }
+}

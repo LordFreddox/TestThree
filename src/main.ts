@@ -302,8 +302,8 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
     break;
     case "3":
       loadAvatar();
-      document.getElementById('div3DView')!.style.display = 'block';
-      document.getElementById('search-section')!.style.display = 'none';
+      // document.getElementById('div3DView')!.style.display = 'block';
+      // document.getElementById('search-section')!.style.display = 'none';
       break;
   }
 

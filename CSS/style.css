@@ -68,7 +68,6 @@ button {
     left: 0%;
     width: 100%;
     height: 100%;
-    /* display: none; */
 }
 
 .Centered {
@@ -251,7 +250,7 @@ button {
     background-color: #fff;
 }
 
-.searchPlace3D{
+.searchPlace3D {
     /* width: 100%; */
     margin-top: 1rem;
     height: 1.8rem;
@@ -262,22 +261,24 @@ button {
     /* font-size: 1.3rem; */
 }
 
-@keyframes slideDown {
+@keyframes slideShowTop {
     0% {
         transform: translateY(-100vh);
         opacity: 0;
     }
+
     100% {
         transform: translateY(0);
         opacity: 1;
     }
 }
 
-@keyframes slideUp {
+@keyframes slideHideTop {
     0% {
         transform: translateY(0vh);
         opacity: 1;
     }
+
     100% {
         transform: translateY(-100vh);
         opacity: 0;
@@ -285,11 +286,47 @@ button {
 }
 
 .showTop {
-    animation: slideDown 0.5s ease-out forwards;
+    animation: slideShowTop 0.5s ease-out forwards;
 }
 
 .hideTop {
-    animation: slideUp 0.5s ease-out forwards;
+    animation: slideHideTop 0.5s ease-out forwards;
+}
+
+@keyframes slideShowLeft {
+    0% {
+        transform: translateX(-6rem)
+            /*rotate(180deg)*/
+        ;
+    }
+
+    100% {
+        transform: translateX(0.5rem)
+            /*rotate(180deg)*/
+        ;
+    }
+}
+
+@keyframes slideHideLeft {
+    0% {
+        transform: translate(0.5rem)
+            /*rotate(0deg)*/
+        ;
+    }
+
+    100% {
+        transform: translateX(-6rem)
+            /*rotate(0deg)*/
+        ;
+    }
+}
+
+.showLeft {
+    animation: slideShowLeft 0.5s ease-out forwards;
+}
+
+.hideLeft {
+    animation: slideHideLeft 0.5s ease-out forwards;
 }
 
 .search-bar {
@@ -877,6 +914,83 @@ button {
     margin-left: 10vw;
     margin-right: 10vw;
     top: 15%;
+}
+
+.containerZTList {
+    position: absolute;
+    display: flex;
+    /* left: -5rem; */
+    top: 15rem;
+    height: 40rem;
+    width: 10rem;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.ZTArea {
+    display: flex;
+    width: 5rem;
+    height: 100%;
+    border-radius: 1rem;
+    background: #131313;
+    align-items: safe center;
+    overflow-y: auto;
+    justify-content: safe center;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.ZTAction {
+    color: white;
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.ZTAction img {
+    height: 2.5rem;
+}
+
+.ZTAction span {
+    margin-top: 5px;
+}
+
+.btnZTList {
+    height: 9rem;
+    z-index: 1;
+}
+
+.ZTDescriptionArea {
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    z-index: 2;
+    width: 70vw;
+    height: 50vh;
+    left: 5rem;
+    background: white;
+    border-radius: 1rem;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.ZTDescriptionArea span {
+    font-size: large;
+    text-align: center;
+    /* margin-top: 3rem; */
+}
+
+.ZTDescriptionArea img {
+    width: 90%;
+    height: 30rem;
 }
 
 /*#region chatbot*/

@@ -7,6 +7,7 @@
   <title>Mapas</title>
   <script type="module" src="/src/main.ts"></script>
   <script type="module" src="/src/chat.ts"></script>
+  <script type="module" src="/src/ZT/ZTView.ts"></script>
   <!-- <script type="module" src="/src/CallManager/CallView.ts"></script> -->
   <link rel="stylesheet" href="CSS/style.css">
 </head>
@@ -120,7 +121,7 @@
     </div>
   </div>
 
-  <div id="div3DView" style="display: none;" class="MainSettings">
+  <div id="div3DView" class="MainSettings">
     <div id="labelsScene" class="unselectable"></div>
 
     <img id="tutorial" alt="Zoom Out" style="display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 20vw; margin-left: 40%;
@@ -183,6 +184,15 @@
       <img src="/img/end_call.png" alt="end_call" class="EndCallButton">
     </div>
 
+    <div id="containerZTList" class="raycast-blocker containerZTList hideLeft">
+      <div id="ZTArea" class="ZTArea">
+      </div>
+      <img src="/img/btnZTList.svg" alt="btnZTList" id="btnZTList" class="btnZTList">
+      <div id="ZTDescriptionArea" class="ZTDescriptionArea">
+        <span id="ZTDescriptionTitle"><b></b></span>
+        <img id="ZTQR" src="" alt="">
+      </div>
+    </div>
     <section class="msger">
       <header class="msger-header">
         <img id="CloseChatHeaderButton" type="button" title="close" src="/img/icon-close.svg">
@@ -212,9 +222,7 @@
   <script>
     const buttonSidebar = document.querySelector('#description-path button');
     const sidebar = document.querySelector('#descriptionSpan');
-    const QRDisplay = document.getElementById('QRDisplay');
-    const msger = document.querySelector('.msger');
-
+    
     function showSidebar() {
       sidebar.style.width = '70vw';
       sidebar.style.padding = '20px';
@@ -227,10 +235,6 @@
       sidebar.style.padding = '0px';
       buttonSidebar.removeEventListener('click', hideSidebar);
       buttonSidebar.addEventListener('click', showSidebar);
-    }
-
-    function ExitQRPanel() {
-      QRDisplay.style.display = 'none';
     }
   </script>
 </body>
