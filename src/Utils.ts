@@ -32,6 +32,13 @@ function DebugNavMesh(navMesh: Mesh) {
     );
 }
 
+function IsLocalHost(): boolean{
+    if(window.location.hostname === "localhost")
+        return true;
+    else
+        return false;
+}
+
 export function shouldBlock(event: TouchEvent): boolean {
     let targetElement = event.target as HTMLElement;
 
@@ -55,4 +62,4 @@ function GetHTMLElement(element: string): HTMLElement {
     return document.querySelector(element) as HTMLElement;
 }
 
-export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh, GetHTMLElement }
+export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh, GetHTMLElement, IsLocalHost }

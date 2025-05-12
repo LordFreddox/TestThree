@@ -1,9 +1,8 @@
 import { appendMessage } from "./chat.ts";
+import { URL_MCPCLIENT } from "./constants/constants.ts";
 
 let fullConversation: string = '';
 let messageAmount: number = 1;
-// const URL_MCPCLIENT = 'http://localhost:3000';
-const URL_MCPCLIENT = 'https://f4d9-181-59-2-70.ngrok-free.app';
 let controller = new AbortController();
 let DescriptionsMap: Map<string, string> = new Map();
 
@@ -76,7 +75,8 @@ async function ChatRequest(message: string, botName: string, role: string, agent
     AppendJsonToContext(message, role);
     try {
         const body = {
-            messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`)
+            messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`),
+            company: agentId
         };
         const response = await fetch(`${URL_MCPCLIENT}/chat`, {
             method: 'POST',

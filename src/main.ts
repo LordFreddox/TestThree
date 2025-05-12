@@ -8,7 +8,7 @@ import {
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { GetPlaces, Place, PROJECT } from './http-service.js';
+import { GetPlaces, Place, PROJECT } from './HTTP/http-service.ts';
 import { scene, camera, renderer } from './Renderer.ts';
 import {
   initFloorSelector, initCategorySelector,
@@ -17,8 +17,9 @@ import {
   SetupDescriptionCardForPlace, SetupPlacesForSearchMap3D
 } from './view.ts';
 // import { createNavMesh } from './Navigator.ts'
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock } from './Utils.ts';
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
+import { FillZTArea } from './ZT/ZTView.ts';
 
 const urlParams = new URLSearchParams(window.location.search);
 const ServType: string = urlParams.get('ServType')!;
@@ -28,6 +29,7 @@ const tutorial = document.getElementById('tutorial') as HTMLElement;
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
 const BASE_URL = `${window.location.origin}${basePath}/models/`;
 const companyId = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
+localStorage.setItem('companyId', companyId);
 let mixers: AnimationMixer[] = [];
 // let allAvailableAnimationClipsMap = new Map<Object3D, AnimationClip[]>();
 const clock = new Clock();
@@ -50,13 +52,13 @@ var _v = new Vector3();
 let contador = 0;//valor a cambiar en el temporizador
 
 let modelUrl: string;
-if (window.location.hostname === "localhost") {
+if (IsLocalHost()) {
   modelUrl = `./models/${companyId}_${PROJECT.toLowerCase()}.glb`;
 } else {
   modelUrl = companyId === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + `${companyId}_${PROJECT.toLowerCase()}.glb`;
 }
 
-if (companyId === "0" || window.location.hostname === "localhost") {
+if (companyId === "0" || IsLocalHost()) {
   GetPlacesFake();
 } else {
   GetPlacesReal();
@@ -273,37 +275,41 @@ function SetupPlacesOnScene(places: Place[]) {
 function SetupExplorerOrVirtualtour(places: Place[]) {
   switch (ServType) {
     case "1":
+      GetHTMLElement('.container-select-place').style.top = '1vh';
       GetHTMLElement('#previewButton').style.display = 'none';
+      document.getElementById('div3DView')!.style.display = 'none';
       document.getElementById('search-section')!.style.display = 'block';
       // document.getElementById("back3D")!.style.display = 'block';
-      if (places[0]) {
-        const imageElement = document.getElementById('imageSearchSprite');
-        if (imageElement) {
-          imageElement.setAttribute('src', places[0].company_picture_url);
+      // if (places[0]) {
+      //   const imageElement = document.getElementById('imageSearchSprite');
+      //   if (imageElement) {
+      //     imageElement.setAttribute('src', places[0].company_picture_url);
 
-          imageElement.onerror = function () {
-            imageElement.style.visibility = 'hidden';
-          };
+      //     imageElement.onerror = function () {
+      //       imageElement.style.visibility = 'hidden';
+      //     };
 
-          imageElement.onload = function () {
-            imageElement.style.visibility = 'visible';
-          };
-        }
-      }
+      //     imageElement.onload = function () {
+      //       imageElement.style.visibility = 'visible';
+      //     };
+      //   }
+      // }
       // document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
       SetupPlacesForSearchVirtualTour(places);
       GetHTMLElement('#loadingMain').style.display = "none";
       break;
     case "2":
-        loadAvatar();
+        loadAvatar(companyId);
+        FillZTArea(companyId);
         document.getElementById('div3DView')!.style.display = 'block';
         document.getElementById('search-section')!.style.display = 'none';
         document.getElementById('ecommerce-redirect')!.style.display = 'none';
     break;
     case "3":
-      loadAvatar();
-      // document.getElementById('div3DView')!.style.display = 'block';
-      // document.getElementById('search-section')!.style.display = 'none';
+      loadAvatar(companyId);
+      FillZTArea(companyId);
+      document.getElementById('div3DView')!.style.display = 'block';
+      document.getElementById('search-section')!.style.display = 'none';
       break;
   }
 
@@ -366,7 +372,3 @@ function animate() {
 }
 
 animate();
-
-export {
-  companyId
-};

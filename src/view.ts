@@ -1,13 +1,13 @@
 import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 import { camera, canvas } from './Renderer.ts';
-import { Place, PROJECT } from './http-service.js';
-import { companyId } from './main.ts';
-import { getPathAndDisplay } from './Navigator.ts';
+import { Place, PROJECT } from './HTTP/http-service.ts';
+// import { getPathAndDisplay } from './Navigator.ts';
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
 import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 
+const companyId = localStorage.getItem("companyId")!;
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
 let MapObjectPlacesText = {} as { [key: string]: Object3D[] };

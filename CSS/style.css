@@ -23,7 +23,7 @@
     --left-msg-bg: #ececec;
     --right-msg-bg: #579ffb;
     --button-disable-color: rgb(158, 158, 158);
-    --button-enable-color: #be3ad9;
+    --button-enable-color: #dfd87d;
 }
 
 #hideAll {
@@ -158,7 +158,7 @@ button {
     text-align: center;
     margin-left: 1rem;
     margin-right: 1rem;
-    color: white;
+    color: black;
     font-size: 1rem;
 }
 
@@ -295,29 +295,21 @@ button {
 
 @keyframes slideShowLeft {
     0% {
-        transform: translateX(-6rem)
-            /*rotate(180deg)*/
-        ;
+        transform: translateX(-6rem);
     }
 
     100% {
-        transform: translateX(0.5rem)
-            /*rotate(180deg)*/
-        ;
+        transform: translateX(0.5rem);
     }
 }
 
 @keyframes slideHideLeft {
     0% {
-        transform: translate(0.5rem)
-            /*rotate(0deg)*/
-        ;
+        transform: translate(0.5rem);
     }
 
     100% {
-        transform: translateX(-6rem)
-            /*rotate(0deg)*/
-        ;
+        transform: translateX(-6rem);
     }
 }
 
@@ -439,9 +431,9 @@ button {
     display: none;
     position: absolute;
     width: 90%;
-    /* top: 18vh; */
+    top: 1vh;
     left: 5vw;
-    /* right: 9vw; */
+    right: 9vw;
     z-index: 1;
 }
 

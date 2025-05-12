@@ -1,7 +1,7 @@
 import { UltravoxSession } from 'ultravox-client';
+import { URL_MCPCLIENT } from "../constants/constants.ts";
+
 const CallSession = new UltravoxSession();
-// const URL_MCPCLIENT = 'http://localhost:3000';
-const URL_MCPCLIENT = 'https://f4d9-181-59-2-70.ngrok-free.app';
 
 SetupListeners();
 
