@@ -20,7 +20,9 @@ import {
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea } from './ZT/ZTView.ts';
-
+import { ClosePlaceCard } from './view.ts';
+import { CloseSearchPlace } from './view.ts';
+import { HideZT } from './ZT/ZTView.ts';
 const urlParams = new URLSearchParams(window.location.search);
 const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
@@ -304,6 +306,8 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
         document.getElementById('div3DView')!.style.display = 'block';
         document.getElementById('search-section')!.style.display = 'none';
         document.getElementById('ecommerce-redirect')!.style.display = 'none';
+        //document.getElementById('btnZTList')!.style.display = 'none';
+        //document.getElementById('ZTArea')!.style.display = 'none';
     break;
     case "3":
       loadAvatar(companyId);
@@ -327,13 +331,18 @@ controls.addEventListener('start', () => {
 
 window.addEventListener('touchend', (event) => {
   //disable raycast 
+  //cerrar pantallas 
+ 
   if(shouldBlock(event)) return; 
+  ClosePlaceCard();
+  CloseSearchPlace();
+  HideZT();
   if(contador!== 0) return;
   const touch = event.changedTouches[0];
   mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
-
+ 
   // Remove the previous debug line if it exists
   //scene.remove(scene.getObjectByName('rayLine')!);
 

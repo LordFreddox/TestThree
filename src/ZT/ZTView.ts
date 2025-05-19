@@ -5,6 +5,7 @@ import * as QRCode from 'qrcode';
 const containerZTList = GetHTMLElement('#containerZTList');
 const ZTDescriptionTitle = GetHTMLElement('#ZTDescriptionTitle');
 const ZTDescriptionArea = GetHTMLElement('#ZTDescriptionArea');
+const btnZTList = GetHTMLElement('#btnZTList');
 const ZTQR = GetHTMLElement('#ZTQR') as HTMLImageElement;
 let isZTOpen: boolean = false;
 let currentSelectService: number = 0;
@@ -54,15 +55,17 @@ export async function FillZTArea(companyId: string) {
             container.appendChild(itemDiv);
         });
 
-        GetHTMLElement('#btnZTList').onclick = () => {
+        btnZTList.onclick = () => {
             if (isZTOpen) {
                 isZTOpen = false;
                 containerZTList.classList.add('hideLeft');
                 containerZTList.classList.remove('showLeft');
+                btnZTList.style.transform = 'scaleX(1)';
             } else {
                 isZTOpen = true;
                 containerZTList.classList.add('showLeft');
                 containerZTList.classList.remove('hideLeft');
+                btnZTList.style.transform = 'scaleX(-1)';
             }
         };
     } catch (error) {
@@ -70,12 +73,15 @@ export async function FillZTArea(companyId: string) {
         console.error('Error loading services:', error);
     }
 }
-
+export function HideZT() {
+    ZTDescriptionArea.style.visibility = 'hidden';
+}
 function handleBlockClick(serviceData: Service) {
     if (ZTDescriptionArea.computedStyleMap().get('visibility') == 'visible' &&
         currentSelectService == serviceData.id) {
         currentSelectService = 0;
         ZTDescriptionArea.style.visibility = 'hidden';
+        
     } else {
         currentSelectService = serviceData.id;
         ZTDescriptionArea.style.visibility = 'visible';

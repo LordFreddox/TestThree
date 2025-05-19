@@ -16,6 +16,7 @@ const tempV = new Vector3();
 const paddingBetweenText = 30;
 const BASE_URL_PATH_DESCRIPTION = 'https://strg01tockall.blob.core.windows.net/container-unity/ResumenRecorridos/';
 const searchBar = document.getElementById('searchPlace3D') as HTMLInputElement;
+const closeSeachIcon = document.getElementById('icon-close') as HTMLInputElement;
 const input_searcher = document.getElementById('input_searcher') as HTMLInputElement;
 const placeSelectors = document.getElementsByClassName('container-input');
 let labelsScene = new Map<Vector3, HTMLDivElement>();
@@ -56,6 +57,8 @@ GetHTMLElement('#deleteSearch').onclick = () => {
 GetHTMLElement('#searchPlace3D').onclick = () => {
     searchPanel.style.display = 'block';
     containerSearch.style.display = 'none';
+    closeSeachIcon.style.display = 'flex';
+    ClosePlaceCard();
 };
 
 searchBar?.addEventListener('input', () => {
@@ -63,11 +66,14 @@ searchBar?.addEventListener('input', () => {
     filterPlaceSearchItem(searchTerm);
 });
 
+GetHTMLElement('#icon-close').onclick = () => {
+   CloseSearchPlace();
+};
 GetHTMLElement('#closePlaceCard').onclick = () => {
     ClosePlaceCard();
 };
 
-function ClosePlaceCard() {
+export function ClosePlaceCard() {
     divCardPlace.classList.remove('showTop');
     divCardPlace.classList.add('hideTop');
     if (currentController) {
@@ -75,6 +81,13 @@ function ClosePlaceCard() {
         currentController = null;
     }
 }
+
+export function CloseSearchPlace() {
+    searchPanel.style.display = 'none';
+    containerSearch.style.display = 'block';
+    closeSeachIcon.style.display = 'none';
+}
+
 
 function DisplayChatAI(idPlace: string) {
     //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
@@ -537,7 +550,9 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     divCardPlace.classList.remove('hideTop');
     divCardPlace.classList.add('showTop');
-
+    searchPanel.style.display = 'none';
+    containerSearch.style.display = 'block';
+    closeSeachIcon.style.display = 'none';
     (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = object.userData.place.companysubsidiary_image_url;
     divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${object.userData.place.companysubsidiary_name}`;
     divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;
