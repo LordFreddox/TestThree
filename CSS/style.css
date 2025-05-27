@@ -637,19 +637,30 @@ button {
     /* height: 1.5rem; */
     margin-bottom: 5px;
 }
-.MoreInfo{
+
+.MoreInfo {
     align-self: flex-start;
-     margin-top: auto; 
-     margin-left:1rem;
-     margin-top: 0; 
-     margin-bottom: 0;
+    margin-top: auto;
+    margin-left: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
 }
+
 .PlaceCardLongDescription {
     height: 100%;
     margin: 1rem;
     overflow-y: auto;
     width: 90%;
     white-space: pre-line;
+}
+
+.PlaceCardLongDescription img{
+    width: 100%;
+}
+
+.PlaceCardLongDescription video{
+    width: 100%;
+    height: 20rem;
 }
 
 #gradient-text {
@@ -805,7 +816,6 @@ button {
     filter: grayscale(1);
     /* margin-top: 0; */
     margin-right: 15px;
-    content: url("/img/icon-arrow-blue.svg");
 }
 
 .icon-x {
@@ -841,6 +851,9 @@ button {
     right: 2rem;
     top: 3rem;
     width: 5rem;
+    border-radius: 50%;
+    border-color: green;
+    border-style: none;
 }
 
 .EndCallButton {
@@ -1227,7 +1240,7 @@ button {
     .name-place{
         font-size: 100px;
     }
-    
+
     .PlaceCardBasicDescription {
 
         text-align: left;
@@ -1236,7 +1249,7 @@ button {
         float: left;
         width: 100%;
     }
-    
+
     .review-container {
         font-size: 28px;
         display: flex;
@@ -1247,13 +1260,13 @@ button {
         margin-right: 5rem;
         margin-top: -8rem;
     }
-    
+
     .review {
         width: 15rem;
         height: 4rem;
         margin-bottom: 5px;
     }
-    
+
     .PlaceCardLongDescription {
         height: 100%;
         margin: 1rem;
@@ -1262,16 +1275,17 @@ button {
         white-space: pre-line;
         font-size: 28px;
     }
-    .MoreInfo{
+
+    .MoreInfo {
         align-self: flex-start;
-         margin-top: auto; 
-         margin-left:3rem;
-         margin-top: 0; 
-         margin-bottom: 0;
-         font-size: 28px;
-         font-weight: bold;
+        margin-top: auto;
+        margin-left: 3rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 28px;
+        font-weight: bold;
     }
-    
+
     #gradient-text {
         position: absolute;
         background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.5), white);
@@ -1279,16 +1293,16 @@ button {
         height: 7rem;
         bottom: 6rem;
     }
-    
+
     #logo_place_card {
         display: block;
     }
-    
+
     #description_place_card {
         display: inline-block;
         width: 100%;
     }
-    
+
     .placeCard-ecommerce {
         height: 5rem;
         margin-bottom: 1rem;
@@ -1298,13 +1312,13 @@ button {
         width: 200px;
         color: black;
     }
-    
+
     #closePlaceCard {
         display: inline-block;
         background: url(/img/icon-close-card.svg);
         background-position: center;
         background-repeat: no-repeat;
-        background-size: contain; 
+        background-size: contain;
         border: none;
         width: 4rem;
         height: 4rem;
@@ -1312,6 +1326,7 @@ button {
         margin-top: -5em;
         margin-right: 2em;
     }
+
     .BotButton3D {
         position: absolute;
         right: 2rem;

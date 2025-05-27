@@ -4,19 +4,20 @@ import { URL_MCPCLIENT } from "./constants/constants.ts";
 let fullConversation: string = '';
 let messageAmount: number = 1;
 let controller = new AbortController();
-let DescriptionsMap: Map<string, string> = new Map();
+let DescriptionsMap: Map<number, string> = new Map();
 
 function InitContextWithSystemPrompt(sysPromt: string) {
     AppendJsonToContext(sysPromt, "system");
 }
 
-export function UpdateDescription(placeId: string, description: HTMLElement): AbortController {
-    if(DescriptionsMap.has(placeId)){
-        description.innerHTML = DescriptionsMap.get(placeId)!;
+export function UpdateDescription(placeId: number, companysubsidiaryId: number, description: HTMLElement): AbortController {
+    if(DescriptionsMap.has(companysubsidiaryId)){
+        description.innerHTML = DescriptionsMap.get(companysubsidiaryId)!;
         return controller;
     }
     const body = {
-        placeId: placeId
+        placeId: placeId,
+        companysubsidiaryId: companysubsidiaryId
     };
     description.innerHTML = 'Cargando informacion...';
     // controller = new AbortController();
@@ -29,7 +30,7 @@ export function UpdateDescription(placeId: string, description: HTMLElement): Ab
         body: JSON.stringify(body),
         signal: controller.signal
     })
-        .then(response => handleStreamResponse(response, description, placeId))
+        .then(response => handleStreamResponse(response, description, companysubsidiaryId))
         .catch(()=>{
                 console.log('Fetch aborted or error');
                 controller = new AbortController();
@@ -38,17 +39,17 @@ export function UpdateDescription(placeId: string, description: HTMLElement): Ab
     return controller; // Return the controller for external abort access
 }
 
-function handleStreamResponse(response: Response, description: HTMLElement, placeId: string) {
+function handleStreamResponse(response: Response, description: HTMLElement, companysubsidiaryId: number) {
     if (!response.body) return;
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let fullText = '';
-    processStream(reader, decoder, fullText, description, placeId);
+    processStream(reader, decoder, fullText, description, companysubsidiaryId);
 }
 
 function processStream(reader: ReadableStreamDefaultReader<Uint8Array<ArrayBufferLike>>,
-    decoder: TextDecoder, fullText: string, description: HTMLElement, placeId: string) {
+    decoder: TextDecoder, fullText: string, description: HTMLElement, companysubsidiaryId: number) {
     reader.read().then(({ done, value }) => {
         if (done) {
             console.log('Stream complete');
@@ -59,8 +60,8 @@ function processStream(reader: ReadableStreamDefaultReader<Uint8Array<ArrayBuffe
         const chunk = decoder.decode(value);
         fullText += chunk;
         description.innerHTML = fullText; // Function to update your UI with the text
-        DescriptionsMap.set(placeId, fullText);
-        processStream(reader, decoder, fullText, description, placeId); // Continue reading
+        DescriptionsMap.set(companysubsidiaryId, fullText);
+        processStream(reader, decoder, fullText, description, companysubsidiaryId); // Continue reading
     }).catch(err => {
         if (err.name === 'AbortError') {
             console.log('Stream aborted');
@@ -127,15 +128,17 @@ async function ChatRequest(message: string, botName: string, role: string, agent
 }
 
 function AppendJsonToContext(message: string, role: string) {
-    const messageToSent = JSON.stringify({
-        role: role,
-        content: message
-    });
-    fullConversation += `${messageToSent},`;
+    const messageToSent: MessageLLM = {role: role, content: message};
+    fullConversation += `${JSON.stringify(messageToSent)},`;
 }
 
 function ResetContext() {
     fullConversation = '';
+}
+
+interface MessageLLM{
+    role: string,
+    content: string
 }
 
 export { InitContextWithSystemPrompt, ChatRequest, ResetContext };

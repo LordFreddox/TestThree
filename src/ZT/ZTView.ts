@@ -2,6 +2,8 @@ import { GetHTMLElement, IsLocalHost } from "../Utils.ts";
 import { GetServiceList, Service } from '../HTTP/http-service.ts';
 import * as QRCode from 'qrcode';
 
+export let serviceList: Service[] | undefined;
+
 const containerZTList = GetHTMLElement('#containerZTList');
 const ZTDescriptionTitle = GetHTMLElement('#ZTDescriptionTitle');
 const ZTDescriptionArea = GetHTMLElement('#ZTDescriptionArea');
@@ -12,18 +14,23 @@ let currentSelectService: number = 0;
 
 export async function FillZTArea(companyId: string) {
     try {
-        let serviceList: Service[];
-        if (IsLocalHost()) {
-            let response = await fetch('src/testJsons/service_list.json');
+        if (IsLocalHost()) 
+        {
+            let response = await fetch('https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/testJSON/service_list.json');
             const parsedResponse = await response.json();
             serviceList = parsedResponse.data.services;
         } else {
             serviceList = await GetServiceList(companyId);
         }
+        if(!serviceList){
+            btnZTList.style.visibility = 'hidden';
+            return;
+        }
 
         const container = GetHTMLElement('#ZTArea');
 
         serviceList.forEach((service, index) => {
+            if(!service.url) return;
             const itemDiv = document.createElement('div');
             itemDiv.className = 'ZTAction';
             itemDiv.id = `ZTBlock${index + 1}`;
@@ -35,7 +42,7 @@ export async function FillZTArea(companyId: string) {
                 img.onerror = () => {
                     img.src = './img/ZT_icon_compass.svg';
                 };
-            } 
+            }
             else {
                 img.src = './img/ZT_icon_compass.svg';
             }
@@ -49,7 +56,7 @@ export async function FillZTArea(companyId: string) {
             itemDiv.appendChild(span);
 
             itemDiv.onclick = () => {
-                handleBlockClick(service);
+                handleBlockClick(service.description, service.url, service.id);
             };
 
             container.appendChild(itemDiv);
@@ -57,17 +64,12 @@ export async function FillZTArea(companyId: string) {
 
         btnZTList.onclick = () => {
             if (isZTOpen) {
-                isZTOpen = false;
-                containerZTList.classList.add('hideLeft');
-                containerZTList.classList.remove('showLeft');
-                btnZTList.style.transform = 'scaleX(1)';
+                SetCloseZTState();
             } else {
-                isZTOpen = true;
-                containerZTList.classList.add('showLeft');
-                containerZTList.classList.remove('hideLeft');
-                btnZTList.style.transform = 'scaleX(-1)';
+                SetOpenZTState();
             }
         };
+
     } catch (error) {
         GetHTMLElement('#containerZTList').style.display = 'none';
         console.error('Error loading services:', error);
@@ -76,19 +78,35 @@ export async function FillZTArea(companyId: string) {
 export function HideZT() {
     ZTDescriptionArea.style.visibility = 'hidden';
 }
-function handleBlockClick(serviceData: Service) {
+
+function SetOpenZTState() {
+    isZTOpen = true;
+    containerZTList.classList.add('showLeft');
+    containerZTList.classList.remove('hideLeft');
+    btnZTList.style.transform = 'scaleX(-1)';
+}
+
+function SetCloseZTState() {
+    isZTOpen = false;
+    containerZTList.classList.add('hideLeft');
+    containerZTList.classList.remove('showLeft');
+    btnZTList.style.transform = 'scaleX(1)';
+}
+
+export function handleBlockClick(description: string, url: string, id: number = 0,) {
+    SetOpenZTState();
     if (ZTDescriptionArea.computedStyleMap().get('visibility') == 'visible' &&
-        currentSelectService == serviceData.id) {
+        currentSelectService == id) {
         currentSelectService = 0;
         ZTDescriptionArea.style.visibility = 'hidden';
-        
+
     } else {
-        currentSelectService = serviceData.id;
+        currentSelectService = id;
         ZTDescriptionArea.style.visibility = 'visible';
-        ZTDescriptionTitle.innerText = serviceData.description;
+        ZTDescriptionTitle.innerText = description;
     }
 
-    QRCode.toDataURL(serviceData.url).then((dataUrl) => {
+    QRCode.toDataURL(url).then((dataUrl) => {
         ZTQR.src = dataUrl;
         ZTQR.style.height = window.getComputedStyle(ZTQR).width;
     });

@@ -1,11 +1,12 @@
 import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
-import { camera, canvas } from './Renderer.ts';
+import { camera, canvas, scene } from './Renderer.ts';
 import { Place, PROJECT } from './HTTP/http-service.ts';
 // import { getPathAndDisplay } from './Navigator.ts';
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
 import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
+// import { controls } from './main.ts';
 
 const companyId = localStorage.getItem("companyId")!;
 const COLOR_SELECTED = new Color(0x733D96);
@@ -89,9 +90,9 @@ export function CloseSearchPlace() {
 }
 
 
-function DisplayChatAI(idPlace: string) {
+function DisplayChatAI(idPlace: number) {
     //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
-    setCurrentAgent(idPlace);
+    setCurrentAgent(idPlace.toString());
     GetHTMLElement('.msger').style.display = 'flex';
 }
 
@@ -247,7 +248,7 @@ function SetupPlacesForSearchVirtualTour(places: Place[]) {
         placesList.appendChild(CreateOptionItemSearchPanel(places[index]));
     });
     //setup personlist aswell for testing purpouse
-    personList.appendChild(CreateOptionItemSearchPanelPerson());
+    // personList.appendChild(CreateOptionItemSearchPanelPerson());
 }
 
 function SetupPlacesForSearchMap3D(place: Place, object: Object3D, floorLevels: Object3D[]) {
@@ -546,6 +547,12 @@ function CreateTextForPlace(
 }
 
 async function SetupDescriptionCardForPlace(object: Object3D) {
+    // object.getWorldPosition(camera.position);
+    // camera.lookAt(object.position);
+    // controls.target = object.position;
+    // controls.maxDistance = 2;
+    // controls.update();
+    const placeData: Place = object.userData.place;
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     divCardPlace.classList.remove('hideTop');
@@ -553,49 +560,75 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     searchPanel.style.display = 'none';
     containerSearch.style.display = 'block';
     closeSeachIcon.style.display = 'none';
-    (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = object.userData.place.companysubsidiary_image_url;
-    divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${object.userData.place.companysubsidiary_name}`;
-    divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${object.userData.place.place_category_name}`;
-    divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${object.userData.place.place_area_name}`;
+    (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = placeData.companysubsidiary_image_url;
+    divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${placeData.companysubsidiary_name}`;
+    divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${placeData.place_category_name}`;
+    divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${placeData.place_area_name}`;
     (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
         EndCallView();
-        DisplayChatAI(object.userData.place.id);
+        DisplayChatAI(placeData.place_id);
         ClosePlaceCard();
     };
     const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
-    currentController = UpdateDescription(object.userData.place.company_id, description);
+    currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
 
-function CreateOptionItemSearchPanelPerson() {
-    let newButton = document.createElement('button');
-    newButton.classList.add('place-item');
-    newButton.type = 'button';
-    let place: Place = {
-        place_id: 15387,
-        companysubsidiary_name: 'Jesus Marsel Garcia Blanco',
-        place_area_name: 'Ingenieria de sistemas',
-        companysubsidiary_image_url: 'https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2025-01/139_companyImage_1737038911430.jpeg',
-        company_id: 1,
-        company_name: 'Sample Company',
-        company_picture_url: 'https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2025-01/139_companyImage_1737038911430.jpeg',
-        place_category_name: 'Edificio Mario Laserna, Piso 2',
-        place_area_id: 1
-    };
+async function SetupDescriptionCardForPlaceByID(placeID: string) {
+    console.log('focus por IA', placeID);
+    const object = scene.getObjectByName(placeID);
+    if(!object) return;
+    // camera.lookAt(object.position);
+    // camera.zoom = 0;
+    const placeData: Place = object.userData.place;
 
-    newButton.onclick = () => { ButtonActionItemSearchPanel(place) };
-
-    const html = `
-            <img alt="" class="image-place" src="${place.companysubsidiary_image_url}">
-            <div class="info">
-                <span class="name-place">${place.companysubsidiary_name}</span>
-                <span class="subname-place">${place.place_area_name}</span>
-                <span class="building-place">${place.place_category_name}</span>
-            </div>
-            <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
-
-    newButton.innerHTML = html;
-    return newButton; // Return the HTML string for use elsewhere if needed
+    RestoreOriginalColors();
+    // ChangeColorOfSingleObject(object, COLOR_SELECTED);
+    // divCardPlace.classList.remove('hideTop');
+    // divCardPlace.classList.add('showTop');
+    // (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = placeData.companysubsidiary_image_url;
+    // divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${placeData.companysubsidiary_name}`;
+    // divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${placeData.place_category_name}`;
+    // divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${placeData.place_area_name}`;
+    // (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
+    //     EndCallView();
+    //     DisplayChatAI(placeData.place_id);
+    //     ClosePlaceCard();
+    // };
+    // const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
+    // currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
+
+// function CreateOptionItemSearchPanelPerson() {
+//     let newButton = document.createElement('button');
+//     newButton.classList.add('place-item');
+//     newButton.type = 'button';
+//     let place: Place = {
+//         place_id: 15387,
+//         companysubsidiary_id: 12345,
+//         companysubsidiary_name: 'Jesus Marsel Garcia Blanco',
+//         place_area_name: 'Ingenieria de sistemas',
+//         companysubsidiary_image_url: 'https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2025-01/139_companyImage_1737038911430.jpeg',
+//         company_id: 1,
+//         company_name: 'Sample Company',
+//         company_picture_url: 'https://sasiteit.blob.core.windows.net/zion/multimedia/companies/2025-01/139_companyImage_1737038911430.jpeg',
+//         place_category_name: 'Edificio Mario Laserna, Piso 2',
+//         place_area_id: 1
+//     };
+
+//     newButton.onclick = () => { ButtonActionItemSearchPanel(place) };
+
+//     const html = `
+//             <img alt="" class="image-place" src="${place.companysubsidiary_image_url}">
+//             <div class="info">
+//                 <span class="name-place">${place.companysubsidiary_name}</span>
+//                 <span class="subname-place">${place.place_area_name}</span>
+//                 <span class="building-place">${place.place_category_name}</span>
+//             </div>
+//             <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
+
+//     newButton.innerHTML = html;
+//     return newButton; // Return the HTML string for use elsewhere if needed
+// }
 
 function CreateOptionItemSearchPanel(place: Place) {
     let newButton = document.createElement('button');
@@ -671,5 +704,5 @@ export {
     updateLabelPositions, updateLabelVisibility,
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
     SetupPlacesForSearchVirtualTour, SetupPlacesForSearchMap3D,
-    CreateTextForPlace, SetupDescriptionCardForPlace
+    CreateTextForPlace, SetupDescriptionCardForPlace, SetupDescriptionCardForPlaceByID
 };

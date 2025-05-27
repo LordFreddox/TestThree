@@ -43,7 +43,7 @@ let places: Place[];
 const mouse = new Vector2();
 const raycaster = new Raycaster();
 
-const controls = new OrbitControls(camera, renderer.domElement)
+export const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
 controls.maxPolarAngle = Math.PI / 2.1;    // Limitar angulo de camara
 controls.enableDamping = true;             // Movimiento suave
