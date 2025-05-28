@@ -384,7 +384,7 @@ export function focusCameraOnObject(object: Object3D) {
     return;
   }
 
-  const offset = new Vector3(0, 0, 0);
+  const offset = new Vector3(0, 5, 0);
   //const offset = new Vector3(3, 5, -5); 
   object.updateMatrixWorld();
 
@@ -404,18 +404,18 @@ function animate() {
     controls.update();
 
     camera.position.lerp(targetPosition, lerpSpeed);
-    
+    console.log("Posicion:", camera.position.distanceTo(targetPosition));
     // Si ya llegamos al punto
-    if (camera.position.distanceTo(targetPosition) <= 1) {
+    if (camera.position.distanceTo(targetPosition) <= 2) {
       console.log("Cámara ha llegado al objetivo:", targetPosition);
       camera.position.copy(targetPosition);
+      controls.enabled = true;
       controls.target.copy(targetLookAt);
       controls.update();
       isMovingCamera = false;
     }
-  } else {
-  
-
+  } 
+  else {
   controls.update();
   mixers.forEach((mixer) =>
     mixer.update(clock.getDelta())

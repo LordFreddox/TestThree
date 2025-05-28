@@ -659,6 +659,10 @@ closeWebView.onclick = () => {
     webviewContainer.classList.remove('showTop');
     webviewContainer.classList.add('hideTop');
 }
+/*const testbutton=document.getElementById('searchPlace3D') as HTMLInputElement;
+testbutton.onclick = () => {
+   SetupDescriptionCardForPlaceByID('14403'); 
+}*/
 
 function CreateOptionItemSearchPanel(place: Place) {
     let newButton = document.createElement('button');
