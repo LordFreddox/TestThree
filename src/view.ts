@@ -27,6 +27,7 @@ let endPlaceId: string | undefined
 const searchPanel = GetHTMLElement('.container-select-place');
 const containerSearch = GetHTMLElement('#container-search');
 const descriptionPathPanel = document.getElementById('description-path');
+const webviewContainer= document.getElementById('webView') as HTMLIFrameElement;
 const placesList = GetHTMLElement('#placesList');
 const personList = GetHTMLElement('#personList');
 const divCardPlace = GetHTMLElement('#divCardPlace');
@@ -574,13 +575,27 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
 }
 
 async function SetupDescriptionCardForPlaceByID(placeID: string) {
+    webviewContainer.classList.add('showTop');
+    webviewContainer.classList.remove('hideTop');
     console.log('focus por IA', placeID);
     const object = scene.getObjectByName(placeID);
-    if(!object) return;
+    if(!object){ 
+        console.log('Object not found in scene for placeID:', placeID);
+        return;}
     // camera.lookAt(object.position);
     // camera.zoom = 0;
-    const placeData: Place = object.userData.place;
+    /*const placeData: Place = object.userData.place;//la información del lugar se obtiene del objeto y necesito
+    console.log('placeData Name ', placeData.company_name);*/
 
+    console.log('placeID',placeID); 
+    const webView=document.getElementById('3DVisualizer') as HTMLIFrameElement;
+    if (!webView) {
+        console.error('WebView element not found');
+        return;
+    }
+    
+    webView.src = "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId="+placeID+"&userId=0" ;
+    console.log('WebView src set to:', webView.src);
     RestoreOriginalColors();
     // ChangeColorOfSingleObject(object, COLOR_SELECTED);
     // divCardPlace.classList.remove('hideTop');
@@ -597,7 +612,10 @@ async function SetupDescriptionCardForPlaceByID(placeID: string) {
     // const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
     // currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
-
+/*const inputSearch = document.getElementById('threeLoad') as HTMLInputElement;
+inputSearch.onclick = () => {
+console.log('inputSearch clicked');
+}*/
 // function CreateOptionItemSearchPanelPerson() {
 //     let newButton = document.createElement('button');
 //     newButton.classList.add('place-item');
@@ -629,6 +647,12 @@ async function SetupDescriptionCardForPlaceByID(placeID: string) {
 //     newButton.innerHTML = html;
 //     return newButton; // Return the HTML string for use elsewhere if needed
 // }
+const closeWebView=document.getElementById('closeWebView') as HTMLInputElement;
+closeWebView.onclick = () => {
+   //SetupDescriptionCardForPlaceByID('1173'); // 
+    webviewContainer.classList.remove('showTop');
+    webviewContainer.classList.add('hideTop');
+}
 
 function CreateOptionItemSearchPanel(place: Place) {
     let newButton = document.createElement('button');
