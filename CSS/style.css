@@ -705,16 +705,17 @@ button {
 }
 #closeWebView{
     display: inline-block;
-    background: url(/img/icon-close-card.svg);
+    /*background: url(/img/icon-close-card.svg);*/
+    background-color: #707070;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    border-radius: 50%;
     border: none;
     width: 2rem;
     height: 2rem;
     padding: 0;
-    margin-top: -3em;
-    margin-right: 2em;
+    margin-right: -20em;
 }
 
 /*#endregion */

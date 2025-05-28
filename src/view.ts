@@ -7,7 +7,7 @@ import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
-
+import { focusCameraOnObject } from './main.ts';//metodo para animar la camara al objeto seleccionado
 const companyId = localStorage.getItem("companyId")!;
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
@@ -35,6 +35,8 @@ let currentController: AbortController | null = null;
 
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
+
+
 
 function normalizeString(str: string): string {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove all diacritical marks
@@ -574,14 +576,17 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
 
+
 async function SetupDescriptionCardForPlaceByID(placeID: string) {
-    webviewContainer.classList.add('showTop');
-    webviewContainer.classList.remove('hideTop');
+
+    
     console.log('focus por IA', placeID);
     const object = scene.getObjectByName(placeID);
-    if(!object){ 
-        console.log('Object not found in scene for placeID:', placeID);
-        return;}
+    if(!object) return;
+    focusCameraOnObject(object);
+    await new Promise(f => setTimeout(f,1000));
+    webviewContainer.classList.add('showTop');
+    webviewContainer.classList.remove('hideTop');
     // camera.lookAt(object.position);
     // camera.zoom = 0;
     /*const placeData: Place = object.userData.place;//la información del lugar se obtiene del objeto y necesito
@@ -612,6 +617,7 @@ async function SetupDescriptionCardForPlaceByID(placeID: string) {
     // const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
     // currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
+
 /*const inputSearch = document.getElementById('threeLoad') as HTMLInputElement;
 inputSearch.onclick = () => {
 console.log('inputSearch clicked');

@@ -231,6 +231,8 @@ controls.addEventListener('end', () => {
 
 controls.update();
 
+
+
 function GetPlacesReal() {
   GetPlaces().then(json => {
     places = json.data_place.places;
@@ -368,7 +370,52 @@ window.addEventListener('touchend', (event) => {
   //scene.add(line);
 });
 
+
+// Variables globales para el movimiento
+let isMovingCamera = false;
+const targetPosition = new Vector3();
+const targetLookAt = new Vector3();
+const lerpSpeed = 0.01;
+
+// Función para enfocar la cámara a un objeto
+export function focusCameraOnObject(object: Object3D) {
+  if (!object) {
+    console.warn("Objeto no válido");
+    return;
+  }
+
+  const offset = new Vector3(0, 0, 0);
+  //const offset = new Vector3(3, 5, -5); 
+  object.updateMatrixWorld();
+
+  const worldPos = new Vector3();
+  object.getWorldPosition(worldPos);
+targetLookAt.copy(worldPos);
+  targetPosition.copy(worldPos).add(offset);
+  
+
+  isMovingCamera = true;
+}
+
 function animate() {
+   if (isMovingCamera) {
+    // Mover posición y target suavemente
+    controls.target.lerp(targetLookAt, lerpSpeed);
+    controls.update();
+
+    camera.position.lerp(targetPosition, lerpSpeed);
+    
+    // Si ya llegamos al punto
+    if (camera.position.distanceTo(targetPosition) <= 1) {
+      console.log("Cámara ha llegado al objetivo:", targetPosition);
+      camera.position.copy(targetPosition);
+      controls.target.copy(targetLookAt);
+      controls.update();
+      isMovingCamera = false;
+    }
+  } else {
+  
+
   controls.update();
   mixers.forEach((mixer) =>
     mixer.update(clock.getDelta())
@@ -376,6 +423,7 @@ function animate() {
   lookAtCamera.forEach((object) => {
     object.lookAt(camera.position);
   });
+  }
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
