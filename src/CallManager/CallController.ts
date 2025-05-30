@@ -6,14 +6,14 @@ import { EndCallView } from './CallView.ts';
 // import { GetHTMLElement } from '../Utils.ts';
 
 const CallSession = new UltravoxSession();
-let timeOutCancelation: string | number | NodeJS.Timeout | undefined;
+let firstSpeak = true;
+// let timeOutCancelation: string | number | NodeJS.Timeout | undefined;
 SetupListeners();
 
 export async function CreateCall(): Promise<boolean> {
     try {
         const body = {
             companyId: localStorage.getItem("companyId")!,
-            // newPlaces: 
         };
         const response = await fetch(`${URL_MCPCLIENT}/ultravox`, {
             method: 'POST',
@@ -46,8 +46,19 @@ export async function CreateCall(): Promise<boolean> {
 function SetupListeners() {
     CallSession.addEventListener('status', () => {
         console.log(`Session status changed: ${CallSession.status}`);
-        if (CallSession.status == UltravoxSessionStatus.SPEAKING)
-            clearTimeout(timeOutCancelation);
+        switch (CallSession.status) {
+            case UltravoxSessionStatus.SPEAKING:
+                if(firstSpeak){
+                    firstSpeak = false;
+                    EndCallView();
+                }
+                // clearTimeout(timeOutCancelation);
+                break;
+            case UltravoxSessionStatus.LISTENING:
+                break;
+            default:
+                break;
+        }
     });
 
     CallSession.addEventListener('transcripts', () => {
