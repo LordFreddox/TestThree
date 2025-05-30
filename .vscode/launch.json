@@ -9,7 +9,7 @@
                 "--remote-debugging-port=9222",
                 "--window-size=720,1520"
             ],
-            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=139", // https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/index.html?ServType=3&project=zyon&placeId=139
+            "url": "http://localhost:4200/index.html?ServType=3&project=triptrapp&placeId=198", // https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/index.html?ServType=3&project=zyon&placeId=139
             "presentation": {
                 "hidden": true
             }
@@ -18,7 +18,7 @@
             "type": "vscode-edge-devtools.debug",
             "name": "Open Edge DevTools",
             "request": "attach",
-            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=139", //60901 como puerto para servicios?
+            "url": "http://localhost:4200/index.html?ServType=3&project=triptrapp&placeId=198", //60901 como puerto para servicios?
             "presentation": {
                 "hidden": true
             }
