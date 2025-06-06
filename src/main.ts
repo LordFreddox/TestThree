@@ -52,9 +52,9 @@ let contador = 0;//valor a cambiar en el temporizador
 
 let modelUrl: string;
 if (window.location.hostname === "localhost") {
-  modelUrl = `./models/${companyId}_${PROJECT.toLowerCase()}.glb`;
+  modelUrl = `./models/${PROJECT.toUpperCase()}/${companyId}.glb`;
 } else {
-  modelUrl = companyId === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + `${companyId}_${PROJECT.toLowerCase()}.glb`;
+  modelUrl = `${BASE_URL}${PROJECT.toUpperCase()}/${companyId}.glb`;
 }
 
 if (fakeId === null) {
@@ -231,9 +231,6 @@ controls.addEventListener('end', () => {
     if (contador <= 0) {
       contador = 0;
       clearInterval(intervalo);
-      console.log("¡Terminó! Valor:", contador);
-    } else {
-      console.log("Valor:", contador.toFixed(2));
     }
   }, intervalos);
 });
