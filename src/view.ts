@@ -1,4 +1,4 @@
-import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
+import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3, Plane } from 'three';
 import { camera, canvas, scene } from './Renderer.ts';
 import { Place, PROJECT } from './HTTP/http-service.ts';
 // import { getPathAndDisplay } from './Navigator.ts';
@@ -589,17 +589,16 @@ async function SetupDescriptionCardForPlaceByID(placeID: string) {
     webviewContainer.classList.remove('hideTop');
     // camera.lookAt(object.position);
     // camera.zoom = 0;
-    /*const placeData: Place = object.userData.place;//la información del lugar se obtiene del objeto y necesito
-    console.log('placeData Name ', placeData.company_name);*/
+    const placeData: Place = object.userData.place;//la información del lugar se obtiene del objeto y necesito
+    //console.log('placeData Name ', placeData.company_name);
 
-    console.log('placeID',placeID); 
     const webView=document.getElementById('3DVisualizer') as HTMLIFrameElement;
     if (!webView) {
         console.error('WebView element not found');
         return;
     }
-    
-    webView.src = "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId="+placeID+"&userId=0" ;
+    console.log("placeid"+placeID+"companyId="+placeData.company_id);
+    webView.src = "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId="+placeID+"&companyId="+placeData.company_id+"&userId=0" ;
     console.log('WebView src set to:', webView.src);
     RestoreOriginalColors();
     // ChangeColorOfSingleObject(object, COLOR_SELECTED);
