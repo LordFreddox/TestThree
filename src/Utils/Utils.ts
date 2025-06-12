@@ -1,5 +1,5 @@
 import { Object3D, Box3, Vector3, Group, MeshBasicMaterial, Mesh } from 'three';
-import { scene } from './Renderer.ts';
+import { scene } from '../Renderer.ts';
 
 const blockerClassName = 'raycast-blocker';
 

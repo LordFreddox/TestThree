@@ -1,5 +1,5 @@
 import { appendMessage } from "./chat.ts";
-import { URL_MCPCLIENT } from "./constants/constants.ts";
+import { IS_PRODUCTION_ENVIROMENT, URL_MCPCLIENT } from "./Utils/constants.ts";
 
 let fullConversation: string = '';
 let messageAmount: number = 1;
@@ -17,7 +17,8 @@ export function UpdateDescription(placeId: number, companysubsidiaryId: number, 
     }
     const body = {
         placeId: placeId,
-        companysubsidiaryId: companysubsidiaryId
+        companysubsidiaryId: companysubsidiaryId,
+        isProductionEnviroment: IS_PRODUCTION_ENVIROMENT
     };
     description.innerHTML = 'Cargando informacion...';
     // controller = new AbortController();

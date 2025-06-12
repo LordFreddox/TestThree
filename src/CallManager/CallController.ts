@@ -1,8 +1,11 @@
 import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
-import { URL_MCPCLIENT } from "../constants/constants.ts";
+import { COMPANY_ID, IS_PRODUCTION_ENVIROMENT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
-import { EndCallView } from './CallView.ts';
+import { EndCallView, botName } from './CallView.ts';
+import { SearchPlacesByDistanceCategoryArea } from '../main.ts';
+import { scene } from '../Renderer.ts';
+// import { generateUUID } from 'three/src/math/MathUtils.js';
 // import { GetHTMLElement } from '../Utils.ts';
 
 const CallSession = new UltravoxSession();
@@ -12,8 +15,15 @@ SetupListeners();
 
 export async function CreateCall(): Promise<boolean> {
     try {
+        // const roomName = `room-${localStorage.getItem("companyId")!}-${generateUUID()}`;
+        // const participantName = `participant-${localStorage.getItem("companyId")!}-${generateUUID()}`;
+        // const session = await Promise.resolve(connectParticipant(participantName, roomName));
+        
         const body = {
-            companyId: localStorage.getItem("companyId")!,
+            companyId: COMPANY_ID,
+            companyName: localStorage.getItem('companyName')!,
+            botName: botName,
+            isProductionEnviroment: IS_PRODUCTION_ENVIROMENT
         };
         const response = await fetch(`${URL_MCPCLIENT}/ultravox`, {
             method: 'POST',
@@ -48,7 +58,7 @@ function SetupListeners() {
         console.log(`Session status changed: ${CallSession.status}`);
         switch (CallSession.status) {
             case UltravoxSessionStatus.SPEAKING:
-                if(firstSpeak){
+                if (firstSpeak) {
                     firstSpeak = false;
                     EndCallView();
                 }
@@ -81,6 +91,51 @@ function SetupListeners() {
     });
 }
 
+// const connectParticipant = async (identity: string, roomName: string): Promise<Room> => {
+//     const room = new Room();
+//     const { token, url } = await fetchToken(identity, roomName);
+
+//     room.on(RoomEvent.Disconnected, () => {
+//         console.log(`[${identity}] Disconnected from room`);
+//     });
+
+//     await room.connect(url, token, {
+//         autoSubscribe: true,
+//     } as RoomConnectOptions);
+
+//     await new Promise<void>((resolve) => {
+//         if (room.state === 'connected') {
+//             resolve();
+//         } else {
+//             room.once(RoomEvent.Connected, () => resolve());
+//         }
+//     });
+
+//     console.log(`${identity} connected.`);
+
+//     return room;
+// };
+
+// const fetchToken = async (
+//     identity: string,
+//     roomName: string,
+// ): Promise<{ token: string; url: string }> => {
+//     const response = await fetch(`http://localhost:3000/get-token`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ identity, roomName }),
+//     });
+
+//     if (!response.ok) {
+//         throw new Error('Failed to fetch token');
+//     }
+
+//     const data = await response.json();
+//     return { token: data.token, url: data.url };
+// };
+
 // async function TimeOutUser(timeToOut: number = 10000) {
 //     timeOutCancelation = setTimeout(() => {
 //         EndCallView();
@@ -90,18 +145,19 @@ function SetupListeners() {
 // }
 
 const FocusOnPlace = (params: any) => {
-    SetupDescriptionCardForPlaceByID(params.placeId as string);
+    console.log(`sending place ID for focus ${params.placeId as string}`);
+    const FocusResponse = SetupDescriptionCardForPlaceByID(params.placeId as string);
     EndCallView();
-    return `successfully focused the place `;
+    return `Lugar enfocado exitosamente en ${JSON.stringify(FocusResponse)}`;
 };
 
 const OpenServices = (params: any) => {
-    if(!serviceList) return `Hubo un error al mostrar la url.`;
+    if (!serviceList) return `Hubo un error al mostrar la url.`;
 
     console.log(`executing tool OpenServices`, params.serviceId);
     const service =
         serviceList.find(service => service.id === Number.parseInt(params.serviceId));
-    if(!service) return `Hubo un error al mostrar la url.`;
+    if (!service) return `Hubo un error al mostrar la url.`;
     handleBlockClick(
         service?.description,
         service?.url,
@@ -111,15 +167,24 @@ const OpenServices = (params: any) => {
     return `Mostrando url, por favor, escanee el QR en pantalla.`;
 };
 
-// CallSession.registerToolImplementation(
-//     "FocusOnPlace",
-//     FocusOnPlace
-// );
+const GetPlacesRecomendationByCategory = (params: any) => {
+    const startObject = scene.getObjectByName(params.placeId as string);
+    const categoryToSearch = params.category as string;
+    console.log(`entering GetPlacesRecomendationByCategory with placeID: ${params.placeId as string} and category: ${categoryToSearch}`);
+    if(!startObject) return `Lugar inicial no encontrado en escena`;
+    if(!categoryToSearch) return `Categoría no enviada`;
+
+    const foundPlaces = SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
+    if(foundPlaces.size === 0) return `No se encontraron lugares con los filtros asignados de categoría`;
+
+    return `Se encontraron los siguientes lugares alrededor de tu ubicación con la categoría de ${categoryToSearch}: ${JSON.stringify(foundPlaces)}`;
+};
 
 CallSession.registerToolImplementations({
     "FocusOnPlace": FocusOnPlace,
-    "OpenServices": OpenServices
-})
+    "OpenServices": OpenServices,
+    "GetPlacesRecomendationByCategory": GetPlacesRecomendationByCategory
+});
 
 export function EndCall() {
     CallSession.leaveCall();

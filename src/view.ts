@@ -1,14 +1,15 @@
 import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3, Plane } from 'three';
 import { camera, canvas, scene } from './Renderer.ts';
-import { Place, PROJECT } from './HTTP/http-service.ts';
+import { Place } from './Utils/Types.ts';
+import { PROJECT } from './HTTP/http-service.ts';
 // import { getPathAndDisplay } from './Navigator.ts';
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils.ts';
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils/Utils.ts';
 import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
-import { focusCameraOnObject } from './main.ts';//metodo para animar la camara al objeto seleccionado
-const companyId = localStorage.getItem("companyId")!;
+import { focusCameraOnObject, SearchPlacesByDistanceCategoryArea } from './main.ts';//metodo para animar la camara al objeto seleccionado
+import { COMPANY_ID } from './Utils/constants.ts';
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
 let MapObjectPlacesText = {} as { [key: string]: Object3D[] };
@@ -27,7 +28,7 @@ let endPlaceId: string | undefined
 const searchPanel = GetHTMLElement('.container-select-place');
 const containerSearch = GetHTMLElement('#container-search');
 const descriptionPathPanel = document.getElementById('description-path');
-const webviewContainer= document.getElementById('webView') as HTMLIFrameElement;
+const webviewContainer = document.getElementById('webView') as HTMLIFrameElement;
 const placesList = GetHTMLElement('#placesList');
 const personList = GetHTMLElement('#personList');
 const divCardPlace = GetHTMLElement('#divCardPlace');
@@ -35,8 +36,6 @@ let currentController: AbortController | null = null;
 
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
-
-
 
 function normalizeString(str: string): string {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove all diacritical marks
@@ -71,7 +70,7 @@ searchBar?.addEventListener('input', () => {
 });
 
 GetHTMLElement('#icon-close').onclick = () => {
-   CloseSearchPlace();
+    CloseSearchPlace();
 };
 GetHTMLElement('#closePlaceCard').onclick = () => {
     ClosePlaceCard();
@@ -180,14 +179,14 @@ function SetClearXIcon(currentSelectedSearchButton: HTMLElement) {
 GetHTMLElement('#fullviewButton').onclick = async () => {
     if (!startPlaceId || !endPlaceId) return;
     if (startPlaceId === endPlaceId) return;
-    window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
+    window.open(ConstructUnityVirtualTourURL(COMPANY_ID, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
         '_blank'); //CHANGE BOT TEST 3/7/2025
 };
 
 GetHTMLElement('#ExitQR').onclick = () => {
     if (!startPlaceId || !endPlaceId) return;
     if (startPlaceId === endPlaceId) return;
-    window.open(ConstructUnityVirtualTourURL(companyId, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
+    window.open(ConstructUnityVirtualTourURL(COMPANY_ID, startPlaceId, endPlaceId, PROJECT.toLowerCase()),
         '_blank');
     GetHTMLElement('#QRDisplay').style.display = 'none';
 };
@@ -255,13 +254,13 @@ function SetupPlacesForSearchVirtualTour(places: Place[]) {
 }
 
 function SetupPlacesForSearchMap3D(place: Place, object: Object3D, floorLevels: Object3D[]) {
-        let newButton = document.createElement('button');
-        newButton.classList.add('place-item');
-        newButton.type = 'button';
-        // newButton.classList.add('itemPlaceSearchClass');
-        newButton.onclick = () => { ButtonActionItemSearchPanelMap3D(object, floorLevels) };
+    let newButton = document.createElement('button');
+    newButton.classList.add('place-item');
+    newButton.type = 'button';
+    // newButton.classList.add('itemPlaceSearchClass');
+    newButton.onclick = () => { ButtonActionItemSearchPanelMap3D(object, floorLevels) };
 
-        const html = `
+    const html = `
             <img alt="" class="image-place" src="${place.companysubsidiary_image_url}">
             <div class="info">
                 <span class="name-place">${place.companysubsidiary_name}</span>
@@ -269,8 +268,8 @@ function SetupPlacesForSearchMap3D(place: Place, object: Object3D, floorLevels: 
             </div>
             <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
 
-        newButton.innerHTML = html;
-        placesList.appendChild(newButton);
+    newButton.innerHTML = html;
+    placesList.appendChild(newButton);
 }
 
 async function checkAndDownloadJSON() {
@@ -284,7 +283,7 @@ async function checkAndDownloadJSON() {
         return;
     }
 
-    const url = BASE_URL_PATH_DESCRIPTION + `${companyId}-${new URLSearchParams(window.location.search).get('project')?.toUpperCase()}` + "/resumen-" + startPlaceId + "_" + endPlaceId + ".json";
+    const url = BASE_URL_PATH_DESCRIPTION + `${COMPANY_ID}-${new URLSearchParams(window.location.search).get('project')?.toUpperCase()}` + "/resumen-" + startPlaceId + "_" + endPlaceId + ".json";
 
     try {
         const response = await fetch(url);
@@ -534,6 +533,9 @@ function RestoreOriginalColors() {
 
 function CreateTextForPlace(
     textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1.1,) {
+    if (textName.bigcompany_id.toString() !== COMPANY_ID)
+        return;
+
     const elem = document.createElement('div');
     const formattedKey = textName.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
     elem.textContent = formattedKey;
@@ -541,7 +543,11 @@ function CreateTextForPlace(
     elem.style.fontWeight = 'bold';
     labelContainerElem!.appendChild(elem);
     const { center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
-    const topCenterPosition = new Vector3(center.x, 1, center.z);
+    let topCenterPosition: Vector3 = new Vector3();
+    if (floorLevels.length === 0)
+        topCenterPosition = new Vector3(center.x, 1, center.z);
+    else
+        topCenterPosition = new Vector3(center.x, center.y, center.z);
     labelsScene.set(topCenterPosition, elem);
     const floorObj = findFloorObject(placeObject, floorLevels);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
@@ -556,6 +562,8 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     // controls.maxDistance = 2;
     // controls.update();
     const placeData: Place = object.userData.place;
+    SearchPlacesByDistanceCategoryArea(object, "Restaurantes");
+    // focusCameraOnObject(object);
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     divCardPlace.classList.remove('hideTop');
@@ -576,45 +584,30 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
 
-
-async function SetupDescriptionCardForPlaceByID(placeID: string) {
-
-    
-    console.log('focus por IA', placeID);
+function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edificio: string } {
     const object = scene.getObjectByName(placeID);
-    if(!object) return;
+    if (!object) return { piso: "Piso no encontrado", edificio: "Edificio no encontrado" };
+
+    const placeData: Place = object.userData.place;
+    WaitForFocusAnimation(object, placeData);
+    RestoreOriginalColors();
+    ChangeColorOfSingleObject(object, COLOR_SELECTED);
+    return { piso: `Piso ${placeData.place_area_name}`, edificio: `Edificio ${placeData.company_name}` };
+}
+
+async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
     focusCameraOnObject(object);
-    await new Promise(f => setTimeout(f,1000));
+    await new Promise(f => setTimeout(f, 1000));
+    if(placeData.bigcompany_id.toString() === COMPANY_ID) return; //dont show webview on same bigsurface
+
     webviewContainer.classList.add('showTop');
     webviewContainer.classList.remove('hideTop');
-    // camera.lookAt(object.position);
-    // camera.zoom = 0;
-    const placeData: Place = object.userData.place;//la información del lugar se obtiene del objeto y necesito
-    //console.log('placeData Name ', placeData.company_name);
-
-    const webView=document.getElementById('3DVisualizer') as HTMLIFrameElement;
+    const webView = document.getElementById('3DVisualizer') as HTMLIFrameElement;
     if (!webView) {
         console.error('WebView element not found');
-        return;
     }
-    console.log("placeid"+placeID+"companyId="+placeData.company_id);
-    webView.src = "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId="+placeID+"&companyId="+placeData.company_id+"&userId=0" ;
+    webView.src = "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId=" + placeData.place_id + "&companyId=" + placeData.company_id + "&userId=0";
     console.log('WebView src set to:', webView.src);
-    RestoreOriginalColors();
-    // ChangeColorOfSingleObject(object, COLOR_SELECTED);
-    // divCardPlace.classList.remove('hideTop');
-    // divCardPlace.classList.add('showTop');
-    // (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = placeData.companysubsidiary_image_url;
-    // divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${placeData.companysubsidiary_name}`;
-    // divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${placeData.place_category_name}`;
-    // divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${placeData.place_area_name}`;
-    // (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
-    //     EndCallView();
-    //     DisplayChatAI(placeData.place_id);
-    //     ClosePlaceCard();
-    // };
-    // const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
-    // currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
 
 /*const inputSearch = document.getElementById('threeLoad') as HTMLInputElement;
@@ -652,9 +645,9 @@ console.log('inputSearch clicked');
 //     newButton.innerHTML = html;
 //     return newButton; // Return the HTML string for use elsewhere if needed
 // }
-const closeWebView=document.getElementById('closeWebView') as HTMLInputElement;
+const closeWebView = document.getElementById('closeWebView') as HTMLInputElement;
 closeWebView.onclick = () => {
-   //SetupDescriptionCardForPlaceByID('1173'); // 
+    //SetupDescriptionCardForPlaceByID('1173'); // 
     webviewContainer.classList.remove('showTop');
     webviewContainer.classList.add('hideTop');
 }

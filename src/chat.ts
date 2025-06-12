@@ -1,4 +1,4 @@
-import { GetHTMLElement } from './Utils.ts';
+import { GetHTMLElement } from './Utils/Utils.ts';
 import { ChatRequest } from './AI.ts';
 
 const PERSON_NAME = "Marsel";

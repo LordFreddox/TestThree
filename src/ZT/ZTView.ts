@@ -1,5 +1,6 @@
-import { GetHTMLElement, IsLocalHost } from "../Utils.ts";
-import { GetServiceList, Service } from '../HTTP/http-service.ts';
+import { GetHTMLElement, IsLocalHost } from "../Utils/Utils.ts";
+import { GetServiceList } from '../HTTP/http-service.ts';
+import { Service } from '../Utils/Types.ts';
 import * as QRCode from 'qrcode';
 
 export let serviceList: Service[] | undefined;

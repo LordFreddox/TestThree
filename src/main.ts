@@ -8,30 +8,27 @@ import {
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { GetPlaces, Place, PROJECT } from './HTTP/http-service.ts';
+import { Place } from './Utils/Types.ts';
+import { GetPlaces, PROJECT } from './HTTP/http-service.ts';
 import { scene, camera, renderer } from './Renderer.ts';
 import {
-  initFloorSelector, initCategorySelector,
+  initFloorSelector, initCategorySelector, ClosePlaceCard, CloseSearchPlace,
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
   SetupDescriptionCardForPlace, SetupPlacesForSearchMap3D
 } from './view.ts';
-// import { createNavMesh } from './Navigator.ts'
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils.ts';
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils/Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
-import { FillZTArea } from './ZT/ZTView.ts';
-import { ClosePlaceCard } from './view.ts';
-import { CloseSearchPlace } from './view.ts';
-import { HideZT } from './ZT/ZTView.ts';
-const urlParams = new URLSearchParams(window.location.search);
-const ServType: string = urlParams.get('ServType')!;
+import { FillZTArea, HideZT } from './ZT/ZTView.ts';
+import { ChangeCompanyId, COMPANY_ID, SERV_TYPE } from './Utils/constants.ts';
+// const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
 const tutorial = document.getElementById('tutorial') as HTMLElement;
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
 const BASE_URL = `${window.location.origin}${basePath}/models/`;
-const companyId = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
-localStorage.setItem('companyId', companyId);
+// const companyId = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
+// localStorage.setItem('companyId', companyId);
 let mixers: AnimationMixer[] = [];
 // let allAvailableAnimationClipsMap = new Map<Object3D, AnimationClip[]>();
 const clock = new Clock();
@@ -55,12 +52,12 @@ let contador = 0;//valor a cambiar en el temporizador
 
 let modelUrl: string;
 if (IsLocalHost()) {
-  modelUrl = `./models/${companyId}_${PROJECT.toLowerCase()}.glb`;
+  modelUrl = `./models/${COMPANY_ID}_${PROJECT.toLowerCase()}.glb`;
 } else {
-  modelUrl = companyId === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + `${companyId}_${PROJECT.toLowerCase()}.glb`;
+  modelUrl = COMPANY_ID === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + `${COMPANY_ID}_${PROJECT.toLowerCase()}.glb`;
 }
 
-if (companyId === "0" || IsLocalHost()) {
+if (COMPANY_ID === "0" || IsLocalHost()) {
   GetPlacesFake();
 } else {
   GetPlacesReal();
@@ -68,18 +65,18 @@ if (companyId === "0" || IsLocalHost()) {
 //GetPlacesReal(companyId);
 
 
-document.addEventListener('wheel', function(e) {
+document.addEventListener('wheel', function (e) {
   if (e.ctrlKey) {
     e.preventDefault();
   }
 }, { passive: false });
 
-document.addEventListener('gesturestart', function(e) {
+document.addEventListener('gesturestart', function (e) {
   e.preventDefault();
 }, { passive: false });
 
 function Start() {
-  if(ServType === '3'||ServType === '2'){ 
+  if (SERV_TYPE === '3' || SERV_TYPE === '2') {
     loader.load(
       modelUrl,
       (gltf) => {
@@ -87,25 +84,24 @@ function Start() {
         gltf.scene.position.set(0, 0, 0);
         scene.add(gltf.scene);
         const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
-  
+
         const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
           gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
-  
+
         if (spawn) {
           // Obtener posición mundial del objeto "spawn"
           const spawnPosition = new Vector3();
           spawn.getWorldPosition(spawnPosition);
-  
+
           // Posiciona la cámara relativa al spawn
           camera.position.set(
             spawnPosition.x + 2,
             spawnPosition.y + 5,
             spawnPosition.z + 0 // puedes ajustar este valor si quieres moverla también en Z
           );
-  
+
           camera.lookAt(spawnPosition);
         } else {
-          console.warn('No se encontró un objeto con nombre que incluya "spawn".');
           camera.position.set(size.x + 10, center.y + size.y + 13, 0);
         }
         //camera.position.set(size.x + 10, center.y + size.y + 13, 0);
@@ -113,14 +109,14 @@ function Start() {
         // camera.far = size.length() * 10;
         // camera.zoom = -size.length() / 10;
         controls.minDistance = size.length() / 20;
-        controls.maxDistance = size.length();
-        const mediam = (size.x + size.z) / 2;
+        controls.maxDistance = size.length() / 2;
         minPan = new Vector3(-size.length() / 2, 0, -size.length() / 4);
         maxPan = new Vector3(size.length() / 2, 0, size.length() / 4);
-        controls.minZoom = mediam / 75;
-        controls.maxZoom = mediam / 2.5;
+        // const mediam = (size.x + size.z) / 2;
+        // controls.minZoom = mediam / 50;
+        // controls.maxZoom = mediam / 2.5;
         controls.update();
-  
+
         //create skybox
         const geometry = new SphereGeometry(1, 60, 40);
         const material = new MeshBasicMaterial({
@@ -132,7 +128,7 @@ function Start() {
         scene.add(backgroundSphere);
         backgroundSphere.scale.set(
           size.length() + 100, size.length() + 100, size.length() + 100);
-  
+
         //populate animation array
         // const mixer = new AnimationMixer(gltf.scene);
         // allAvailableAnimationClipsMap.set(gltf.scene, gltf.animations);
@@ -141,13 +137,13 @@ function Start() {
         //   mixer.clipAction(clip).play();
         // });
         // mixers.push(mixer);
-  
+
         gltf.scene.traverse(child => {
           if (child.name.includes('ROTATE_')) {
             lookAtCamera.push(child);
           }
         });
-  
+
         //populate floorLevels array with the objects that has the following name piso1, piso2, piso3 and so on
         let index = 1;
         while (true) {
@@ -159,21 +155,21 @@ function Start() {
             break;
           }
         }
-  
+
         if (floorLevels.length > 1) {
           initFloorSelector(floorLevels, labelsScene);
         } else {
           document.getElementById('floor-selector-title')!.style.display = 'none';
           document.getElementById('floor-selector')!.style.display = 'none';
         }
-  
+
         const objetivoParent = scene.getObjectByName("objetivos");
         if (objetivoParent) {
           objetivoParent.children.forEach(child => {
             child.visible = false;
           });
         }
-  
+
         loadingscreen.style.display = "none";
         // const navmeshObj = scene.getObjectByName('navmesh');
         // if (navmeshObj) {
@@ -181,18 +177,23 @@ function Start() {
         // }
 
         SetupPlacesOnScene(places);
-  
+        for (let i = 0; i < places.length; i++) {
+          if (places[i].bigcompany_level === 1) {
+            localStorage.setItem('companyName', places[i].bigcompany_name_short);
+            break;
+          }
+        }
         //Set selected floor to 1
         const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
         floorSelector.selectedIndex = 0;
         const event = new Event('change', { bubbles: true });
         floorSelector.dispatchEvent(event);
-  
+
         GetHTMLElement('#loadingMain').style.display = "none";
       },
       (xhr) => {
         const progress = (xhr.loaded / xhr.total) * 100;
-  
+
         if (loadingBar) {
           loadingBar.style.width = `${progress}%`;
         }
@@ -231,8 +232,6 @@ controls.addEventListener('end', () => {
 
 controls.update();
 
-
-
 function GetPlacesReal() {
   GetPlaces().then(json => {
     places = json.data_place.places;
@@ -243,7 +242,7 @@ function GetPlacesReal() {
 }
 
 function GetPlacesFake() {
-  fetch(`src/testJsons/response_${companyId}_${PROJECT.toLowerCase()}.json`)
+  fetch(`src/testJsons/response_${COMPANY_ID}_${PROJECT.toLowerCase()}.json`)
     .then(json => {
       if (!json.ok) {
         console.log('Network response was not ok');
@@ -277,7 +276,7 @@ function SetupPlacesOnScene(places: Place[]) {
 }
 
 function SetupExplorerOrVirtualtour(places: Place[]) {
-  switch (ServType) {
+  switch (SERV_TYPE) {
     case "1":
       GetHTMLElement('.container-select-place').style.top = '1vh';
       GetHTMLElement('#previewButton').style.display = 'none';
@@ -303,17 +302,17 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
       GetHTMLElement('#loadingMain').style.display = "none";
       break;
     case "2":
-        loadAvatar(companyId);
-        FillZTArea(companyId);
-        document.getElementById('div3DView')!.style.display = 'block';
-        document.getElementById('search-section')!.style.display = 'none';
-        document.getElementById('ecommerce-redirect')!.style.display = 'none';
-        //document.getElementById('btnZTList')!.style.display = 'none';
-        //document.getElementById('ZTArea')!.style.display = 'none';
-    break;
+      loadAvatar(COMPANY_ID);
+      FillZTArea(COMPANY_ID);
+      document.getElementById('div3DView')!.style.display = 'block';
+      document.getElementById('search-section')!.style.display = 'none';
+      document.getElementById('ecommerce-redirect')!.style.display = 'none';
+      //document.getElementById('btnZTList')!.style.display = 'none';
+      //document.getElementById('ZTArea')!.style.display = 'none';
+      break;
     case "3":
-      loadAvatar(companyId);
-      FillZTArea(companyId);
+      loadAvatar(COMPANY_ID);
+      FillZTArea(COMPANY_ID);
       document.getElementById('div3DView')!.style.display = 'block';
       document.getElementById('search-section')!.style.display = 'none';
       break;
@@ -334,17 +333,17 @@ controls.addEventListener('start', () => {
 window.addEventListener('touchend', (event) => {
   //disable raycast 
   //cerrar pantallas 
- 
-  if(shouldBlock(event)) return; 
+
+  if (shouldBlock(event)) return;
   ClosePlaceCard();
   CloseSearchPlace();
   HideZT();
-  if(contador!== 0) return;
+  if (contador !== 0) return;
   const touch = event.changedTouches[0];
   mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
- 
+
   // Remove the previous debug line if it exists
   //scene.remove(scene.getObjectByName('rayLine')!);
 
@@ -390,21 +389,48 @@ export function focusCameraOnObject(object: Object3D) {
 
   const worldPos = new Vector3();
   object.getWorldPosition(worldPos);
-targetLookAt.copy(worldPos);
+  targetLookAt.copy(worldPos);
   targetPosition.copy(worldPos).add(offset);
-  
+
 
   isMovingCamera = true;
 }
 
+export function SearchPlacesByDistanceCategoryArea(
+  startObject: Object3D, categoryFilter: string, 
+  searchDistance: number = 50): Map<string, string> {
+  let foundObjects: Map<string, string> = new Map<string, string>();
+
+  // if (!startObject) {
+  //   foundObjects.push("No se encontraron lugares");
+  //   return foundObjects;
+  // }
+
+  const startPosition: Vector3 = new Vector3;
+  startObject.getWorldPosition(startPosition);
+  interactObjects.forEach(object => {
+    const probePosition: Vector3 = new Vector3;
+    object.getWorldPosition(probePosition);
+    const calculatedDistance = startPosition.distanceTo(probePosition);
+    if (
+      // calculatedDistance < searchDistance &&//filter by distance
+      object.userData.place.place_category_name === categoryFilter //filter by category
+      && startObject.userData.place.place_area_id === object.userData.place.place_area_id //filter by same area id
+    ) {
+      console.log(`calculatedDistance to ${object.userData.place.companysubsidiary_name}: ${calculatedDistance}`);
+      foundObjects.set(object.name, `A ${Math.round(calculatedDistance)} metros de distancia`);
+    }
+  });
+  return foundObjects;
+}
+
 function animate() {
-   if (isMovingCamera) {
+  if (isMovingCamera) {
     // Mover posición y target suavemente
     controls.target.lerp(targetLookAt, lerpSpeed);
     controls.update();
 
     camera.position.lerp(targetPosition, lerpSpeed);
-    console.log("Posicion:", camera.position.distanceTo(targetPosition));
     // Si ya llegamos al punto
     if (camera.position.distanceTo(targetPosition) <= 2) {
       console.log("Cámara ha llegado al objetivo:", targetPosition);
@@ -414,15 +440,15 @@ function animate() {
       controls.update();
       isMovingCamera = false;
     }
-  } 
+  }
   else {
-  controls.update();
-  mixers.forEach((mixer) =>
-    mixer.update(clock.getDelta())
-  );
-  lookAtCamera.forEach((object) => {
-    object.lookAt(camera.position);
-  });
+    controls.update();
+    mixers.forEach((mixer) =>
+      mixer.update(clock.getDelta())
+    );
+    lookAtCamera.forEach((object) => {
+      object.lookAt(camera.position);
+    });
   }
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
