@@ -394,9 +394,10 @@ export function focusCameraOnObject(object: Object3D) {
   targetLookAt.copy(worldPos);
   targetPosition.copy(worldPos).add(offset);
   console.log("Enfocando cámara en objeto:", object.name, "Posición:", targetPosition);
+   if(originalMinDistance === undefined || originalMaxDistance === undefined) {
   originalMinDistance = controls.minDistance;
   originalMaxDistance = controls.maxDistance;
-
+  }
   //desactivamos temporalmente las restricciones de zoom
   controls.minDistance = 0;
   controls.maxDistance = Infinity;
@@ -434,15 +435,13 @@ export function SearchPlacesByDistanceCategoryArea(
 
 function animate() {
   if (isMovingCamera) {
-    // Mover posición y target suavemente
+    // Movimiento de la camara
     controls.target.lerp(targetLookAt, lerpSpeed);
     controls.update();
 
     camera.position.lerp(targetPosition, lerpSpeed);
-    console.log("Posicion:", camera.position.distanceTo(targetPosition));
     // Si ya llegamos al punto
     if (camera.position.distanceTo(targetPosition) <= 12) {
-      console.log("Cámara ha llegado al objetivo:", targetPosition);
       camera.position.copy(targetPosition);
       // Restauramos restricciones de zoom
       controls.minDistance = originalMinDistance;
