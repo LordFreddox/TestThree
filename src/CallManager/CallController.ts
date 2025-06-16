@@ -1,5 +1,5 @@
 import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
-import { COMPANY_ID, IS_PRODUCTION_ENVIROMENT, URL_MCPCLIENT } from "../Utils/constants.ts";
+import { COMPANY_ID, COMPANY_NAME, IS_PRODUCTION_ENVIROMENT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
 import { EndCallView, botName } from './CallView.ts';
@@ -21,7 +21,7 @@ export async function CreateCall(): Promise<boolean> {
         
         const body = {
             companyId: COMPANY_ID,
-            companyName: localStorage.getItem('companyName')!,
+            companyName: COMPANY_NAME,
             botName: botName,
             isProductionEnviroment: IS_PRODUCTION_ENVIROMENT
         };
@@ -75,7 +75,7 @@ function SetupListeners() {
         const lastTranscript = CallSession.transcripts[CallSession.transcripts.length - 1] as Transcript;
 
         if (lastTranscript.speaker != 'agent') return;
-        console.log('callTranscript:', lastTranscript.text);
+        // console.log('callTranscript:', lastTranscript.text);
 
         // const urlMatch = lastTranscript.text.match(/https?:\/\/(?:\w+\-?\.)+\w+\/(?:[^/]+\/)*[\w-]+\.php/);
         // if (urlMatch && alreadyShowWifi) {

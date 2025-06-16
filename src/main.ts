@@ -20,7 +20,7 @@ import {
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils/Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
-import { ChangeCompanyId, COMPANY_ID, SERV_TYPE } from './Utils/constants.ts';
+import { ChangeCompanyName, COMPANY_ID, SERV_TYPE } from './Utils/constants.ts';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -179,7 +179,7 @@ function Start() {
         SetupPlacesOnScene(places);
         for (let i = 0; i < places.length; i++) {
           if (places[i].bigcompany_level === 1) {
-            localStorage.setItem('companyName', places[i].bigcompany_name_short);
+            ChangeCompanyName(places[i].bigcompany_name_short);
             break;
           }
         }
@@ -413,7 +413,7 @@ export function SearchPlacesByDistanceCategoryArea(
   //   foundObjects.push("No se encontraron lugares");
   //   return foundObjects;
   // }
-
+  console.log(searchDistance);
   const startPosition: Vector3 = new Vector3;
   startObject.getWorldPosition(startPosition);
   interactObjects.forEach(object => {

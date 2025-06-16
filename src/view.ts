@@ -1,4 +1,4 @@
-import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3, Plane } from 'three';
+import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 import { camera, canvas, scene } from './Renderer.ts';
 import { Place } from './Utils/Types.ts';
 import { PROJECT } from './HTTP/http-service.ts';
@@ -8,7 +8,7 @@ import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
-import { focusCameraOnObject, SearchPlacesByDistanceCategoryArea } from './main.ts';//metodo para animar la camara al objeto seleccionado
+import { focusCameraOnObject } from './main.ts';//metodo para animar la camara al objeto seleccionado
 import { COMPANY_ID } from './Utils/constants.ts';
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
@@ -562,7 +562,7 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     // controls.maxDistance = 2;
     // controls.update();
     const placeData: Place = object.userData.place;
-    SearchPlacesByDistanceCategoryArea(object, "Restaurantes");
+    // SearchPlacesByDistanceCategoryArea(object, "Restaurantes");
     focusCameraOnObject(object);
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
