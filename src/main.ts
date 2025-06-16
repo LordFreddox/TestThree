@@ -375,6 +375,8 @@ let isMovingCamera = false;
 const targetPosition = new Vector3();
 const targetLookAt = new Vector3();
 const lerpSpeed = 0.01;
+let originalMinDistance: number;
+let originalMaxDistance: number;
 
 // Función para enfocar la cámara a un objeto
 export function focusCameraOnObject(object: Object3D) {
@@ -391,8 +393,14 @@ export function focusCameraOnObject(object: Object3D) {
   object.getWorldPosition(worldPos);
   targetLookAt.copy(worldPos);
   targetPosition.copy(worldPos).add(offset);
+  console.log("Enfocando cámara en objeto:", object.name, "Posición:", targetPosition);
+  originalMinDistance = controls.minDistance;
+  originalMaxDistance = controls.maxDistance;
 
-
+  //desactivamos temporalmente las restricciones de zoom
+  controls.minDistance = 0;
+  controls.maxDistance = Infinity;
+  controls.enabled = false; // evitamos que el usuario interactúe
   isMovingCamera = true;
 }
 
@@ -431,24 +439,28 @@ function animate() {
     controls.update();
 
     camera.position.lerp(targetPosition, lerpSpeed);
+    console.log("Posicion:", camera.position.distanceTo(targetPosition));
     // Si ya llegamos al punto
-    if (camera.position.distanceTo(targetPosition) <= 2) {
+    if (camera.position.distanceTo(targetPosition) <= 12) {
       console.log("Cámara ha llegado al objetivo:", targetPosition);
       camera.position.copy(targetPosition);
+      // Restauramos restricciones de zoom
+      controls.minDistance = originalMinDistance;
+      controls.maxDistance = originalMaxDistance;
       controls.enabled = true;
       controls.target.copy(targetLookAt);
       controls.update();
       isMovingCamera = false;
     }
-  }
+  } 
   else {
-    controls.update();
-    mixers.forEach((mixer) =>
-      mixer.update(clock.getDelta())
-    );
-    lookAtCamera.forEach((object) => {
-      object.lookAt(camera.position);
-    });
+  controls.update();
+  mixers.forEach((mixer) =>
+    mixer.update(clock.getDelta())
+  );
+  lookAtCamera.forEach((object) => {
+    object.lookAt(camera.position);
+  });
   }
   renderer.render(scene, camera);
   requestAnimationFrame(animate);

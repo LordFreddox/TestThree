@@ -563,9 +563,10 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     // controls.update();
     const placeData: Place = object.userData.place;
     SearchPlacesByDistanceCategoryArea(object, "Restaurantes");
-    // focusCameraOnObject(object);
+    focusCameraOnObject(object);
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
+    await new Promise(f => setTimeout(f, 2000));
     divCardPlace.classList.remove('hideTop');
     divCardPlace.classList.add('showTop');
     searchPanel.style.display = 'none';
@@ -597,7 +598,7 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edif
 
 async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
     focusCameraOnObject(object);
-    await new Promise(f => setTimeout(f, 1000));
+    await new Promise(f => setTimeout(f, 2000));
     if(placeData.bigcompany_id.toString() === COMPANY_ID) return; //dont show webview on same bigsurface
 
     webviewContainer.classList.add('showTop');
