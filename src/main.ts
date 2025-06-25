@@ -384,16 +384,23 @@ export function focusCameraOnObject(object: Object3D) {
     console.warn("Objeto no válido");
     return;
   }
-
+  console.log("Enfocando cámara en objeto:", object.name);
+  //camera.position.copy(object.position);
+  
   const offset = new Vector3(0, 5, 0);
   //const offset = new Vector3(3, 5, -5); 
   object.updateMatrixWorld();
 
   const worldPos = new Vector3();
+  
   object.getWorldPosition(worldPos);
-  targetLookAt.copy(worldPos);
+  //camera.position.set(worldPos.x, worldPos.y + 50, worldPos.z);
+  camera.lookAt(worldPos);
   targetPosition.copy(worldPos).add(offset);
-  console.log("Enfocando cámara en objeto:", object.name, "Posición:", targetPosition);
+  const targetoffset = new Vector3(0, -10, 0);
+  targetLookAt.copy(worldPos).add(targetoffset);
+  //targetPosition.copy(object.position).add(offset);
+  console.log("world", worldPos, "Posición:", object.position);
    if(originalMinDistance === undefined || originalMaxDistance === undefined) {
   originalMinDistance = controls.minDistance;
   originalMaxDistance = controls.maxDistance;
@@ -436,21 +443,22 @@ export function SearchPlacesByDistanceCategoryArea(
 function animate() {
   if (isMovingCamera) {
     // Movimiento de la camara
-    controls.target.lerp(targetLookAt, lerpSpeed);
-    controls.update();
+    controls.target.lerp(targetPosition, lerpSpeed);
+    //controls.update();
 
     camera.position.lerp(targetPosition, lerpSpeed);
     // Si ya llegamos al punto
-    if (camera.position.distanceTo(targetPosition) <= 12) {
-      camera.position.copy(targetPosition);
-      // Restauramos restricciones de zoom
-      controls.minDistance = originalMinDistance;
-      controls.maxDistance = originalMaxDistance;
-      controls.enabled = true;
-      controls.target.copy(targetLookAt);
-      controls.update();
-      isMovingCamera = false;
-    }
+    console.log(camera.position.distanceTo(targetPosition));
+    if (camera.position.distanceTo(targetPosition) <= 3) {
+  camera.position.copy(targetPosition);
+  controls.target.copy(targetLookAt);
+
+  controls.minDistance = originalMinDistance;
+  controls.maxDistance = originalMaxDistance;
+  controls.enabled = true;
+
+  isMovingCamera = false;
+}
   } 
   else {
   controls.update();

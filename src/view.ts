@@ -586,9 +586,8 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
 }
 
 function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edificio: string } {
-    const object = scene.getObjectByName(placeID);
+    const object = scene.getObjectByName(placeID) as Object3D;
     if (!object) return { piso: "Piso no encontrado", edificio: "Edificio no encontrado" };
-
     const placeData: Place = object.userData.place;
     WaitForFocusAnimation(object, placeData);
     RestoreOriginalColors();
@@ -654,7 +653,7 @@ closeWebView.onclick = () => {
 }
 /*const testbutton=document.getElementById('searchPlace3D') as HTMLInputElement;
 testbutton.onclick = () => {
-   SetupDescriptionCardForPlaceByID('14403'); 
+   SetupDescriptionCardForPlaceByID('14328'); 
 }*/
 
 function CreateOptionItemSearchPanel(place: Place) {
