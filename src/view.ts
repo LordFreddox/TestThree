@@ -585,14 +585,15 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
 
-function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edificio: string } {
-    const object = scene.getObjectByName(placeID) as Object3D;
-    if (!object) return { piso: "Piso no encontrado", edificio: "Edificio no encontrado" };
+function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edificio: string, success: boolean } {
+    const object = scene.getObjectByName(placeID);
+    if (!object) return { piso: "Piso no encontrado", edificio: "Edificio no encontrado", success: false };
+
     const placeData: Place = object.userData.place;
     WaitForFocusAnimation(object, placeData);
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
-    return { piso: `Piso ${placeData.place_area_name}`, edificio: `Edificio ${placeData.company_name}` };
+    return { piso: `Piso ${placeData.place_area_name}`, edificio: `Edificio ${placeData.company_name}`, success: true };
 }
 
 async function WaitForFocusAnimation(object: Object3D, placeData: Place) {

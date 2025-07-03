@@ -18,7 +18,7 @@
             "type": "vscode-edge-devtools.debug",
             "name": "Open Edge DevTools",
             "request": "attach",
-            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=203",
+            "url": "http://localhost:4200/index.html?ServType=3&project=triptrapp&placeId=198",
             "presentation": {
                 "hidden": true
             }

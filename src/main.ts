@@ -20,7 +20,7 @@ import {
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils/Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
-import { ChangeCompanyName, COMPANY_ID, SERV_TYPE } from './Utils/constants.ts';
+import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -36,7 +36,7 @@ let lookAtCamera: Object3D[] = [];
 let floorLevels: Object3D[] = [];
 let interactObjects = [] as Object3D[];
 const loader = new GLTFLoader();
-let places: Place[];
+let places: Place[] = [];
 const mouse = new Vector2();
 const raycaster = new Raycaster();
 
@@ -52,16 +52,21 @@ let contador = 0;//valor a cambiar en el temporizador
 
 let modelUrl: string;
 if (IsLocalHost()) {
-  modelUrl = `./models/${COMPANY_ID}_${PROJECT.toLowerCase()}.glb`;
+  modelUrl = `./models/${PROJECT.toUpperCase()}/${COMPANY_ID}.glb`;
 } else {
-  modelUrl = COMPANY_ID === "0" ? BASE_URL + 'default' + '.glb' : BASE_URL + `${COMPANY_ID}_${PROJECT.toLowerCase()}.glb`;
+  modelUrl = `${BASE_URL}${PROJECT.toUpperCase()}/${COMPANY_ID}.glb`;
 }
 
-if (COMPANY_ID === "0" || IsLocalHost()) {
-  GetPlacesFake();
+if (FAKE_ID === null) {
+  if (COMPANY_ID === "0" || IsLocalHost()) {
+    GetPlacesFake();
+  } else {
+    GetPlacesReal();
+  }
 } else {
-  GetPlacesReal();
+  Start();
 }
+
 //GetPlacesReal(companyId);
 
 
@@ -176,7 +181,14 @@ function Start() {
         //   createNavMesh(navmeshObj as Mesh)
         // }
 
-        SetupPlacesOnScene(places);
+        if (FAKE_ID === null) {
+          SetupPlacesOnScene(places);
+        } else { //enable ui on fakeId
+          document.getElementById('div3DView')!.style.display = 'block';
+          document.getElementById('search-section')!.style.display = 'none';
+          document.getElementById('category-selector-parent')!.style.display = 'none';
+        }
+
         for (let i = 0; i < places.length; i++) {
           if (places[i].bigcompany_level === 1) {
             ChangeCompanyName(places[i].bigcompany_name_short);
@@ -386,13 +398,13 @@ export function focusCameraOnObject(object: Object3D) {
   }
   console.log("Enfocando cámara en objeto:", object.name);
   //camera.position.copy(object.position);
-  
+
   const offset = new Vector3(0, 5, 0);
   //const offset = new Vector3(3, 5, -5); 
   object.updateMatrixWorld();
 
   const worldPos = new Vector3();
-  
+
   object.getWorldPosition(worldPos);
   //camera.position.set(worldPos.x, worldPos.y + 50, worldPos.z);
   camera.lookAt(worldPos);
@@ -401,9 +413,9 @@ export function focusCameraOnObject(object: Object3D) {
   targetLookAt.copy(worldPos).add(targetoffset);
   //targetPosition.copy(object.position).add(offset);
   console.log("world", worldPos, "Posición:", object.position);
-   if(originalMinDistance === undefined || originalMaxDistance === undefined) {
-  originalMinDistance = controls.minDistance;
-  originalMaxDistance = controls.maxDistance;
+  if (originalMinDistance === undefined || originalMaxDistance === undefined) {
+    originalMinDistance = controls.minDistance;
+    originalMaxDistance = controls.maxDistance;
   }
   //desactivamos temporalmente las restricciones de zoom
   controls.minDistance = 0;
@@ -413,14 +425,10 @@ export function focusCameraOnObject(object: Object3D) {
 }
 
 export function SearchPlacesByDistanceCategoryArea(
-  startObject: Object3D, categoryFilter: string, 
+  startObject: Object3D, categoryFilter: string,
   searchDistance: number = 50): Map<string, string> {
   let foundObjects: Map<string, string> = new Map<string, string>();
 
-  // if (!startObject) {
-  //   foundObjects.push("No se encontraron lugares");
-  //   return foundObjects;
-  // }
   console.log(searchDistance);
   const startPosition: Vector3 = new Vector3;
   startObject.getWorldPosition(startPosition);
@@ -440,6 +448,15 @@ export function SearchPlacesByDistanceCategoryArea(
   return foundObjects;
 }
 
+// export function GetPlaceIDByName(placeName: string): string{
+//   for (let index = 0; index < places.length; index++) {
+//     const element = places[index];
+//     if(element.companysubsidiary_name.includes(placeName)){
+
+//     }
+//   }
+// }
+
 function animate() {
   if (isMovingCamera) {
     // Movimiento de la camara
@@ -448,26 +465,25 @@ function animate() {
 
     camera.position.lerp(targetPosition, lerpSpeed);
     // Si ya llegamos al punto
-    console.log(camera.position.distanceTo(targetPosition));
     if (camera.position.distanceTo(targetPosition) <= 3) {
-  camera.position.copy(targetPosition);
-  controls.target.copy(targetLookAt);
+      camera.position.copy(targetPosition);
+      controls.target.copy(targetLookAt);
 
-  controls.minDistance = originalMinDistance;
-  controls.maxDistance = originalMaxDistance;
-  controls.enabled = true;
+      controls.minDistance = originalMinDistance;
+      controls.maxDistance = originalMaxDistance;
+      controls.enabled = true;
 
-  isMovingCamera = false;
-}
-  } 
+      isMovingCamera = false;
+    }
+  }
   else {
-  controls.update();
-  mixers.forEach((mixer) =>
-    mixer.update(clock.getDelta())
-  );
-  lookAtCamera.forEach((object) => {
-    object.lookAt(camera.position);
-  });
+    controls.update();
+    mixers.forEach((mixer) =>
+      mixer.update(clock.getDelta())
+    );
+    lookAtCamera.forEach((object) => {
+      object.lookAt(camera.position);
+    });
   }
   renderer.render(scene, camera);
   requestAnimationFrame(animate);

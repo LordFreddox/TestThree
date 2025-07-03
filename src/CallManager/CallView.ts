@@ -1,5 +1,5 @@
 import { GetHTMLElement, IsLocalHost } from '../Utils/Utils.ts';
-import { CreateCall, EndCall } from './CallController.ts';
+import { CreateCallLiveKit, EndCall } from './CallController.ts';
 import { GetAvatarURL } from '../HTTP/http-service.ts';
 import { AvatarResponse } from '../Utils/Types.ts';
 // import { handleBlockClick } from '../ZT/ZTView.ts';
@@ -39,7 +39,8 @@ export async function loadAvatar(companyId: string) {
 StartCallButton.onclick = async () => {
     StartCallView();
     if (isOnCall) return;
-    isOnCall = await CreateCall();
+    // isOnCall = await CreateCall();
+    isOnCall = await CreateCallLiveKit();
 
     // await setTimeout(() => {
     //     isOnCall = true;

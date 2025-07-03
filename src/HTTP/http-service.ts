@@ -1,6 +1,6 @@
-import { COMPANY_ID } from "../Utils/constants.ts";
+import { COMPANY_ID, PROJECT_ENVIROMENT } from "../Utils/constants.ts";
 import { AvatarResponse, ResponsePlaces, Service, DataService, ProjectBaseURL } from "../Utils/Types.ts";
-
+import { THREEJS_PROD_URL, THREEJS_PRU_URL, THREEJS_TRIPTRAPP, THREEJS_CAFAM } from "../Utils/constants.ts";
 const urlParams = new URLSearchParams(window.location.search);
 const PROJECT = urlParams.get('project')?.toUpperCase() as keyof typeof ProjectBaseURL;
 const base_url = ProjectBaseURL[PROJECT];
@@ -26,7 +26,26 @@ function GetPlaces(): Promise<ResponsePlaces> {
 
 export async function GetAvatarURL(companyId: string): Promise<AvatarResponse | undefined> {
   try {
-    const response = await fetch(`https://as-ws-zyon-pru.azurewebsites.net/api/v1/three/avatar`, {
+    let endpoint: string = ``;
+
+    switch (PROJECT_ENVIROMENT) {
+      case "ZYON":
+        endpoint = THREEJS_PROD_URL;
+        break;
+      case "ZYON_PRU":
+        endpoint = THREEJS_PRU_URL;
+        break;
+      case "TRIPTRAPP":
+        endpoint = THREEJS_TRIPTRAPP;
+        break;
+      case "CAFAM":
+        endpoint = THREEJS_CAFAM;
+        break;
+      default:
+        endpoint = THREEJS_PRU_URL;
+        break;
+    }
+    const response = await fetch(`${endpoint}/api/v1/three/avatar`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +63,26 @@ export async function GetAvatarURL(companyId: string): Promise<AvatarResponse | 
 
 export async function GetServiceList(companyId: string): Promise<Service[] | undefined> {
   try {
-    const response = await fetch(`https://as-ws-zyon-pru.azurewebsites.net/api/v1/three/services`, {
+        let endpoint: string = ``;
+
+    switch (PROJECT_ENVIROMENT) {
+      case "ZYON":
+        endpoint = THREEJS_PROD_URL;
+        break;
+      case "ZYON_PRU":
+        endpoint = THREEJS_PRU_URL;
+        break;
+      case "TRIPTRAPP":
+        endpoint = THREEJS_TRIPTRAPP;
+        break;
+      case "CAFAM":
+        endpoint = THREEJS_CAFAM;
+        break;
+      default:
+        endpoint = THREEJS_PRU_URL;
+        break;
+    }
+    const response = await fetch(`${endpoint}/api/v1/three/services`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

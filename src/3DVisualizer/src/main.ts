@@ -3,13 +3,23 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
+enum ProjectBaseURL {
+    TRIPTRAPP = 'https://apiapp.tockall-triptrapp.com/api',
+    CAFAM = 'https://apiapp.cafammelgar.tockall.com/api',
+    ZYON_PRU = 'https://as-ws-siteit-test.azurewebsites.net/api',
+    ZYON = 'https://apiapp.zyon.tockall.com/api'
+}
 //import Stats from 'three/addons/libs/stats.module.js'
 //import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
 const urlParams = new URLSearchParams(window.location.search);
 const placeId = urlParams.get('placeId');
 const companyId = urlParams.get('companyId');
 //const project = urlParams.get('project');
-const scene = new THREE.Scene()
+const scene = new THREE.Scene();
+const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
+const BASE_URL = `${window.location.origin}${basePath}/models/`;
+const PROJECT = urlParams.get('project')?.toUpperCase() as keyof typeof ProjectBaseURL;
+const PROJECT_BASE = ProjectBaseURL[PROJECT];
 
  new RGBELoader().load('img/venice_sunset_1k.hdr', (texture) => {
    texture.mapping = THREE.EquirectangularReflectionMapping
@@ -45,7 +55,7 @@ controls.enableDamping = true
 console.log("placeId: " + placeId)
 console.log("CompanyId: " + companyId)//Cargar el modelo GLTF con el company ID y seleccionar y cambiar de material al objetivo con el place ID
 //new GLTFLoader().load("https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-UI-test/models/"+placeId+"_"+project+".glb", (gltf) => {
-new GLTFLoader().load("https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/models/"+companyId+".glb", (gltf) => {
+new GLTFLoader().load(`${BASE_URL}${PROJECT_BASE}/${companyId}.glb`, (gltf) => {
 // const suzanne = gltf.scene.getObjectByName('Suzanne') as THREE.Mesh
   // suzanne.castShadow = true
 
