@@ -9,6 +9,7 @@ import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
 import { focusCameraOnObject } from './main.ts';//metodo para animar la camara al objeto seleccionado
+import { spawnMarkerAboveObject } from './main.ts';
 import { COMPANY_ID } from './Utils/constants.ts';
 const COLOR_SELECTED = new Color(0x733D96);
 let MapObjectsListByCategoryName = {} as { [key: string]: Object3D[] };
@@ -564,6 +565,7 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     const placeData: Place = object.userData.place;
     // SearchPlacesByDistanceCategoryArea(object, "Restaurantes");
     focusCameraOnObject(object);
+    spawnMarkerAboveObject(object);
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     await new Promise(f => setTimeout(f, 2000));
@@ -598,6 +600,7 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edif
 
 async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
     focusCameraOnObject(object);
+    spawnMarkerAboveObject(object);
     await new Promise(f => setTimeout(f, 2000));
     if(placeData.bigcompany_id.toString() === COMPANY_ID) return; //dont show webview on same bigsurface
 

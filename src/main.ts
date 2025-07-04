@@ -17,6 +17,7 @@ import {
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
   SetupDescriptionCardForPlace, SetupPlacesForSearchMap3D
 } from './view.ts';
+import * as THREE from 'three';
 import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils/Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
@@ -422,6 +423,62 @@ export function focusCameraOnObject(object: Object3D) {
   controls.maxDistance = Infinity;
   controls.enabled = false; // evitamos que el usuario interactúe
   isMovingCamera = true;
+}
+// Referencia al modelo y al marcador actual
+let markerTemplate: Object3D | null = null;
+let currentMarker: Object3D | null = null;
+
+// Cargar el modelo glb
+const markerloader = new GLTFLoader();
+markerloader.load('./models/marker.glb', (gltf) => {
+  markerTemplate = gltf.scene;
+});
+
+// Spawnear el marcador
+export function spawnMarkerAboveObject(target: Object3D) {
+  // Eliminar el marcador anterior
+  if (currentMarker) {
+    scene.remove(currentMarker);
+    currentMarker.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        mesh.geometry.dispose();
+        if (Array.isArray(mesh.material)) {
+          mesh.material.forEach(mat => mat.dispose());
+        } else {
+          mesh.material.dispose();
+        }
+      }
+    });
+    currentMarker = null;
+  }
+
+  if (!markerTemplate) return;
+
+  // Clonar el modelo
+  const marker = markerTemplate.clone();
+
+  // Obtener tamaño del objeto objetivo
+  const box = new THREE.Box3().setFromObject(target);
+  const size = new THREE.Vector3();
+  box.getSize(size);
+  const height = size.y;
+
+  // Escalar el diamante en proporción al objeto
+  const scaleFactor = height * 0.3; // Ajusta esto si se ve muy grande o pequeño
+  marker.scale.setScalar(scaleFactor);
+
+  // Obtener posición del objeto
+  const worldPosition = new THREE.Vector3();
+  target.getWorldPosition(worldPosition);
+
+  // Posicionar el marcador justo encima
+  marker.position.copy(worldPosition);
+  marker.position.y += height + scaleFactor / 2 + 0.05;
+
+  // Añadir a escena y guardar referencia
+  scene.add(marker);
+  currentMarker = marker;
 }
 
 export function SearchPlacesByDistanceCategoryArea(
