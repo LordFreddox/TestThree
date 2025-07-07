@@ -505,6 +505,15 @@ export function SearchPlacesByDistanceCategoryArea(
   return foundObjects;
 }
 
+export function GetPlacesInfoByName(place_name: string): Place[]{
+  let placeFound: Place[] = [];
+  for (let index = 0; index < places.length; index++) {
+    if(places[index].companysubsidiary_name.includes(place_name))
+      placeFound.push(places[index]);
+  }
+  return placeFound;
+}
+
 // export function GetPlaceIDByName(placeName: string): string{
 //   for (let index = 0; index < places.length; index++) {
 //     const element = places[index];

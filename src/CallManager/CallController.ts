@@ -3,7 +3,7 @@ import { COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, URL_MCPCLIENT } from "../
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
 import { EndCallView, botName } from './CallView.ts';
-import { SearchPlacesByDistanceCategoryArea } from '../main.ts';
+import { GetPlacesInfoByName, SearchPlacesByDistanceCategoryArea } from '../main.ts';
 import { scene } from '../Renderer.ts';
 import {
     Room, RoomEvent, RoomConnectOptions, Track, RpcInvocationData,
@@ -99,6 +99,17 @@ async function RegisterRPCCalls(room: Room) {
                 return ObtenerLugaresRecomendadosPorCategoria(data);
             } catch (error) {
                 throw new RpcError(1, "No se encontraron lugares recomendados.");
+            }
+        }
+    );
+
+    await room.registerRpcMethod(
+        'ObtenerInfoDeLugarPorNombre',
+        async (data: RpcInvocationData) => {
+            try {
+                return ObtenerInfoDeLugarPorNombre(data);
+            } catch (error) {
+                throw new RpcError(1, "No se encontraron lugares con ese nombre.");
             }
         }
     );
@@ -206,7 +217,7 @@ const fetchToken = async (): Promise<{
 // }
 
 function EnfocarCamaraEnLugarPorID(data: RpcInvocationData) {
-// function EnfocarCamaraEnLugarPorID(params: any) {
+    // function EnfocarCamaraEnLugarPorID(params: any) {
     let params = JSON.parse(data.payload);
     console.log(`sending place ID for focus ${params.placeId as string}`);
     const FocusResponse = SetupDescriptionCardForPlaceByID(params.placeId as string);
@@ -218,7 +229,7 @@ function EnfocarCamaraEnLugarPorID(data: RpcInvocationData) {
 };
 
 function AbrirServiciosQR(data: RpcInvocationData) {
-// function OpenServices(params: any) {
+    // function OpenServices(params: any) {
     if (!serviceList) return `Hubo un error al mostrar el QR.`;
     let params = JSON.parse(data.payload);
     console.log(`executing tool OpenServices`, params.serviceId as number);
@@ -235,7 +246,7 @@ function AbrirServiciosQR(data: RpcInvocationData) {
 };
 
 function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
-// function GetPlacesRecomendationByCategory(params: any) {
+    // function GetPlacesRecomendationByCategory(params: any) {
     let params = JSON.parse(data.payload);
     const startObject = scene.getObjectByName(params.placeId as string);
     const categoryToSearch = params.category as string;
@@ -249,6 +260,15 @@ function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
     return `Se encontraron los siguientes lugares alrededor de tu ubicación con la categoría de ${categoryToSearch}: ${JSON.stringify(foundPlaces)}`;
 };
 
+function ObtenerInfoDeLugarPorNombre(data: RpcInvocationData){
+    let params = JSON.parse(data.payload);
+    const placesFound = GetPlacesInfoByName(params.place_name);
+    if(placesFound.length > 0)
+        return JSON.stringify(placesFound);
+    else
+        return `No se encontraron lugares con ese nombre`;
+}
+
 // CallSession.registerToolImplementations({
 //     "FocusOnPlace": FocusOnPlace,
 //     "OpenServices": OpenServices,
@@ -256,8 +276,8 @@ function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
 // });
 
 export function EndCall() {
-    roomSession.disconnect();
-    // CallSession.leaveCall();
+    roomSession?.disconnect();
+    // CallSession?.leaveCall();
 }
 
 function handleTrackSubscribed(

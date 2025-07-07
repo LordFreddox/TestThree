@@ -9074,6 +9074,33 @@
                     "bigcompany_name_short": "Santafé",
                     "bigcompany_level": 1,
                     "distance": "0"
+                },
+                {
+                    "place_id": 16116,
+                    "place_name_id": " ",
+                    "place_type_id": "1",
+                    "place_latitude": "4.762260138893998",
+                    "place_longitude": "-74.04627428360595",
+                    "place_category_name": "Servicios",
+                    "place_image_360_url": null,
+                    "place_area_name": "Sotanos",
+                    "place_area_id": 914,
+                    "companysubsidiary_id": 1321,
+                    "companysubsidiary_name": "Parqueaderos",
+                    "companysubsidiary_image_url": "https://strg01tockall.blob.core.windows.net/container1/multimedia/cs/2025-06/1321_companysubsidiaryImage1_1750192137536.jpeg",
+                    "companysubsidiary_tabs": "1",
+                    "companysubsidiary_latitude": "4.763051",
+                    "companysubsidiary_longitude": "-74.0454417",
+                    "company_id": 203,
+                    "company_name": "Santafé",
+                    "company_about": "Somos un mundo ideal para visitantes y anunciantes. Satisfacemos tus momentos de compra, diversión y relacionamiento de manera experiencial y entretenida.",
+                    "company_picture_url": "https://strg01tockall.blob.core.windows.net/container1/multimedia/companies/2025-03/203_companyImage_1741389944135.jpeg",
+                    "company_tabs": "1,5",
+                    "company_level": 1,
+                    "bigcompany_id": 203,
+                    "bigcompany_name_short": "Santafé",
+                    "bigcompany_level": 1,
+                    "distance": "0"
                 }
             ]
         }
