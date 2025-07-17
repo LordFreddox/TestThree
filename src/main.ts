@@ -34,7 +34,7 @@ let mixers: AnimationMixer[] = [];
 // let allAvailableAnimationClipsMap = new Map<Object3D, AnimationClip[]>();
 const clock = new Clock();
 let lookAtCamera: Object3D[] = [];
-let floorLevels: Object3D[] = [];
+export let floorLevels: Object3D[] = [];
 let interactObjects = [] as Object3D[];
 const loader = new GLTFLoader();
 let places: Place[] = [];
@@ -437,22 +437,8 @@ markerloader.load('./models/marker.glb', (gltf) => {
 // Spawnear el marcador
 export function spawnMarkerAboveObject(target: Object3D) {
   // Eliminar el marcador anterior
-  if (currentMarker) {
-    scene.remove(currentMarker);
-    currentMarker.traverse((child) => {
-      if ((child as THREE.Mesh).isMesh) {
-        const mesh = child as THREE.Mesh;
-        mesh.geometry.dispose();
-        if (Array.isArray(mesh.material)) {
-          mesh.material.forEach(mat => mat.dispose());
-        } else {
-          mesh.material.dispose();
-        }
-      }
-    });
-    currentMarker = null;
-  }
-
+  if (currentMarker) 
+    removeCurrentMarker();
   if (!markerTemplate) return;
 
   // Clonar el modelo
@@ -481,6 +467,37 @@ export function spawnMarkerAboveObject(target: Object3D) {
   currentMarker = marker;
 }
 
+export function centerModelOnFloor(floor: Object3D) {
+    const box = new THREE.Box3().setFromObject(floor);
+  const center = new THREE.Vector3();
+  box.getCenter(center);
+
+  // Usar eje Y para la altura
+  const currentPos = camera.position.clone();
+  const newTarget = new Vector3(controls.target.x, center.y, controls.target.z);
+
+  // Calcular desplazamiento vertical en Y y aplicarlo a la cámara
+  const yOffset = (center.y - controls.target.y)*2;
+  console.log("Desplazamiento vertical:", yOffset);
+  const newCameraPos = currentPos.clone().add(new Vector3(0, yOffset, 0));
+
+  camera.position.copy(newCameraPos);
+  controls.target.copy(newTarget);
+  controls.update();
+}
+export function adjustZoomLimitsForFloor(floor: Object3D) {
+  console.log("Ajustando límites de zoom para el piso:", floor.name);
+  const box = new THREE.Box3().setFromObject(floor);
+  const size = new THREE.Vector3();
+  box.getSize(size);
+
+  const maxDimension = Math.max(size.x, size.y, size.z);
+
+  controls.minDistance = maxDimension / 5; // Acercamiento permitido
+  controls.maxDistance = maxDimension * 2;  // Alejamiento permitido
+}
+
+
 export function SearchPlacesByDistanceCategoryArea(
   startObject: Object3D, categoryFilter: string,
   searchDistance: number = 50): Map<string, string> {
@@ -504,7 +521,25 @@ export function SearchPlacesByDistanceCategoryArea(
   });
   return foundObjects;
 }
+export function removeCurrentMarker() {
+  if (!currentMarker) return;
 
+  scene.remove(currentMarker);
+
+  currentMarker.traverse((child) => {
+    if ((child as THREE.Mesh).isMesh) {
+      const mesh = child as THREE.Mesh;
+      mesh.geometry.dispose();
+      if (Array.isArray(mesh.material)) {
+        mesh.material.forEach(mat => mat.dispose());
+      } else {
+        mesh.material.dispose();
+      }
+    }
+  });
+
+  currentMarker = null;
+}
 export function GetPlacesInfoByName(place_name: string): Place[]{
   let placeFound: Place[] = [];
   for (let index = 0; index < places.length; index++) {
