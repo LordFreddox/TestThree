@@ -13,6 +13,7 @@ export const THREEJS_CAFAM = '';
 export let COMPANY_ID = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
 export const FAKE_ID = urlParams.get('fakeId');
 export const SERV_TYPE = urlParams.get('ServType')!;
+export const START_POINT = urlParams.get('startPoint');
 export let COMPANY_NAME: String = '';
 export const PROJECT_ENVIROMENT: string = 
     (urlParams.get('project')?.toUpperCase() as keyof typeof ProjectBaseURL);

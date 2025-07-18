@@ -1,5 +1,9 @@
 import './style.css'
-import * as THREE from 'three'
+import {
+  Scene, EquirectangularReflectionMapping,
+  PerspectiveCamera, WebGLRenderer,
+  Mesh, MeshStandardMaterial
+} from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
@@ -15,21 +19,21 @@ const urlParams = new URLSearchParams(window.location.search);
 const placeId = urlParams.get('placeId');
 const companyId = urlParams.get('companyId');
 //const project = urlParams.get('project');
-const scene = new THREE.Scene();
+const scene = new Scene();
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
 const BASE_URL = `${window.location.origin}${basePath}/models/`;
 const PROJECT = urlParams.get('project')?.toUpperCase() as keyof typeof ProjectBaseURL;
 const PROJECT_BASE = ProjectBaseURL[PROJECT];
 
- new RGBELoader().load('img/venice_sunset_1k.hdr', (texture) => {
-   texture.mapping = THREE.EquirectangularReflectionMapping
-   scene.environment = texture
- })
+new RGBELoader().load('img/venice_sunset_1k.hdr', (texture) => {
+  texture.mapping = EquirectangularReflectionMapping
+  scene.environment = texture
+})
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
+const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
 camera.position.set(1.5, 0.75, 2)
 
-const renderer = new THREE.WebGLRenderer({ antialias: true })
+const renderer = new WebGLRenderer({ antialias: true })
 //renderer.toneMapping = THREE.ACESFilmicToneMapping
 //renderer.toneMappingExposure = 0.1
 renderer.shadowMap.enabled = true
@@ -63,8 +67,8 @@ new GLTFLoader().load(`${BASE_URL}${PROJECT_BASE}/${companyId}.glb`, (gltf) => {
   // plane.receiveShadow = true
   if(placeId!=null){
   const objeto = gltf.scene.getObjectByName(placeId);
-  if (objeto && objeto instanceof THREE.Mesh) {
-  const materialMoradoTranslucido = new THREE.MeshStandardMaterial({
+  if (objeto && objeto instanceof Mesh) {
+  const materialMoradoTranslucido = new MeshStandardMaterial({
     color: 0x8000ff,
     transparent: true,
     opacity: 0.5,

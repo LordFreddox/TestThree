@@ -3,7 +3,7 @@ import { camera, canvas, scene } from './Renderer.ts';
 import { Place } from './Utils/Types.ts';
 import { PROJECT } from './HTTP/http-service.ts';
 // import { getPathAndDisplay } from './Navigator.ts';
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement } from './Utils/Utils.ts';
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, normalizeString } from './Utils/Utils.ts';
 import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
@@ -37,10 +37,6 @@ const divCardPlace = GetHTMLElement('#divCardPlace');
 let currentController: AbortController | null = null;
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
-
-function normalizeString(str: string): string {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove all diacritical marks
-}
 
 input_searcher.addEventListener('input', () => {
     const searchTerm = normalizeString(input_searcher.value.toLowerCase());
@@ -565,12 +561,6 @@ function CreateTextForPlace(
 }
 
 async function SetupDescriptionCardForPlace(object: Object3D) {
-    console.log('SetupDescriptionCardForPlace called with object:', object.name);
-    // object.getWorldPosition(camera.position);
-    // camera.lookAt(object.position);
-    // controls.target = object.position;
-    // controls.maxDistance = 2;
-    // controls.update();
     const placeData: Place = object.userData.place;
     // SearchPlacesByDistanceCategoryArea(object, "Restaurantes");
     /*focusCameraOnObject(object);
@@ -597,10 +587,10 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
 
-function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edificio: string, success: boolean } {
+function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, success: boolean } {
     const object = scene.getObjectByName(placeID);
-    
-    if (!object) return { piso: "Piso no encontrado", edificio: "Edificio no encontrado", success: false };
+    if (!object) return { piso: "Piso no encontrado", success: false };
+
     const placeData: Place = object.userData.place;
     const floorObj = findFloorObject(object,floorLevels);
     console.log("floorObj="+floorObj);
@@ -613,7 +603,7 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, edif
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
-    return { piso: `Piso ${placeData.place_area_name}`, edificio: `Edificio ${placeData.company_name}`, success: true };
+    return { piso: `Piso ${placeData.place_area_name}`, success: true };
 }
 
 async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
@@ -674,12 +664,11 @@ closeWebView.onclick = () => {
     webviewContainer.classList.remove('showTop');
     webviewContainer.classList.add('hideTop');
 }
-/*const testbutton=document.getElementById('searchPlace3D') as HTMLInputElement;
-testbutton.onclick = () => {
-   SetupDescriptionCardForPlaceByID('15905'); 
-   console.log('testbutton clicked');
-}
-*/
+// const testbutton=document.getElementById('searchPlace3D') as HTMLInputElement;
+// testbutton.onclick = () => {
+//     SetupDescriptionCardForPlaceByID('15959'); 
+// }
+
 function CreateOptionItemSearchPanel(place: Place) {
     let newButton = document.createElement('button');
     newButton.classList.add('place-item');

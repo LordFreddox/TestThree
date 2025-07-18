@@ -1,14 +1,14 @@
 import {
   AnimationMixer, Object3D, Clock,
-  /*AnimationClip,*/ MeshBasicMaterial,
-  Mesh, BackSide, Vector3,
+  MeshBasicMaterial,
+  Mesh, BackSide, Vector3, Box3,
   SphereGeometry, Vector2,
   Raycaster, Intersection
 } from 'three';
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { Place } from './Utils/Types.ts';
+import { Place, PlaceShort } from './Utils/Types.ts';
 import { GetPlaces, PROJECT } from './HTTP/http-service.ts';
 import { scene, camera, renderer } from './Renderer.ts';
 import {
@@ -17,8 +17,7 @@ import {
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
   SetupDescriptionCardForPlace, SetupPlacesForSearchMap3D
 } from './view.ts';
-import * as THREE from 'three';
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost } from './Utils/Utils.ts';
+import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost, normalizeString } from './Utils/Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
 import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
@@ -40,6 +39,7 @@ const loader = new GLTFLoader();
 let places: Place[] = [];
 const mouse = new Vector2();
 const raycaster = new Raycaster();
+let totalSceneSize: number = 0;
 
 export const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
@@ -90,7 +90,7 @@ function Start() {
         gltf.scene.position.set(0, 0, 0);
         scene.add(gltf.scene);
         const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
-
+        totalSceneSize = size.length();
         const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
           gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
 
@@ -445,8 +445,8 @@ export function spawnMarkerAboveObject(target: Object3D) {
   const marker = markerTemplate.clone();
 
   // Obtener tamaño del objeto objetivo
-  const box = new THREE.Box3().setFromObject(target);
-  const size = new THREE.Vector3();
+  const box = new Box3().setFromObject(target);
+  const size = new Vector3();
   box.getSize(size);
   const height = size.y;
 
@@ -455,7 +455,7 @@ export function spawnMarkerAboveObject(target: Object3D) {
   marker.scale.setScalar(scaleFactor);
 
   // Obtener posición del objeto
-  const worldPosition = new THREE.Vector3();
+  const worldPosition = new Vector3();
   target.getWorldPosition(worldPosition);
 
   // Posicionar el marcador justo encima
@@ -468,8 +468,8 @@ export function spawnMarkerAboveObject(target: Object3D) {
 }
 
 export function centerModelOnFloor(floor: Object3D) {
-    const box = new THREE.Box3().setFromObject(floor);
-  const center = new THREE.Vector3();
+    const box = new Box3().setFromObject(floor);
+  const center = new Vector3();
   box.getCenter(center);
 
   // Usar eje Y para la altura
@@ -487,8 +487,8 @@ export function centerModelOnFloor(floor: Object3D) {
 }
 export function adjustZoomLimitsForFloor(floor: Object3D) {
   console.log("Ajustando límites de zoom para el piso:", floor.name);
-  const box = new THREE.Box3().setFromObject(floor);
-  const size = new THREE.Vector3();
+  const box = new Box3().setFromObject(floor);
+  const size = new Vector3();
   box.getSize(size);
 
   const maxDimension = Math.max(size.x, size.y, size.z);
@@ -499,27 +499,42 @@ export function adjustZoomLimitsForFloor(floor: Object3D) {
 
 
 export function SearchPlacesByDistanceCategoryArea(
-  startObject: Object3D, categoryFilter: string,
-  searchDistance: number = 50): Map<string, string> {
-  let foundObjects: Map<string, string> = new Map<string, string>();
+  startObject: Object3D,
+  categoryFilter: string): string {
+  let foundObjects: { place_id: string, companysubsidiary_name: string, distance: string }[] = [];
+  let foundObjectsFar: { place_id: string, companysubsidiary_name: string, distance: string }[] = [];
 
-  console.log(searchDistance);
   const startPosition: Vector3 = new Vector3;
   startObject.getWorldPosition(startPosition);
   interactObjects.forEach(object => {
     const probePosition: Vector3 = new Vector3;
     object.getWorldPosition(probePosition);
     const calculatedDistance = startPosition.distanceTo(probePosition);
-    if (
-      // calculatedDistance < searchDistance &&//filter by distance
-      object.userData.place.place_category_name === categoryFilter //filter by category
-      && startObject.userData.place.place_area_id === object.userData.place.place_area_id //filter by same area id
-    ) {
-      console.log(`calculatedDistance to ${object.userData.place.companysubsidiary_name}: ${calculatedDistance}`);
-      foundObjects.set(object.name, `A ${Math.round(calculatedDistance)} metros de distancia`);
+    if (object.userData.place.place_category_name === categoryFilter) {
+      if (calculatedDistance < totalSceneSize / 10 //filter by 10% of total scene size
+          // object.userData.place.place_area_id === startObject.userData.place.place_area_id //filter by same area id
+        ) {
+        foundObjects.push({
+          place_id: object.userData.place.place_id,
+          companysubsidiary_name: object.userData.place.companysubsidiary_name,
+          distance: `A ${calculatedDistance} metros`
+        });
+      } else if (calculatedDistance < totalSceneSize / 5) {//filter by 25% of total scene size
+        foundObjects.push({
+          place_id: object.userData.place.place_id,
+          companysubsidiary_name: object.userData.place.companysubsidiary_name,
+          distance: `A ${calculatedDistance} metros`
+        });
+      }
     }
   });
-  return foundObjects;
+  if (foundObjects.length > 0) { //some places passed the filter
+    return `Se recomiendan los siguientes lugares cercanos a ti con la categoría de ${categoryFilter}: ${JSON.stringify(foundObjects)}`;
+  }
+  if (foundObjectsFar.length > 0){ //nothing passed the filter
+    return `No se encontraron lugares cercanos a ti, sin embargo te puedo recomendar estos que estan un poco mas lejos: ${JSON.stringify(foundObjectsFar)}`;
+  }
+  return `No se encontraron lugares recomendados con esa categoría`;
 }
 export function removeCurrentMarker() {
   if (!currentMarker) return;
@@ -527,8 +542,8 @@ export function removeCurrentMarker() {
   scene.remove(currentMarker);
 
   currentMarker.traverse((child) => {
-    if ((child as THREE.Mesh).isMesh) {
-      const mesh = child as THREE.Mesh;
+    if ((child as Mesh).isMesh) {
+      const mesh = child as Mesh;
       mesh.geometry.dispose();
       if (Array.isArray(mesh.material)) {
         mesh.material.forEach(mat => mat.dispose());
@@ -540,23 +555,31 @@ export function removeCurrentMarker() {
 
   currentMarker = null;
 }
-export function GetPlacesInfoByName(place_name: string): Place[]{
-  let placeFound: Place[] = [];
+export function GetPlacesInfoByName(place_name: string): PlaceShort[] {
+  let placeFound: PlaceShort[] = [];
   for (let index = 0; index < places.length; index++) {
-    if(places[index].companysubsidiary_name.includes(place_name))
-      placeFound.push(places[index]);
+    const originalNormalized = normalizeString(places[index].companysubsidiary_name.toLocaleLowerCase());
+    const searchnormalized = normalizeString(place_name.toLocaleLowerCase())
+    if (originalNormalized.includes(searchnormalized))
+      placeFound.push({
+        place_id: places[index].place_id,
+        place_category_name: places[index].place_category_name,
+        companysubsidiary_name: places[index].companysubsidiary_name,
+        place_area_name: places[index].place_area_name
+      });
   }
   return placeFound;
 }
 
-// export function GetPlaceIDByName(placeName: string): string{
-//   for (let index = 0; index < places.length; index++) {
-//     const element = places[index];
-//     if(element.companysubsidiary_name.includes(placeName)){
-
-//     }
-//   }
-// }
+export function GetAllCategories(): string[] {
+  let categories: string[] = [];
+  for (let index = 0; index < places.length; index++) {
+    if (!categories.includes(places[index].place_category_name)) {
+      categories.push(places[index].place_category_name);
+    }
+  }
+  return categories;
+}
 
 function animate() {
   if (isMovingCamera) {

@@ -1,16 +1,16 @@
 import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
-import { COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, URL_MCPCLIENT } from "../Utils/constants.ts";
+import { COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
 import { EndCallView, botName } from './CallView.ts';
-import { GetPlacesInfoByName, SearchPlacesByDistanceCategoryArea } from '../main.ts';
-import { scene } from '../Renderer.ts';
+import { GetAllCategories, GetPlacesInfoByName, SearchPlacesByDistanceCategoryArea } from '../main.ts';
 import {
     Room, RoomEvent, RoomConnectOptions, Track, RpcInvocationData,
     RemoteParticipant, RemoteTrackPublication, RemoteTrack,
-    RpcError
+    RpcError, TranscriptionSegment, Participant, TrackPublication,
 } from "livekit-client";
 import { GetHTMLElement } from '../Utils/Utils.ts';
+import { scene } from '../Renderer.ts';
 
 const CallSession = new UltravoxSession();
 let firstSpeak = true;
@@ -114,6 +114,17 @@ async function RegisterRPCCalls(room: Room) {
         }
     );
 
+        await room.registerRpcMethod(
+        'ObtenerListadoDeCategorias',
+        async (_data: RpcInvocationData) => {
+            try {
+                return ObtenerListadoDeCategorias();
+            } catch (error) {
+                throw new RpcError(1, "No se pudo obtener las categorias en este momento.");
+            }
+        }
+    );
+
     console.log("registered all tools");
 }
 
@@ -122,10 +133,10 @@ function SetupListeners() {
         console.log(`Session status changed: ${CallSession.status}`);
         switch (CallSession.status) {
             case UltravoxSessionStatus.SPEAKING:
-                if (firstSpeak) {
-                    firstSpeak = false;
-                    EndCallView();
-                }
+                // if (firstSpeak) {
+                //     firstSpeak = false;
+                //     EndCallView();
+                // }
                 // clearTimeout(timeOutCancelation);
                 break;
             case UltravoxSessionStatus.LISTENING:
@@ -166,6 +177,7 @@ const connectParticipant = async (): Promise<Room> => {
     room
         .on(RoomEvent.TrackSubscribed, handleTrackSubscribed)
         .on(RoomEvent.TrackUnsubscribed, handleTrackUnsubscribed)
+        .on(RoomEvent.TranscriptionReceived, handleTranscriptionReceived)
 
     await room.connect(url, token, {
         autoSubscribe: true,
@@ -246,27 +258,44 @@ function AbrirServiciosQR(data: RpcInvocationData) {
 };
 
 function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
-    // function GetPlacesRecomendationByCategory(params: any) {
     let params = JSON.parse(data.payload);
-    const startObject = scene.getObjectByName(params.placeId as string);
+    if(!START_POINT) return `No se puede recomendar lugares en este momento.`;
+
+    const startObject = scene.getObjectByName(START_POINT);
     const categoryToSearch = params.category as string;
-    console.log(`entering GetPlacesRecomendationByCategory with placeID: ${params.placeId as string} and category: ${categoryToSearch}`);
+    console.log(`entering GetPlacesRecomendationByCategory with category: ${categoryToSearch}`);
     if (!startObject) return `Lugar inicial no encontrado en escena`;
     if (!categoryToSearch) return `Categoría no enviada`;
 
-    const foundPlaces = SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
-    if (foundPlaces.size === 0) return `No se encontraron lugares con los filtros asignados de categoría`;
-
-    return `Se encontraron los siguientes lugares alrededor de tu ubicación con la categoría de ${categoryToSearch}: ${JSON.stringify(foundPlaces)}`;
+    return SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
 };
 
-function ObtenerInfoDeLugarPorNombre(data: RpcInvocationData){
+function ObtenerInfoDeLugarPorNombre(data: RpcInvocationData) {
     let params = JSON.parse(data.payload);
-    const placesFound = GetPlacesInfoByName(params.place_name);
-    if(placesFound.length > 0)
+    console.log(`sending place_name for info ${params.placeName as string}`);
+    const placesFound = GetPlacesInfoByName(params.placeName);
+    if (placesFound.length > 0) {
+        console.log(`se encontraron ${placesFound.length} lugares con ese nombre`);
+        console.log(JSON.stringify(placesFound));
         return JSON.stringify(placesFound);
-    else
+    }
+    else {
+        console.log(`No se encontraron lugares con ese nombre`);
         return `No se encontraron lugares con ese nombre`;
+    }
+}
+
+function ObtenerListadoDeCategorias() {
+    const categoriesFound = GetAllCategories();
+    if (categoriesFound.length > 0) {
+        console.log(`se encontraron ${categoriesFound.length} categorias.`);
+        console.log(JSON.stringify(categoriesFound));
+        return JSON.stringify(categoriesFound);
+    }
+    else {
+        console.log(`No se encontraron categorias`);
+        return `No se encontraron categorias`;
+    }
 }
 
 // CallSession.registerToolImplementations({
@@ -299,6 +328,20 @@ function handleTrackUnsubscribed(
 ) {
     // remove tracks from all attached elements
     track.detach();
+}
+
+function handleTranscriptionReceived(
+    transcription: TranscriptionSegment[],
+    _participant?: Participant | undefined,
+    _publication?: TrackPublication | undefined
+) {
+    if (transcription.length === 0) return;
+    console.log(transcription[transcription.length - 1].text)
+    if (firstSpeak) {
+        console.log("EndCallView()");
+        firstSpeak = false;
+        EndCallView();
+    }
 }
 
 interface Transcript {

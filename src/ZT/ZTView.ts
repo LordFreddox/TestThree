@@ -63,13 +63,7 @@ export async function FillZTArea(companyId: string) {
             container.appendChild(itemDiv);
         });
 
-        btnZTList.onclick = () => {
-            if (isZTOpen) {
-                SetCloseZTState();
-            } else {
-                SetOpenZTState();
-            }
-        };
+        btnZTList.onclick = () => toggleZTState();
 
     } catch (error) {
         GetHTMLElement('#containerZTList').style.display = 'none';
@@ -87,21 +81,31 @@ function SetOpenZTState() {
     btnZTList.style.transform = 'scaleX(-1)';
 }
 
-function SetCloseZTState() {
+export function SetCloseZTState() {
     isZTOpen = false;
     containerZTList.classList.add('hideLeft');
     containerZTList.classList.remove('showLeft');
     btnZTList.style.transform = 'scaleX(1)';
 }
 
+function toggleZTState() {
+    if (isZTOpen) {
+        SetCloseZTState();
+    } else {
+        SetOpenZTState();
+    }
+}
+
 export function handleBlockClick(description: string, url: string, id: number = 0,) {
     SetOpenZTState();
     if (ZTDescriptionArea.computedStyleMap().get('visibility') == 'visible' &&
-        currentSelectService == id) {
+        currentSelectService == id) 
+    {
         currentSelectService = 0;
         ZTDescriptionArea.style.visibility = 'hidden';
-
-    } else {
+    } 
+    else 
+    {
         currentSelectService = id;
         ZTDescriptionArea.style.visibility = 'visible';
         ZTDescriptionTitle.innerText = description;

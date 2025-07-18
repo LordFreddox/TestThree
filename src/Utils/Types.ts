@@ -21,6 +21,13 @@ export interface Place {
     company_picture_url: string
 }
 
+export interface PlaceShort{
+    place_id: number,
+    place_category_name: string,
+    place_area_name: string,
+    companysubsidiary_name: string,
+}
+
 export interface ResponsePlaces {
     data_place: places
 }

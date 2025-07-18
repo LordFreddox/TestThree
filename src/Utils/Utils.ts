@@ -39,7 +39,7 @@ function IsLocalHost(): boolean{
         return false;
 }
 
-export function shouldBlock(event: TouchEvent): boolean {
+function shouldBlock(event: TouchEvent): boolean {
     let targetElement = event.target as HTMLElement;
 
     while (targetElement) {
@@ -62,4 +62,9 @@ function GetHTMLElement(element: string): HTMLElement {
     return document.querySelector(element) as HTMLElement;
 }
 
-export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh, GetHTMLElement, IsLocalHost }
+function normalizeString(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove all diacritical marks
+}
+
+export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh, 
+    GetHTMLElement, IsLocalHost, shouldBlock, normalizeString }

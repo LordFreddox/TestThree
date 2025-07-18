@@ -6,7 +6,7 @@ import {
 } from './CallController.ts';
 import { GetAvatarURL } from '../HTTP/http-service.ts';
 import { AvatarResponse } from '../Utils/Types.ts';
-// import { handleBlockClick } from '../ZT/ZTView.ts';
+import { HideZT, SetCloseZTState } from '../ZT/ZTView.ts';
 
 const EndCallButton = GetHTMLElement('.EndCallButton');
 const AICallCard = GetHTMLElement('#AICallCard');
@@ -42,6 +42,8 @@ export async function loadAvatar(companyId: string) {
 
 StartCallButton.onclick = async () => {
     StartCallView();
+    SetCloseZTState();
+    HideZT();
     if (isOnCall) return;
     // isOnCall = await CreateCall();
     isOnCall = await CreateCallLiveKit();
