@@ -674,12 +674,12 @@ closeWebView.onclick = () => {
     webviewContainer.classList.remove('showTop');
     webviewContainer.classList.add('hideTop');
 }
-const testbutton=document.getElementById('searchPlace3D') as HTMLInputElement;
+/*const testbutton=document.getElementById('searchPlace3D') as HTMLInputElement;
 testbutton.onclick = () => {
    SetupDescriptionCardForPlaceByID('15905'); 
    console.log('testbutton clicked');
 }
-
+*/
 function CreateOptionItemSearchPanel(place: Place) {
     let newButton = document.createElement('button');
     newButton.classList.add('place-item');
