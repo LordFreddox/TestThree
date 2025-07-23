@@ -262,8 +262,7 @@ function SetupPlacesForSearchMap3D(place: Place, object: Object3D, floorLevels: 
             <div class="info">
                 <span class="name-place">${place.companysubsidiary_name}</span>
                 <span class="subname-place">${place.place_area_name}</span>
-            </div>
-            <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
+            </div>`;
 
     newButton.innerHTML = html;
     placesList.appendChild(newButton);
@@ -325,10 +324,8 @@ function DisableTourState() {
 }
 
 function findFloorObject(object: Object3D, floorLevels: Object3D[]): Object3D | null {
-    console.log("findFloorObject called with object:", object.name);
     let current: Object3D | null = object;
     while (current) {
-        console.log("Current object in hierarchy:", current.name);
         if (floorLevels.includes(current)) return current;
         current = current.parent;
     }
@@ -653,7 +650,7 @@ console.log('inputSearch clicked');
 //                 <span class="subname-place">${place.place_area_name}</span>
 //                 <span class="building-place">${place.place_category_name}</span>
 //             </div>
-//             <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
+// `;
 
 //     newButton.innerHTML = html;
 //     return newButton; // Return the HTML string for use elsewhere if needed
@@ -680,8 +677,7 @@ function CreateOptionItemSearchPanel(place: Place) {
             <div class="info">
                 <span class="name-place">${place.companysubsidiary_name}</span>
                 <span class="subname-place">${place.place_area_name}</span>
-            </div>
-            <img src="/img/icon-arrow-right.svg" alt="" class="icon-right">`;
+            </div>`;
 
     newButton.innerHTML = html;
     return newButton; // Return the HTML string for use elsewhere if needed
