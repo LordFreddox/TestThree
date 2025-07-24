@@ -49,8 +49,6 @@ var minPan = new Vector3();
 var maxPan = new Vector3();
 var _v = new Vector3();
 
-let contador = 0;//valor a cambiar en el temporizador
-
 let modelUrl: string;
 if (IsLocalHost()) {
   modelUrl = `./models/${PROJECT.toUpperCase()}/${COMPANY_ID}.glb`;
@@ -86,7 +84,7 @@ function Start() {
     loader.load(
       modelUrl,
       (gltf) => {
-        //tutorial.style.display = 'flex';
+        tutorial.style.display = 'flex';
         gltf.scene.position.set(0, 0, 0);
         scene.add(gltf.scene);
         const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
@@ -226,21 +224,16 @@ controls.addEventListener('change', () => {
   camera.position.sub(_v);
 });
 
-controls.addEventListener('end', () => {
-  updateLabelVisibility();
-  contador = 2;//valor a cambiar en el temporizador
-  const duracion = 1; // 1 segundo
-  const intervalos = 100; // cada 100ms
-  const pasos = duracion / intervalos;
-  const decremento = contador / pasos;
+let canRaycast = true;
 
-  const intervalo = setInterval(() => {
-    contador -= decremento;
-    if (contador <= 0) {
-      contador = 0;
-      clearInterval(intervalo);
-    }
-  }, intervalos);
+controls.addEventListener('start', () => {
+  canRaycast = false;
+});
+
+controls.addEventListener('end', () => {
+  setTimeout(() => {
+    canRaycast = true;
+  }, 1000); // espera 1 segundo antes de volver a permitir raycast
 });
 
 controls.update();
@@ -344,42 +337,29 @@ controls.addEventListener('start', () => {
 });
 
 window.addEventListener('touchend', (event) => {
-  //disable raycast 
-  //cerrar pantallas 
+  if (!canRaycast) return; 
 
   if (shouldBlock(event)) return;
+
   ClosePlaceCard();
   CloseSearchPlace();
   HideZT();
-  if (contador !== 0) return;
+
   const touch = event.changedTouches[0];
   mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
 
-  // Remove the previous debug line if it exists
-  //scene.remove(scene.getObjectByName('rayLine')!);
-
   const intersects: Intersection[] = raycaster.intersectObjects(interactObjects, true);
   if (intersects.length > 0) {
     for (let i = 0; i < intersects.length; i++) {
       if (intersects[i].object.userData.isPlaceObject &&
-        intersects[i].object.parent?.visible === true) {
+          intersects[i].object.parent?.visible === true) {
         SetupDescriptionCardForPlace(intersects[i].object);
         break;
       }
     }
   }
-
-  //add debug lines
-  //const rayOrigin = raycaster.ray.origin;
-  //const rayDirection = raycaster.ray.direction.clone().multiplyScalar(50); // Extend the direction for visualization
-  //const points = [rayOrigin, rayOrigin.clone().add(rayDirection)];
-  //const geometry = new THREE.BufferGeometry().setFromPoints(points);
-  //const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
-  //const line = new THREE.Line(geometry, material);
-  //line.name = 'rayLine';
-  //scene.add(line);
 });
 
 
