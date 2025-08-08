@@ -63,7 +63,11 @@ function GetHTMLElement(element: string): HTMLElement {
 }
 
 function normalizeString(str: string): string {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove all diacritical marks
+    // Remove diacritical marks
+    let normalized = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    // Remove punctuation and special characters (keep only alphanumeric and spaces)
+    normalized = normalized.replace(/[^a-zA-Z0-9\s]/g, '');
+    return normalized;
 }
 
 export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh, 

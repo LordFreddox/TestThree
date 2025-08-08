@@ -234,6 +234,7 @@ controls.addEventListener('end', () => {
   setTimeout(() => {
     canRaycast = true;
   }, 1000); // espera 1 segundo antes de volver a permitir raycast
+  updateLabelVisibility();
 });
 
 controls.update();
@@ -276,8 +277,6 @@ function SetupPlacesOnScene(places: Place[]) {
       interactObjects.push(object);
     }
   });
-  updateLabelPositions();
-  updateLabelVisibility();
   initCategorySelector();
 }
 

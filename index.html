@@ -9,7 +9,10 @@
   <script type="module" src="/src/chat.ts"></script>
   <script type="module" src="/src/ZT/ZTView.ts"></script>
   <!-- <script type="module" src="/src/CallManager/CallView.ts"></script> -->
-  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/main_style.css">
+  <link rel="stylesheet" href="CSS/ZT_style.css">
+  <link rel="stylesheet" href="CSS/mobile_style.css">
+  <link rel="stylesheet" href="CSS/bot_chat_style.css">
 </head>
 
 <body style="background-color: black;padding: 0;" oncontextmenu="return false;">
@@ -149,11 +152,11 @@
     <img src="img/icon-close.svg" alt="search" id="icon-close" class="icon-close">
     </div>
 
-    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript raycast-blocker">
+    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript vibrate raycast-blocker">
     <div id="webView" class="card-select-place hideTop">
-    <img src="img/icon-close-card.svg" alt="search" id="closeWebView">
-    <iframe id="3DVisualizer" src="" title="threeOverlay" class="PlaceCardBasicDescription" style="height: 90%;width: 90%;"></iframe>
-   </div>
+      <img src="img/icon-close-card.svg" alt="search" id="closeWebView">
+      <iframe id="3DVisualizer" src="" title="threeOverlay" class="PlaceCardBasicDescription" style="height: 90%;width: 90%;"></iframe>
+    </div>
     <div id="divCardPlace" class="card-select-place raycast-blocker hideTop">
       <div id="header-container">
         <img id="logo_place_card" title="logo">
@@ -183,7 +186,7 @@
     </div>
 
     <div id="AICallCard" class="card-select-place raycast-blocker hideTop">
-      <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatar avatarImgScript">
+      <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatarImgScript">
       <b style="font-size: x-large;">¿Tienes dudas?</b>
       <span style="font-size: large;">Estoy aquí para guiarte</span>
       <span style="font-size: small; text-align: center; margin-left: 3rem; margin-right: 3rem; color: #2e2e2e">Puedes preguntarme por edificos, facultades o zonas específicas. También te ayudo a encontrar baños, cafeterías o salidas.</span>

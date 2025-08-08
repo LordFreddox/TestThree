@@ -1,6 +1,6 @@
 import { GetHTMLElement, IsLocalHost } from '../Utils/Utils.ts';
 import { 
-    // CreateCall, 
+    CreateCallUltravox, 
     CreateCallLiveKit, 
     EndCall 
 } from './CallController.ts';
@@ -10,7 +10,7 @@ import { HideZT, SetCloseZTState } from '../ZT/ZTView.ts';
 
 const EndCallButton = GetHTMLElement('.EndCallButton');
 const AICallCard = GetHTMLElement('#AICallCard');
-const StartCallButton = GetHTMLElement('.BotButton3D');
+const StartCallButton = GetHTMLElement('.avatarImgScript');
 let isOnCall: boolean = false;
 export let botName: string = 'Guía Zyon';
 
@@ -45,23 +45,19 @@ StartCallButton.onclick = async () => {
     SetCloseZTState();
     HideZT();
     if (isOnCall) return;
-    // isOnCall = await CreateCall();
+    
+    //create livekit call
     isOnCall = await CreateCallLiveKit();
 
-    // await setTimeout(() => {
-    //     isOnCall = true;
-    //     const testString = ` ¡Claro! El código de la red WiFi es: https://portalcautivo.zyon.tockall.com/estadio-el-campin-front-html/code.php# ¿Quieres saber algo mas?`;
-    //     const urlMatch = testString.match(/https?:\/\/(?:\w+\-?\.)+\w+\/(?:[^/]+\/)*[\w-]+\.php/);
-    //     if (urlMatch) {
-    //         handleBlockClick(
-    //             'Código WiFI',
-    //             urlMatch[0].replace(/\s/g, '')
-    //         );
-    //         console.log(urlMatch[0].replace(/\s/g, ''));
-    //         EndCallView();
-    //     }
-    // }, 1000);
+    // if(!isOnCall) //if livekit call fails, then create ultravox call as fallback
+    // {
+    //     isOnCall = await CreateCallUltravox();
+    // }
 
+    if(isOnCall) //if call created, stop avatar vibrate animation
+    {
+        StartCallButton.classList.remove('vibrate');
+    }
 };
 
 EndCallButton.onclick = () => {
@@ -70,32 +66,31 @@ EndCallButton.onclick = () => {
         isOnCall = false;
     }
     EndCallView();
-    StartCallButton.style.borderStyle = 'none';
 };
 
 function StartCallView() {
     AICallCard.classList.remove('hideTop');
     AICallCard.classList.add('showTop');
 
-    StartCallButton.style.display = 'none';
-    StartCallButton.style.borderStyle = 'none';
-}
-
-export function EndCallView() {
-    AICallCard.classList.remove('showTop');
-    AICallCard.classList.add('hideTop');
-
-    StartCallButton.style.display = 'block';
     StartCallButton.style.borderStyle = 'solid';
 }
 
-// const testString = ` ¡Claro! El código de la red WiFi es: https://portalcautivo.zyon.tockall.com/estadio-el-campin-front-html/code.php# ¿Quieres saber algo mas?`;
-// const urlMatch = testString.match(/https?:\/\/(?:\w+\-?\.)+\w+\/(?:[^/]+\/)*[\w-]+\.php/);
-// if (urlMatch) {
-//     handleBlockClick(
-//         'Código WiFI',
-//         urlMatch[0].replace(/\s/g, '')
-//     );
-//     console.log(urlMatch[0].replace(/\s/g, ''));
-//     EndCallView();
-// }
+export function EndCallView() {
+    HideAvatarButtonForNSeconds();
+}
+
+export function HideCallViewTranscript(){
+    AICallCard.classList.remove('showTop');
+    AICallCard.classList.add('hideTop');
+    StartCallButton.style.borderStyle = 'solid';
+    isOnCall = false;
+}
+
+async function HideAvatarButtonForNSeconds(n_seconds: number = 1){
+    await new Promise(f => setTimeout(f, n_seconds * 1000));
+    AICallCard.classList.remove('showTop');
+    AICallCard.classList.add('hideTop');
+    StartCallButton.classList.add('vibrate');
+
+    StartCallButton.style.borderStyle = 'none';
+}

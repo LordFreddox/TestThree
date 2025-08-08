@@ -37,6 +37,8 @@ const divCardPlace = GetHTMLElement('#divCardPlace');
 let currentController: AbortController | null = null;
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
+let currentFloor: () => string = () =>
+  (document.getElementById('floor-selector') as HTMLSelectElement).value;
 
 input_searcher.addEventListener('input', () => {
     const searchTerm = normalizeString(input_searcher.value.toLowerCase());
@@ -338,10 +340,10 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
     floorSelector.style.display = 'block';
 
     // Add default option
-    // const defaultOption = document.createElement('option');
-    // defaultOption.value = '-1';
-    // defaultOption.text = 'Todos los Pisos';
-    // floorSelector.appendChild(defaultOption);
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '-1';
+    defaultOption.text = 'Todos los Pisos';
+    floorSelector.appendChild(defaultOption);
 
     floorLevels.forEach((_, index) => {
         const option = document.createElement('option');
@@ -376,7 +378,9 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
     }
     labelsScene.forEach((elem) => {
         const labelFloorIndex = parseInt(elem.dataset.floorIndex || '-1', 10);
-        if (index === -1 || index === labelFloorIndex) {
+        if (
+            // index === -1 || 
+            index === labelFloorIndex) {
             elem.style.display = 'block';
             elem.classList.remove('HideFromFloor');
         } else {
@@ -436,8 +440,10 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
 }
 
 function updateLabelPositions() {
+    if(currentFloor() == "-1" ) return; //no position update when all floor selected
+
     labelsScene.forEach((elem, position) => {
-        if (elem.style.display == 'none') return;
+        if (elem.style.display == 'none' || currentFloor() == "-1" ) return;
         tempV.copy(position);
         tempV.project(camera);
 
@@ -450,11 +456,14 @@ function updateLabelPositions() {
 }
 
 function updateLabelVisibility() {
+    if(currentFloor() == "-1" ) return; //no visibility update when all floor selected
+
     const labelData: LabelData[] = [];
 
     labelsScene.forEach((elem, position) => {
         if (elem.classList.contains('HideFromFloor')
-            || elem.classList.contains('HideFromCategory')) {
+            || elem.classList.contains('HideFromCategory')) 
+        {
             elem.style.display = 'none';
             return;
         }
@@ -543,6 +552,7 @@ function CreateTextForPlace(
     elem.textContent = formattedKey;
     elem.style.fontSize = fontSize + 'em';
     elem.style.fontWeight = 'bold';
+    elem.style.display = 'none';
     labelContainerElem!.appendChild(elem);
     const { center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
     let topCenterPosition: Vector3 = new Vector3();
@@ -559,6 +569,9 @@ function CreateTextForPlace(
 
 async function SetupDescriptionCardForPlace(object: Object3D) {
     const placeData: Place = object.userData.place;
+    const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
+    currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
+
     // SearchPlacesByDistanceCategoryArea(object, "Restaurantes");
     /*focusCameraOnObject(object);
     spawnMarkerAboveObject(object);*/
@@ -580,8 +593,6 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
         DisplayChatAI(placeData.place_id);
         ClosePlaceCard();
     };
-    const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
-    currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
 }
 
 function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, success: boolean } {
@@ -589,6 +600,9 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     if (!object) return { piso: "Piso no encontrado", success: false };
 
     const placeData: Place = object.userData.place;
+    const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
+    currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
+    SetupCardDescriptionCardPlace(placeData);
     const floorObj = findFloorObject(object,floorLevels);
     console.log("floorObj="+floorObj);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
@@ -598,8 +612,6 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     WaitForFocusAnimation(object, placeData);
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
-    const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
-    currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
     return { piso: `Piso ${placeData.place_area_name}`, success: true };
 }
 
@@ -608,6 +620,7 @@ async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
     focusCameraOnObject(object);
     spawnMarkerAboveObject(object);
     await new Promise(f => setTimeout(f, 2000));
+    SetupCardDescriptionCardPlace();
     if(placeData.bigcompany_id.toString() === COMPANY_ID) return; //dont show webview on same bigsurface
 
     webviewContainer.classList.add('showTop');
@@ -618,6 +631,16 @@ async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
     }
     webView.src = "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId=" + placeData.place_id + "&companyId=" + placeData.company_id + "&userId=0";
     console.log('WebView src set to:', webView.src);
+}
+
+function SetupCardDescriptionCardPlace(placeData: Place){
+    divCardPlace.classList.remove('hideTop');
+    divCardPlace.classList.add('showTop');
+    (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = placeData.companysubsidiary_image_url;
+    divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${placeData.companysubsidiary_name}`;
+    divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${placeData.place_category_name}`;
+    divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${placeData.place_area_name}`;
+
 }
 
 /*const inputSearch = document.getElementById('threeLoad') as HTMLInputElement;

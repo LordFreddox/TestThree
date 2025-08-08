@@ -249,25 +249,30 @@ button {
     border: 1px solid #ccc;
     background-color: #fff;
 }
-.searchPlace3DPanel{
+
+.searchPlace3DPanel {
     display: flex;
     align-items: center;
     background-color: white;
-    border-radius: 999px; /* Para bordes totalmente redondeados */
+    border-radius: 999px;
+    /* Para bordes totalmente redondeados */
     width: 55%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 1rem;
 }
-.icon-search{
+
+.icon-search {
     width: 2rem;
     height: 2rem;
     background-color: #F5F5F5;
     border-radius: 50%;
     margin-right: 1em;
     margin-bottom: 0%;
-    
-    }
-.searchPlace3D {/*MOBILE*/
+
+}
+
+.searchPlace3D {
+    /*MOBILE*/
     /* width: 100%; */
     height: 2rem;
     outline: none;
@@ -276,18 +281,19 @@ button {
     width: 100%;
     /* font-size: 1.3rem; */
 }
-.icon-close{
+
+.icon-close {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
     position: absolute;
     right: 30%;
     top: 68%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #F5F5F5;
     display: none;
     /*cursor: pointer;*/
-    }
+}
 
 @keyframes slideShowTop {
     0% {
@@ -442,8 +448,6 @@ button {
     }
 }
 
-/*#region Search place panel */
-
 .container-searchButtons {
     display: flex;
     flex-direction: row;
@@ -597,8 +601,6 @@ button {
     height: 5vh;
 }
 
-/*#endregion */
-/*#region CardPlace*/
 .hidden {
     position: fixed;
     bottom: -100%;
@@ -654,11 +656,11 @@ button {
     white-space: pre-line;
 }
 
-.PlaceCardLongDescription img{
+.PlaceCardLongDescription img {
     width: 100%;
 }
 
-.PlaceCardLongDescription video{
+.PlaceCardLongDescription video {
     width: 100%;
     height: 20rem;
 }
@@ -703,7 +705,8 @@ button {
     margin-top: -3em;
     margin-right: 2em;
 }
-#closeWebView{
+
+#closeWebView {
     display: inline-block;
     /*background: url(/img/icon-close-card.svg);*/
     background-position: center;
@@ -714,6 +717,7 @@ button {
     height: 1rem;
     padding: 0;
     margin-right: -20em;
+    z-index: 5;
 }
 
 /*#endregion */
@@ -858,7 +862,11 @@ button {
     padding-bottom: 10px;
 }
 
-.BotButton3D {
+.avatarImgScript {
+    width: 10rem;
+}
+
+.BotButton3DMobile {
     position: absolute;
     right: 2rem;
     top: 3rem;
@@ -866,6 +874,50 @@ button {
     border-radius: 50%;
     border-color: green;
     border-style: none;
+}
+
+.BotButton3D {
+    position: absolute;
+    left: 35%;
+    top: 60%;
+    width: 10rem;
+    border-radius: 50%;
+    border-color: green;
+    border-style: none;
+}
+
+.vibrate {
+    animation: vibrate 1s infinite;
+}
+
+@keyframes vibrate {
+    0% {
+        transform: translateX(0);
+    }
+
+    10% {
+        transform: translateX(-2px);
+    }
+
+    20% {
+        transform: translateX(2px);
+    }
+
+    30% {
+        transform: translateX(-2px);
+    }
+
+    40% {
+        transform: translateX(2px);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .EndCallButton {
@@ -947,545 +999,4 @@ button {
     display: block;
     right: 5vw;
     top: 5vh;
-}
-
-.AIChatArea {
-    display: flex;
-    flex-direction: column;
-    place-content: space-evenly;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    margin-left: 10vw;
-    margin-right: 10vw;
-    top: 15%;
-}
-
-.containerZTList {
-    position: absolute;
-    display: flex;
-    /* left: -5rem; */
-    top: 15rem;
-    height: 40rem;
-    width: 10rem;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.ZTArea {
-    display: flex;
-    width: 5rem;
-    height: 100%;
-    border-radius: 1rem;
-    background: #131313;
-    align-items: safe center;
-    overflow-y: auto;
-    justify-content: safe center;
-    flex-direction: column;
-    z-index: 3;
-}
-
-.ZTAction {
-    color: white;
-    display: flex;
-    width: 80%;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    text-align: center;
-    align-items: center;
-}
-
-.ZTAction img {
-    height: 2.5rem;
-}
-
-.ZTAction span {
-    margin-top: 5px;
-}
-
-.btnZTList {
-    height: 9rem;
-    z-index: 1;
-}
-
-.ZTDescriptionArea {
-    position: absolute;
-    visibility: hidden;
-    display: flex;
-    z-index: 2;
-    width: 70vw;
-    height: 50vh;
-    left: 5rem;
-    background: white;
-    border-radius: 1rem;
-    flex-direction: column;
-    align-content: center;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.ZTDescriptionArea span {
-    font-size: large;
-    text-align: center;
-    /* margin-top: 3rem; */
-}
-
-.ZTDescriptionArea img {
-    width: 90%;
-    height: 30rem;
-}
-
-/*#region chatbot*/
-
-.msger {
-    position: absolute;
-    display: none;
-    flex-flow: column wrap;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 867px;
-    height: 100%;
-    border: var(--border);
-    border-radius: 5px;
-    background: var(--msger-bg);
-    box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
-}
-
-.msger-header {
-    padding: 10px;
-    background: #eee;
-    color: #666;
-}
-
-.msger-header img {
-    width: 25px;
-    height: 25px;
-    background-color: black;
-}
-
-.msger-chat {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
-}
-
-.msger-chat::-webkit-scrollbar {
-    width: 6px;
-}
-
-.msger-chat::-webkit-scrollbar-track {
-    background: #ddd;
-}
-
-.msger-chat::-webkit-scrollbar-thumb {
-    background: #bdbdbd;
-}
-
-.msg {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 10px;
-}
-
-.msg:last-of-type {
-    margin: 0;
-}
-
-.msg-img {
-    /* width: 50px; */
-    height: 50px;
-    margin-right: 10px;
-    background: #ddd;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-}
-
-.msg-bubble {
-    max-width: 450px;
-    padding: 15px;
-    border-radius: 15px;
-    background: var(--left-msg-bg);
-}
-
-.msg-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.msg-info-name {
-    margin-right: 10px;
-    font-weight: bold;
-    /* color: black; */
-}
-
-.left-msg .msg-bubble {
-    border-bottom-left-radius: 0;
-}
-
-.right-msg {
-    flex-direction: row-reverse;
-}
-
-.right-msg .msg-bubble {
-    background: var(--right-msg-bg);
-    color: #fff;
-    border-bottom-right-radius: 0;
-}
-
-.right-msg .msg-img {
-    margin: 0 0 0 10px;
-}
-
-.msger-inputarea {
-    display: flex;
-    padding: 10px;
-    border-top: var(--border);
-    background: #eee;
-}
-
-.msger-inputarea * {
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    font-size: 1em;
-}
-
-.msger-input {
-    flex: 1;
-    background: #ddd;
-}
-
-.msger-send-btn {
-    margin-left: 10px;
-    background: rgb(0, 196, 65);
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.23s;
-}
-
-.msger-send-btn:hover {
-    background: rgb(0, 180, 50);
-}
-
-.msger-chat {
-    background-color: #fcfcfe;
-}
-
-/*#endregion*/
-@media screen and (width: 1080px) and (height: 1920px) {
-   
-    .container-3DView-options
-    {
-        font-size: 15px;
-    }
-.category-selector {
-    font-size: 15px;
-    width: 100%;
-}
-
-
-.category-list {
-    list-style-type: none;
-    margin-top: 20px;
-}
-
-.category-list li {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    
-}
-
-.category-list a {
-    color: #333;
-    text-decoration: none;
-}
-
-.searchPlace3DPanel{
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 999px; /* Para bordes totalmente redondeados */
-    width: 55%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-top: 1rem;
-    height: 5rem;
-}
-.icon-search{
-    width: 5rem;
-    height: 5rem;
-    background-color: #F5F5F5;
-    border-radius: 50%;
-    margin-right: 1em;
-    margin-bottom: 0%;
-    
-    }
-
-.icon-close{
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    position: absolute;
-    right: 30%;
-    top: 60%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background-color: #F5F5F5;
-    display: none;
-    /*cursor: pointer;*/
-    }
-    .searchPlace3D{/*TOTEM*/
-        padding-left: 10%;
-        font-size: 25px;
-        height: 3rem;
-        width: 50%;
-        text-align: end;
-    }
-    
-    .name-place{
-        font-size: 100px;
-    }
-
-    .PlaceCardBasicDescription {
-
-        text-align: left;
-        display: block;
-        margin: 0;
-        float: left;
-        width: 100%;
-    }
-
-    .review-container {
-        font-size: 28px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        /* Alinea los elementos a la derecha */
-        width: 100%;
-        margin-right: 5rem;
-        margin-top: -8rem;
-    }
-
-    .review {
-        width: 15rem;
-        height: 4rem;
-        margin-bottom: 5px;
-    }
-
-    .PlaceCardLongDescription {
-        height: 100%;
-        margin: 1rem;
-        overflow-y: auto;
-        width: 90%;
-        white-space: pre-line;
-        font-size: 28px;
-    }
-
-    .MoreInfo {
-        align-self: flex-start;
-        margin-top: auto;
-        margin-left: 3rem;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    #gradient-text {
-        position: absolute;
-        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.5), white);
-        width: 100%;
-        height: 7rem;
-        bottom: 6rem;
-    }
-
-    #logo_place_card {
-        display: block;
-    }
-
-    #description_place_card {
-        display: inline-block;
-        width: 100%;
-    }
-
-    .placeCard-ecommerce {
-        height: 5rem;
-        margin-bottom: 1rem;
-        background-color: #257ecc;
-        border-radius: 40px;
-        border-style: none;
-        width: 200px;
-        color: black;
-    }
-
-    #closePlaceCard {
-        display: inline-block;
-        background: url(/img/icon-close-card.svg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        border: none;
-        width: 4rem;
-        height: 4rem;
-        padding: 0;
-        margin-top: -5em;
-        margin-right: 2em;
-    }
-
-    .BotButton3D {
-        position: absolute;
-        right: 2rem;
-        top: 3rem;
-        width: 10rem;
-        height: 10rem;
-    }
-.btnZTList {
-    height: 15rem;
-    z-index: 1;
-}
-.containerZTList {
-    position: absolute;
-    display: flex;
-    /* left: -5rem; */
-    top: 40rem;
-    height: 60rem;
-    width: 20rem;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    font-size: 20px;
-}
-
-.ZTArea {
-    display: flex;
-    width: 10rem;
-    height: 100%;
-    border-radius: 1rem;
-    background: #131313;
-    align-items: safe center;
-    overflow-y: auto;
-    justify-content: safe center;
-    flex-direction: column;
-    z-index: 3;
-}
-
-.ZTAction {
-    color: white;
-    display: flex;
-    width: 80%;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    text-align: center;
-    align-items: center;
-}
-
-.ZTAction img {
-    height: 5rem;
-}
-
-.ZTAction span {
-    margin-top: 5px;
-}
-/*
-.btnZTList {
-    height: 9rem;
-    z-index: 1;
-}
-
-.ZTDescriptionArea {
-    position: absolute;
-    visibility: hidden;
-    display: flex;
-    z-index: 2;
-    width: 70vw;
-    height: 50vh;
-    left: 5rem;
-    background: white;
-    border-radius: 1rem;
-    flex-direction: column;
-    align-content: center;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.ZTDescriptionArea span {
-    font-size: large;
-    text-align: center;
-    /* margin-top: 3rem; */
-/*}
-
-.ZTDescriptionArea img {
-    width: 90%;
-    height: 30rem;
-}*/
-
-/*#region Animation Totem*/
-@keyframes slideShowLeft {
-    0% {
-        transform: translateX(-13rem);
-    }
-
-    100% {
-        transform: translateX(0.5rem);
-    }
-}
-
-@keyframes slideHideLeft {
-    0% {
-        transform: translate(0.5rem);
-    }
-
-    100% {
-        transform: translateX(-13rem);
-    }
-}
-
-/*.showLeft {
-    animation: slideShowLeft 0.5s ease-out forwards;
-}
-
-.hideLeft {
-    animation: slideHideLeft 0.5s ease-out forwards;
-}*/
-/*#endregion*/
-.container-3DView-options {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    width: 70vw;
-    margin-top: 10%;
-    margin-left: 5%;
-    align-items: flex-start;
-    justify-content: space-between;
-    font-size: 20px;
-}
-.category-selector {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    height: 5rem;
-    padding: 0%;
-}
-#closeWebView{
-    display: inline-block;
-    /*background: url(/img/icon-close-card.svg);*/
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    width: 5rem;
-    height: 5rem;
-    padding: 0;
-    margin-right: -60em;
-}
 }

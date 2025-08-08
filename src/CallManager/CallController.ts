@@ -2,12 +2,13 @@ import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
 import { COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
-import { EndCallView, botName } from './CallView.ts';
+import { EndCallView, HideCallViewTranscript, botName } from './CallView.ts';
 import { GetAllCategories, GetPlacesInfoByName, SearchPlacesByDistanceCategoryArea } from '../main.ts';
 import {
     Room, RoomEvent, RoomConnectOptions, Track, RpcInvocationData,
     RemoteParticipant, RemoteTrackPublication, RemoteTrack,
     RpcError, TranscriptionSegment, Participant, TrackPublication,
+    DisconnectReason
 } from "livekit-client";
 import { GetHTMLElement } from '../Utils/Utils.ts';
 import { scene } from '../Renderer.ts';
@@ -15,10 +16,10 @@ import { scene } from '../Renderer.ts';
 const CallSession = new UltravoxSession();
 let firstSpeak = true;
 let roomSession: Room;
-// let timeOutCancelation: string | number | NodeJS.Timeout | undefined;
+let transcriptTimeout: number | ReturnType<typeof setTimeout> | undefined;
 SetupListeners();
 
-export async function CreateCall(): Promise<boolean> {
+export async function CreateCallUltravox(): Promise<boolean> {
     try {
         const body = {
             companyId: COMPANY_ID,
@@ -133,11 +134,10 @@ function SetupListeners() {
         console.log(`Session status changed: ${CallSession.status}`);
         switch (CallSession.status) {
             case UltravoxSessionStatus.SPEAKING:
-                // if (firstSpeak) {
-                //     firstSpeak = false;
-                //     EndCallView();
-                // }
-                // clearTimeout(timeOutCancelation);
+                if (firstSpeak) {
+                    firstSpeak = false;
+                    EndCallView();
+                }
                 break;
             case UltravoxSessionStatus.LISTENING:
                 break;
@@ -150,19 +150,6 @@ function SetupListeners() {
         const lastTranscript = CallSession.transcripts[CallSession.transcripts.length - 1] as Transcript;
 
         if (lastTranscript.speaker != 'agent') return;
-        // console.log('callTranscript:', lastTranscript.text);
-
-        // const urlMatch = lastTranscript.text.match(/https?:\/\/(?:\w+\-?\.)+\w+\/(?:[^/]+\/)*[\w-]+\.php/);
-        // if (urlMatch && alreadyShowWifi) {
-        //     alreadyShowWifi = false;
-        //     handleBlockClick(
-        //         'Código WiFI',
-        //         urlMatch[0].replace(/\s/g, '')
-        //     );
-        //     EndCallView();
-        //     TimeOutUser();
-        //     return;
-        // }
     });
 }
 
@@ -178,6 +165,7 @@ const connectParticipant = async (): Promise<Room> => {
         .on(RoomEvent.TrackSubscribed, handleTrackSubscribed)
         .on(RoomEvent.TrackUnsubscribed, handleTrackUnsubscribed)
         .on(RoomEvent.TranscriptionReceived, handleTranscriptionReceived)
+        .on(RoomEvent.Disconnected, handleRoomDisconnect)
 
     await room.connect(url, token, {
         autoSubscribe: true,
@@ -220,20 +208,12 @@ const fetchToken = async (): Promise<{
     };
 };
 
-// async function TimeOutUser(timeToOut: number = 10000) {
-//     timeOutCancelation = setTimeout(() => {
-//         EndCallView();
-//         EndCall();
-//         GetHTMLElement('.BotButton3D').style.borderStyle = 'none';
-//     }, timeToOut);
-// }
-
 function EnfocarCamaraEnLugarPorID(data: RpcInvocationData) {
     // function EnfocarCamaraEnLugarPorID(params: any) {
     let params = JSON.parse(data.payload);
     console.log(`sending place ID for focus ${params.placeId as string}`);
     const FocusResponse = SetupDescriptionCardForPlaceByID(params.placeId as string);
-    EndCallView();
+    //EndCallView();
     if (FocusResponse.success)
         return `Lugar enfocado exitosamente en ${JSON.stringify(FocusResponse)}`;
     else
@@ -253,7 +233,7 @@ function AbrirServiciosQR(data: RpcInvocationData) {
         service?.url,
         service?.id
     );
-    EndCallView();
+    //EndCallView();
     return `Mostrando url, por favor, escanee el QR en pantalla.`;
 };
 
@@ -336,11 +316,37 @@ function handleTranscriptionReceived(
     _publication?: TrackPublication | undefined
 ) {
     if (transcription.length === 0) return;
+
     console.log(transcription[transcription.length - 1].text)
+
     if (firstSpeak) {
-        console.log("EndCallView()");
         firstSpeak = false;
-        EndCallView();
+        HideCallViewTranscript();
+    }
+
+    if (transcriptTimeout !== undefined) {
+        clearTimeout(transcriptTimeout);
+    }
+
+    if (transcription[transcription.length - 1].final) {
+        transcriptTimeout = setTimeout(() => {
+            console.log('No new transcript in 20s - closing call.');
+            EndCallView();
+            EndCall();
+        }, 10000);
+    }
+}
+
+function handleRoomDisconnect(reason?: DisconnectReason | undefined){
+    if(reason)
+        console.log(`disconecction due to ${DisconnectReason[reason.valueOf()]}`)
+
+    EndCallView();
+    EndCall();
+
+    if (transcriptTimeout !== undefined) {
+        clearTimeout(transcriptTimeout);
+        transcriptTimeout = undefined;
     }
 }
 
