@@ -2,7 +2,7 @@ import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
 import { COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
-import { EndCallView, HideCallViewTranscript, botName } from './CallView.ts';
+import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botName } from './CallView.ts';
 import { GetAllCategories, GetPlacesInfoByName, SearchPlacesByDistanceCategoryArea } from '../main.ts';
 import {
     Room, RoomEvent, RoomConnectOptions, Track, RpcInvocationData,
@@ -285,6 +285,7 @@ function ObtenerListadoDeCategorias() {
 // });
 
 export function EndCall() {
+    UpdateIsOnCallStatus(false);
     roomSession?.disconnect();
     // CallSession?.leaveCall();
 }
@@ -333,7 +334,8 @@ function handleTranscriptionReceived(
             console.log('No new transcript in 20s - closing call.');
             EndCallView();
             EndCall();
-        }, 10000);
+            firstSpeak = true;
+        }, 50000);
     }
 }
 
@@ -341,13 +343,14 @@ function handleRoomDisconnect(reason?: DisconnectReason | undefined){
     if(reason)
         console.log(`disconecction due to ${DisconnectReason[reason.valueOf()]}`)
 
-    EndCallView();
     EndCall();
+    EndCallView();
 
     if (transcriptTimeout !== undefined) {
         clearTimeout(transcriptTimeout);
         transcriptTimeout = undefined;
     }
+    firstSpeak = true;
 }
 
 interface Transcript {

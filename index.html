@@ -146,16 +146,17 @@
         </select>
       </div>
       <div class="searchPlace3DPanel">
-      <img src="img/icon-lupa.svg" alt="search" class="icon-search">
-      <input autocomplete="off" placeholder="Buscar lugar" type="text" id="searchPlace3D" class="searchPlace3D">
-    </div>
-    <img src="img/icon-close.svg" alt="search" id="icon-close" class="icon-close">
+        <img src="img/icon-lupa.svg" alt="search" class="icon-search">
+        <input autocomplete="off" placeholder="Buscar lugar" type="text" id="searchPlace3D" class="searchPlace3D">
+      </div>
+      <img src="img/icon-close.svg" alt="search" id="icon-close" class="icon-close">
     </div>
 
-    <img src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript vibrate raycast-blocker">
+    <img id="avatarButton" src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript vibrate raycast-blocker">
     <div id="webView" class="card-select-place hideTop">
       <img src="img/icon-close-card.svg" alt="search" id="closeWebView">
-      <iframe id="3DVisualizer" src="" title="threeOverlay" class="PlaceCardBasicDescription" style="height: 90%;width: 90%;"></iframe>
+      <iframe id="3DVisualizer" src="" title="threeOverlay" class="PlaceCardBasicDescription"
+        style="height: 90%;width: 90%;"></iframe>
     </div>
     <div id="divCardPlace" class="card-select-place raycast-blocker hideTop">
       <div id="header-container">
@@ -189,7 +190,9 @@
       <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatarImgScript">
       <b style="font-size: x-large;">¿Tienes dudas?</b>
       <span style="font-size: large;">Estoy aquí para guiarte</span>
-      <span style="font-size: small; text-align: center; margin-left: 3rem; margin-right: 3rem; color: #2e2e2e">Puedes preguntarme por edificos, facultades o zonas específicas. También te ayudo a encontrar baños, cafeterías o salidas.</span>
+      <span style="font-size: small; text-align: center; margin-left: 3rem; margin-right: 3rem; color: #2e2e2e">Puedes
+        preguntarme por edificos, facultades o zonas específicas. También te ayudo a encontrar baños, cafeterías o
+        salidas.</span>
       <img src="/img/end_call.png" alt="end_call" class="EndCallButton">
     </div>
 
@@ -227,26 +230,86 @@
     </section>
     <canvas id="canvas"></canvas>
     <div id="AudioParent" style="display: none;">
-  </div>
+    </div>
 
-  <script>
-    const buttonSidebar = document.querySelector('#description-path button');
-    const sidebar = document.querySelector('#descriptionSpan');
-    
-    function showSidebar() {
-      sidebar.style.width = '70vw';
-      sidebar.style.padding = '20px';
-      buttonSidebar.removeEventListener('click', showSidebar);
-      buttonSidebar.addEventListener('click', hideSidebar);
-    }
+    <script>
+      const buttonSidebar = document.querySelector('#description-path button');
+      const sidebar = document.querySelector('#descriptionSpan');
+      dragElement(document.getElementById("avatarButton"));
 
-    function hideSidebar() {
-      sidebar.style.width = '0vw';
-      sidebar.style.padding = '0px';
-      buttonSidebar.removeEventListener('click', hideSidebar);
-      buttonSidebar.addEventListener('click', showSidebar);
-    }
-  </script>
+      function showSidebar() {
+        sidebar.style.width = '70vw';
+        sidebar.style.padding = '20px';
+        buttonSidebar.removeEventListener('click', showSidebar);
+        buttonSidebar.addEventListener('click', hideSidebar);
+      }
+
+      function hideSidebar() {
+        sidebar.style.width = '0vw';
+        sidebar.style.padding = '0px';
+        buttonSidebar.removeEventListener('click', hideSidebar);
+        buttonSidebar.addEventListener('click', showSidebar);
+      }
+
+      //draggable function for avatar button
+      function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        elmnt.onmousedown = dragMouseDown;
+        elmnt.ontouchstart = dragMouseDown;
+
+
+        function dragMouseDown(e) {
+          e = e || window.event;
+          //e.preventDefault();
+          // get the mouse cursor position at startup:
+          pos3 = e.clientX || e.touches[0].clientX;
+          pos4 = e.clientY || e.touches[0].clientY;
+          document.onmouseup = closeDragElement;
+          document.ontouchend = closeDragElement;
+          // call a function whenever the cursor moves:
+          document.onmousemove = elementDrag;
+          document.ontouchmove = elementDrag;
+        }
+
+        function elementDrag(e) {
+          e = e || window.event;
+          //e.preventDefault();
+          // calculate the new cursor position:
+          pos1 = pos3 - (e.clientX || e.touches[0].clientX);
+          pos2 = pos4 - (e.clientY || e.touches[0].clientY);
+          pos3 = e.clientX || e.touches[0].clientX;
+          pos4 = e.clientY || e.touches[0].clientY;
+          
+          // Calculate new position
+          var newTop = (elmnt.offsetTop - pos2);
+          var newLeft = (elmnt.offsetLeft - pos1);
+          
+          // Get element dimensions
+          var elmntWidth = elmnt.offsetWidth;
+          var elmntHeight = elmnt.offsetHeight;
+          
+          // Get viewport dimensions
+          var viewportWidth = window.innerWidth;
+          var viewportHeight = window.innerHeight;
+          
+          // Clamp positions to stay within viewport
+          newTop = Math.max(0, Math.min(newTop, viewportHeight - elmntHeight));
+          newLeft = Math.max(0, Math.min(newLeft, viewportWidth - elmntWidth));
+          
+          // set the element's new position:
+          elmnt.style.top = newTop + "px";
+          elmnt.style.left = newLeft + "px";
+        }
+
+        function closeDragElement() {
+          /* stop moving when mouse button is released:*/
+          document.onmouseup = null;
+          document.onmousemove = null;
+          document.ontouchend = null;
+          document.ontouchmove = null;
+        }
+      }
+    </script>
 </body>
 
 </html>

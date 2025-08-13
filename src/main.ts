@@ -536,9 +536,9 @@ export function removeCurrentMarker() {
 }
 export function GetPlacesInfoByName(place_name: string): PlaceShort[] {
   let placeFound: PlaceShort[] = [];
+  const searchnormalized = normalizeString(place_name.toLocaleLowerCase())
   for (let index = 0; index < places.length; index++) {
     const originalNormalized = normalizeString(places[index].companysubsidiary_name.toLocaleLowerCase());
-    const searchnormalized = normalizeString(place_name.toLocaleLowerCase())
     if (originalNormalized.includes(searchnormalized))
       placeFound.push({
         place_id: places[index].place_id,

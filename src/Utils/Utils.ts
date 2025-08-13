@@ -67,6 +67,7 @@ function normalizeString(str: string): string {
     let normalized = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     // Remove punctuation and special characters (keep only alphanumeric and spaces)
     normalized = normalized.replace(/[^a-zA-Z0-9\s]/g, '');
+    normalized = normalized.replace(/\s/g, ''); //removing all spaces, tabs, newlines.
     return normalized;
 }
 

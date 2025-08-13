@@ -11,7 +11,7 @@ import { HideZT, SetCloseZTState } from '../ZT/ZTView.ts';
 const EndCallButton = GetHTMLElement('.EndCallButton');
 const AICallCard = GetHTMLElement('#AICallCard');
 const StartCallButton = GetHTMLElement('.avatarImgScript');
-let isOnCall: boolean = false;
+export let isOnCall: boolean = false;
 export let botName: string = 'Guía Zyon';
 
 export async function loadAvatar(companyId: string) {
@@ -83,7 +83,6 @@ export function HideCallViewTranscript(){
     AICallCard.classList.remove('showTop');
     AICallCard.classList.add('hideTop');
     StartCallButton.style.borderStyle = 'solid';
-    isOnCall = false;
 }
 
 async function HideAvatarButtonForNSeconds(n_seconds: number = 1){
@@ -93,4 +92,8 @@ async function HideAvatarButtonForNSeconds(n_seconds: number = 1){
     StartCallButton.classList.add('vibrate');
 
     StartCallButton.style.borderStyle = 'none';
+}
+
+export function UpdateIsOnCallStatus(newStatus: boolean){
+    isOnCall = newStatus;
 }
