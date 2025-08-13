@@ -127,7 +127,7 @@ function Start() {
         controls.update();
 
         //create skybox
-        const geometry = new SphereGeometry(1, 60, 40);
+        /*const geometry = new SphereGeometry(1, 60, 40);
         const material = new MeshBasicMaterial({
           color: 0xCBCBCB,
           side: BackSide,
@@ -136,7 +136,7 @@ function Start() {
         backgroundSphere.name = 'backgroundSphere';
         scene.add(backgroundSphere);
         backgroundSphere.scale.set(
-          size.length() + 1000, size.length() + 1000, size.length() + 1000);
+          size.length() + 1000, size.length() + 1000, size.length() + 1000);*/
 
         //populate animation array
         // const mixer = new AnimationMixer(gltf.scene);
@@ -400,14 +400,14 @@ let originalMinDistance: number;
 let originalMaxDistance: number;
 // Función para enfocar la cámara a un objeto
 export function focusCameraOnObject(object: Object3D) {
-      if (!object) {
+       if (!object) {
     console.warn("Objeto no válido");
     return;
   }
   console.log("Enfocando cámara en objeto:", object.name);
   //camera.position.copy(object.position);
 
-  const offset = new Vector3(0, 5, 0);
+  const offset = new Vector3(0, 10, 0);
   //const offset = new Vector3(3, 5, -5); 
   object.updateMatrixWorld();
 
@@ -417,17 +417,16 @@ export function focusCameraOnObject(object: Object3D) {
   //camera.position.set(worldPos.x, worldPos.y + 50, worldPos.z);
   camera.lookAt(worldPos);
   targetPosition.copy(worldPos).add(offset);
-  const targetoffset = new Vector3(0, -10, 0);
-  targetLookAt.copy(worldPos).add(targetoffset);
+  targetLookAt.copy(worldPos);
   //targetPosition.copy(object.position).add(offset);
   console.log("world", worldPos, "Posición:", object.position);
-  if (originalMinDistance === undefined || originalMaxDistance === undefined) {
+  /*if (originalMinDistance === undefined || originalMaxDistance === undefined) {
     originalMinDistance = controls.minDistance;
     originalMaxDistance = controls.maxDistance;
   }
   //desactivamos temporalmente las restricciones de zoom
   controls.minDistance = 0;
-  controls.maxDistance = Infinity;
+  controls.maxDistance = Infinity;*/
   controls.enabled = false; // evitamos que el usuario interactúe
   isMovingCamera = true;
 }

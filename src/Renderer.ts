@@ -13,7 +13,7 @@ let camera: PerspectiveCamera;
 scene = new Scene();
 renderer = new WebGLRenderer({ antialias: true, alpha: true, canvas: document.querySelector('canvas')! });
 renderer.setClearColor(0x000000, 0);
-scene.background = new Color(0xCBCBCB);
+scene.background = new Color(0x404040);
 renderer.setSize(window.innerWidth, window.innerHeight);
 canvas = document.querySelector('canvas')!;
 // camera = new OrthographicCamera(
