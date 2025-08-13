@@ -8,8 +8,8 @@ import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
-import { focusCameraOnObject,floorLevels,removeCurrentMarker } from './main.ts';//metodo para animar la camara al objeto seleccionado
-import { spawnMarkerAboveObject/*,centerModelOnFloor,adjustZoomLimitsForFloor*/ } from './main.ts';
+import { focusCameraOnObject,floorLevels,removeCurrentMarker, controls } from './main.ts';//metodo para animar la camara al objeto seleccionado
+import { spawnMarkerAboveObject,focusCameraOnFloor } from './main.ts';
 import { COMPANY_ID } from './Utils/constants.ts';
 
 const COLOR_SELECTED = new Color(0x733D96);
@@ -37,7 +37,7 @@ const divCardPlace = GetHTMLElement('#divCardPlace');
 let currentController: AbortController | null = null;
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
-
+let floorIndex= -1;
 input_searcher.addEventListener('input', () => {
     const searchTerm = normalizeString(input_searcher.value.toLowerCase());
     filterPlaceSearchItem(searchTerm);
@@ -338,15 +338,16 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
     floorSelector.style.display = 'block';
 
     // Add default option
-    // const defaultOption = document.createElement('option');
-    // defaultOption.value = '-1';
-    // defaultOption.text = 'Todos los Pisos';
-    // floorSelector.appendChild(defaultOption);
+     const defaultOption = document.createElement('option');
+     defaultOption.value = '-1';
+     defaultOption.text = 'Todos los Pisos';
+     floorSelector.appendChild(defaultOption);
 
-    floorLevels.forEach((_, index) => {
+    floorLevels.forEach((floor, index) => {
         const option = document.createElement('option');
+        const displayName = floor.userData.displayName || `Piso ${index + 1}`;
         option.value = index.toString();
-        option.text = `Piso ${index + 1}`;
+        option.text = displayName;
         floorSelector.appendChild(option);
     });
 
@@ -368,10 +369,10 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
         // Show only the selected floor
         floorLevels.forEach((floor, i) => {
             floor.visible = (i === index);
-            /*if(i=== index) {
-            centerModelOnFloor(floor);
-            adjustZoomLimitsForFloor(floor);
-        }*/
+            if(i=== index) {
+                console.log("Centering model on floor: ", floor.userData.displayName || `Piso ${i + 1}`);
+            focusCameraOnFloor(floor,controls);
+        }
         });
     }
     labelsScene.forEach((elem) => {
@@ -384,6 +385,7 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
             elem.classList.add('HideFromFloor');
         }
     });
+    floorIndex = index;
     updateLabelPositions();
     updateLabelVisibility();
 }
@@ -436,6 +438,12 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
 }
 
 function updateLabelPositions() {
+    if (floorIndex === -1){
+        labelsScene.forEach((elem) => {
+            elem.style.display = 'none';
+        });
+        return;
+    }
     labelsScene.forEach((elem, position) => {
         if (elem.style.display == 'none') return;
         tempV.copy(position);
@@ -451,7 +459,6 @@ function updateLabelPositions() {
 
 function updateLabelVisibility() {
     const labelData: LabelData[] = [];
-
     labelsScene.forEach((elem, position) => {
         if (elem.classList.contains('HideFromFloor')
             || elem.classList.contains('HideFromCategory')) {
@@ -594,9 +601,10 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
     const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
     floorSelector.value = floorIndex.toString();
+    console.log("floorIndex= "+floorIndex+"floorlevels= "+floorLevels);
     showFloor(floorIndex, floorLevels, labelsScene);
-    WaitForFocusAnimation(object, placeData);
     RestoreOriginalColors();
+    WaitForFocusAnimation(object, placeData);
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);

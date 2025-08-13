@@ -21,6 +21,9 @@ import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLoc
 import { loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
 import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -40,6 +43,7 @@ let places: Place[] = [];
 const mouse = new Vector2();
 const raycaster = new Raycaster();
 let totalSceneSize: number = 0;
+let raycastTimeout: ReturnType<typeof setTimeout> | null = null;
 
 export const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
@@ -113,9 +117,10 @@ function Start() {
         // camera.far = size.length() * 10;
         // camera.zoom = -size.length() / 10;
         controls.minDistance = size.length() / 20;
-        controls.maxDistance = size.length() / 2;
-        minPan = new Vector3(-size.length() / 2, 0, -size.length() / 4);
-        maxPan = new Vector3(size.length() / 2, 0, size.length() / 4);
+        controls.maxDistance = size.length() / 1;
+        //Tuve que cambiar el valor Y del Pan para los modelos multinivel, se requiere para mover el target en el eje Y
+        minPan = new Vector3(-size.length() / 2, -size.length() / 2, -size.length() / 4);
+        maxPan = new Vector3(size.length() / 2, size.length() / 2, size.length() / 4);
         // const mediam = (size.x + size.z) / 2;
         // controls.minZoom = mediam / 50;
         // controls.maxZoom = mediam / 2.5;
@@ -131,7 +136,7 @@ function Start() {
         backgroundSphere.name = 'backgroundSphere';
         scene.add(backgroundSphere);
         backgroundSphere.scale.set(
-          size.length() + 100, size.length() + 100, size.length() + 100);
+          size.length() + 200, size.length() + 200, size.length() + 200);
 
         //populate animation array
         // const mixer = new AnimationMixer(gltf.scene);
@@ -201,6 +206,8 @@ function Start() {
         floorSelector.dispatchEvent(event);
 
         GetHTMLElement('#loadingMain').style.display = "none";
+        updateLabelPositions();
+        updateLabelVisibility();
       },
       (xhr) => {
         const progress = (xhr.loaded / xhr.total) * 100;
@@ -211,10 +218,22 @@ function Start() {
       },
       (error) => {
         console.error('An error happened', error);
-      }
+      },
     );
+    /*updateLabelPositions();
+    updateLabelVisibility();*/
   }
 }
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+
+const bloomPass = new UnrealBloomPass(
+  new Vector2(window.innerWidth, window.innerHeight),
+  1.5,  // strength (intensidad del bloom)
+  0.4,  // radius
+  0.85  // threshold
+);
+composer.addPass(bloomPass);
 
 controls.addEventListener('change', () => {
   updateLabelPositions();
@@ -228,12 +247,22 @@ let canRaycast = true;
 
 controls.addEventListener('start', () => {
   canRaycast = false;
+  if (raycastTimeout) {
+    clearTimeout(raycastTimeout);
+    raycastTimeout = null;
+  }
 });
 
 controls.addEventListener('end', () => {
-  setTimeout(() => {
+  updateLabelVisibility();
+  if (raycastTimeout) {
+    clearTimeout(raycastTimeout);
+  }
+
+  raycastTimeout = setTimeout(() => {
     canRaycast = true;
-  }, 1000); // espera 1 segundo antes de volver a permitir raycast
+    console.log("Raycast enabled again");
+  }, 2000); // espera 2 segundos antes de volver a permitir raycast
 });
 
 controls.update();
@@ -370,10 +399,9 @@ const targetLookAt = new Vector3();
 const lerpSpeed = 0.01;
 let originalMinDistance: number;
 let originalMaxDistance: number;
-
 // Función para enfocar la cámara a un objeto
 export function focusCameraOnObject(object: Object3D) {
-  if (!object) {
+      if (!object) {
     console.warn("Objeto no válido");
     return;
   }
@@ -404,11 +432,10 @@ export function focusCameraOnObject(object: Object3D) {
   controls.enabled = false; // evitamos que el usuario interactúe
   isMovingCamera = true;
 }
-// Referencia al modelo y al marcador actual
 let markerTemplate: Object3D | null = null;
 let currentMarker: Object3D | null = null;
 
-// Cargar el modelo glb
+// Cargar el modelo glb del marcador
 const markerloader = new GLTFLoader();
 markerloader.load('./models/marker.glb', (gltf) => {
   markerTemplate = gltf.scene;
@@ -434,6 +461,8 @@ export function spawnMarkerAboveObject(target: Object3D) {
   const scaleFactor = height * 0.3; // Ajusta esto si se ve muy grande o pequeño
   marker.scale.setScalar(scaleFactor);
 
+   // Asegurar matrices actualizadas antes de obtener la posición global
+  target.updateMatrixWorld(true);
   // Obtener posición del objeto
   const worldPosition = new Vector3();
   target.getWorldPosition(worldPosition);
@@ -446,35 +475,21 @@ export function spawnMarkerAboveObject(target: Object3D) {
   scene.add(marker);
   currentMarker = marker;
 }
+export function focusCameraOnFloor(floor: Object3D, controls: OrbitControls) {
+   if (!floor) return;
 
-export function centerModelOnFloor(floor: Object3D) {
-    const box = new Box3().setFromObject(floor);
-  const center = new Vector3();
-  box.getCenter(center);
-
-  // Usar eje Y para la altura
-  const currentPos = camera.position.clone();
-  const newTarget = new Vector3(controls.target.x, center.y, controls.target.z);
-
-  // Calcular desplazamiento vertical en Y y aplicarlo a la cámara
-  const yOffset = (center.y - controls.target.y)*2;
-  console.log("Desplazamiento vertical:", yOffset);
-  const newCameraPos = currentPos.clone().add(new Vector3(0, yOffset, 0));
-
-  camera.position.copy(newCameraPos);
-  controls.target.copy(newTarget);
-  controls.update();
-}
-export function adjustZoomLimitsForFloor(floor: Object3D) {
-  console.log("Ajustando límites de zoom para el piso:", floor.name);
   const box = new Box3().setFromObject(floor);
-  const size = new Vector3();
-  box.getSize(size);
+  const center = box.getCenter(new Vector3());
 
-  const maxDimension = Math.max(size.x, size.y, size.z);
+  const offset = new Vector3(0, 10, 20);
 
-  controls.minDistance = maxDimension / 5; // Acercamiento permitido
-  controls.maxDistance = maxDimension * 2;  // Alejamiento permitido
+  const newCameraPos = center.clone().add(offset);
+
+  // Cambiamos la posición y el target sin animación
+  camera.position.copy(newCameraPos);
+  controls.target.copy(center);
+
+  controls.update();
 }
 
 
@@ -571,13 +586,14 @@ function animate() {
     // Si ya llegamos al punto
     if (camera.position.distanceTo(targetPosition) <= 3) {
       camera.position.copy(targetPosition);
-      controls.target.copy(targetLookAt);
 
-      controls.minDistance = originalMinDistance;
-      controls.maxDistance = originalMaxDistance;
-      controls.enabled = true;
+    // Fijamos el target en el objeto seleccionado
+    controls.target.copy(targetLookAt);
 
-      isMovingCamera = false;
+    controls.enabled = true;
+    isMovingCamera = false;
+    updateLabelPositions();
+    updateLabelVisibility();
     }
   }
   else {
@@ -591,6 +607,7 @@ function animate() {
   }
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
+  composer.render();
 }
 
 animate();
