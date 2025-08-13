@@ -23,7 +23,7 @@ canvas = document.querySelector('canvas')!;
 //     -20 / 2, 
 //     1, 
 //     1500);
-camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1);
+camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1,8000);
 const light = new DirectionalLight(0xffffff, 1);
 const ambientLight = new AmbientLight(0xffffff, 1.5); // Luz blanca suave
 scene.add(ambientLight, light);

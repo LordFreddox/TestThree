@@ -136,7 +136,7 @@ function Start() {
         backgroundSphere.name = 'backgroundSphere';
         scene.add(backgroundSphere);
         backgroundSphere.scale.set(
-          size.length() + 200, size.length() + 200, size.length() + 200);
+          size.length() + 1000, size.length() + 1000, size.length() + 1000);
 
         //populate animation array
         // const mixer = new AnimationMixer(gltf.scene);
