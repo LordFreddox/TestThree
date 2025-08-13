@@ -331,11 +331,11 @@ function handleTranscriptionReceived(
 
     if (transcription[transcription.length - 1].final) {
         transcriptTimeout = setTimeout(() => {
-            console.log('No new transcript in 20s - closing call.');
+            console.log('No new transcript in 10s - closing call.');
             EndCallView();
             EndCall();
             firstSpeak = true;
-        }, 50000);
+        }, 10000);
     }
 }
 

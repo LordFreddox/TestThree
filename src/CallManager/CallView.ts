@@ -49,10 +49,10 @@ StartCallButton.onclick = async () => {
     //create livekit call
     isOnCall = await CreateCallLiveKit();
 
-    // if(!isOnCall) //if livekit call fails, then create ultravox call as fallback
-    // {
-    //     isOnCall = await CreateCallUltravox();
-    // }
+    if(!isOnCall) //if livekit call fails, then create ultravox call as fallback
+    {
+        isOnCall = await CreateCallUltravox();
+    }
 
     if(isOnCall) //if call created, stop avatar vibrate animation
     {

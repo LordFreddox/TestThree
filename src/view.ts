@@ -3,13 +3,13 @@ import { camera, canvas, scene } from './Renderer.ts';
 import { Place } from './Utils/Types.ts';
 import { PROJECT } from './HTTP/http-service.ts';
 // import { getPathAndDisplay } from './Navigator.ts';
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, normalizeString } from './Utils/Utils.ts';
+import { CreateLineRender, GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, normalizeString } from './Utils/Utils.ts';
 import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
-import { focusCameraOnObject,floorLevels,removeCurrentMarker } from './main.ts';//metodo para animar la camara al objeto seleccionado
-import { spawnMarkerAboveObject/*,centerModelOnFloor,adjustZoomLimitsForFloor*/ } from './main.ts';
+import { focusCameraOnObject, floorLevels, removeCurrentMarker, controls } from './main.ts';//metodo para animar la camara al objeto seleccionado
+import { spawnMarkerAboveObject, focusCameraOnFloor } from './main.ts';
 import { COMPANY_ID } from './Utils/constants.ts';
 
 const COLOR_SELECTED = new Color(0x733D96);
@@ -38,7 +38,7 @@ let currentController: AbortController | null = null;
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
 let currentFloor: () => string = () =>
-  (document.getElementById('floor-selector') as HTMLSelectElement).value;
+    (document.getElementById('floor-selector') as HTMLSelectElement).value;
 
 input_searcher.addEventListener('input', () => {
     const searchTerm = normalizeString(input_searcher.value.toLowerCase());
@@ -345,10 +345,11 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
     defaultOption.text = 'Todos los Pisos';
     floorSelector.appendChild(defaultOption);
 
-    floorLevels.forEach((_, index) => {
+    floorLevels.forEach((floor, index) => {
         const option = document.createElement('option');
+        const displayName = floor.userData.displayName || `Piso ${index + 1}`;
         option.value = index.toString();
-        option.text = `Piso ${index + 1}`;
+        option.text = displayName;
         floorSelector.appendChild(option);
     });
 
@@ -356,7 +357,7 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
         const selectedIndex = parseInt((event.target as HTMLSelectElement).value, 10);
         showFloor(selectedIndex, floorLevels, labelsScene);
         removeCurrentMarker(); // Remove any current marker when changing floors
-        
+
     });
 }
 
@@ -370,10 +371,10 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
         // Show only the selected floor
         floorLevels.forEach((floor, i) => {
             floor.visible = (i === index);
-            /*if(i=== index) {
-            centerModelOnFloor(floor);
-            adjustZoomLimitsForFloor(floor);
-        }*/
+            if (i === index) {
+                console.log("Centering model on floor: ", floor.userData.displayName || `Piso ${i + 1}`);
+                focusCameraOnFloor(floor, controls);
+            }
         });
     }
     labelsScene.forEach((elem) => {
@@ -440,10 +441,10 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
 }
 
 function updateLabelPositions() {
-    if(currentFloor() == "-1" ) return; //no position update when all floor selected
+    if (currentFloor() == "-1") return; //no position update when all floor selected
 
     labelsScene.forEach((elem, position) => {
-        if (elem.style.display == 'none' || currentFloor() == "-1" ) return;
+        if (elem.style.display == 'none' || currentFloor() == "-1") return;
         tempV.copy(position);
         tempV.project(camera);
 
@@ -456,14 +457,13 @@ function updateLabelPositions() {
 }
 
 function updateLabelVisibility() {
-    if(currentFloor() == "-1" ) return; //no visibility update when all floor selected
+    if (currentFloor() == "-1") return; //no visibility update when all floor selected
 
     const labelData: LabelData[] = [];
 
     labelsScene.forEach((elem, position) => {
         if (elem.classList.contains('HideFromFloor')
-            || elem.classList.contains('HideFromCategory')) 
-        {
+            || elem.classList.contains('HideFromCategory')) {
             elem.style.display = 'none';
             return;
         }
@@ -546,7 +546,7 @@ function CreateTextForPlace(
     textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1.1,) {
     if (textName.bigcompany_id.toString() !== COMPANY_ID)
         return;
-
+    const lineHeigh: number = 15;
     const elem = document.createElement('div');
     const formattedKey = textName.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
     elem.textContent = formattedKey;
@@ -556,10 +556,13 @@ function CreateTextForPlace(
     labelContainerElem!.appendChild(elem);
     const { center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
     let topCenterPosition: Vector3 = new Vector3();
-    if (floorLevels.length === 0)
-        topCenterPosition = new Vector3(center.x, 1, center.z);
-    else
+    if (floorLevels.length === 0) {
+        topCenterPosition = new Vector3(center.x, center.y + lineHeigh, center.z);
+        CreateLineRender(center, topCenterPosition, 0x000000);
+    }
+    else {
         topCenterPosition = new Vector3(center.x, center.y, center.z);
+    }
     labelsScene.set(topCenterPosition, elem);
     const floorObj = findFloorObject(placeObject, floorLevels);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
@@ -603,14 +606,14 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
     SetupCardDescriptionCardPlace(placeData);
-    const floorObj = findFloorObject(object,floorLevels);
-    console.log("floorObj="+floorObj);
+    const floorObj = findFloorObject(object, floorLevels);
+    console.log("floorObj=" + floorObj);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
     const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
     floorSelector.value = floorIndex.toString();
     showFloor(floorIndex, floorLevels, labelsScene);
-    WaitForFocusAnimation(object, placeData);
     RestoreOriginalColors();
+    WaitForFocusAnimation(object, placeData);
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
     return { piso: `Piso ${placeData.place_area_name}`, success: true };
 }
@@ -620,8 +623,8 @@ async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
     focusCameraOnObject(object);
     spawnMarkerAboveObject(object);
     await new Promise(f => setTimeout(f, 2000));
-    SetupCardDescriptionCardPlace();
-    if(placeData.bigcompany_id.toString() === COMPANY_ID) return; //dont show webview on same bigsurface
+    SetupCardDescriptionCardPlace(placeData);
+    if (placeData.bigcompany_id.toString() === COMPANY_ID) return; //dont show webview on same bigsurface
 
     webviewContainer.classList.add('showTop');
     webviewContainer.classList.remove('hideTop');
@@ -633,7 +636,7 @@ async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
     console.log('WebView src set to:', webView.src);
 }
 
-function SetupCardDescriptionCardPlace(placeData: Place){
+function SetupCardDescriptionCardPlace(placeData: Place) {
     divCardPlace.classList.remove('hideTop');
     divCardPlace.classList.add('showTop');
     (divCardPlace.querySelector('#logo_place_card') as HTMLImageElement).src = placeData.companysubsidiary_image_url;

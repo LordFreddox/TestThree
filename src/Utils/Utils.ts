@@ -1,4 +1,6 @@
-import { Object3D, Box3, Vector3, Group, MeshBasicMaterial, Mesh } from 'three';
+import { Object3D, Box3, Vector3, Group, MeshBasicMaterial, 
+    Mesh, BufferGeometry, LineBasicMaterial, Line, 
+    ColorRepresentation} from 'three';
 import { scene } from '../Renderer.ts';
 
 const blockerClassName = 'raycast-blocker';
@@ -32,8 +34,8 @@ function DebugNavMesh(navMesh: Mesh) {
     );
 }
 
-function IsLocalHost(): boolean{
-    if(window.location.hostname === "localhost")
+function IsLocalHost(): boolean {
+    if (window.location.hostname === "localhost")
         return true;
     else
         return false;
@@ -71,5 +73,15 @@ function normalizeString(str: string): string {
     return normalized;
 }
 
-export { GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh, 
-    GetHTMLElement, IsLocalHost, shouldBlock, normalizeString }
+function CreateLineRender(startPosition: Vector3, endPosition: Vector3, color: ColorRepresentation) {
+    const lineGeometry = new BufferGeometry().setFromPoints([startPosition, endPosition]);
+    const lineMaterial = new LineBasicMaterial({ color: color });
+    const line = new Line(lineGeometry, lineMaterial);
+    scene.add(line);
+}
+
+export {
+    GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh,
+    GetHTMLElement, IsLocalHost, shouldBlock, normalizeString,
+    CreateLineRender
+}
