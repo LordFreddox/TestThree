@@ -1,9 +1,9 @@
-import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3 } from 'three';
+import { Object3D, Color, Mesh, MeshStandardMaterial, Vector3, ArrowHelper } from 'three';
 import { camera, canvas, scene } from './Renderer.ts';
 import { Place } from './Utils/Types.ts';
 import { PROJECT } from './HTTP/http-service.ts';
 // import { getPathAndDisplay } from './Navigator.ts';
-import { CreateLineRender, GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, normalizeString } from './Utils/Utils.ts';
+import { CreateArrowRender, GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, normalizeString } from './Utils/Utils.ts';
 import { setCurrentAgent } from './chat.ts';
 import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
@@ -24,6 +24,7 @@ const closeSeachIcon = document.getElementById('icon-close') as HTMLInputElement
 const input_searcher = document.getElementById('input_searcher') as HTMLInputElement;
 const placeSelectors = document.getElementsByClassName('container-input');
 let labelsScene = new Map<Vector3, HTMLDivElement>();
+let labelsLine = new Map<HTMLDivElement, ArrowHelper>();
 const labelContainerElem = document.querySelector('#labelsScene');
 let startPlaceId: string | undefined;
 let endPlaceId: string | undefined
@@ -379,13 +380,20 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
     }
     labelsScene.forEach((elem) => {
         const labelFloorIndex = parseInt(elem.dataset.floorIndex || '-1', 10);
+        let line;
         if (
             // index === -1 || 
             index === labelFloorIndex) {
             elem.style.display = 'block';
+            line = labelsLine.get(elem);
+            if(line)
+                line.visible = true;
             elem.classList.remove('HideFromFloor');
         } else {
             elem.style.display = 'none';
+            line = labelsLine.get(elem);
+            if(line)
+                line.visible = false;
             elem.classList.add('HideFromFloor');
         }
     });
@@ -419,11 +427,18 @@ function initCategorySelector() {
 
 function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement>) {
     labelsScene.forEach((elem) => {
+        let line;
         if (category === '-1' || elem.dataset.category === category) {
             elem.style.display = 'block';
+            line = labelsLine.get(elem);
+            if(line)
+                line.visible = true;
             elem.classList.remove('HideFromCategory');
         } else {
             elem.style.display = 'none';
+            line = labelsLine.get(elem);
+            if(line)
+                line.visible = false;
             elem.classList.add('HideFromCategory');
         }
     });
@@ -460,11 +475,15 @@ function updateLabelVisibility() {
     if (currentFloor() == "-1") return; //no visibility update when all floor selected
 
     const labelData: LabelData[] = [];
+    let line;
 
     labelsScene.forEach((elem, position) => {
         if (elem.classList.contains('HideFromFloor')
             || elem.classList.contains('HideFromCategory')) {
             elem.style.display = 'none';
+            line = labelsLine.get(elem);
+            if(line)
+                line.visible = false;
             return;
         }
         tempV.copy(position);
@@ -478,6 +497,9 @@ function updateLabelVisibility() {
         // Store the label data
         labelData.push({ elem, x, y, zIndex });
         elem.style.display = 'block';
+        // line = labelsLine.get(elem);
+        // if(line)
+        //     line.visible = true;
     });
 
     // Sort labels by zIndex in descending order
@@ -498,8 +520,14 @@ function updateLabelVisibility() {
 
         if (overlap || (i > 0 && labelData[i - 1].zIndex === zIndex) || zIndex < 0) {
             elem.style.display = 'none';
+            line = labelsLine.get(elem);
+            if(line)
+                line.visible = false;
         } else {
             elem.style.display = 'block';
+            line = labelsLine.get(elem);
+            if(line)
+                line.visible = true;
             elem.style.zIndex = zIndex.toString();
         }
     }
@@ -543,26 +571,28 @@ function RestoreOriginalColors() {
 }
 
 function CreateTextForPlace(
-    textName: Place, placeObject: Object3D, floorLevels: Object3D[], fontSize = 1.1,) {
+    textName: Place, placeObject: Object3D, floorLevels: Object3D[], arrowLenght: number, arrowColor: string, fontSize = 1.1) {
     if (textName.bigcompany_id.toString() !== COMPANY_ID)
         return;
-    const lineHeigh: number = 15;
     const elem = document.createElement('div');
     const formattedKey = textName.companysubsidiary_name.split(' - ')[0].replace(/ /g, '\n');
     elem.textContent = formattedKey;
     elem.style.fontSize = fontSize + 'em';
     elem.style.fontWeight = 'bold';
     elem.style.display = 'none';
+    elem.onclick = () => { SetupDescriptionCardForPlace(placeObject); };
     labelContainerElem!.appendChild(elem);
-    const { center } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
+    const { center, size } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
     let topCenterPosition: Vector3 = new Vector3();
-    if (floorLevels.length === 0) {
-        topCenterPosition = new Vector3(center.x, center.y + lineHeigh, center.z);
-        CreateLineRender(center, topCenterPosition, 0x000000);
-    }
-    else {
-        topCenterPosition = new Vector3(center.x, center.y, center.z);
-    }
+    // if (floorLevels.length === 0) {
+    //     topCenterPosition = new Vector3(center.x, center.y + lineHeigh, center.z);
+    // }
+    // else {
+    //     topCenterPosition = new Vector3(center.x, center.y, center.z);
+    // }
+    topCenterPosition = new Vector3(center.x, (center.y + (size.y / 2 )) + arrowLenght, center.z);
+    const initPosition: Vector3 = new Vector3(center.x, center.y + (size.y / 2 ), center.z);
+    labelsLine.set(elem, CreateArrowRender(topCenterPosition, initPosition, topCenterPosition, arrowLenght, arrowColor));
     labelsScene.set(topCenterPosition, elem);
     const floorObj = findFloorObject(placeObject, floorLevels);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;

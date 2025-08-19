@@ -1,7 +1,7 @@
 import { GetHTMLElement, IsLocalHost } from '../Utils/Utils.ts';
 import { 
     CreateCallUltravox, 
-    CreateCallLiveKit, 
+    // CreateCallLiveKit, 
     EndCall 
 } from './CallController.ts';
 import { GetAvatarURL } from '../HTTP/http-service.ts';
@@ -47,7 +47,7 @@ StartCallButton.onclick = async () => {
     if (isOnCall) return;
     
     //create livekit call
-    isOnCall = await CreateCallLiveKit();
+    // isOnCall = await CreateCallLiveKit();
 
     if(!isOnCall) //if livekit call fails, then create ultravox call as fallback
     {

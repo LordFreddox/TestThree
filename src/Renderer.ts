@@ -1,8 +1,11 @@
 import { Scene, AmbientLight, WebGLRenderer, Color,
     /* OrthographicCamera,*/ DirectionalLight,
-    PerspectiveCamera, 
+    PerspectiveCamera, Vector2
 } from 'three';
 import { updateLabelPositions } from './view.ts';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
 let scene: Scene;
 let renderer: WebGLRenderer;
@@ -28,6 +31,17 @@ const light = new DirectionalLight(0xffffff, 1);
 const ambientLight = new AmbientLight(0xffffff, 1.5); // Luz blanca suave
 scene.add(ambientLight, light);
 
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+
+const bloomPass = new UnrealBloomPass(
+  new Vector2(window.innerWidth, window.innerHeight),
+  1.5,  // strength (intensidad del bloom)
+  0.4,  // radius
+  0.85  // threshold
+);
+composer.addPass(bloomPass);
+
 window.addEventListener('resize', onWindowResize, false);
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -40,4 +54,4 @@ function onWindowResize() {
     updateLabelPositions();
 }
 
-export { scene, camera, renderer, canvas };
+export { scene, camera, renderer, canvas, composer };

@@ -1,29 +1,31 @@
 import {
   AnimationMixer, Object3D, Clock,
-  MeshBasicMaterial,
-  Mesh, BackSide, Vector3, Box3,
-  SphereGeometry, Vector2,
-  Raycaster, Intersection
+  // MeshBasicMaterial, BackSide,
+  // SphereGeometry, Intersection,
+  Mesh, Vector3, Box3,
+  // Raycaster
 } from 'three';
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { Place, PlaceShort } from './Utils/Types.ts';
 import { GetPlaces, PROJECT } from './HTTP/http-service.ts';
-import { scene, camera, renderer } from './Renderer.ts';
+import { scene, camera, renderer, composer } from './Renderer.ts';
 import {
   initFloorSelector, initCategorySelector, ClosePlaceCard, CloseSearchPlace,
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
-  SetupDescriptionCardForPlace, SetupPlacesForSearchMap3D
+  SetupPlacesForSearchMap3D,
+  // SetupDescriptionCardForPlace
 } from './view.ts';
-import { GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, shouldBlock, IsLocalHost, normalizeString } from './Utils/Utils.ts';
+import {
+  GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement,
+  // shouldBlock,
+  IsLocalHost, normalizeString
+} from './Utils/Utils.ts';
 import { loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
 import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -40,8 +42,8 @@ export let floorLevels: Object3D[] = [];
 let interactObjects = [] as Object3D[];
 const loader = new GLTFLoader();
 let places: Place[] = [];
-const mouse = new Vector2();
-const raycaster = new Raycaster();
+// const mouse = new Vector2();
+// const raycaster = new Raycaster();
 let totalSceneSize: number = 0;
 let raycastTimeout: ReturnType<typeof setTimeout> | null = null;
 
@@ -186,7 +188,9 @@ function Start() {
         // }
 
         if (FAKE_ID === null) {
-          SetupPlacesOnScene(places);
+          const arrowLength: number = gltf.scenes[0].userData.arrowLength ?? 5;
+          const arrowColor: string = gltf.scenes[0].userData.arrowColor ?? "#595959";
+          SetupPlacesOnScene(places, arrowLength, arrowColor);
         } else { //enable ui on fakeId
           document.getElementById('div3DView')!.style.display = 'block';
           document.getElementById('search-section')!.style.display = 'none';
@@ -224,16 +228,6 @@ function Start() {
     updateLabelVisibility();*/
   }
 }
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
-
-const bloomPass = new UnrealBloomPass(
-  new Vector2(window.innerWidth, window.innerHeight),
-  1.5,  // strength (intensidad del bloom)
-  0.4,  // radius
-  0.85  // threshold
-);
-composer.addPass(bloomPass);
 
 controls.addEventListener('change', () => {
   updateLabelPositions();
@@ -243,10 +237,10 @@ controls.addEventListener('change', () => {
   camera.position.sub(_v);
 });
 
-let canRaycast = true;
+// let canRaycast = true;
 
 controls.addEventListener('start', () => {
-  canRaycast = false;
+  // canRaycast = false;
   if (raycastTimeout) {
     clearTimeout(raycastTimeout);
     raycastTimeout = null;
@@ -260,7 +254,7 @@ controls.addEventListener('end', () => {
   }
 
   raycastTimeout = setTimeout(() => {
-    canRaycast = true;
+    // canRaycast = true;
     console.log("Raycast enabled again");
   }, 2000); // espera 2 segundos antes de volver a permitir raycast
   updateLabelVisibility();
@@ -291,7 +285,7 @@ function GetPlacesFake() {
     });
 }
 
-function SetupPlacesOnScene(places: Place[]) {
+function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: string) {
   places.forEach((place) => {
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
@@ -302,7 +296,7 @@ function SetupPlacesOnScene(places: Place[]) {
         MapObjectsListByCategoryName[place.place_category_name] = [];
       }
       MapObjectsListByCategoryName[place.place_category_name].push(object);
-      CreateTextForPlace(place, object, floorLevels);
+      CreateTextForPlace(place, object, floorLevels, arrowLenght, arrowColor);
       interactObjects.push(object);
     }
   });
@@ -364,30 +358,30 @@ controls.addEventListener('start', () => {
   }
 });
 
-window.addEventListener('touchend', (event) => {
-  if (!canRaycast) return; 
+window.addEventListener('touchend', (_event) => {
+  // if (!canRaycast) return; 
 
-  if (shouldBlock(event)) return;
+  // if (shouldBlock(event)) return;
 
   ClosePlaceCard();
   CloseSearchPlace();
   HideZT();
 
-  const touch = event.changedTouches[0];
-  mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
+  // const touch = event.changedTouches[0];
+  // mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+  // mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+  // raycaster.setFromCamera(mouse, camera);
 
-  const intersects: Intersection[] = raycaster.intersectObjects(interactObjects, true);
-  if (intersects.length > 0) {
-    for (let i = 0; i < intersects.length; i++) {
-      if (intersects[i].object.userData.isPlaceObject &&
-          intersects[i].object.parent?.visible === true) {
-        SetupDescriptionCardForPlace(intersects[i].object);
-        break;
-      }
-    }
-  }
+  // const intersects: Intersection[] = raycaster.intersectObjects(interactObjects, true);
+  // if (intersects.length > 0) {
+  //   for (let i = 0; i < intersects.length; i++) {
+  //     if (intersects[i].object.userData.isPlaceObject &&
+  //         intersects[i].object.parent?.visible === true) {
+  //       SetupDescriptionCardForPlace(intersects[i].object);
+  //       break;
+  //     }
+  //   }
+  // }
 });
 
 
@@ -396,11 +390,11 @@ let isMovingCamera = false;
 const targetPosition = new Vector3();
 const targetLookAt = new Vector3();
 const lerpSpeed = 0.01;
-let originalMinDistance: number;
-let originalMaxDistance: number;
+// let originalMinDistance: number;
+// let originalMaxDistance: number;
 // Función para enfocar la cámara a un objeto
 export function focusCameraOnObject(object: Object3D) {
-       if (!object) {
+  if (!object) {
     console.warn("Objeto no válido");
     return;
   }
@@ -442,7 +436,7 @@ markerloader.load('./models/marker.glb', (gltf) => {
 // Spawnear el marcador
 export function spawnMarkerAboveObject(target: Object3D) {
   // Eliminar el marcador anterior
-  if (currentMarker) 
+  if (currentMarker)
     removeCurrentMarker();
   if (!markerTemplate) return;
 
@@ -459,7 +453,7 @@ export function spawnMarkerAboveObject(target: Object3D) {
   const scaleFactor = height * 0.3; // Ajusta esto si se ve muy grande o pequeño
   marker.scale.setScalar(scaleFactor);
 
-   // Asegurar matrices actualizadas antes de obtener la posición global
+  // Asegurar matrices actualizadas antes de obtener la posición global
   target.updateMatrixWorld(true);
   // Obtener posición del objeto
   const worldPosition = new Vector3();
@@ -473,8 +467,9 @@ export function spawnMarkerAboveObject(target: Object3D) {
   scene.add(marker);
   currentMarker = marker;
 }
+
 export function focusCameraOnFloor(floor: Object3D, controls: OrbitControls) {
-   if (!floor) return;
+  if (!floor) return;
 
   const box = new Box3().setFromObject(floor);
   const center = box.getCenter(new Vector3());
@@ -490,7 +485,6 @@ export function focusCameraOnFloor(floor: Object3D, controls: OrbitControls) {
   controls.update();
 }
 
-
 export function SearchPlacesByDistanceCategoryArea(
   startObject: Object3D,
   categoryFilter: string): string {
@@ -505,8 +499,8 @@ export function SearchPlacesByDistanceCategoryArea(
     const calculatedDistance = startPosition.distanceTo(probePosition);
     if (object.userData.place.place_category_name === categoryFilter) {
       if (calculatedDistance < totalSceneSize / 10 //filter by 10% of total scene size
-          // object.userData.place.place_area_id === startObject.userData.place.place_area_id //filter by same area id
-        ) {
+        // object.userData.place.place_area_id === startObject.userData.place.place_area_id //filter by same area id
+      ) {
         foundObjects.push({
           place_id: object.userData.place.place_id,
           companysubsidiary_name: object.userData.place.companysubsidiary_name,
@@ -524,11 +518,12 @@ export function SearchPlacesByDistanceCategoryArea(
   if (foundObjects.length > 0) { //some places passed the filter
     return `Se recomiendan los siguientes lugares cercanos a ti con la categoría de ${categoryFilter}: ${JSON.stringify(foundObjects)}`;
   }
-  if (foundObjectsFar.length > 0){ //nothing passed the filter
+  if (foundObjectsFar.length > 0) { //nothing passed the filter
     return `No se encontraron lugares cercanos a ti, sin embargo te puedo recomendar estos que estan un poco mas lejos: ${JSON.stringify(foundObjectsFar)}`;
   }
   return `No se encontraron lugares recomendados con esa categoría`;
 }
+
 export function removeCurrentMarker() {
   if (!currentMarker) return;
 
@@ -548,6 +543,7 @@ export function removeCurrentMarker() {
 
   currentMarker = null;
 }
+
 export function GetPlacesInfoByName(place_name: string): PlaceShort[] {
   let placeFound: PlaceShort[] = [];
   const searchnormalized = normalizeString(place_name.toLocaleLowerCase())
@@ -585,14 +581,15 @@ function animate() {
     if (camera.position.distanceTo(targetPosition) <= 3) {
       camera.position.copy(targetPosition);
 
-    // Fijamos el target en el objeto seleccionado
-    controls.target.copy(targetLookAt);
+      // Fijamos el target en el objeto seleccionado
+      controls.target.copy(targetLookAt);
 
-    controls.enabled = true;
-    isMovingCamera = false;
-    updateLabelPositions();
-    updateLabelVisibility();
+      controls.enabled = true;
+      isMovingCamera = false;
+      // updateLabelVisibility();
     }
+    updateLabelPositions();
+
   }
   else {
     controls.update();

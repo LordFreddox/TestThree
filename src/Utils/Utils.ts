@@ -1,6 +1,8 @@
-import { Object3D, Box3, Vector3, Group, MeshBasicMaterial, 
-    Mesh, BufferGeometry, LineBasicMaterial, Line, 
-    ColorRepresentation} from 'three';
+import {
+    Object3D, Box3, Vector3, Group, MeshBasicMaterial,
+    Mesh, ArrowHelper,
+    Color
+} from 'three';
 import { scene } from '../Renderer.ts';
 
 const blockerClassName = 'raycast-blocker';
@@ -73,15 +75,28 @@ function normalizeString(str: string): string {
     return normalized;
 }
 
-function CreateLineRender(startPosition: Vector3, endPosition: Vector3, color: ColorRepresentation) {
-    const lineGeometry = new BufferGeometry().setFromPoints([startPosition, endPosition]);
-    const lineMaterial = new LineBasicMaterial({ color: color });
-    const line = new Line(lineGeometry, lineMaterial);
-    scene.add(line);
+function CreateArrowRender(startPosition: Vector3, endPosition: Vector3,
+    centerPosition: Vector3, arrowLenght:number, color: string): ArrowHelper {
+    const realColor: Color = new Color(color);
+    const arrow = new ArrowHelper(
+        new Vector3(endPosition.x - startPosition.x,
+            endPosition.y - startPosition.y,
+            endPosition.z - startPosition.z), // dir
+        centerPosition, // origin
+        arrowLenght, // Length
+        realColor, // hex color
+        0.5, // head length
+        0.5 // head width
+    );
+    // const lineGeometry = new BufferGeometry().setFromPoints([startPosition, endPosition]);
+    // const lineMaterial = new LineBasicMaterial({ color: color });
+    // const line = new Line(lineGeometry, lineMaterial);
+    scene.add(arrow);
+    return arrow;
 }
 
 export {
     GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh,
     GetHTMLElement, IsLocalHost, shouldBlock, normalizeString,
-    CreateLineRender
+    CreateArrowRender
 }
