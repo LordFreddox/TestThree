@@ -12,7 +12,8 @@ import { Place, PlaceShort } from './Utils/Types.ts';
 import { GetPlaces, PROJECT } from './HTTP/http-service.ts';
 import { scene, camera, renderer, composer } from './Renderer.ts';
 import {
-  initFloorSelector, initCategorySelector, ClosePlaceCard, CloseSearchPlace,
+  initFloorSelector, ClosePlaceCard, CloseSearchPlace,
+  // initCategorySelector, 
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
@@ -286,7 +287,24 @@ function GetPlacesFake() {
 }
 
 function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: string) {
+  let settingLogoGS: boolean = true;
+  const logoImg = GetHTMLElement(".logoGS") as HTMLImageElement;
+
   places.forEach((place) => {
+    if (settingLogoGS && place.bigcompany_level === 1) {
+      logoImg.onerror = () => {
+        logoImg.style.visibility = 'hidden';
+        settingLogoGS = false;
+      };
+      logoImg.onload = () => {
+        logoImg.style.visibility = 'visible';
+      };
+
+      // logoImg.src = place.company_picture_url;
+      logoImg.src = "https://strg01tockall.blob.core.windows.net/container1/multimedia/companies/2025-08/1360_companyLogo_1755710645795.svg";
+      settingLogoGS = false;
+    }
+
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
       SetupPlacesForSearchMap3D(place, object, floorLevels);
@@ -300,7 +318,11 @@ function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: st
       interactObjects.push(object);
     }
   });
-  initCategorySelector();
+
+  if (settingLogoGS) {
+    logoImg.style.visibility = 'hidden';
+  }
+  // initCategorySelector(); //disable categorySelector for now
 }
 
 function SetupExplorerOrVirtualtour(places: Place[]) {

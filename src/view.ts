@@ -402,7 +402,7 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
 }
 
 function initCategorySelector() {
-    document.getElementById('category-selector-title')!.style.display = 'block';
+    GetHTMLElement('#category-selector-title')!.style.display = 'block';
     const categorySelector = document.getElementById('category-selector') as HTMLSelectElement;
     categorySelector.style.display = 'block';
 

@@ -250,6 +250,10 @@ button {
     background-color: #fff;
 }
 
+#category-selector-title{
+    display: none;
+}
+
 .searchPlace3DPanel {
     display: flex;
     align-items: center;
@@ -646,6 +650,14 @@ button {
     margin-left: 1rem;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.logoGS {
+    /* position: absolute; */
+    top: 5vh;
+    right: 5vw;
+    max-width: 20vw;
+    max-height: 10vh;
 }
 
 .PlaceCardLongDescription {
