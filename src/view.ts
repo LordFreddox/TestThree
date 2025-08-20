@@ -637,7 +637,7 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
     SetupCardDescriptionCardPlace(placeData);
     const floorObj = findFloorObject(object, floorLevels);
-    console.log("floorObj=" + floorObj);
+    console.table("floorObj=" + floorObj);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
     const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
     floorSelector.value = floorIndex.toString();

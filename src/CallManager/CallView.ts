@@ -54,6 +54,10 @@ StartCallButton.onclick = async () => {
         isOnCall = await CreateCallUltravox();
     }
 
+    // isOnCall = true;
+    // await new Promise(f => setTimeout(f, 1 * 1000));
+    // HideCallViewTranscript();
+
     if(isOnCall) //if call created, stop avatar vibrate animation
     {
         StartCallButton.classList.remove('vibrate');
@@ -76,7 +80,7 @@ function StartCallView() {
 }
 
 export function EndCallView() {
-    HideAvatarButtonForNSeconds();
+    HideAvatarButtonForNSeconds(0);
 }
 
 export function HideCallViewTranscript(){

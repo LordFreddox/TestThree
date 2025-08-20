@@ -255,7 +255,7 @@ controls.addEventListener('end', () => {
 
   raycastTimeout = setTimeout(() => {
     // canRaycast = true;
-    console.log("Raycast enabled again");
+    // console.log("Raycast enabled again");
   }, 2000); // espera 2 segundos antes de volver a permitir raycast
   updateLabelVisibility();
 });
