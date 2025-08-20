@@ -356,34 +356,10 @@ controls.addEventListener('start', () => {
     hasUserInteracted = true;
     tutorial.style.display = 'none';
   }
+    ClosePlaceCard();
+    CloseSearchPlace();
+    HideZT();
 });
-
-window.addEventListener('touchend', (_event) => {
-  // if (!canRaycast) return; 
-
-  // if (shouldBlock(event)) return;
-
-  ClosePlaceCard();
-  CloseSearchPlace();
-  HideZT();
-
-  // const touch = event.changedTouches[0];
-  // mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
-  // mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
-  // raycaster.setFromCamera(mouse, camera);
-
-  // const intersects: Intersection[] = raycaster.intersectObjects(interactObjects, true);
-  // if (intersects.length > 0) {
-  //   for (let i = 0; i < intersects.length; i++) {
-  //     if (intersects[i].object.userData.isPlaceObject &&
-  //         intersects[i].object.parent?.visible === true) {
-  //       SetupDescriptionCardForPlace(intersects[i].object);
-  //       break;
-  //     }
-  //   }
-  // }
-});
-
 
 // Variables globales para el movimiento
 let isMovingCamera = false;
@@ -474,7 +450,7 @@ export function focusCameraOnFloor(floor: Object3D, controls: OrbitControls) {
   const box = new Box3().setFromObject(floor);
   const center = box.getCenter(new Vector3());
 
-  const offset = new Vector3(0, 10, 20);
+  const offset = new Vector3(30, 30, 30);
 
   const newCameraPos = center.clone().add(offset);
 
