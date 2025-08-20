@@ -300,8 +300,7 @@ function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: st
         logoImg.style.visibility = 'visible';
       };
 
-      // logoImg.src = place.company_picture_url;
-      logoImg.src = "https://strg01tockall.blob.core.windows.net/container1/multimedia/companies/2025-08/1360_companyLogo_1755710645795.svg";
+      logoImg.src = place.company_logo_url;
       settingLogoGS = false;
     }
 

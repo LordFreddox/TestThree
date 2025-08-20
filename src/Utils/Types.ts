@@ -18,7 +18,8 @@ export interface Place {
     companysubsidiary_image_url: string,
     company_id: number,
     company_name: string,
-    company_picture_url: string
+    company_picture_url: string,
+    company_logo_url: string
 }
 
 export interface PlaceShort{
