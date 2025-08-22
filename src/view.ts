@@ -38,9 +38,10 @@ const divCardPlace = GetHTMLElement('#divCardPlace');
 let currentController: AbortController | null = null;
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
-let currentFloor: () => string = () =>
-    (document.getElementById('floor-selector') as HTMLSelectElement).value;
-
+let currentFloor: () => string = () => {
+    const selectedItem = document.querySelector('#floor-carousel .floor-selector-item.selected') as HTMLElement;
+    return selectedItem ? selectedItem.dataset.index || '-1' : '-1';
+};
 input_searcher.addEventListener('input', () => {
     const searchTerm = normalizeString(input_searcher.value.toLowerCase());
     filterPlaceSearchItem(searchTerm);
@@ -199,40 +200,6 @@ function ConstructUnityVirtualTourURL(companyId: string, startPlaceId: string, e
     //TODO: Parse in unity the project type
 }
 
-// function AddCarouselItem(imageUrl: string, description: string,
-//     object: Object3D, floorLevels: Object3D[]) {
-//     const carouselContainer = document.querySelector('.carousel-container');
-//     const newItem = document.createElement('div');
-//     newItem.classList.add('carousel-item');
-//     newItem.innerHTML = `
-//         <img src="${imageUrl}" alt="${description}">
-//         <p>${description}</p>
-//     `;
-//     carouselContainer!.appendChild(newItem);
-//     newItem.addEventListener('click', () => {
-//         SetupDescriptionCardForPlace(object);
-//         RestoreOriginalColors();
-//         ChangeColorOfSingleObject(object, COLOR_SELECTED);
-//         const floorObj = findFloorObject(object, floorLevels);
-//         const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
-//         const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-//         floorSelector.value = floorIndex.toString();
-//         showFloor(floorIndex, floorLevels, labelsScene);
-//     });
-// }
-
-// function filterCarouselItems(searchTerm: string) {
-//     const carouselItems = document.querySelectorAll('.itemPlaceSearchClass');
-//     carouselItems.forEach((item) => {
-//         const description = normalizeString(item.getElementsByClassName('name-place')![0].innerHTML.toLowerCase());
-//         if (description.includes(searchTerm)) {
-//             (item as HTMLElement).style.display = 'flex';
-//         } else {
-//             (item as HTMLElement).style.display = 'none';
-//         }
-//     });
-// }
-
 function filterPlaceSearchItem(searchTerm: string) {
     const carouselItems = document.querySelectorAll('.place-item');
     carouselItems.forEach((item) => {
@@ -336,29 +303,52 @@ function findFloorObject(object: Object3D, floorLevels: Object3D[]): Object3D | 
 }
 
 function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HTMLDivElement>) {
-    document.getElementById('floor-selector-title')!.style.display = 'block';
-    const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-    floorSelector.style.display = 'block';
+    const carouselContainer = document.getElementById('floor-carousel-container') as HTMLElement;
+    const staticItem = document.createElement('div');
+    staticItem.id = 'static-item';
+    staticItem.className = 'floor-selector-item selected'; // Set as initially selected
+    staticItem.dataset.index = '-1';
+    staticItem.innerText = 'Todos los Pisos';
+    carouselContainer.appendChild(staticItem);
 
-    // Add default option
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '-1';
-    defaultOption.text = 'Todos los Pisos';
-    floorSelector.appendChild(defaultOption);
+    const carousel = document.getElementById('floor-carousel') as HTMLElement;
+    carousel.style.display = 'block';
 
     floorLevels.forEach((floor, index) => {
-        const option = document.createElement('option');
+        const item = document.createElement('div');
+        item.className = 'floor-selector-item';
+        item.dataset.index = index.toString();
         const displayName = floor.userData.displayName || `Piso ${index + 1}`;
-        option.value = index.toString();
-        option.text = displayName;
-        floorSelector.appendChild(option);
+        item.innerText = displayName;
+        carousel.appendChild(item);
     });
 
-    floorSelector.addEventListener('change', (event) => {
-        const selectedIndex = parseInt((event.target as HTMLSelectElement).value, 10);
-        showFloor(selectedIndex, floorLevels, labelsScene);
-        removeCurrentMarker(); // Remove any current marker when changing floors
+    // Attach the event listener for clicking on carousel items
+    carousel.addEventListener('click', (event) => {
+        if ((event.target as HTMLElement).classList.contains('floor-selector-item')) {
+            const selectedIndex = parseInt((event.target as HTMLElement).dataset.index || '0', 10);
+            showFloor(selectedIndex, floorLevels, labelsScene);
+            removeCurrentMarker();
 
+            // Handle selection state
+            document.querySelectorAll('#floor-carousel .floor-selector-item').forEach(item => {
+                item.classList.remove('selected');
+                staticItem.classList.remove('selected');
+            });
+            (event.target as HTMLElement).classList.add('selected');
+        }
+    });
+
+    // Event listener for the static item
+    staticItem.addEventListener('click', () => {
+        showFloor(-1, floorLevels, labelsScene);
+        removeCurrentMarker();
+
+        // Handle selection state
+        document.querySelectorAll('#floor-carousel .floor-selector-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+        staticItem.classList.add('selected');
     });
 }
 
@@ -386,19 +376,28 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
             index === labelFloorIndex) {
             elem.style.display = 'block';
             line = labelsLine.get(elem);
-            if(line)
+            if (line)
                 line.visible = true;
             elem.classList.remove('HideFromFloor');
         } else {
             elem.style.display = 'none';
             line = labelsLine.get(elem);
-            if(line)
+            if (line)
                 line.visible = false;
             elem.classList.add('HideFromFloor');
         }
     });
     updateLabelPositions();
     updateLabelVisibility();
+
+    const targetFloor = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${index}"]`) as HTMLElement;
+    if (targetFloor) {
+        document.querySelectorAll('#floor-carousel .floor-selector-item').forEach(item => {
+            item.classList.remove('selected');
+            GetHTMLElement("#static-item").classList.remove('selected');
+        });
+        targetFloor.classList.add('selected');
+    }
 }
 
 function initCategorySelector() {
@@ -431,13 +430,13 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
         if (category === '-1' || elem.dataset.category === category) {
             elem.style.display = 'block';
             line = labelsLine.get(elem);
-            if(line)
+            if (line)
                 line.visible = true;
             elem.classList.remove('HideFromCategory');
         } else {
             elem.style.display = 'none';
             line = labelsLine.get(elem);
-            if(line)
+            if (line)
                 line.visible = false;
             elem.classList.add('HideFromCategory');
         }
@@ -482,7 +481,7 @@ function updateLabelVisibility() {
             || elem.classList.contains('HideFromCategory')) {
             elem.style.display = 'none';
             line = labelsLine.get(elem);
-            if(line)
+            if (line)
                 line.visible = false;
             return;
         }
@@ -521,12 +520,12 @@ function updateLabelVisibility() {
         if (overlap || (i > 0 && labelData[i - 1].zIndex === zIndex) || zIndex < 0) {
             elem.style.display = 'none';
             line = labelsLine.get(elem);
-            if(line)
+            if (line)
                 line.visible = false;
         } else {
             elem.style.display = 'block';
             line = labelsLine.get(elem);
-            if(line)
+            if (line)
                 line.visible = true;
             elem.style.zIndex = zIndex.toString();
         }
@@ -590,8 +589,8 @@ function CreateTextForPlace(
     // else {
     //     topCenterPosition = new Vector3(center.x, center.y, center.z);
     // }
-    topCenterPosition = new Vector3(center.x, (center.y + (size.y / 2 )) + arrowLenght, center.z);
-    const initPosition: Vector3 = new Vector3(center.x, center.y + (size.y / 2 ), center.z);
+    topCenterPosition = new Vector3(center.x, (center.y + (size.y / 2)) + arrowLenght, center.z);
+    const initPosition: Vector3 = new Vector3(center.x, center.y + (size.y / 2), center.z);
     labelsLine.set(elem, CreateArrowRender(topCenterPosition, initPosition, topCenterPosition, arrowLenght, arrowColor));
     labelsScene.set(topCenterPosition, elem);
     const floorObj = findFloorObject(placeObject, floorLevels);
@@ -636,16 +635,21 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
     currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
     SetupCardDescriptionCardPlace(placeData);
+
     const floorObj = findFloorObject(object, floorLevels);
     console.table("floorObj=" + floorObj);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
-    const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-    floorSelector.value = floorIndex.toString();
-    showFloor(floorIndex, floorLevels, labelsScene);
-    RestoreOriginalColors();
-    WaitForFocusAnimation(object, placeData);
-    ChangeColorOfSingleObject(object, COLOR_SELECTED);
-    return { piso: `Piso ${placeData.place_area_name}`, success: true };
+
+    const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
+    if (carouselItem) {
+        showFloor(floorIndex, floorLevels, labelsScene);
+        RestoreOriginalColors();
+        WaitForFocusAnimation(object, placeData);
+        ChangeColorOfSingleObject(object, COLOR_SELECTED);
+        return { piso: `Piso ${placeData.place_area_name}`, success: true };
+    } else {
+        return { piso: "Piso no encontrado", success: false };
+    }
 }
 
 async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
@@ -717,9 +721,9 @@ closeWebView.onclick = () => {
     webviewContainer.classList.remove('showTop');
     webviewContainer.classList.add('hideTop');
 }
-// const testbutton=document.getElementById('searchPlace3D') as HTMLInputElement;
+// const testbutton = document.getElementById('searchPlace3D') as HTMLInputElement;
 // testbutton.onclick = () => {
-//     SetupDescriptionCardForPlaceByID('15959'); 
+//     SetupDescriptionCardForPlaceByID('16121');
 // }
 
 function CreateOptionItemSearchPanel(place: Place) {
@@ -772,11 +776,17 @@ function ButtonActionItemSearchPanelMap3D(object: Object3D, floorLevels: Object3
     SetupDescriptionCardForPlace(object);
     RestoreOriginalColors();
     ChangeColorOfSingleObject(object, COLOR_SELECTED);
+
     const floorObj = findFloorObject(object, floorLevels);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
-    const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-    floorSelector.value = floorIndex.toString();
-    showFloor(floorIndex, floorLevels, labelsScene);
+
+    const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
+    if (carouselItem) {
+        showFloor(floorIndex, floorLevels, labelsScene);
+    } else {
+        console.warn("Carousel item not found for the selected floor.");
+    }
+
     searchPanel.style.display = 'none';
     searchBar.value = '';
     const event = new Event('input', { bubbles: true });

@@ -91,6 +91,7 @@ function CreateArrowRender(startPosition: Vector3, endPosition: Vector3,
     // const lineGeometry = new BufferGeometry().setFromPoints([startPosition, endPosition]);
     // const lineMaterial = new LineBasicMaterial({ color: color });
     // const line = new Line(lineGeometry, lineMaterial);
+    arrow.visible = false;
     scene.add(arrow);
     return arrow;
 }

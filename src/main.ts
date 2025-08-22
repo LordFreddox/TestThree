@@ -204,11 +204,11 @@ function Start() {
             break;
           }
         }
-        //Set selected floor to 1
-        const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-        floorSelector.selectedIndex = 0;
-        const event = new Event('change', { bubbles: true });
-        floorSelector.dispatchEvent(event);
+
+        // const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
+        // floorSelector.selectedIndex = 0;
+        // const event = new Event('change', { bubbles: true });
+        // floorSelector.dispatchEvent(event);
 
         GetHTMLElement('#loadingMain').style.display = "none";
         updateLabelPositions();
