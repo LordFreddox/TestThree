@@ -675,6 +675,7 @@ button {
     right: 5vw;
     max-width: 20vw;
     max-height: 10vh;
+    margin-bottom: 1rem;
 }
 
 .PlaceCardLongDescription {
