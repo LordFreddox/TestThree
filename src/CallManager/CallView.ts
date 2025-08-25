@@ -13,6 +13,7 @@ const AICallCard = GetHTMLElement('#AICallCard');
 const StartCallButton = GetHTMLElement('.avatarImgScript');
 export let isOnCall: boolean = false;
 export let botName: string = 'Guía Zyon';
+export let botGenre: number = 0;
 
 export async function loadAvatar(companyId: string) {
     try {
@@ -34,7 +35,7 @@ export async function loadAvatar(companyId: string) {
             avatarElements[i].src = avatarResponse.data.avatar.picture_url;
         }
         botName = avatarResponse.data.avatar.name;
-
+        botGenre = avatarResponse.data.avatar.genre;
     } catch (error) {
         console.error('Error loading avatar:', error);
     }

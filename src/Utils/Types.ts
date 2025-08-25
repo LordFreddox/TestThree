@@ -60,7 +60,8 @@ export interface AvatarResponse {
         avatar: {
             "picture_url": string,
             "audio_url": string,
-            "name": string
+            "name": string,
+            "genre": number //0 Femenine, 1 Masculine
         }
     }
 }

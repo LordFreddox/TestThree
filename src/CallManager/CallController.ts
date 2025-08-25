@@ -2,7 +2,7 @@ import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
 import { COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
-import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botName } from './CallView.ts';
+import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botName, botGenre } from './CallView.ts';
 import { 
     // GetAllCategories, GetPlacesInfoByName, 
     SearchPlacesByDistanceCategoryArea 
@@ -29,6 +29,7 @@ export async function CreateCallUltravox(): Promise<boolean> {
             companyId: COMPANY_ID,
             companyName: COMPANY_NAME,
             botName: botName,
+            botGenre: botGenre,
             projectEnviroment: PROJECT_ENVIROMENT
         };
         const response = await fetch(`${URL_MCPCLIENT}/ultravox`, {
@@ -198,6 +199,7 @@ const fetchToken = async (): Promise<{
         companyId: COMPANY_ID,
         companyName: COMPANY_NAME,
         botName: botName,
+        botGenre: botGenre,
         projectEnviroment: PROJECT_ENVIROMENT
     };
     const response = await fetch(`${URL_MCPCLIENT}/get-token`, {

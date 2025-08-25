@@ -3,6 +3,7 @@ import {
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
   Mesh, Vector3, Box3,
+  BoxGeometry, Color, MeshStandardMaterial
   // Raycaster
 } from 'three';
 
@@ -47,6 +48,8 @@ let places: Place[] = [];
 // const raycaster = new Raycaster();
 let totalSceneSize: number = 0;
 let raycastTimeout: ReturnType<typeof setTimeout> | null = null;
+let modelSize: Vector3 | null = null;
+let modelCenter: Vector3 | null = null;
 
 export const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
@@ -95,6 +98,8 @@ function Start() {
         gltf.scene.position.set(0, 0, 0);
         scene.add(gltf.scene);
         const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
+        modelSize = size;
+        modelCenter = center;
         totalSceneSize = size.length();
         const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
           gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
@@ -209,7 +214,7 @@ function Start() {
         // floorSelector.selectedIndex = 0;
         // const event = new Event('change', { bubbles: true });
         // floorSelector.dispatchEvent(event);
-
+        generateBuildingsAroundModel();
         GetHTMLElement('#loadingMain').style.display = "none";
         updateLabelPositions();
         updateLabelVisibility();
@@ -377,10 +382,71 @@ controls.addEventListener('start', () => {
     hasUserInteracted = true;
     tutorial.style.display = 'none';
   }
-    ClosePlaceCard();
-    CloseSearchPlace();
-    HideZT();
+  ClosePlaceCard();
+  CloseSearchPlace();
+  HideZT();
 });
+
+
+
+const geometry = new BoxGeometry(1, 1, 1);
+// Parámetros de generación
+const spacing = 25;         // espacio entre edificios
+const minHeight = 1;        // altura mínima
+const maxHeight = 5;       // altura máxima
+const minWidth = 10;        // ancho mínimo
+const maxWidth = 30;        // ancho máximo
+
+function getColorByDistance(pos: Vector3, center: Vector3): Color {
+  const maxDistance = 200;
+  const dist = pos.distanceTo(center);
+  const t = Math.min(dist / maxDistance, 1);
+
+  const colorNear = new Color(0x40E0D0);
+  const colorFar = new Color(0x808080);
+
+  return colorNear.lerp(colorFar, t);
+}
+//Metodo para generar edificios aleatorios
+function generateBuildingsAroundModel() {
+  if (!modelSize || !modelCenter) {
+    console.warn("No se encuentra el bounding box del modelo.");
+    return;
+  }
+
+  const minX = modelCenter.x - modelSize.x / 2;
+  const maxX = modelCenter.x + modelSize.x / 2;
+  const minZ = modelCenter.z - modelSize.z / 2;
+  const maxZ = modelCenter.z + modelSize.z / 2;
+
+  for (let i = -200; i < 200; i += spacing) {
+    for (let j = -200; j < 200; j += spacing) {
+      // Solo generamos edificios FUERA del bounding box del modelo
+      if (i < minX - spacing || i > maxX + spacing ||
+        j < minZ - spacing || j > maxZ + spacing) {
+
+        const height = Math.random() * (maxHeight - minHeight) + minHeight;
+        const width = Math.random() * (maxWidth - minWidth) + minWidth;
+        const depth = Math.random() * (maxWidth - minWidth) + minWidth;
+
+        const position = new Vector3(i, height / 2, j);
+        const color = getColorByDistance(position, modelCenter);
+
+        const buildingMaterial = new MeshStandardMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.5,
+        });
+
+        const building = new Mesh(geometry, buildingMaterial);
+        building.scale.set(width, height, depth);
+        building.position.copy(position);
+
+        scene.add(building);
+      }
+    }
+  }
+}
 
 // Variables globales para el movimiento
 let isMovingCamera = false;
@@ -398,7 +464,7 @@ export function focusCameraOnObject(object: Object3D) {
   console.log("Enfocando cámara en objeto:", object.name);
   //camera.position.copy(object.position);
 
-  const offset = new Vector3(0, 10, 0);
+  const offset = new Vector3(0, 30, 0);
   //const offset = new Vector3(3, 5, -5); 
   object.updateMatrixWorld();
 
