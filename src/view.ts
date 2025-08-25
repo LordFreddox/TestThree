@@ -9,7 +9,7 @@ import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
 import { focusCameraOnObject, floorLevels, removeCurrentMarker, controls } from './main.ts';//metodo para animar la camara al objeto seleccionado
-import { spawnMarkerAboveObject, focusCameraOnFloor } from './main.ts';
+import { spawnMarkerAboveObject, focusCameraOnFloor, isSingleLevel } from './main.ts';
 import { COMPANY_ID } from './Utils/constants.ts';
 
 const COLOR_SELECTED = new Color(0x733D96);
@@ -455,10 +455,19 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
 }
 
 function updateLabelPositions() {
-    if (currentFloor() == "-1") return; //no position update when all floor selected
+    if (currentFloor() == "-1"){
+        if(!isSingleLevel){
+            return;
+        }
+    } //no position update when all floor selected
 
     labelsScene.forEach((elem, position) => {
-        if (elem.style.display == 'none' || currentFloor() == "-1") return;
+        if (elem.style.display == 'none' || currentFloor() == "-1"){
+            if(!isSingleLevel){
+                return;
+            }
+        }
+        
         tempV.copy(position);
         tempV.project(camera);
 
@@ -471,7 +480,11 @@ function updateLabelPositions() {
 }
 
 function updateLabelVisibility() {
-    if (currentFloor() == "-1") return; //no visibility update when all floor selected
+    if (currentFloor() == "-1"){
+        if(!isSingleLevel){
+            return;
+        }
+    }  //no visibility update when all floor selected
 
     const labelData: LabelData[] = [];
     let line;
@@ -583,20 +596,20 @@ function CreateTextForPlace(
     labelContainerElem!.appendChild(elem);
     const { center, size } = GetBoundingBoxSizeAndCenterOfObject(placeObject);
     let topCenterPosition: Vector3 = new Vector3();
-    // if (floorLevels.length === 0) {
-    //     topCenterPosition = new Vector3(center.x, center.y + lineHeigh, center.z);
-    // }
-    // else {
-    //     topCenterPosition = new Vector3(center.x, center.y, center.z);
-    // }
+
     topCenterPosition = new Vector3(center.x, (center.y + (size.y / 2)) + arrowLenght, center.z);
     const initPosition: Vector3 = new Vector3(center.x, center.y + (size.y / 2), center.z);
-    labelsLine.set(elem, CreateArrowRender(topCenterPosition, initPosition, topCenterPosition, arrowLenght, arrowColor));
+    const arrow = CreateArrowRender(topCenterPosition, initPosition, topCenterPosition, arrowLenght, arrowColor);
+    labelsLine.set(elem, arrow);
     labelsScene.set(topCenterPosition, elem);
     const floorObj = findFloorObject(placeObject, floorLevels);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
     elem.dataset.floorIndex = floorIndex.toString();
     elem.dataset.category = textName.place_category_name;
+    if (floorLevels.length === 0) { // in single level, activate renders by default
+        elem.style.display = 'block';
+        arrow.visible = true;
+    }
 }
 
 async function SetupDescriptionCardForPlace(object: Object3D) {

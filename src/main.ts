@@ -50,6 +50,7 @@ let totalSceneSize: number = 0;
 let raycastTimeout: ReturnType<typeof setTimeout> | null = null;
 let modelSize: Vector3 | null = null;
 let modelCenter: Vector3 | null = null;
+export let isSingleLevel: boolean = true;
 
 export const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
@@ -175,9 +176,11 @@ function Start() {
 
         if (floorLevels.length > 1) {
           initFloorSelector(floorLevels, labelsScene);
+          isSingleLevel = false;
         } else {
-          document.getElementById('floor-selector-title')!.style.display = 'none';
-          document.getElementById('floor-selector')!.style.display = 'none';
+          // document.getElementById('floor-selector-title')!.style.display = 'none';
+          document.getElementById('floor-carousel-container')!.style.display = 'none';
+          isSingleLevel = true;
         }
 
         const objetivoParent = scene.getObjectByName("objetivos");
@@ -210,10 +213,6 @@ function Start() {
           }
         }
 
-        // const floorSelector = document.getElementById('floor-selector') as HTMLSelectElement;
-        // floorSelector.selectedIndex = 0;
-        // const event = new Event('change', { bubbles: true });
-        // floorSelector.dispatchEvent(event);
         generateBuildingsAroundModel();
         GetHTMLElement('#loadingMain').style.display = "none";
         updateLabelPositions();
