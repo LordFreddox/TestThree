@@ -133,10 +133,14 @@
 
     <div class="container-3DView-options raycast-blocker">
       <!-- <button id="back3D" type="button">Regresar</button> -->
+      <img alt="logo_GS" class="logoGS">
 
-      <p id="floor-selector-title" style="top: 16vh" class="unselectable">Filtrar por Pisos</p>
-      <select id="floor-selector" style="top: 18vh;" class="category-selector" title="Select Floor">
-      </select>
+      <!-- <p id="floor-selector-title" style="top: 16vh" class="unselectable">Filtrar por Pisos</p> -->
+      <!-- <select id="floor-selector" style="top: 18vh;" class="category-selector" title="Select Floor">
+      </select> -->
+      <div id="floor-carousel-container">
+        <div id="floor-carousel"></div>
+      </div>
 
       <div id="category-selector-parent" style="display: block;">
         <p id="category-selector-title" class="unselectable">
@@ -152,7 +156,8 @@
       <img src="img/icon-close.svg" alt="search" id="icon-close" class="icon-close">
     </div>
 
-    <img id="avatarButton" src="/img/icon-bot-IA.svg" alt="bot" class="BotButton3D avatarImgScript vibrate raycast-blocker">
+    <img id="avatarButton" src="/img/icon-bot-IA.svg" alt="bot"
+      class="BotButton3D avatarImgScript vibrate raycast-blocker">
     <div id="webView" class="card-select-place hideTop">
       <img src="img/icon-close-card.svg" alt="search" id="closeWebView">
       <iframe id="3DVisualizer" src="" title="threeOverlay" class="PlaceCardBasicDescription"
@@ -279,23 +284,23 @@
           pos2 = pos4 - (e.clientY || e.touches[0].clientY);
           pos3 = e.clientX || e.touches[0].clientX;
           pos4 = e.clientY || e.touches[0].clientY;
-          
+
           // Calculate new position
           var newTop = (elmnt.offsetTop - pos2);
           var newLeft = (elmnt.offsetLeft - pos1);
-          
+
           // Get element dimensions
           var elmntWidth = elmnt.offsetWidth;
           var elmntHeight = elmnt.offsetHeight;
-          
+
           // Get viewport dimensions
           var viewportWidth = window.innerWidth;
           var viewportHeight = window.innerHeight;
-          
+
           // Clamp positions to stay within viewport
           newTop = Math.max(0, Math.min(newTop, viewportHeight - elmntHeight));
           newLeft = Math.max(0, Math.min(newLeft, viewportWidth - elmntWidth));
-          
+
           // set the element's new position:
           elmnt.style.top = newTop + "px";
           elmnt.style.left = newLeft + "px";

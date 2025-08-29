@@ -18,7 +18,8 @@ export interface Place {
     companysubsidiary_image_url: string,
     company_id: number,
     company_name: string,
-    company_picture_url: string
+    company_picture_url: string,
+    company_logo_url: string
 }
 
 export interface PlaceShort{
@@ -59,7 +60,8 @@ export interface AvatarResponse {
         avatar: {
             "picture_url": string,
             "audio_url": string,
-            "name": string
+            "name": string,
+            "genre": number //0 Femenine, 1 Masculine
         }
     }
 }

@@ -2,12 +2,16 @@ import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
 import { COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { SetupDescriptionCardForPlaceByID } from '../view.ts';
-import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botName } from './CallView.ts';
-import { GetAllCategories, GetPlacesInfoByName, SearchPlacesByDistanceCategoryArea } from '../main.ts';
+import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botName, botGenre } from './CallView.ts';
+import { 
+    // GetAllCategories, GetPlacesInfoByName, 
+    SearchPlacesByDistanceCategoryArea 
+} from '../main.ts';
 import {
-    Room, RoomEvent, RoomConnectOptions, Track, RpcInvocationData,
+    Room, RoomEvent, RoomConnectOptions, Track, 
+    // RpcInvocationData, RpcError,
     RemoteParticipant, RemoteTrackPublication, RemoteTrack,
-    RpcError, TranscriptionSegment, Participant, TrackPublication,
+    TranscriptionSegment, Participant, TrackPublication,
     DisconnectReason
 } from "livekit-client";
 import { GetHTMLElement } from '../Utils/Utils.ts';
@@ -25,6 +29,7 @@ export async function CreateCallUltravox(): Promise<boolean> {
             companyId: COMPANY_ID,
             companyName: COMPANY_NAME,
             botName: botName,
+            botGenre: botGenre,
             projectEnviroment: PROJECT_ENVIROMENT
         };
         const response = await fetch(`${URL_MCPCLIENT}/ultravox`, {
@@ -60,7 +65,7 @@ export async function CreateCallLiveKit(): Promise<boolean> {
         const room = await Promise.resolve(connectParticipant());
         await room.localParticipant.setMicrophoneEnabled(true);
         await room.startAudio();
-        await RegisterRPCCalls(room);
+        // await RegisterRPCCalls(room);
         if (!room) return false;
         roomSession = room;
         return true;
@@ -70,64 +75,64 @@ export async function CreateCallLiveKit(): Promise<boolean> {
     }
 }
 
-async function RegisterRPCCalls(room: Room) {
-    await room.registerRpcMethod(
-        'EnfocarCamaraEnLugarPorID',
-        async (data: RpcInvocationData) => {
-            try {
-                return EnfocarCamaraEnLugarPorID(data);
-            } catch (error) {
-                throw new RpcError(1, "No se pudo encontrar el lugar en el mapa.");
-            }
-        }
-    );
+// async function RegisterRPCCalls(room: Room) {
+//     await room.registerRpcMethod(
+//         'EnfocarCamaraEnLugarPorID',
+//         async (data: RpcInvocationData) => {
+//             try {
+//                 return EnfocarCamaraEnLugarPorID(data);
+//             } catch (error) {
+//                 throw new RpcError(1, "No se pudo encontrar el lugar en el mapa.");
+//             }
+//         }
+//     );
 
-    await room.registerRpcMethod(
-        'AbrirServiciosQR',
-        async (data: RpcInvocationData) => {
-            try {
-                return AbrirServiciosQR(data);
-            } catch (error) {
-                throw new RpcError(1, "Hubo un error al mostrar la url.");
-            }
-        }
-    );
+//     await room.registerRpcMethod(
+//         'AbrirServiciosQR',
+//         async (data: RpcInvocationData) => {
+//             try {
+//                 return AbrirServiciosQR(data);
+//             } catch (error) {
+//                 throw new RpcError(1, "Hubo un error al mostrar la url.");
+//             }
+//         }
+//     );
 
-    await room.registerRpcMethod(
-        'ObtenerLugaresRecomendadosPorCategoria',
-        async (data: RpcInvocationData) => {
-            try {
-                return ObtenerLugaresRecomendadosPorCategoria(data);
-            } catch (error) {
-                throw new RpcError(1, "No se encontraron lugares recomendados.");
-            }
-        }
-    );
+//     await room.registerRpcMethod(
+//         'ObtenerLugaresRecomendadosPorCategoria',
+//         async (data: RpcInvocationData) => {
+//             try {
+//                 return ObtenerLugaresRecomendadosPorCategoria(data);
+//             } catch (error) {
+//                 throw new RpcError(1, "No se encontraron lugares recomendados.");
+//             }
+//         }
+//     );
 
-    await room.registerRpcMethod(
-        'ObtenerInfoDeLugarPorNombre',
-        async (data: RpcInvocationData) => {
-            try {
-                return ObtenerInfoDeLugarPorNombre(data);
-            } catch (error) {
-                throw new RpcError(1, "No se encontraron lugares con ese nombre.");
-            }
-        }
-    );
+//     await room.registerRpcMethod(
+//         'ObtenerInfoDeLugarPorNombre',
+//         async (data: RpcInvocationData) => {
+//             try {
+//                 return ObtenerInfoDeLugarPorNombre(data);
+//             } catch (error) {
+//                 throw new RpcError(1, "No se encontraron lugares con ese nombre.");
+//             }
+//         }
+//     );
 
-        await room.registerRpcMethod(
-        'ObtenerListadoDeCategorias',
-        async (_data: RpcInvocationData) => {
-            try {
-                return ObtenerListadoDeCategorias();
-            } catch (error) {
-                throw new RpcError(1, "No se pudo obtener las categorias en este momento.");
-            }
-        }
-    );
+//     await room.registerRpcMethod(
+//         'ObtenerListadoDeCategorias',
+//         async (_data: RpcInvocationData) => {
+//             try {
+//                 return ObtenerListadoDeCategorias();
+//             } catch (error) {
+//                 throw new RpcError(1, "No se pudo obtener las categorias en este momento.");
+//             }
+//         }
+//     );
 
-    console.log("registered all tools");
-}
+//     console.log("registered all tools");
+// }
 
 function SetupListeners() {
     CallSession.addEventListener('status', () => {
@@ -136,10 +141,20 @@ function SetupListeners() {
             case UltravoxSessionStatus.SPEAKING:
                 if (firstSpeak) {
                     firstSpeak = false;
-                    EndCallView();
+                    HideCallViewTranscript();
+                }
+
+                if (transcriptTimeout !== undefined) {
+                    clearTimeout(transcriptTimeout);
                 }
                 break;
             case UltravoxSessionStatus.LISTENING:
+                transcriptTimeout = setTimeout(() => {
+                    console.log('No new transcript in 10s - closing call.');
+                    EndCallView();
+                    EndCall();
+                    firstSpeak = true;
+                }, 10000);
                 break;
             default:
                 break;
@@ -184,6 +199,7 @@ const fetchToken = async (): Promise<{
         companyId: COMPANY_ID,
         companyName: COMPANY_NAME,
         botName: botName,
+        botGenre: botGenre,
         projectEnviroment: PROJECT_ENVIROMENT
     };
     const response = await fetch(`${URL_MCPCLIENT}/get-token`, {
@@ -208,9 +224,9 @@ const fetchToken = async (): Promise<{
     };
 };
 
-function EnfocarCamaraEnLugarPorID(data: RpcInvocationData) {
-    // function EnfocarCamaraEnLugarPorID(params: any) {
-    let params = JSON.parse(data.payload);
+// function EnfocarCamaraEnLugarPorID(data: RpcInvocationData) {
+function EnfocarCamaraEnLugarPorID(params: any) {
+    // let params = JSON.parse(data.payload);
     console.log(`sending place ID for focus ${params.placeId as string}`);
     const FocusResponse = SetupDescriptionCardForPlaceByID(params.placeId as string);
     //EndCallView();
@@ -220,10 +236,10 @@ function EnfocarCamaraEnLugarPorID(data: RpcInvocationData) {
         return "No se pudo encontrar el lugar en el mapa.";
 };
 
-function AbrirServiciosQR(data: RpcInvocationData) {
-    // function OpenServices(params: any) {
+// function AbrirServiciosQR(data: RpcInvocationData) {
+function OpenServices(params: any) {
     if (!serviceList) return `Hubo un error al mostrar el QR.`;
-    let params = JSON.parse(data.payload);
+    // let params = JSON.parse(data.payload);
     console.log(`executing tool OpenServices`, params.serviceId as number);
     const service =
         serviceList.find(service => service.id === Number.parseInt(params.serviceId));
@@ -237,9 +253,10 @@ function AbrirServiciosQR(data: RpcInvocationData) {
     return `Mostrando url, por favor, escanee el QR en pantalla.`;
 };
 
-function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
-    let params = JSON.parse(data.payload);
-    if(!START_POINT) return `No se puede recomendar lugares en este momento.`;
+// function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
+function ObtenerLugaresRecomendadosPorCategoria(params: any) { 
+    // let params = JSON.parse(data.payload);
+    if (!START_POINT) return `No se puede recomendar lugares en este momento.`;
 
     const startObject = scene.getObjectByName(START_POINT);
     const categoryToSearch = params.category as string;
@@ -250,44 +267,45 @@ function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
     return SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
 };
 
-function ObtenerInfoDeLugarPorNombre(data: RpcInvocationData) {
-    let params = JSON.parse(data.payload);
-    console.log(`sending place_name for info ${params.placeName as string}`);
-    const placesFound = GetPlacesInfoByName(params.placeName);
-    if (placesFound.length > 0) {
-        console.log(`se encontraron ${placesFound.length} lugares con ese nombre`);
-        console.log(JSON.stringify(placesFound));
-        return JSON.stringify(placesFound);
-    }
-    else {
-        console.log(`No se encontraron lugares con ese nombre`);
-        return `No se encontraron lugares con ese nombre`;
-    }
-}
+// function ObtenerInfoDeLugarPorNombre(data: RpcInvocationData) {
+//     let params = JSON.parse(data.payload);
+//     console.log(`sending place_name for info ${params.placeName as string}`);
+//     const placesFound = GetPlacesInfoByName(params.placeName);
+//     if (placesFound.length > 0) {
+//         console.log(`se encontraron ${placesFound.length} lugares con ese nombre`);
+//         console.log(JSON.stringify(placesFound));
+//         return JSON.stringify(placesFound);
+//     }
+//     else {
+//         console.log(`No se encontraron lugares con ese nombre`);
+//         return `No se encontraron lugares con ese nombre`;
+//     }
+// }
 
-function ObtenerListadoDeCategorias() {
-    const categoriesFound = GetAllCategories();
-    if (categoriesFound.length > 0) {
-        console.log(`se encontraron ${categoriesFound.length} categorias.`);
-        console.log(JSON.stringify(categoriesFound));
-        return JSON.stringify(categoriesFound);
-    }
-    else {
-        console.log(`No se encontraron categorias`);
-        return `No se encontraron categorias`;
-    }
-}
+// function ObtenerListadoDeCategorias() {
+//     const categoriesFound = GetAllCategories();
+//     if (categoriesFound.length > 0) {
+//         console.log(`se encontraron ${categoriesFound.length} categorias.`);
+//         console.log(JSON.stringify(categoriesFound));
+//         return JSON.stringify(categoriesFound);
+//     }
+//     else {
+//         console.log(`No se encontraron categorias`);
+//         return `No se encontraron categorias`;
+//     }
+// }
 
-// CallSession.registerToolImplementations({
-//     "FocusOnPlace": FocusOnPlace,
-//     "OpenServices": OpenServices,
-//     "GetPlacesRecomendationByCategory": GetPlacesRecomendationByCategory
-// });
+CallSession.registerToolImplementations({
+    "FocusOnPlace": EnfocarCamaraEnLugarPorID,
+    "OpenServices": OpenServices,
+    "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria
+});
 
 export function EndCall() {
     UpdateIsOnCallStatus(false);
     roomSession?.disconnect();
-    // CallSession?.leaveCall();
+    CallSession?.leaveCall();
+    firstSpeak = true;
 }
 
 function handleTrackSubscribed(
@@ -339,8 +357,8 @@ function handleTranscriptionReceived(
     }
 }
 
-function handleRoomDisconnect(reason?: DisconnectReason | undefined){
-    if(reason)
+function handleRoomDisconnect(reason?: DisconnectReason | undefined) {
+    if (reason)
         console.log(`disconecction due to ${DisconnectReason[reason.valueOf()]}`)
 
     EndCall();

@@ -12,7 +12,8 @@ import { Place, PlaceShort } from './Utils/Types.ts';
 import { GetPlaces, PROJECT } from './HTTP/http-service.ts';
 import { scene, camera, renderer, composer } from './Renderer.ts';
 import {
-  initFloorSelector, initCategorySelector, ClosePlaceCard, CloseSearchPlace,
+  initFloorSelector, ClosePlaceCard, CloseSearchPlace,
+  // initCategorySelector, 
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
@@ -49,6 +50,7 @@ let totalSceneSize: number = 0;
 let raycastTimeout: ReturnType<typeof setTimeout> | null = null;
 let modelSize: Vector3 | null = null;
 let modelCenter: Vector3 | null = null;
+export let isSingleLevel: boolean = true;
 
 export const controls = new OrbitControls(camera, renderer.domElement)
 controls.minPolarAngle = Math.PI / 10;     // Permitir vista directamente hacia abajo
@@ -97,8 +99,8 @@ function Start() {
         gltf.scene.position.set(0, 0, 0);
         scene.add(gltf.scene);
         const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
-         modelSize = size;
-         modelCenter = center;
+        modelSize = size;
+        modelCenter = center;
         totalSceneSize = size.length();
         const spawn = gltf.scene.getObjectByProperty('name', 'spawn') ||
           gltf.scene.children.find(child => child.name.toLowerCase().includes('spawn'));
@@ -174,9 +176,11 @@ function Start() {
 
         if (floorLevels.length > 1) {
           initFloorSelector(floorLevels, labelsScene);
+          isSingleLevel = false;
         } else {
-          document.getElementById('floor-selector-title')!.style.display = 'none';
-          document.getElementById('floor-selector')!.style.display = 'none';
+          // document.getElementById('floor-selector-title')!.style.display = 'none';
+          document.getElementById('floor-carousel-container')!.style.display = 'none';
+          isSingleLevel = true;
         }
 
         const objetivoParent = scene.getObjectByName("objetivos");
@@ -263,7 +267,7 @@ controls.addEventListener('end', () => {
 
   raycastTimeout = setTimeout(() => {
     // canRaycast = true;
-    console.log("Raycast enabled again");
+    // console.log("Raycast enabled again");
   }, 2000); // espera 2 segundos antes de volver a permitir raycast
   updateLabelVisibility();
 });
@@ -294,7 +298,23 @@ function GetPlacesFake() {
 }
 
 function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: string) {
+  let settingLogoGS: boolean = true;
+  const logoImg = GetHTMLElement(".logoGS") as HTMLImageElement;
+
   places.forEach((place) => {
+    if (settingLogoGS && place.bigcompany_level === 1) {
+      logoImg.onerror = () => {
+        logoImg.style.visibility = 'hidden';
+        settingLogoGS = false;
+      };
+      logoImg.onload = () => {
+        logoImg.style.visibility = 'visible';
+      };
+
+      logoImg.src = place.company_logo_url;
+      settingLogoGS = false;
+    }
+
     const object = scene.getObjectByName(place.place_id.toString());
     if (object) {
       SetupPlacesForSearchMap3D(place, object, floorLevels);
@@ -308,7 +328,11 @@ function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: st
       interactObjects.push(object);
     }
   });
-  initCategorySelector();
+
+  if (settingLogoGS) {
+    logoImg.style.visibility = 'hidden';
+  }
+  // initCategorySelector(); //disable categorySelector for now
 }
 
 function SetupExplorerOrVirtualtour(places: Place[]) {
@@ -364,9 +388,9 @@ controls.addEventListener('start', () => {
     hasUserInteracted = true;
     tutorial.style.display = 'none';
   }
-    ClosePlaceCard();
-    CloseSearchPlace();
-    HideZT();
+  ClosePlaceCard();
+  CloseSearchPlace();
+  HideZT();
 });
 
 
