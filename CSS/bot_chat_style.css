@@ -95,6 +95,10 @@
     /* color: black; */
 }
 
+.msg-text {
+    white-space: pre-line;
+}
+
 .left-msg .msg-bubble {
     border-bottom-left-radius: 0;
 }

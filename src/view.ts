@@ -4,8 +4,7 @@ import { Place } from './Utils/Types.ts';
 import { PROJECT } from './HTTP/http-service.ts';
 // import { getPathAndDisplay } from './Navigator.ts';
 import { CreateArrowRender, GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement, normalizeString } from './Utils/Utils.ts';
-import { setCurrentAgent } from './chat.ts';
-import { EndCallView } from './CallManager/CallView.ts';
+// import { EndCallView } from './CallManager/CallView.ts';
 import { UpdateDescription } from './AI.ts';
 // import { controls } from './main.ts';
 import { focusCameraOnObject, floorLevels, removeCurrentMarker, controls } from './main.ts';//metodo para animar la camara al objeto seleccionado
@@ -93,9 +92,7 @@ export function CloseSearchPlace() {
 }
 
 
-function DisplayChatAI(idPlace: number) {
-    //use idPlace to know what aget chat to activate, for now activate GetHTMLElement('.msger')
-    setCurrentAgent(idPlace.toString());
+export function DisplayChatAI() {
     GetHTMLElement('.msger').style.display = 'flex';
 }
 
@@ -633,11 +630,11 @@ async function SetupDescriptionCardForPlace(object: Object3D) {
     divCardPlace.querySelector('#placeCardName')!.innerHTML = `<b>Lugar</b>: ${placeData.companysubsidiary_name}`;
     divCardPlace.querySelector('#placeCardCategory')!.innerHTML = `<b>Categoria</b>: ${placeData.place_category_name}`;
     divCardPlace.querySelector('#placeCardArea')!.innerHTML = `<b>Ubicación</b>: ${placeData.place_area_name}`;
-    (divCardPlace.querySelector('#ecommerce-redirect') as HTMLButtonElement).onclick = () => {
-        EndCallView();
-        DisplayChatAI(placeData.place_id);
-        ClosePlaceCard();
-    };
+    // (divCardPlace.querySelector('#text-chat-AI') as HTMLButtonElement).onclick = () => {
+    //     EndCallView();
+    //     DisplayChatAI(placeData.place_id);
+    //     ClosePlaceCard();
+    // };
 }
 
 function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, success: boolean } {

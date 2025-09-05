@@ -1,19 +1,17 @@
 import { GetHTMLElement, IsLocalHost } from '../Utils/Utils.ts';
-import { 
-    CreateCallUltravox, 
-    // CreateCallLiveKit, 
-    EndCall 
-} from './CallController.ts';
+import { CreateCallLiveKit, EndCall as EndCallLiveKit } from './LivekitManager.ts';
 import { GetAvatarURL } from '../HTTP/http-service.ts';
 import { AvatarResponse } from '../Utils/Types.ts';
 import { HideZT, SetCloseZTState } from '../ZT/ZTView.ts';
+import { CreateCallUltravox, EndCall as EndCallUltravox } from './UltravoxManager.ts';
+import { ChangeBotName } from '../Utils/constants.ts';
 
 const EndCallButton = GetHTMLElement('.EndCallButton');
 const AICallCard = GetHTMLElement('#AICallCard');
 const StartCallButton = GetHTMLElement('.avatarImgScript');
 export let isOnCall: boolean = false;
-export let botName: string = 'Guía Zyon';
 export let botGenre: number = 0;
+let currentCallManager: 'livekit' | 'ultravox' | null = null;
 
 export async function loadAvatar(companyId: string) {
     try {
@@ -34,7 +32,7 @@ export async function loadAvatar(companyId: string) {
         for (let i = 0; i < avatarElements.length; i++) {
             avatarElements[i].src = avatarResponse.data.avatar.picture_url;
         }
-        botName = avatarResponse.data.avatar.name;
+        ChangeBotName(avatarResponse.data.avatar.name);
         botGenre = avatarResponse.data.avatar.genre;
     } catch (error) {
         console.error('Error loading avatar:', error);
@@ -47,17 +45,18 @@ StartCallButton.onclick = async () => {
     HideZT();
     if (isOnCall) return;
     
-    //create livekit call
-    // isOnCall = await CreateCallLiveKit();
-
-    if(!isOnCall) //if livekit call fails, then create ultravox call as fallback
-    {
+    // Try LiveKit first
+    isOnCall = await CreateCallLiveKit();
+    if (isOnCall) {
+        currentCallManager = 'livekit';
+    } 
+    else {
+        // Fallback to Ultravox
         isOnCall = await CreateCallUltravox();
+        if (isOnCall) {
+            currentCallManager = 'ultravox';
+        }
     }
-
-    // isOnCall = true;
-    // await new Promise(f => setTimeout(f, 1 * 1000));
-    // HideCallViewTranscript();
 
     if(isOnCall) //if call created, stop avatar vibrate animation
     {
@@ -67,7 +66,12 @@ StartCallButton.onclick = async () => {
 
 EndCallButton.onclick = () => {
     if (isOnCall) {
-        EndCall();
+        // Call the appropriate EndCall function
+        if (currentCallManager === 'livekit') {
+            EndCallLiveKit();
+        } else if (currentCallManager === 'ultravox') {
+            EndCallUltravox();
+        }
         isOnCall = false;
     }
     EndCallView();

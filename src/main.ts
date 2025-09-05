@@ -17,6 +17,7 @@ import {
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
+  DisplayChatAI,
   // SetupDescriptionCardForPlace
 } from './view.ts';
 import { generateBuildingsAroundModel } from './BuildingGenerator.ts';
@@ -25,9 +26,10 @@ import {
   // shouldBlock,
   IsLocalHost, normalizeString
 } from './Utils/Utils.ts';
-import { loadAvatar } from './CallManager/CallView.ts';
+import { EndCallView, loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
 import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
+import { InitChat } from './chat.ts';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -216,7 +218,7 @@ function Start() {
         const userConfig = gltf.scenes[0].userData.generateBuildings ?? false;
         const citySize = gltf.scenes[0].userData.citySize ?? 400;
         if (userConfig == true)
-                  generateBuildingsAroundModel(scene,modelSize, modelCenter,citySize);
+          generateBuildingsAroundModel(scene, modelSize, modelCenter, citySize);
         GetHTMLElement('#loadingMain').style.display = "none";
         updateLabelPositions();
         updateLabelVisibility();
@@ -331,7 +333,7 @@ function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: st
   // initCategorySelector(); //disable categorySelector for now
 }
 
-function SetupExplorerOrVirtualtour(places: Place[]) {
+async function SetupExplorerOrVirtualtour(places: Place[]) {
   switch (SERV_TYPE) {
     case "1":
       GetHTMLElement('.container-select-place').style.top = '1vh';
@@ -362,13 +364,21 @@ function SetupExplorerOrVirtualtour(places: Place[]) {
       FillZTArea(COMPANY_ID);
       document.getElementById('div3DView')!.style.display = 'block';
       document.getElementById('search-section')!.style.display = 'none';
-      document.getElementById('ecommerce-redirect')!.style.display = 'none';
+      // document.getElementById('text-chat-AI')!.style.display = 'none';
       //document.getElementById('btnZTList')!.style.display = 'none';
       //document.getElementById('ZTArea')!.style.display = 'none';
       break;
     case "3":
-      loadAvatar(COMPANY_ID);
-      FillZTArea(COMPANY_ID);
+      await loadAvatar(COMPANY_ID);
+      InitChat();
+      // FillZTArea(COMPANY_ID);
+      GetHTMLElement('#containerZTList')!.style.display = 'none';
+      // GetHTMLElement('#avatarButton')!.style.display = 'none';
+      GetHTMLElement('.avatarImgScript').onclick = () => {
+        EndCallView();
+        DisplayChatAI();
+        ClosePlaceCard();
+      };
       document.getElementById('div3DView')!.style.display = 'block';
       document.getElementById('search-section')!.style.display = 'none';
       break;
@@ -388,9 +398,6 @@ controls.addEventListener('start', () => {
   CloseSearchPlace();
   HideZT();
 });
-
-
-
 
 // Variables globales para el movimiento
 let isMovingCamera = false;

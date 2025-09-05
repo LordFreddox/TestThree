@@ -14,7 +14,8 @@ export let COMPANY_ID = urlParams.get('fakeId') || urlParams.get('placeId') || "
 export const FAKE_ID = urlParams.get('fakeId');
 export const SERV_TYPE = urlParams.get('ServType')!;
 export const START_POINT = urlParams.get('startPoint');
-export let COMPANY_NAME: String = '';
+export let COMPANY_NAME: string = '';
+export let BOT_NAME: string = 'Guía Zyon';
 export const PROJECT_ENVIROMENT: string = 
     (urlParams.get('project')?.toUpperCase() as keyof typeof ProjectBaseURL);
 
@@ -24,4 +25,8 @@ export function ChangeCompanyId(newCompanyId: string){
 
 export function ChangeCompanyName(newCompanyName: string){
     COMPANY_NAME = newCompanyName;
+}
+
+export function ChangeBotName(newBotName: string){
+    BOT_NAME = newBotName;
 }

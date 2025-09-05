@@ -1,5 +1,5 @@
 import { appendMessage } from "./chat.ts";
-import { PROJECT_ENVIROMENT, URL_MCPCLIENT } from "./Utils/constants.ts";
+import { PROJECT_ENVIROMENT, URL_MCPCLIENT, COMPANY_NAME, COMPANY_ID, BOT_NAME } from "./Utils/constants.ts";
 
 let fullConversation: string = '';
 let messageAmount: number = 1;
@@ -73,12 +73,14 @@ function processStream(reader: ReadableStreamDefaultReader<Uint8Array<ArrayBuffe
     });
 }
 
-async function ChatRequest(message: string, botName: string, role: string, agentId: string) {
+async function ChatRequest(message: string, role: string) {
     AppendJsonToContext(message, role);
     try {
         const body = {
             messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`),
-            company: agentId
+            companyName: COMPANY_NAME,
+            companyId: COMPANY_ID,
+            projectEnviroment: PROJECT_ENVIROMENT
         };
         const response = await fetch(`${URL_MCPCLIENT}/chat`, {
             method: 'POST',
@@ -90,33 +92,35 @@ async function ChatRequest(message: string, botName: string, role: string, agent
         });
 
         if (!response.ok) {
-            appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', -1);
+            appendMessage(BOT_NAME, "left", 'Lo siento, ocurrió un error.', -1);
         }
 
         if (!response.body) {
-            appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', -1);
+            appendMessage(BOT_NAME ,"left", 'Lo siento, ocurrió un error.', -1);
             return 'Lo siento, ocurrió un error';
         }
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
+        let fullMessage = '';
 
         while (true) {
             const { done, value } = await reader.read();
-            if (done) break; //exit condition of while loop
+            if (done) break;
 
             const chunk = decoder.decode(value, { stream: true });
             const messages = chunk.trim().split('\n');
             messages.forEach(message => {
                 if (message) {
                     const data = JSON.parse(message);
-                    appendMessage(agentId, botName, "left",
+                    appendMessage(BOT_NAME, "left",
                         data.message, messageAmount);
-                    AppendJsonToContext(data.message, 'assistant');
+                    fullMessage += data.message;    
                 }
             });
         }
         messageAmount++;
+        AppendJsonToContext(fullMessage, 'assistant');
         // const botResponseMessage = await response.json();
         // appendMessage(agentId, botName, "left",
         //     botResponseMessage.response.message, botResponseMessage.response.id);
@@ -124,7 +128,7 @@ async function ChatRequest(message: string, botName: string, role: string, agent
 
     } catch (error) {
         console.error('Error fetching bot response:', error);
-        appendMessage(agentId, botName, "left", 'Lo siento, ocurrió un error.', -1);
+        appendMessage(BOT_NAME, "left", 'Lo siento, ocurrió un error.', -1);
     }
 }
 
