@@ -2,8 +2,7 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3,
-  BoxGeometry, Color, MeshStandardMaterial
+  Mesh, Vector3, Box3
   // Raycaster
 } from 'three';
 
@@ -20,6 +19,7 @@ import {
   SetupPlacesForSearchMap3D,
   // SetupDescriptionCardForPlace
 } from './view.ts';
+import { generateBuildingsAroundModel } from './BuildingGenerator.ts';
 import {
   GetBoundingBoxSizeAndCenterOfObject, GetHTMLElement,
   // shouldBlock,
@@ -213,7 +213,10 @@ function Start() {
           }
         }
 
-        generateBuildingsAroundModel();
+        const userConfig = gltf.scenes[0].userData.generateBuildings ?? false;
+        const citySize = gltf.scenes[0].userData.citySize ?? 400;
+        if (userConfig == true)
+                  generateBuildingsAroundModel(scene,modelSize, modelCenter,citySize);
         GetHTMLElement('#loadingMain').style.display = "none";
         updateLabelPositions();
         updateLabelVisibility();
@@ -388,64 +391,6 @@ controls.addEventListener('start', () => {
 
 
 
-const geometry = new BoxGeometry(1, 1, 1);
-// Parámetros de generación
-const spacing = 25;         // espacio entre edificios
-const minHeight = 1;        // altura mínima
-const maxHeight = 5;       // altura máxima
-const minWidth = 10;        // ancho mínimo
-const maxWidth = 30;        // ancho máximo
-
-function getColorByDistance(pos: Vector3, center: Vector3): Color {
-  const maxDistance = 200;
-  const dist = pos.distanceTo(center);
-  const t = Math.min(dist / maxDistance, 1);
-
-  const colorNear = new Color(0x40E0D0);
-  const colorFar = new Color(0x808080);
-
-  return colorNear.lerp(colorFar, t);
-}
-//Metodo para generar edificios aleatorios
-function generateBuildingsAroundModel() {
-  if (!modelSize || !modelCenter) {
-    console.warn("No se encuentra el bounding box del modelo.");
-    return;
-  }
-
-  const minX = modelCenter.x - modelSize.x / 2;
-  const maxX = modelCenter.x + modelSize.x / 2;
-  const minZ = modelCenter.z - modelSize.z / 2;
-  const maxZ = modelCenter.z + modelSize.z / 2;
-
-  for (let i = -200; i < 200; i += spacing) {
-    for (let j = -200; j < 200; j += spacing) {
-      // Solo generamos edificios FUERA del bounding box del modelo
-      if (i < minX - spacing || i > maxX + spacing ||
-        j < minZ - spacing || j > maxZ + spacing) {
-
-        const height = Math.random() * (maxHeight - minHeight) + minHeight;
-        const width = Math.random() * (maxWidth - minWidth) + minWidth;
-        const depth = Math.random() * (maxWidth - minWidth) + minWidth;
-
-        const position = new Vector3(i, height / 2, j);
-        const color = getColorByDistance(position, modelCenter);
-
-        const buildingMaterial = new MeshStandardMaterial({
-          color: color,
-          transparent: true,
-          opacity: 0.5,
-        });
-
-        const building = new Mesh(geometry, buildingMaterial);
-        building.scale.set(width, height, depth);
-        building.position.copy(position);
-
-        scene.add(building);
-      }
-    }
-  }
-}
 
 // Variables globales para el movimiento
 let isMovingCamera = false;

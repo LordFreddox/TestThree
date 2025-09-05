@@ -653,16 +653,16 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     console.table("floorObj=" + floorObj);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
 
-    const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
-    if (carouselItem) {
+    // const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
+    // if (carouselItem) {
         showFloor(floorIndex, floorLevels, labelsScene);
         RestoreOriginalColors();
         WaitForFocusAnimation(object, placeData);
         ChangeColorOfSingleObject(object, COLOR_SELECTED);
         return { piso: `Piso ${placeData.place_area_name}`, success: true };
-    } else {
-        return { piso: "Piso no encontrado", success: false };
-    }
+    // } else {
+    //     return { piso: "Piso no encontrado", success: false };
+    // }
 }
 
 async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
@@ -736,7 +736,7 @@ closeWebView.onclick = () => {
 }
 // const testbutton = document.getElementById('searchPlace3D') as HTMLInputElement;
 // testbutton.onclick = () => {
-//     SetupDescriptionCardForPlaceByID('16121');
+//     SetupDescriptionCardForPlaceByID('14322');
 // }
 
 function CreateOptionItemSearchPanel(place: Place) {

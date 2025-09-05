@@ -1,6 +1,6 @@
 import { Scene, AmbientLight, WebGLRenderer, Color,
     /* OrthographicCamera,*/ DirectionalLight,
-    PerspectiveCamera, Vector2
+    PerspectiveCamera, Vector2,Fog
 } from 'three';
 import { updateLabelPositions } from './view.ts';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -41,6 +41,8 @@ const bloomPass = new UnrealBloomPass(
   0.85  // threshold
 );
 composer.addPass(bloomPass);
+
+//scene.fog = new Fog(0x808080, 50, 800); //niebla de las escenas, por definir con tamaño de escena
 
 window.addEventListener('resize', onWindowResize, false);
 function onWindowResize() {
