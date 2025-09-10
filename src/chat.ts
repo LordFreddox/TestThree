@@ -77,5 +77,5 @@ document.querySelectorAll('.msger-send-btn').forEach((button) => {
 
 export function InitChat() {
   waitForBotResponse = false;
-  appendMessage(BOT_NAME, "left", "Hola, bienvenido. ¿En que puedo ayudarte hoy?.", -1);
+  appendMessage(BOT_NAME, "left", `Hola bienvenido, soy ${BOT_NAME}, tu asistente virtual. ¿En que puedo ayudarte hoy?.`, -1);
 }

@@ -46,17 +46,17 @@ StartCallButton.onclick = async () => {
     if (isOnCall) return;
     
     // Try LiveKit first
-    isOnCall = await CreateCallLiveKit();
-    if (isOnCall) {
-        currentCallManager = 'livekit';
-    } 
-    else {
+    // isOnCall = await CreateCallLiveKit();
+    // if (isOnCall) {
+    //     currentCallManager = 'livekit';
+    // } 
+    // else {
         // Fallback to Ultravox
         isOnCall = await CreateCallUltravox();
         if (isOnCall) {
             currentCallManager = 'ultravox';
         }
-    }
+    // }
 
     if(isOnCall) //if call created, stop avatar vibrate animation
     {

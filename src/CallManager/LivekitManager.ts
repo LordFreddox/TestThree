@@ -18,7 +18,7 @@ import { GetHTMLElement } from '../Utils/Utils.ts';
 import { scene } from '../Renderer.ts';
 
 let firstSpeak: boolean = true;
-let agentConnected: boolean = false;
+// let agentConnected: boolean = false;
 let roomSession: Room;
 let transcriptTimeout: number | ReturnType<typeof setTimeout> | undefined;
 
@@ -224,7 +224,7 @@ function EndCall() {
     UpdateIsOnCallStatus(false);
     roomSession?.disconnect();
     firstSpeak = true;
-    agentConnected = false;
+    // agentConnected = false;
 }
 
 function handleTrackSubscribed(
@@ -291,7 +291,7 @@ function handleRoomDisconnect(reason?: DisconnectReason | undefined) {
 }
 
 function handleParticipantConnected(_RemoteParticipant: RemoteParticipant){
-    agentConnected = true;
+    // agentConnected = true;
 }
 
 export { EndCall, CreateCallLiveKit };

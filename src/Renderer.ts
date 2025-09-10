@@ -1,6 +1,6 @@
 import { Scene, AmbientLight, WebGLRenderer, Color,
     /* OrthographicCamera,*/ DirectionalLight,
-    PerspectiveCamera, Vector2,Fog
+    PerspectiveCamera, Vector2
 } from 'three';
 import { updateLabelPositions } from './view.ts';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';

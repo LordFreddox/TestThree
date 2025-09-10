@@ -69,7 +69,7 @@ function SetupListeners() {
                     EndCallView();
                     EndCall();
                     firstSpeak = true;
-                }, 10000);
+                }, 15000);
                 break;
             default:
                 break;
