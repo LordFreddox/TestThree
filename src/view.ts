@@ -91,11 +91,6 @@ export function CloseSearchPlace() {
     closeSeachIcon.style.display = 'none';
 }
 
-
-export function DisplayChatAI() {
-    GetHTMLElement('.msger').style.display = 'flex';
-}
-
 GetHTMLElement('#CloseChatHeaderButton').onclick = () => {
     GetHTMLElement('.msger').style.display = 'none';
 }
@@ -299,7 +294,7 @@ function findFloorObject(object: Object3D, floorLevels: Object3D[]): Object3D | 
     return null;
 }
 
-function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HTMLDivElement>) {
+function initFloorSelector(floorLevels: Object3D[]) {
     const carouselContainer = document.getElementById('floor-carousel-container') as HTMLElement;
     const staticItem = document.createElement('div');
     staticItem.id = 'static-item';
@@ -324,7 +319,7 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
     carousel.addEventListener('click', (event) => {
         if ((event.target as HTMLElement).classList.contains('floor-selector-item')) {
             const selectedIndex = parseInt((event.target as HTMLElement).dataset.index || '0', 10);
-            showFloor(selectedIndex, floorLevels, labelsScene);
+            showFloor(selectedIndex, floorLevels);
             removeCurrentMarker();
 
             // Handle selection state
@@ -338,7 +333,7 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
 
     // Event listener for the static item
     staticItem.addEventListener('click', () => {
-        showFloor(-1, floorLevels, labelsScene);
+        showFloor(-1, floorLevels);
         removeCurrentMarker();
 
         // Handle selection state
@@ -349,7 +344,7 @@ function initFloorSelector(floorLevels: Object3D[], labelsScene: Map<Vector3, HT
     });
 }
 
-function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vector3, HTMLDivElement>) {
+export function showFloor(index: number, floorLevels: Object3D[]) {
     if (index === -1) {
         // Show all floors
         floorLevels.forEach((floor) => {
@@ -394,6 +389,13 @@ function showFloor(index: number, floorLevels: Object3D[], labelsScene: Map<Vect
             GetHTMLElement("#static-item").classList.remove('selected');
         });
         targetFloor.classList.add('selected');
+    }
+
+    if (index === -1) {
+        document.querySelectorAll('#floor-carousel .floor-selector-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+        GetHTMLElement("#static-item").classList.add('selected');
     }
 }
 
@@ -652,7 +654,7 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
 
     // const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
     // if (carouselItem) {
-        showFloor(floorIndex, floorLevels, labelsScene);
+        showFloor(floorIndex, floorLevels);
         RestoreOriginalColors();
         WaitForFocusAnimation(object, placeData);
         ChangeColorOfSingleObject(object, COLOR_SELECTED);
@@ -792,7 +794,7 @@ function ButtonActionItemSearchPanelMap3D(object: Object3D, floorLevels: Object3
 
     const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
     if (carouselItem) {
-        showFloor(floorIndex, floorLevels, labelsScene);
+        showFloor(floorIndex, floorLevels);
     } else {
         console.warn("Carousel item not found for the selected floor.");
     }

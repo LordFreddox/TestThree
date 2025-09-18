@@ -1,5 +1,5 @@
 import { GetHTMLElement, IsLocalHost } from '../Utils/Utils.ts';
-import { CreateCallLiveKit, EndCall as EndCallLiveKit } from './LivekitManager.ts';
+import { EndCall as EndCallLiveKit } from './LivekitManager.ts';
 import { GetAvatarURL } from '../HTTP/http-service.ts';
 import { AvatarResponse } from '../Utils/Types.ts';
 import { HideZT, SetCloseZTState } from '../ZT/ZTView.ts';

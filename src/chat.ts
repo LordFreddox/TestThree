@@ -2,25 +2,29 @@ import { GetHTMLElement } from './Utils/Utils.ts';
 import { ChatRequest } from './AI.ts';
 import { BOT_NAME } from './Utils/constants.ts';
 
-const PERSON_NAME = "Invitado";
 let waitForBotResponse: boolean;
 let lasChatID: number = 0;
 
 // Function to send a message to a specific chatbot
 async function sendMessage(message: string) {
-  appendMessage(PERSON_NAME, "right", message, -1);
+  appendMessage("right", message, -1);
   ChatRequest(message, "user");
   waitForBotResponse = true;
 }
 
+GetHTMLElement(".msger-input")!.addEventListener("pointerdown", (event) => {
+  GetHTMLElement('.chatInputOverlay').style.display = 'flex';
+});
+
+GetHTMLElement(".chatInputOverlay > button")!.addEventListener("pointerdown", (event) => {
+  GetHTMLElement('.chatInputOverlay').style.display = 'none';
+});
+
 // Function to create a message element
-function createMessageElement(name: string, side: string, text: string, id: number): string {
+function createMessageElement(side: string, text: string, id: number): string {
   let msgHTML = `
     <div class="msg ${side}-msg">
       <div class="msg-bubble">
-        <div class="msg-info">
-          <div class="msg-info-name">${name}</div>
-        </div>
         <span class="msg-text" id="chat${id}">${text}</span>
       </div>
     </div>
@@ -28,12 +32,11 @@ function createMessageElement(name: string, side: string, text: string, id: numb
   return msgHTML;
 }
 
-// Function to append a message to the correct chatbot
-export function appendMessage(name: string, side: string, text: string, id: number) {
+export function appendMessage(side: string, text: string, id: number) {
   const msgerChat = GetHTMLElement(".msger-chat")!;
   if (id !== -1) {
     if (lasChatID !== id) { //create new chatID
-      const messageElement = createMessageElement(name, side, text, id);
+      const messageElement = createMessageElement(side, text, id);
       msgerChat.insertAdjacentHTML("beforeend", messageElement);
       lasChatID = id;
     } else {
@@ -43,7 +46,7 @@ export function appendMessage(name: string, side: string, text: string, id: numb
     }
   } else {
     // Create a new chat with the new message
-    const messageElement = createMessageElement(name, side, text, id);
+    const messageElement = createMessageElement(side, text, id);
     msgerChat.insertAdjacentHTML("beforeend", messageElement);
   }
 
@@ -51,20 +54,10 @@ export function appendMessage(name: string, side: string, text: string, id: numb
   waitForBotResponse = false;
 }
 
-// Function to reset a specific chatbot
-// export function ResetChatBot(agentId: string) {
-//   const msgerChat = getChatbotElement(agentId).querySelector(".msger-chat")!;
-//   while (msgerChat.firstChild) {
-//     if(msgerChat.childElementCount === 1) return;
-//     msgerChat.removeChild(msgerChat.lastChild!);
-//   }
-// }
-
 document.querySelectorAll('.msger-send-btn').forEach((button) => {
   button.addEventListener('click', () => {
     if (waitForBotResponse) return;
-
-    // const agentId = (button.closest('.msger') as HTMLElement).dataset.agent!;
+    GetHTMLElement('.chatInputOverlay').style.display = 'none';
     const msgText = (button.previousElementSibling as HTMLInputElement);
     if (msgText.value === '') return;
 
@@ -76,6 +69,12 @@ document.querySelectorAll('.msger-send-btn').forEach((button) => {
 });
 
 export function InitChat() {
+  GetHTMLElement('#chatBotName').innerText = BOT_NAME;
   waitForBotResponse = false;
-  appendMessage(BOT_NAME, "left", `Hola bienvenido, soy ${BOT_NAME}, tu asistente virtual. ¿En que puedo ayudarte hoy?.`, -1);
+  appendMessage("left", `¡Hola! ¿Cómo puedo ayudarte hoy? 😊`, -1);
+}
+
+export function DisplayChatAI() {
+    GetHTMLElement('.msger').style.display = 'flex';
+    GetHTMLElement('#tutorial').style.display = 'none';
 }

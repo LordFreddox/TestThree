@@ -210,29 +210,45 @@
         <img id="ZTQR" src="" alt="">
       </div>
     </div>
-    <section class="msger raycast-blocker">
-      <header class="msger-header">
-        <img id="CloseChatHeaderButton" type="button" title="close" src="/img/icon-close.svg">
-      </header>
-      <main class="msger-chat">
-        <!-- <div class="msg left-msg">
-          <div class="msg-bubble">
-            <div class="msg-info">
-              <div class="msg-info-name">Guía Zyon</div>
-            </div>
 
-            <div class="msg-text">
-              Hola, bienvenido. ¿En que puedo ayudarte hoy?.
-            </div>
-          </div>
-        </div> -->
+    <section class="msger raycast-blocker">
+
+      <header class="msger-header">
+        <img id="CloseChatHeaderButton" type="button" title="close" src="/img/icon-arrow-left.svg">
+        <img class="imgIAChat" src="/img/logo-ia.webp" alt="IA Logo">
+        <div class="msger-header-title">
+          <span id="chatBotName" class="chatBotName">Asistente Virtual</span>
+          <span class="msger-header-title-sub">Tu asistente virtual.</span>
+        </div>
+      </header>
+
+      <main class="msger-chat">
       </main>
 
-      <div class="msger-inputarea">
-        <input type="text" class="msger-input" placeholder="Escribe algo...">
-        <button type="button" class="msger-send-btn">Enviar</button>
+      <footer class="msger-inputarea">
+        <div type="text" class="msger-input"></div>
+        <button type="button" class="msger-send-btn" disabled="true">
+          <img src="/img/icon-arrow-right.svg" alt="buscar">
+        </button>
+      </footer>
+
+      <div id="chatInputOverlay" class="chatInputOverlay">
+        <button title="closeChatInputArea" id="closeChatOverlay">
+          <img src="/img/icon-close.svg" alt="close">
+        </button>
+        <div>
+          <span>Escribe tu mensaje</span>
+          <div>
+            <textarea title="title" id="textarea-newMessage" cols="25" rows="5"></textarea>
+            <button title="sendMessageOverlay" type="button" class="msger-send-btn">
+              <img src="/img/icon-arrow-right.svg" alt="send">
+            </button>
+          </div>
+        </div>
       </div>
+
     </section>
+
     <canvas id="canvas"></canvas>
     <div id="AudioParent" style="display: none;">
     </div>

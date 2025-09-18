@@ -2,7 +2,8 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3
+  Mesh, Vector3, Box3,
+  Euler
   // Raycaster
 } from 'three';
 
@@ -15,9 +16,9 @@ import {
   initFloorSelector, ClosePlaceCard, CloseSearchPlace,
   // initCategorySelector, 
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
-  MapObjectsListByCategoryName, labelsScene, SetupPlacesForSearchVirtualTour,
+  MapObjectsListByCategoryName, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
-  DisplayChatAI,
+  showFloor,
   // SetupDescriptionCardForPlace
 } from './view.ts';
 import { generateBuildingsAroundModel } from './BuildingGenerator.ts';
@@ -29,7 +30,7 @@ import {
 import { EndCallView, loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
 import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
-import { InitChat } from './chat.ts';
+import { DisplayChatAI, InitChat } from './chat.ts';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -42,6 +43,9 @@ let mixers: AnimationMixer[] = [];
 // let allAvailableAnimationClipsMap = new Map<Object3D, AnimationClip[]>();
 const clock = new Clock();
 let lookAtCamera: Object3D[] = [];
+let startingCameraPosition: Vector3;
+let startingCameraRotation: Euler;
+
 export let floorLevels: Object3D[] = [];
 let interactObjects = [] as Object3D[];
 const loader = new GLTFLoader();
@@ -127,6 +131,10 @@ function Start() {
         //camera.position.set(50, 50, 0);
         // camera.far = size.length() * 10;
         // camera.zoom = -size.length() / 10;
+        startingCameraPosition = camera.position.clone();
+        startingCameraRotation = camera.rotation.clone();
+        camera.updateProjectionMatrix();
+        controls.target.set(center.x, center.y, center.z);
         controls.minDistance = size.length() / 20;
         controls.maxDistance = size.length() / 1;
         //Tuve que cambiar el valor Y del Pan para los modelos multinivel, se requiere para mover el target en el eje Y
@@ -136,18 +144,6 @@ function Start() {
         // controls.minZoom = mediam / 50;
         // controls.maxZoom = mediam / 2.5;
         controls.update();
-
-        //create skybox
-        /*const geometry = new SphereGeometry(1, 60, 40);
-        const material = new MeshBasicMaterial({
-          color: 0xCBCBCB,
-          side: BackSide,
-        });
-        const backgroundSphere = new Mesh(geometry, material);
-        backgroundSphere.name = 'backgroundSphere';
-        scene.add(backgroundSphere);
-        backgroundSphere.scale.set(
-          size.length() + 1000, size.length() + 1000, size.length() + 1000);*/
 
         //populate animation array
         // const mixer = new AnimationMixer(gltf.scene);
@@ -177,7 +173,7 @@ function Start() {
         }
 
         if (floorLevels.length > 1) {
-          initFloorSelector(floorLevels, labelsScene);
+          initFloorSelector(floorLevels);
           isSingleLevel = false;
         } else {
           // document.getElementById('floor-selector-title')!.style.display = 'none';
@@ -584,6 +580,24 @@ export function GetAllCategories(): string[] {
   return categories;
 }
 
+export function RestartScene() {
+  camera.position.copy(startingCameraPosition);
+  camera.rotation.copy(startingCameraRotation);
+  // controls.target.set(modelCenter!.x, modelCenter!.y, modelCenter!.z);
+  controls.update();
+  if(floorLevels.length > 0)
+  {
+    showFloor(-1, floorLevels);
+  }
+  ClosePlaceCard();
+  CloseSearchPlace();
+  HideZT();
+  removeCurrentMarker();
+  GetHTMLElement('#avatarButton').style.removeProperty('top');
+  GetHTMLElement('#avatarButton').style.removeProperty('left');
+  GetHTMLElement('#tutorial').style.display = 'flex';
+}
+
 function animate() {
   if (isMovingCamera) {
     // Movimiento de la camara
@@ -620,3 +634,7 @@ function animate() {
 }
 
 animate();
+
+setTimeout(() => {
+  RestartScene();
+}, 5000);

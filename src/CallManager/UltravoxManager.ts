@@ -3,7 +3,7 @@ import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botGenre } f
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 
 import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
-import { SearchPlacesByDistanceCategoryArea } from "../main.ts";
+import { RestartScene, SearchPlacesByDistanceCategoryArea } from "../main.ts";
 import { scene } from "../Renderer.ts";
 import { SetupDescriptionCardForPlaceByID } from "../view.ts";
 const CallSession = new UltravoxSession();
@@ -65,9 +65,10 @@ function SetupListeners() {
                 break;
             case UltravoxSessionStatus.LISTENING:
                 transcriptTimeout = setTimeout(() => {
-                    console.log('No new transcript in 10s - closing call.');
+                    console.log('No new transcript in 15s - closing call.');
                     EndCallView();
                     EndCall();
+                    RestartScene();
                     firstSpeak = true;
                 }, 15000);
                 break;

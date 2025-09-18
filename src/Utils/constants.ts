@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 
 // export const URL_MCPCLIENT = 'http://localhost:3000';
 export const URL_MCPCLIENT = 'https://as-ws-asistente-3d.azurewebsites.net';
-// export const URL_MCPCLIENT = 'https://d723-181-59-2-144.ngrok-free.app';
+// export const URL_MCPCLIENT = 'https://profound-similarly-sailfish.ngrok-free.app';
 
 export const THREEJS_PROD_URL = 'https://as-ws-zyon.azurewebsites.net';
 export const THREEJS_PRU_URL = 'https://as-ws-zyon-pru.azurewebsites.net';

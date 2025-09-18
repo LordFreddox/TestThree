@@ -1,5 +1,5 @@
 import { appendMessage } from "./chat.ts";
-import { PROJECT_ENVIROMENT, URL_MCPCLIENT, COMPANY_NAME, COMPANY_ID, BOT_NAME } from "./Utils/constants.ts";
+import { PROJECT_ENVIROMENT, URL_MCPCLIENT, COMPANY_NAME, COMPANY_ID } from "./Utils/constants.ts";
 
 let fullConversation: string = '';
 let messageAmount: number = 1;
@@ -92,11 +92,11 @@ async function ChatRequest(message: string, role: string) {
         });
 
         if (!response.ok) {
-            appendMessage(BOT_NAME, "left", 'Lo siento, ocurrió un error.', -1);
+            appendMessage("left", 'Lo siento, ocurrió un error.', -1);
         }
 
         if (!response.body) {
-            appendMessage(BOT_NAME ,"left", 'Lo siento, ocurrió un error.', -1);
+            appendMessage("left", 'Lo siento, ocurrió un error.', -1);
             return 'Lo siento, ocurrió un error';
         }
 
@@ -113,7 +113,7 @@ async function ChatRequest(message: string, role: string) {
             messages.forEach(message => {
                 if (message) {
                     const data = JSON.parse(message);
-                    appendMessage(BOT_NAME, "left",
+                    appendMessage("left",
                         data.message, messageAmount);
                     fullMessage += data.message;    
                 }
@@ -128,7 +128,7 @@ async function ChatRequest(message: string, role: string) {
 
     } catch (error) {
         console.error('Error fetching bot response:', error);
-        appendMessage(BOT_NAME, "left", 'Lo siento, ocurrió un error.', -1);
+        appendMessage("left", 'Lo siento, ocurrió un error.', -1);
     }
 }
 

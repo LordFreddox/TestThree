@@ -5,6 +5,7 @@ import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botGenre } f
 import { 
     GetAllCategories,
     GetPlacesInfoByName,
+    RestartScene,
     SearchPlacesByDistanceCategoryArea 
 } from '../main.ts';
 import {
@@ -271,6 +272,7 @@ function handleTranscriptionReceived(
             console.log('No new transcript in 10s - closing call.');
             EndCallView();
             EndCall();
+            RestartScene();
             firstSpeak = true;
         }, 10000);
     }
