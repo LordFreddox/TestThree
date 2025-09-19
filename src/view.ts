@@ -37,10 +37,10 @@ const divCardPlace = GetHTMLElement('#divCardPlace');
 let currentController: AbortController | null = null;
 // const SearchPlacePersonText = GetHTMLElement('#SearchPlacePersonText');
 let currentSelectedSearchButton: HTMLElement;
-let currentFloor: () => string = () => {
-    const selectedItem = document.querySelector('#floor-carousel .floor-selector-item.selected') as HTMLElement;
-    return selectedItem ? selectedItem.dataset.index || '-1' : '-1';
-};
+// let currentFloor: () => string = () => {
+//     const selectedItem = document.querySelector('#floor-carousel .floor-selector-item.selected') as HTMLElement;
+//     return selectedItem ? selectedItem.dataset.index || '-1' : '-1';
+// };
 input_searcher.addEventListener('input', () => {
     const searchTerm = normalizeString(input_searcher.value.toLowerCase());
     filterPlaceSearchItem(searchTerm);
@@ -355,7 +355,6 @@ export function showFloor(index: number, floorLevels: Object3D[]) {
         floorLevels.forEach((floor, i) => {
             floor.visible = (i === index);
             if (i === index) {
-                console.log("Centering model on floor: ", floor.userData.displayName || `Piso ${i + 1}`);
                 focusCameraOnFloor(floor, controls);
             }
         });
@@ -364,14 +363,30 @@ export function showFloor(index: number, floorLevels: Object3D[]) {
         const labelFloorIndex = parseInt(elem.dataset.floorIndex || '-1', 10);
         let line;
         if (
-            // index === -1 || 
             index === labelFloorIndex) {
             elem.style.display = 'block';
             line = labelsLine.get(elem);
             if (line)
                 line.visible = true;
             elem.classList.remove('HideFromFloor');
-        } else {
+        } 
+        else if (index === -1) {
+            if (Math.random() < 0.2) { //20% chance to show label
+                elem.style.display = 'block';
+                line = labelsLine.get(elem);
+                if (line)
+                    line.visible = true;
+                elem.classList.remove('HideFromFloor');
+            } 
+            else {
+                elem.style.display = 'none';
+                line = labelsLine.get(elem);
+                if (line)
+                    line.visible = false;
+                elem.classList.add('HideFromFloor');
+            }
+        }
+        else {
             elem.style.display = 'none';
             line = labelsLine.get(elem);
             if (line)
@@ -454,19 +469,21 @@ function showCategory(category: string, labelsScene: Map<Vector3, HTMLDivElement
 }
 
 function updateLabelPositions() {
-    if (currentFloor() == "-1"){
-        if(!isSingleLevel){
-            return;
-        }
-    } //no position update when all floor selected
+    // if (currentFloor() == "-1"){
+    //     if(!isSingleLevel){
+    //         return;
+    //     }
+    // } //no position update when all floor selected
 
     labelsScene.forEach((elem, position) => {
-        if (elem.style.display == 'none' || currentFloor() == "-1"){
-            if(!isSingleLevel){
+        if (elem.style.display == 'none'
+            // || currentFloor() == "-1"
+        ) {
+            if (!isSingleLevel) {
                 return;
             }
         }
-        
+
         tempV.copy(position);
         tempV.project(camera);
 
@@ -479,11 +496,11 @@ function updateLabelPositions() {
 }
 
 function updateLabelVisibility() {
-    if (currentFloor() == "-1"){
-        if(!isSingleLevel){
-            return;
-        }
-    }  //no visibility update when all floor selected
+    // if (currentFloor() == "-1"){
+    //     if(!isSingleLevel){
+    //         return;
+    //     }
+    // }  //no visibility update when all floor selected
 
     const labelData: LabelData[] = [];
     let line;
@@ -654,11 +671,11 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
 
     // const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
     // if (carouselItem) {
-        showFloor(floorIndex, floorLevels);
-        RestoreOriginalColors();
-        WaitForFocusAnimation(object, placeData);
-        ChangeColorOfSingleObject(object, COLOR_SELECTED);
-        return { piso: `Piso ${placeData.place_area_name}`, success: true };
+    showFloor(floorIndex, floorLevels);
+    RestoreOriginalColors();
+    WaitForFocusAnimation(object, placeData);
+    ChangeColorOfSingleObject(object, COLOR_SELECTED);
+    return { piso: `Piso ${placeData.place_area_name}`, success: true };
     // } else {
     //     return { piso: "Piso no encontrado", success: false };
     // }

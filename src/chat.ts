@@ -12,11 +12,11 @@ async function sendMessage(message: string) {
   waitForBotResponse = true;
 }
 
-GetHTMLElement(".msger-input")!.addEventListener("pointerdown", (event) => {
+GetHTMLElement(".msger-input")!.addEventListener("pointerdown", (_event) => {
   GetHTMLElement('.chatInputOverlay').style.display = 'flex';
 });
 
-GetHTMLElement(".chatInputOverlay > button")!.addEventListener("pointerdown", (event) => {
+GetHTMLElement(".chatInputOverlay > button")!.addEventListener("pointerdown", (_event) => {
   GetHTMLElement('.chatInputOverlay').style.display = 'none';
 });
 

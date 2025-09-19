@@ -216,6 +216,9 @@ function Start() {
         if (userConfig == true)
           generateBuildingsAroundModel(scene, modelSize, modelCenter, citySize);
         GetHTMLElement('#loadingMain').style.display = "none";
+        if (floorLevels.length > 0) {
+          showFloor(-1, floorLevels);
+        }
         updateLabelPositions();
         updateLabelVisibility();
       },
@@ -585,8 +588,7 @@ export function RestartScene() {
   camera.rotation.copy(startingCameraRotation);
   // controls.target.set(modelCenter!.x, modelCenter!.y, modelCenter!.z);
   controls.update();
-  if(floorLevels.length > 0)
-  {
+  if (floorLevels.length > 0) {
     showFloor(-1, floorLevels);
   }
   ClosePlaceCard();
@@ -635,6 +637,6 @@ function animate() {
 
 animate();
 
-setTimeout(() => {
-  RestartScene();
-}, 5000);
+// setTimeout(() => {
+//   RestartScene();
+// }, 5000);
