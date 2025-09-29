@@ -92,12 +92,12 @@ async function ChatRequest(message: string, role: string) {
         });
 
         if (!response.ok) {
-            appendMessage("left", 'Lo siento, ocurrió un error.', -1);
+            appendMessage("left", 'Chat no disponible en estos momentos.', -1);
         }
 
         if (!response.body) {
-            appendMessage("left", 'Lo siento, ocurrió un error.', -1);
-            return 'Lo siento, ocurrió un error';
+            appendMessage("left", 'Chat no disponible en estos momentos.', -1);
+            return;
         }
 
         const reader = response.body.getReader();
@@ -128,7 +128,7 @@ async function ChatRequest(message: string, role: string) {
 
     } catch (error) {
         console.error('Error fetching bot response:', error);
-        appendMessage("left", 'Lo siento, ocurrió un error.', -1);
+        appendMessage("left", 'Chat no disponible en estos momentos.', -1);
     }
 }
 

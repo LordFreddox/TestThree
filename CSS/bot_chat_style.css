@@ -252,7 +252,7 @@
     align-items: flex-start;
     gap: 1rem;
     flex-direction: row;
-    height: 20rem;
+    /* height: 20rem; */
 }
 
 .chatInputOverlay > div > div > textarea {
