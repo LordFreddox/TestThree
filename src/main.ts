@@ -2,7 +2,7 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3,
+  Mesh, Vector3, Box3,Scene,
   Euler
   // Raycaster
 } from 'three';
@@ -34,7 +34,7 @@ import { DisplayChatAI, InitChat } from './chat.ts';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
-const tutorial = document.getElementById('tutorial') as HTMLElement;
+//const tutorial = document.getElementById('tutorial') as HTMLElement;
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
 const BASE_URL = `${window.location.origin}${basePath}/models/`;
 // const companyId = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
@@ -49,6 +49,29 @@ let startingCameraRotation: Euler;
 export let floorLevels: Object3D[] = [];
 let interactObjects = [] as Object3D[];
 const loader = new GLTFLoader();
+const buildingModels: Object3D[] = [];
+
+// Lista de rutas de modelos GLB de edificios para el generador
+const buildingModelPaths = [
+  './models/building1.glb',
+  './models/building2.glb',
+  './models/building3.glb',
+  './models/building4.glb',
+];
+
+function loadBuildingModelsAndGenerate(
+  scene: Scene,
+  modelSize: Vector3 | null,
+  modelCenter: Vector3 | null
+): void {
+  Promise.all(
+    buildingModelPaths.map((path: string) => loader.loadAsync(path))
+  ).then((results: { scene: Object3D }[]) => {
+    results.forEach((gltf) => buildingModels.push(gltf.scene));
+    // Llama a la función de generación con los modelos cargados
+    generateBuildingsAroundModel(scene, modelSize, modelCenter, buildingModels);
+  });
+}
 let places: Place[] = [];
 // const mouse = new Vector2();
 // const raycaster = new Raycaster();
@@ -101,7 +124,7 @@ function Start() {
     loader.load(
       modelUrl,
       (gltf) => {
-        tutorial.style.display = 'flex';
+        //tutorial.style.display = 'flex';
         gltf.scene.position.set(0, 0, 0);
         scene.add(gltf.scene);
         const { size, center } = GetBoundingBoxSizeAndCenterOfObject(gltf.scene);
@@ -212,9 +235,8 @@ function Start() {
         }
 
         const userConfig = gltf.scenes[0].userData.generateBuildings ?? false;
-        const citySize = gltf.scenes[0].userData.citySize ?? 400;
         if (userConfig == true)
-          generateBuildingsAroundModel(scene, modelSize, modelCenter, citySize);
+          loadBuildingModelsAndGenerate(scene, modelSize, modelCenter);
         GetHTMLElement('#loadingMain').style.display = "none";
         if (floorLevels.length > 0) {
           showFloor(-1, floorLevels);
@@ -391,7 +413,7 @@ let hasUserInteracted = false;
 controls.addEventListener('start', () => {
   if (!hasUserInteracted) {
     hasUserInteracted = true;
-    tutorial.style.display = 'none';
+    //tutorial.style.display = 'none';
   }
   ClosePlaceCard();
   CloseSearchPlace();
@@ -597,7 +619,7 @@ export function RestartScene() {
   removeCurrentMarker();
   GetHTMLElement('#avatarButton').style.removeProperty('top');
   GetHTMLElement('#avatarButton').style.removeProperty('left');
-  GetHTMLElement('#tutorial').style.display = 'flex';
+  //GetHTMLElement('#tutorial').style.display = 'flex';
 }
 
 function animate() {
