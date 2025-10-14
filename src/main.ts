@@ -2,7 +2,7 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3,Scene,
+  Mesh, Vector3, Box3,Scene,Color,
   Euler
   // Raycaster
 } from 'three';
@@ -18,7 +18,7 @@ import {
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
-  showFloor,
+  showFloor,ChangeColorOfSingleObject,RestoreOriginalColors
   // SetupDescriptionCardForPlace
 } from './view.ts';
 import { generateBuildingsAroundModel } from './BuildingGenerator.ts';
@@ -656,9 +656,56 @@ function animate() {
   requestAnimationFrame(animate);
   composer.render();
 }
+const btnFocusPlace = document.getElementById('btnFocusPlace');
+if (btnFocusPlace) {
+  btnFocusPlace.addEventListener('click', () => {
+    const placeName = btnFocusPlace.getAttribute('data-place') || 'a01';
+    console.log('Botón 1 presionado:', placeName);
+    focusAndColorPlace(placeName);
+  });
+}
+
+const btnFocusPlace2 = document.getElementById('btnFocusPlace2');
+if (btnFocusPlace2) {
+  btnFocusPlace2.addEventListener('click', () => {
+    const placeName2 = btnFocusPlace2.getAttribute('data-place') || 'a02';
+    console.log('Botón 2 presionado:', placeName2);
+    focusAndColorPlace(placeName2);
+  });
+}
+
+// Función para enfocar y colorear padre e hijo
+export function focusAndColorPlace(placeName: string) {
+RestoreOriginalColors();
+  // Busca el objeto hijo por nombre
+  const child = scene.getObjectByProperty('name', placeName);
+  if (!child) {
+    console.warn(`No se encontró el lugar: ${placeName}`);
+    return;
+  }
+
+  // Busca el padre
+  const parent = child.parent;
+  if (!parent) {
+    console.warn(`No se encontró el padre del lugar: ${placeName}`);
+    return;
+  }
+
+  // Enfoca la cámara en el padre
+  focusCameraOnObject(parent);
+
+  // Cambia el color del padre usando la función reutilizable
+  ChangeColorOfSingleObject(parent, new Color("#57FF9E"));
+
+  // Cambia el color del hijo usando la función reutilizable
+  ChangeColorOfSingleObject(child, new Color("#FF2B03"));
+}
 
 animate();
 
 // setTimeout(() => {
 //   RestartScene();
 // }, 5000);
+
+// Encuentra y enfoca el padre de un lugar por nombre de propiedad personalizada
+
