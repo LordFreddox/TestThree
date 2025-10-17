@@ -571,6 +571,8 @@ function ChangeObjectColorsByCategory(category: string, color: Color) {
 
 function ChangeColorOfSingleObject(object: Object3D, color: Color) {
     object.traverse((child) => {
+        console.log("cambiando color a"+child.name);
+        console.log("color" + color);
         if (child instanceof Mesh) {
             const mesh = child;
             const material = mesh.material as MeshStandardMaterial;
@@ -834,5 +836,5 @@ export {
     updateLabelPositions, updateLabelVisibility,
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
     SetupPlacesForSearchVirtualTour, SetupPlacesForSearchMap3D,
-    CreateTextForPlace, SetupDescriptionCardForPlace, SetupDescriptionCardForPlaceByID
+    CreateTextForPlace, SetupDescriptionCardForPlace, SetupDescriptionCardForPlaceByID,ChangeColorOfSingleObject,RestoreOriginalColors
 };

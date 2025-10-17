@@ -2,7 +2,7 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3,Scene,
+  Mesh, Vector3, Box3,Scene,Color,
   Euler
   // Raycaster
 } from 'three';
@@ -18,7 +18,7 @@ import {
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
-  showFloor,
+  showFloor,ChangeColorOfSingleObject,RestoreOriginalColors
   // SetupDescriptionCardForPlace
 } from './view.ts';
 import { generateBuildingsAroundModel } from './BuildingGenerator.ts';
@@ -31,6 +31,7 @@ import { EndCallView, loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
 import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
 import { DisplayChatAI, InitChat } from './chat.ts';
+import { focusSitPlace } from './Boleteria.ts';
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -657,8 +658,23 @@ function animate() {
   composer.render();
 }
 
-animate();
 
-// setTimeout(() => {
-//   RestartScene();
-// }, 5000);
+const btnFocusPlace = document.getElementById('btnFocusPlace');
+if (btnFocusPlace) {
+  btnFocusPlace.addEventListener('click', () => {
+    const placeName = btnFocusPlace.getAttribute('data-place') || 'NB05';
+    console.log('Botón 1 presionado:', placeName);
+    focusSitPlace(placeName);
+  });
+}
+
+const btnFocusPlace2 = document.getElementById('btnFocusPlace2');
+if (btnFocusPlace2) {
+  btnFocusPlace2.addEventListener('click', () => {
+    const placeName2 = btnFocusPlace2.getAttribute('data-place') || 'ON11';
+    console.log('Botón 2 presionado:', placeName2);
+    focusSitPlace(placeName2);
+  });
+}
+
+animate();
