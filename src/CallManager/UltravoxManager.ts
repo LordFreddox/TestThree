@@ -6,6 +6,7 @@ import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
 import { RestartScene, SearchPlacesByDistanceCategoryArea } from "../main.ts";
 import { scene } from "../Renderer.ts";
 import { SetupDescriptionCardForPlaceByID } from "../view.ts";
+import { focusSitPlace } from "../Boleteria.ts";
 const CallSession = new UltravoxSession();
 let firstSpeak = true;
 let transcriptTimeout: number | ReturnType<typeof setTimeout> | undefined;
@@ -88,7 +89,8 @@ function SetupListeners() {
 CallSession.registerToolImplementations({
     "FocusOnPlace": EnfocarCamaraEnLugarPorID,
     "OpenServices": OpenServices,
-    "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria
+    "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria,
+    "ShowEventSeat": ShowEventSeat
 });
 
 function EnfocarCamaraEnLugarPorID(params: any) {
@@ -126,6 +128,12 @@ function ObtenerLugaresRecomendadosPorCategoria(params: any) {
     if (!categoryToSearch) return `Categoría no enviada`;
 
     return SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
+}
+
+function ShowEventSeat(params: any){
+    const placeId = params.placeId as string;
+    focusSitPlace(placeId)
+    return "exitosamente enfocado";
 }
 
 function EndCall() {

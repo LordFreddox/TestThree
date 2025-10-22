@@ -2,7 +2,7 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3,Scene,Color,
+  Mesh, Vector3, Box3,Scene,
   Euler
   // Raycaster
 } from 'three';
@@ -18,7 +18,7 @@ import {
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
-  showFloor,ChangeColorOfSingleObject,RestoreOriginalColors
+  showFloor
   // SetupDescriptionCardForPlace
 } from './view.ts';
 import { generateBuildingsAroundModel } from './BuildingGenerator.ts';
@@ -104,7 +104,7 @@ if (FAKE_ID === null) {
     GetPlacesReal();
   }
 } else {
-  Start();
+  Start(); //starts fake scenes
 }
 
 //GetPlacesReal(companyId);
