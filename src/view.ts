@@ -683,23 +683,35 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     // }
 }
 
-async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
-    console.log('Waiting for focus animation on object:', object.name);
-    focusCameraOnObject(object);
-    spawnMarkerAboveObject(object);
-    await new Promise(f => setTimeout(f, 2000));
-    SetupCardDescriptionCardPlace(placeData);
-    if (placeData.bigcompany_id.toString() === COMPANY_ID) return; //dont show webview on same bigsurface
+ async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
+     console.log('Waiting for focus animation on object:', object.name);
+     focusCameraOnObject(object);
+     spawnMarkerAboveObject(object);
+     await new Promise(f => setTimeout(f, 2000));
+     SetupCardDescriptionCardPlace(placeData);
 
+    if (placeData.bigcompany_id.toString() === COMPANY_ID) return;
+
+    const glbUrl = `https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/models/${placeData.place_id}.glb`;
+    try {
+       const headResp = await fetch(glbUrl, { method: 'HEAD' });
+        if (!headResp.ok) {
+            console.warn(`Modelo 3D no encontrado (${glbUrl}). No se mostrará el visor.`);
+           return;
+        }
+    } catch (err) {
+        console.warn("Error al validar la existencia del modelo 3D:", err);
+        return;
+    }
     webviewContainer.classList.add('showTop');
     webviewContainer.classList.remove('hideTop');
-    const webView = document.getElementById('3DVisualizer') as HTMLIFrameElement;
-    if (!webView) {
-        console.error('WebView element not found');
-    }
-    webView.src = "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId=" + placeData.place_id + "&companyId=" + placeData.company_id + "&userId=0";
-    console.log('WebView src set to:', webView.src);
-}
+   const webView = document.getElementById('3DVisualizer') as HTMLIFrameElement;
+   const webViewUrl =
+        "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/Visualizer3D/index.html?placeId="
+        + placeData.place_id + "&companyId=" + placeData.company_id + "&userId=0";
+    webView.src = webViewUrl;
+ }
+
 
 function SetupCardDescriptionCardPlace(placeData: Place) {
     divCardPlace.classList.remove('hideTop');
