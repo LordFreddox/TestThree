@@ -95,6 +95,7 @@ async function ChatRequest(message: string, role: string) {
 
         if (!response.ok) {
             appendMessage("left", 'Chat no disponible en estos momentos.', -1);
+            return;
         }
 
         if (!response.body) {
