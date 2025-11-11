@@ -2,7 +2,7 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3,Scene,Color,
+  Mesh, Vector3, Box3,Scene,
   Euler
   // Raycaster
 } from 'three';
@@ -18,7 +18,7 @@ import {
   updateLabelPositions, updateLabelVisibility, CreateTextForPlace,
   MapObjectsListByCategoryName, SetupPlacesForSearchVirtualTour,
   SetupPlacesForSearchMap3D,
-  showFloor,ChangeColorOfSingleObject,RestoreOriginalColors
+  showFloor
   // SetupDescriptionCardForPlace
 } from './view.ts';
 import { generateBuildingsAroundModel } from './BuildingGenerator.ts';
@@ -29,7 +29,7 @@ import {
 } from './Utils/Utils.ts';
 import { EndCallView, loadAvatar } from './CallManager/CallView.ts';
 import { FillZTArea, HideZT } from './ZT/ZTView.ts';
-import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
+import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID, SEAT_EVENT } from './Utils/constants.ts';
 import { DisplayChatAI, InitChat } from './chat.ts';
 import { focusSitPlace } from './Boleteria.ts';
 // const ServType: string = urlParams.get('ServType')!;
@@ -244,6 +244,10 @@ function Start() {
         }
         updateLabelPositions();
         updateLabelVisibility();
+
+        if(SEAT_EVENT){
+      focusSitPlace(SEAT_EVENT);
+        }
       },
       (xhr) => {
         const progress = (xhr.loaded / xhr.total) * 100;
