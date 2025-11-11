@@ -14,6 +14,9 @@ async function sendMessage(message: string) {
 
 GetHTMLElement(".msger-input")!.addEventListener("pointerdown", (_event) => {
   GetHTMLElement('.chatInputOverlay').style.display = 'flex';
+  setTimeout(function () {
+    GetHTMLElement('#textarea-newMessage').focus();
+  }, 100);
 });
 
 GetHTMLElement(".chatInputOverlay > button")!.addEventListener("pointerdown", (_event) => {
@@ -75,6 +78,6 @@ export function InitChat() {
 }
 
 export function DisplayChatAI() {
-    GetHTMLElement('.msger').style.display = 'flex';
-    GetHTMLElement('#tutorial').style.display = 'none';
+  GetHTMLElement('.msger').style.display = 'flex';
+  //GetHTMLElement('#tutorial').style.display = 'none';
 }

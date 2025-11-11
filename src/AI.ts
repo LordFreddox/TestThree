@@ -1,7 +1,9 @@
 import { appendMessage } from "./chat.ts";
 import { PROJECT_ENVIROMENT, URL_MCPCLIENT, COMPANY_NAME, COMPANY_ID } from "./Utils/constants.ts";
 
-let fullConversation: string = '';
+let fullConversation: {role: string, content: string}[] = [];
+ResetContext();
+
 let messageAmount: number = 1;
 let controller = new AbortController();
 let DescriptionsMap: Map<number, string> = new Map();
@@ -11,7 +13,7 @@ function InitContextWithSystemPrompt(sysPromt: string) {
 }
 
 export function UpdateDescription(placeId: number, companysubsidiaryId: number, description: HTMLElement): AbortController {
-    if(DescriptionsMap.has(companysubsidiaryId)){
+    if (DescriptionsMap.has(companysubsidiaryId)) {
         description.innerHTML = DescriptionsMap.get(companysubsidiaryId)!;
         return controller;
     }
@@ -32,10 +34,10 @@ export function UpdateDescription(placeId: number, companysubsidiaryId: number, 
         signal: controller.signal
     })
         .then(response => handleStreamResponse(response, description, companysubsidiaryId))
-        .catch(()=>{
-                console.log('Fetch aborted or error');
-                controller = new AbortController();
-                description.innerHTML = 'No se pudo actualizar en estos momentos, intente mas tarde.';
+        .catch(() => {
+            console.log('Fetch aborted or error');
+            controller = new AbortController();
+            description.innerHTML = 'No se pudo actualizar en estos momentos, intente mas tarde.';
         });
     return controller; // Return the controller for external abort access
 }
@@ -77,12 +79,12 @@ async function ChatRequest(message: string, role: string) {
     AppendJsonToContext(message, role);
     try {
         const body = {
-            messages: JSON.parse(`[${fullConversation.slice(0, -1)}]`),
+            messages: fullConversation,
             companyName: COMPANY_NAME,
-            companyId: COMPANY_ID,
+            placeId: COMPANY_ID,
             projectEnviroment: PROJECT_ENVIROMENT
         };
-        const response = await fetch(`${URL_MCPCLIENT}/chat`, {
+        const response = await fetch(`${URL_MCPCLIENT}/chat/groq`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -93,6 +95,7 @@ async function ChatRequest(message: string, role: string) {
 
         if (!response.ok) {
             appendMessage("left", 'Chat no disponible en estos momentos.', -1);
+            return;
         }
 
         if (!response.body) {
@@ -102,25 +105,30 @@ async function ChatRequest(message: string, role: string) {
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
-        let fullMessage = '';
 
         while (true) {
             const { done, value } = await reader.read();
-            if (done) break;
+            if (done) {
+                break;
+            }
 
             const chunk = decoder.decode(value, { stream: true });
             const messages = chunk.trim().split('\n');
             messages.forEach(message => {
                 if (message) {
                     const data = JSON.parse(message);
-                    appendMessage("left",
-                        data.message, messageAmount);
-                    fullMessage += data.message;    
+                    if (data.fullConversation){
+                        fullConversation = data.fullConversation;
+                    }
+                    if (data.message) {
+                        appendMessage("left",
+                            data.message, messageAmount);
+                    }
                 }
             });
         }
         messageAmount++;
-        AppendJsonToContext(fullMessage, 'assistant');
+        // AppendJsonToContext(fullMessage, 'assistant');
         // const botResponseMessage = await response.json();
         // appendMessage(agentId, botName, "left",
         //     botResponseMessage.response.message, botResponseMessage.response.id);
@@ -133,15 +141,16 @@ async function ChatRequest(message: string, role: string) {
 }
 
 function AppendJsonToContext(message: string, role: string) {
-    const messageToSent: MessageLLM = {role: role, content: message};
-    fullConversation += `${JSON.stringify(messageToSent)},`;
+    const messageToSent: MessageLLM = { role: role, content: message };
+    fullConversation.push(messageToSent);
 }
 
 function ResetContext() {
-    fullConversation = '';
+    fullConversation = [];
+    fullConversation.push({role:'assistant', content:'¡Hola! ¿Cómo puedo ayudarte hoy?'});
 }
 
-interface MessageLLM{
+interface MessageLLM {
     role: string,
     content: string
 }

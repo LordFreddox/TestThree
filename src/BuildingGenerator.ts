@@ -19,7 +19,7 @@ function getColorAndOpacityByDistance(pos: Vector3, center: Vector3): { color: C
   const dist = pos.distanceTo(center);
   const t = Math.min(dist / maxDistance, 1);
 
-  const startColor = new Color("#7d7d7dff"); // Color inicial
+  const startColor = new Color("#7d7d7d"); // Color inicial
   const endColor   = new Color(0x404040);  // Color final
   const color = startColor.clone().lerp(endColor, t);
 

@@ -1,4 +1,4 @@
-import { BOT_NAME, COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
+import { BIOMETRIC_DEVICE, BOT_NAME, COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botGenre } from './CallView.ts';
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 
@@ -6,6 +6,7 @@ import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
 import { RestartScene, SearchPlacesByDistanceCategoryArea } from "../main.ts";
 import { scene } from "../Renderer.ts";
 import { SetupDescriptionCardForPlaceByID } from "../view.ts";
+import { focusSitPlace } from "../Boleteria.ts";
 const CallSession = new UltravoxSession();
 let firstSpeak = true;
 let transcriptTimeout: number | ReturnType<typeof setTimeout> | undefined;
@@ -19,7 +20,8 @@ async function CreateCallUltravox(): Promise<boolean> {
             companyName: COMPANY_NAME,
             botName: BOT_NAME,
             botGenre: botGenre,
-            projectEnviroment: PROJECT_ENVIROMENT
+            projectEnviroment: PROJECT_ENVIROMENT,
+            bioDevice: BIOMETRIC_DEVICE
         };
         const response = await fetch(`${URL_MCPCLIENT}/ultravox`, {
             method: 'POST',
@@ -79,7 +81,7 @@ function SetupListeners() {
 
     CallSession.addEventListener('transcripts', () => {
         const lastTranscript = CallSession.transcripts[CallSession.transcripts.length - 1] as Transcript;
-
+        console.log(lastTranscript.speaker, lastTranscript.text);
         if (lastTranscript.speaker != 'agent') return;
     });
 }
@@ -87,7 +89,8 @@ function SetupListeners() {
 CallSession.registerToolImplementations({
     "FocusOnPlace": EnfocarCamaraEnLugarPorID,
     "OpenServices": OpenServices,
-    "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria
+    "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria,
+    "ShowEventSeat": ShowEventSeat
 });
 
 function EnfocarCamaraEnLugarPorID(params: any) {
@@ -125,6 +128,12 @@ function ObtenerLugaresRecomendadosPorCategoria(params: any) {
     if (!categoryToSearch) return `Categoría no enviada`;
 
     return SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
+}
+
+function ShowEventSeat(params: any){
+    const placeId = params.placeId as string;
+    focusSitPlace(placeId)
+    return "exitosamente enfocado";
 }
 
 function EndCall() {

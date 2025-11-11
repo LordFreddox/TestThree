@@ -1,1 +1,107 @@
-{"data":{"page":1,"total":9,"prev_page":null,"next_page":null,"services":[{"id":352,"name":"Beer","description":"Accede a la experiencia","type":"WEB","url":"https://openbeer.io/","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2025-05/pint-of-beer-svgrepo-com.png_1747347000195.png_1748279731315.png","class":1,"url_concat":1},{"id":251,"name":"Billetera ","description":"Compra, paga y transfiere","type":"LAUNCH-WEB","url":"https://minitienda.pages.dev/#/proyecto/cp","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2024-10/WALLET_PCA_(1).svg_1729637845267.svg","class":10,"url_concat":1},{"id":350,"name":"Como llegar","description":"Te ubicamos en tiempo real","type":"GAMING-WEB","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2025-05/map-location-svgrepo-com.png_1731622721653.png_1746745071160.png","class":12,"url_concat":1},{"id":252,"name":"Juan","description":"Juan tu asistente virtual esta para ayudarte","type":"WEB","url":"https://chatbot.zyon.tockall.com/juan/#/project/NZ4Pm5XgIH3VaoWN6IDW7/chat","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2024-10/8263143.webp_1729638413332.webp","class":1,"url_concat":1},{"id":254,"name":"Juega y gana","description":"Vence y te premiamos","type":"LAUNCH-WEB","url":"https://www.1001juegos.com/e/futbol","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2024-10/soccer-player-with-ball-svgrepo-com.png_1729696426695.png","class":10,"url_concat":1},{"id":354,"name":"Lockers","description":"Guarda tus objetos de forma segura","type":"WEB","url":"https://mellow-meerkat-065d1a.netlify.app","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2025-05/LOCKERS_ICONO.png_1744740305389.png_1748279924806.png","class":1,"url_concat":1},{"id":349,"name":"Mapa","description":"Te presentamos nuestras instalaciones","type":"GAMING-WEB","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2025-05/maps-and-flags-maps-and-flags-svgrepo-com.png_1746744897380.png","class":12,"url_concat":1},{"id":253,"name":"Pedidos Online","description":"Pide, reclama o te lo llevamos.","type":"WEB","url":"https://ecommerce.zyon.tockall.com/#/empresa/PaseoGastronomico","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2024-10/E-commerce_(1).svg_1729638881821.svg","class":1,"url_concat":1},{"id":353,"name":"Vending ","description":"Implementación de tecnología inteligente ","type":"WEB","url":"https://as-vending-test.azurewebsites.net/#/vending","icon":"https://strg01tockall.blob.core.windows.net:443/zion/services/2025-05/vending-machine-svgrepo-com_(1).png_1747944148059.png_1748279839999.png","class":1,"url_concat":1}]}}
+{
+    "data": {
+        "services": [
+            {
+                "id": 150,
+                "name": "Beer",
+                "description": "Accede a la experiencia ",
+                "type": "WEB",
+                "url": "https://openbeer.io/",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/BEER_INFOMEDIA.svg_1757629429270.svg",
+                "class": 1,
+                "url_concat": 1
+            },
+            {
+                "id": 97,
+                "name": "Billetera",
+                "description": "Compra, paga y transfiere",
+                "type": "LAUNCH-WEB",
+                "url": "https://wallet-dev.zyon.tockall.com/#/proyecto/ce",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/WALLET_INFOMEDIA.svg_1757629061339.svg",
+                "class": 10,
+                "url_concat": 1
+            },
+            {
+                "id": 63,
+                "name": "Invitados",
+                "description": "Accede a nuestro servicio",
+                "type": "WEB",
+                "url": "https://as-reservations.azurewebsites.net/#/proyecto/ce/login",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/INVITADOS_INFOMEDIA_OK.svg_1757630308474.svg",
+                "class": 1,
+                "url_concat": 1
+            },
+            {
+                "id": 60,
+                "name": "Lockers",
+                "description": "Accede a nuestro servicio",
+                "type": "WEB",
+                "url": "https://develop.cei-lockers.bracedevelopers.com/home",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/LOCJER_INFOMEDIA.svg_1757630963814.svg",
+                "class": 1,
+                "url_concat": 1
+            },
+            {
+                "id": 103,
+                "name": "Mapa",
+                "description": "Te presentamos nuestras instalaciones",
+                "type": "GAMING-WEB",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/MAPA_1.svg_1757631779300.svg",
+                "class": 12,
+                "url_concat": 1,
+                "url": "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D/index.html?ServType=3&project=zyon&placeId=1237"
+            },
+            {
+                "id": 62,
+                "name": "Pedidos Online",
+                "description": "Accede a nuestro servicio",
+                "type": "WEB",
+                "url": "https://ecommercefoods.azurewebsites.net/#/empresa/CEI",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/noun-restaurant-7764380_1.png_1757632859138.png",
+                "class": 1,
+                "url_concat": 1
+            },
+            {
+                "id": 109,
+                "name": "Recorridos Virtuales",
+                "description": "Te ubicamos en tiempo real",
+                "type": "GAMING-WEB",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/COMO_LLEGAR.svg_1757634138691.svg",
+                "class": 12,
+                "url_concat": 1,
+                "url": "https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/index.html?ServType=1&project=zyon&placeId=1237&placeId=1237"
+            },
+            {
+                "id": 88,
+                "name": "Reserva de espacios",
+                "description": "Realiza tu reservas",
+                "type": "WEB",
+                "url": "https://as-reservations.azurewebsites.net/#/proyecto/CEI/reservar-lugar-new",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/RESERVAS_INFO.png_1757635227378.png",
+                "class": 1,
+                "url_concat": 1
+            },
+            {
+                "id": 59,
+                "name": "Vending",
+                "description": "Accede a nuestro servicio",
+                "type": "MACHINE",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/VENDING_1.png_1757635568193.png",
+                "class": 5,
+                "url_concat": 1
+            },
+            {
+                "id": 151,
+                "name": "Vending.",
+                "description": "Implementación de tecnología inteligente ",
+                "type": "WEB",
+                "url": "https://openwavevending.com/#/vending/125/login?business=1237",
+                "icon": "https://strg01tockall.blob.core.windows.net:443/zion/services/2025-09/VENDIG_OK.svg_1757632131400.svg",
+                "class": 1,
+                "url_concat": 1
+            }
+        ],
+        "total": 10,
+        "page": 1
+    }
+}

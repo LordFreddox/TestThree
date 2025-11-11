@@ -2,7 +2,9 @@ import {
   AnimationMixer, Object3D, Clock,
   // MeshBasicMaterial, BackSide,
   // SphereGeometry, Intersection,
-  Mesh, Vector3, Box3,Scene,
+
+  Mesh, Vector3, Box3, Scene,
+
   Euler
   // Raycaster
 } from 'three';
@@ -104,7 +106,7 @@ if (FAKE_ID === null) {
     GetPlacesReal();
   }
 } else {
-  Start();
+  Start(); //starts fake scenes
 }
 
 //GetPlacesReal(companyId);
@@ -226,13 +228,6 @@ function Start() {
           document.getElementById('div3DView')!.style.display = 'block';
           document.getElementById('search-section')!.style.display = 'none';
           document.getElementById('category-selector-parent')!.style.display = 'none';
-        }
-
-        for (let i = 0; i < places.length; i++) {
-          if (places[i].bigcompany_level === 1) {
-            ChangeCompanyName(places[i].bigcompany_name_short);
-            break;
-          }
         }
 
         const userConfig = gltf.scenes[0].userData.generateBuildings ?? false;
@@ -360,41 +355,29 @@ function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: st
 }
 
 async function SetupExplorerOrVirtualtour(places: Place[]) {
+  for (let i = 0; i < places.length; i++) {
+    if (places[i].bigcompany_level === 1) {
+      ChangeCompanyName(places[i].bigcompany_name_short);
+      break;
+    }
+  }
+
   switch (SERV_TYPE) {
-    case "1":
+    case "1": //recorridos virtuales
       GetHTMLElement('.container-select-place').style.top = '1vh';
       GetHTMLElement('#previewButton').style.display = 'none';
       document.getElementById('div3DView')!.style.display = 'none';
       document.getElementById('search-section')!.style.display = 'block';
-      // document.getElementById("back3D")!.style.display = 'block';
-      // if (places[0]) {
-      //   const imageElement = document.getElementById('imageSearchSprite');
-      //   if (imageElement) {
-      //     imageElement.setAttribute('src', places[0].company_picture_url);
-
-      //     imageElement.onerror = function () {
-      //       imageElement.style.visibility = 'hidden';
-      //     };
-
-      //     imageElement.onload = function () {
-      //       imageElement.style.visibility = 'visible';
-      //     };
-      //   }
-      // }
-      // document.getElementById('imageSearchSprite')!.setAttribute('src', places[0].company_picture_url)
       SetupPlacesForSearchVirtualTour(places);
       GetHTMLElement('#loadingMain').style.display = "none";
       break;
-    case "2":
+    case "2": //Mapas 3D con IA conversacional
       loadAvatar(COMPANY_ID);
       FillZTArea(COMPANY_ID);
       document.getElementById('div3DView')!.style.display = 'block';
       document.getElementById('search-section')!.style.display = 'none';
-      // document.getElementById('text-chat-AI')!.style.display = 'none';
-      //document.getElementById('btnZTList')!.style.display = 'none';
-      //document.getElementById('ZTArea')!.style.display = 'none';
       break;
-    case "3":
+    case "3": //Mapas 3D con chatbot
       await loadAvatar(COMPANY_ID);
       InitChat();
       // FillZTArea(COMPANY_ID);
@@ -407,6 +390,13 @@ async function SetupExplorerOrVirtualtour(places: Place[]) {
       };
       document.getElementById('div3DView')!.style.display = 'block';
       document.getElementById('search-section')!.style.display = 'none';
+      break;
+    case "4": //Chatbot sin mapas 3D
+      await loadAvatar(COMPANY_ID);
+      InitChat();
+      DisplayChatAI();
+      GetHTMLElement('#CloseChatHeaderButton').style.display = 'none';
+      GetHTMLElement('#loadingMain').style.display = "none";
       break;
   }
 

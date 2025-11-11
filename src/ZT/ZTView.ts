@@ -17,7 +17,7 @@ export async function FillZTArea(companyId: string) {
     try {
         if (IsLocalHost()) 
         {
-            let response = await fetch('https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/testJSON/service_list.json');
+            let response = await fetch('src/testJsons/service_list.json');
             const parsedResponse = await response.json();
             serviceList = parsedResponse.data.services;
         } else {
@@ -98,7 +98,7 @@ function toggleZTState() {
 
 export function handleBlockClick(description: string, url: string, id: number = 0,) {
     SetOpenZTState();
-    if (ZTDescriptionArea.computedStyleMap().get('visibility') == 'visible' &&
+    if (ZTDescriptionArea.style.visibility == 'visible' &&
         currentSelectService == id) 
     {
         currentSelectService = 0;
