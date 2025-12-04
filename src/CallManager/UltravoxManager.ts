@@ -7,6 +7,7 @@ import { RestartScene, SearchPlacesByDistanceCategoryArea } from "../main.ts";
 import { scene } from "../Renderer.ts";
 import { SetupDescriptionCardForPlaceByID } from "../view.ts";
 import { focusSitPlace } from "../Boleteria.ts";
+import { GetObjectListByUserDataTags } from "../Utils/Utils.ts";
 const CallSession = new UltravoxSession();
 let firstSpeak = true;
 let transcriptTimeout: number | ReturnType<typeof setTimeout> | undefined;
@@ -15,13 +16,47 @@ SetupListeners();
 
 async function CreateCallUltravox(): Promise<boolean> {
     try {
+        let filteredPlaces = [] as {
+            place_name: string,
+            place_id: string,
+            place_area_name: string,
+            place_category: string
+        }[];
+
+        const filteredObjectsByTag = GetObjectListByUserDataTags("objetivos");
+        /*all "places objects" have this properties in theyr userData:
+            object.userData.place = place;
+            object.userData.isPlaceObject = true;
+        */
+
+        filteredObjectsByTag.forEach(object => {
+            if (object.userData.isPlaceObject) {
+                filteredPlaces.push({
+                    place_name: object.userData.place.companysubsidiary_name,
+                    place_id: object.userData.place.place_id,
+                    place_area_name: object.userData.place.place_area_name,
+                    place_category: object.userData.place.place_category_name
+                });
+            } else {
+                if (object.userData.place_id) {
+                    filteredPlaces.push({
+                        place_name: object.userData.place_id,
+                        place_id: object.userData.place_id,
+                        place_area_name: "",
+                        place_category: ""
+                    });
+                }
+            }
+        });
+
         const body = {
             companyId: COMPANY_ID,
             companyName: COMPANY_NAME,
             botName: BOT_NAME,
             botGenre: botGenre,
             projectEnviroment: PROJECT_ENVIROMENT,
-            bioDevice: BIOMETRIC_DEVICE
+            bioDevice: BIOMETRIC_DEVICE,
+            places: filteredPlaces
         };
         const response = await fetch(`${URL_MCPCLIENT}/ultravox`, {
             method: 'POST',
@@ -88,19 +123,24 @@ function SetupListeners() {
 
 CallSession.registerToolImplementations({
     "FocusOnPlace": EnfocarCamaraEnLugarPorID,
+    // "FocusOnPlaceByName": ObtenerInfoDeLugarPorNombre,
     "OpenServices": OpenServices,
     "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria,
-    "ShowEventSeat": ShowEventSeat
+    // "ShowEventSeat": ShowEventSeat
 });
 
 function EnfocarCamaraEnLugarPorID(params: any) {
-    console.log(`sending place ID for focus ${params.placeId as string}`);
-    const FocusResponse = SetupDescriptionCardForPlaceByID(params.placeId as string);
+    const placeId = params.placeId as string;
+    console.log(`EnfocarCamaraEnLugarPorID ${placeId}`);
+    const FocusResponse = SetupDescriptionCardForPlaceByID(placeId);
     //EndCallView();
+    console.table(FocusResponse);
     if (FocusResponse.success)
         return `Lugar enfocado exitosamente en ${JSON.stringify(FocusResponse)}`;
-    else
-        return "No se pudo encontrar el lugar en el mapa.";
+    //fail to focus by place_id from placesList. Proceding to focus by placeName using it's ID
+    console.log(`ObtenerInfoDeLugarPorNombre ${placeId}`);
+    const focusedPlace = focusSitPlace(placeId);
+    return focusedPlace;
 }
 
 function OpenServices(params: any) {
@@ -130,11 +170,12 @@ function ObtenerLugaresRecomendadosPorCategoria(params: any) {
     return SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
 }
 
-function ShowEventSeat(params: any){
-    const placeId = params.placeId as string;
-    focusSitPlace(placeId)
-    return "exitosamente enfocado";
-}
+// function ObtenerInfoDeLugarPorNombre(params: any) {
+//     const placeName: string = params.placeName as string
+//     console.log(`ObtenerInfoDeLugarPorNombre ${placeName}`);
+//     const focusedPlace = focusSitPlace(placeName);
+//     return focusedPlace;
+// }
 
 function EndCall() {
     UpdateIsOnCallStatus(false);

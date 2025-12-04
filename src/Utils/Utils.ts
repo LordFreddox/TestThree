@@ -68,6 +68,9 @@ function GetHTMLElement(element: string): HTMLElement {
 
 function normalizeString(str: string): string {
     // Remove diacritical marks
+    if (!str)
+        return "";
+
     let normalized = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     // Remove punctuation and special characters (keep only alphanumeric and spaces)
     normalized = normalized.replace(/[^a-zA-Z0-9\s]/g, '');
@@ -76,7 +79,7 @@ function normalizeString(str: string): string {
 }
 
 function CreateArrowRender(startPosition: Vector3, endPosition: Vector3,
-    centerPosition: Vector3, arrowLenght:number, color: string): ArrowHelper {
+    centerPosition: Vector3, arrowLenght: number, color: string): ArrowHelper {
     const realColor: Color = new Color(color);
     const arrow = new ArrowHelper(
         new Vector3(endPosition.x - startPosition.x,
@@ -96,8 +99,18 @@ function CreateArrowRender(startPosition: Vector3, endPosition: Vector3,
     return arrow;
 }
 
+function GetObjectListByUserDataTags(tag: string): Object3D[] {
+    let returnedObjects: Object3D[] = [];
+    scene.traverse((child) => {
+        if (child.userData?.tag === tag) {
+            returnedObjects.push(child);
+        }
+    });
+    return returnedObjects;
+}
+
 export {
     GetBoundingBoxSizeAndCenterOfObject, DebugNavMesh,
     GetHTMLElement, IsLocalHost, shouldBlock, normalizeString,
-    CreateArrowRender
+    CreateArrowRender, GetObjectListByUserDataTags
 }

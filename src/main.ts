@@ -568,7 +568,7 @@ export function removeCurrentMarker() {
   currentMarker = null;
 }
 
-export function GetPlacesInfoByName(place_name: string): PlaceShort[] {
+export function GetPlacesInfoByNamePlaceList(place_name: string): PlaceShort[] {
   let placeFound: PlaceShort[] = [];
   const searchnormalized = normalizeString(place_name.toLocaleLowerCase())
   for (let index = 0; index < places.length; index++) {
@@ -645,7 +645,6 @@ function animate() {
   requestAnimationFrame(animate);
   composer.render();
 }
-
 
 const btnFocusPlace = document.getElementById('btnFocusPlace');
 if (btnFocusPlace) {

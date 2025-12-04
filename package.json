@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 4200 --host",
-    "build": "tsc && vite build",
-    "deploy": "gh-pages -d ./dist"
+    "build": "tsc && vite build"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
