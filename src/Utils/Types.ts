@@ -2,7 +2,8 @@ export enum ProjectBaseURL {
     TRIPTRAPP = 'https://apiapp.tockall-triptrapp.com/api',
     CAFAM = 'https://apiapp.cafammelgar.tockall.com/api',
     ZYON_PRU = 'https://as-ws-siteit-test.azurewebsites.net/api',
-    ZYON = 'https://apiapp.zyon.tockall.com/api'
+    ZYON = 'https://apiapp.zyon.tockall.com/api',
+    DEMO = ''
 }
 
 export interface Place {

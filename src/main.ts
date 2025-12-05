@@ -105,10 +105,16 @@ if (FAKE_ID === null) {
   }
 } else {
   Start(); //starts fake scenes
+  if (FAKE_ID) {
+    InitDemoFakeScenes();
+  }
 }
 
-//GetPlacesReal(companyId);
-
+async function InitDemoFakeScenes() {
+    await loadAvatar(COMPANY_ID);
+    GetHTMLElement('.container-3DView-options').style.display = 'none';
+    GetHTMLElement('#containerZTList').style.display = 'none';
+}
 
 document.addEventListener('wheel', function (e) {
   if (e.ctrlKey) {

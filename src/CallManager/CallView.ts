@@ -4,12 +4,12 @@ import { GetAvatarURL } from '../HTTP/http-service.ts';
 import { AvatarResponse } from '../Utils/Types.ts';
 import { HideZT, SetCloseZTState } from '../ZT/ZTView.ts';
 import { CreateCallUltravox, EndCall as EndCallUltravox } from './UltravoxManager.ts';
-import { ChangeBotName } from '../Utils/constants.ts';
+import { ChangeBotName, FAKE_ID } from '../Utils/constants.ts';
 
 const EndCallButton = GetHTMLElement('.EndCallButton');
 const AICallCard = GetHTMLElement('#AICallCard');
 const StartCallButton = GetHTMLElement('.avatarImgScript');
-export let isOnCall: boolean = false;
+let isOnCall: boolean = false;
 export let botGenre: number = 0;
 let currentCallManager: 'livekit' | 'ultravox' | null = null;
 
@@ -17,7 +17,7 @@ export async function loadAvatar(companyId: string) {
     try {
         let avatarResponse: AvatarResponse | undefined;
 
-        if (IsLocalHost()) 
+        if (IsLocalHost() || FAKE_ID) 
         {
             const response = await fetch(`https://strg01tockall.blob.core.windows.net/container-unity/Maps3D/avatars/${companyId}.json`);
             const data = await response.json() as AvatarResponse;
