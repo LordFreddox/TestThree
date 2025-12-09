@@ -7,8 +7,9 @@ import { CreateCallUltravox, EndCall as EndCallUltravox } from './UltravoxManage
 import { ChangeBotName } from '../Utils/constants.ts';
 
 const EndCallButton = GetHTMLElement('.EndCallButton');
-const AICallCard = GetHTMLElement('#AICallCard');
+//const AICallCard = GetHTMLElement('.avatar-ring');
 const StartCallButton = GetHTMLElement('.avatarImgScript');
+const CallContainer = GetHTMLElement('#avatarLoader');
 export let isOnCall: boolean = false;
 export let botGenre: number = 0;
 let currentCallManager: 'livekit' | 'ultravox' | null = null;
@@ -43,8 +44,16 @@ StartCallButton.onclick = async () => {
     StartCallView();
     SetCloseZTState();
     HideZT();
-    if (isOnCall) return;
     
+    StartCallButton.classList.add('avatarClickFeedback');
+
+    setTimeout(() => {
+        StartCallButton.classList.remove('avatarClickFeedback');
+    }, 200);
+    
+    if (isOnCall) return;
+    CallContainer.style.display = 'block';
+    EndCallButton.style.display = 'block';
     // Try LiveKit first
     // isOnCall = await CreateCallLiveKit();
     // if (isOnCall) {
@@ -61,6 +70,8 @@ StartCallButton.onclick = async () => {
     if(isOnCall) //if call created, stop avatar vibrate animation
     {
         StartCallButton.classList.remove('vibrate');
+        StartCallButton.style.borderStyle = 'solid';
+        CallContainer.style.display = 'none';
     }
 };
 
@@ -78,28 +89,26 @@ EndCallButton.onclick = () => {
 };
 
 function StartCallView() {
-    AICallCard.classList.remove('hideTop');
-    AICallCard.classList.add('showTop');
-
-    StartCallButton.style.borderStyle = 'solid';
+     //CallContainer.style.removeProperty('display'); 
 }
 
 export function EndCallView() {
     HideAvatarButtonForNSeconds(0);
+    EndCallButton.style.display = 'none';
 }
 
 export function HideCallViewTranscript(){
-    AICallCard.classList.remove('showTop');
-    AICallCard.classList.add('hideTop');
+    //AICallCard.classList.remove('showTop');
+    //AICallCard.classList.add('hideTop');
     StartCallButton.style.borderStyle = 'solid';
 }
 
 async function HideAvatarButtonForNSeconds(n_seconds: number = 1){
     await new Promise(f => setTimeout(f, n_seconds * 1000));
-    AICallCard.classList.remove('showTop');
-    AICallCard.classList.add('hideTop');
+    //AICallCard.classList.remove('showTop');
+    //AICallCard.classList.add('hideTop');
     StartCallButton.classList.add('vibrate');
-
+    CallContainer.style.display = 'none';
     StartCallButton.style.borderStyle = 'none';
 }
 
