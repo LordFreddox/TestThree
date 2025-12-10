@@ -911,6 +911,7 @@ button {
     left: 35%;
     top: 60%;
     width: 10rem;
+    border: 5px;
     border-radius: 50%;
     border-color: green;
     border-style: none;
