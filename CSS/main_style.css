@@ -23,7 +23,7 @@
     --left-msg-bg: #ececec;
     --right-msg-bg: #579ffb;
     --button-disable-color: rgb(158, 158, 158);
-    --button-enable-color: #9fb7b7;
+    --button-enable-color: #e35639;
 }
 
 #hideAll {
@@ -951,9 +951,7 @@ button {
     }
 }
 
-.avatarClickFeedback {
-    animation: clickFeedback 0.2s forwards;
-}
+
 
 @keyframes clickFeedback {
     0% {
@@ -967,10 +965,14 @@ button {
     }
 }
 
+.avatarClickFeedback {
+    animation: clickFeedback 0.2s forwards;
+}
+
 .EndCallButton {
     width: 4rem;
     position: absolute;
-    transform: translate(-150%, 100%);
+    transform: translate(70%, 350%);
     display: none;
 }
 
