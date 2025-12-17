@@ -38,6 +38,8 @@ const loadingBar = document.getElementById('loading-bar') as HTMLElement;
 //const tutorial = document.getElementById('tutorial') as HTMLElement;
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
 const BASE_URL = `${window.location.origin}${basePath}/models/`;
+const urlParams = new URLSearchParams(window.location.search);
+const seatEvent = urlParams.get('seatEvent') || null;
 // const companyId = urlParams.get('fakeId') || urlParams.get('placeId') || "0";
 // localStorage.setItem('companyId', companyId);
 let mixers: AnimationMixer[] = [];
@@ -242,6 +244,12 @@ function Start() {
         if (floorLevels.length > 0) {
           showFloor(-1, floorLevels);
         }
+
+        if (seatEvent) {
+      setTimeout(() => {
+        focusSitPlace(seatEvent);
+      }, 300);
+    }
         updateLabelPositions();
         updateLabelVisibility();
       },
