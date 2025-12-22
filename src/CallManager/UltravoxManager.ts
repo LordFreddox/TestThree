@@ -1,4 +1,4 @@
-import { BIOMETRIC_DEVICE, BOT_NAME, COMPANY_ID, COMPANY_NAME, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
+import { BIOMETRIC_DEVICE, BOT_NAME, COMPANY_ID, COMPANY_NAME, FAKE_ID, PROJECT_ENVIROMENT, START_POINT, URL_MCPCLIENT } from "../Utils/constants.ts";
 import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botGenre } from './CallView.ts';
 import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 
@@ -49,15 +49,30 @@ async function CreateCallUltravox(): Promise<boolean> {
             }
         });
 
-        const body = {
-            companyId: COMPANY_ID,
-            companyName: COMPANY_NAME,
-            botName: BOT_NAME,
-            botGenre: botGenre,
-            projectEnviroment: PROJECT_ENVIROMENT,
-            bioDevice: BIOMETRIC_DEVICE,
-            places: filteredPlaces
-        };
+        let body: any;
+
+        if (FAKE_ID) {
+            body = {
+                companyId: COMPANY_ID,
+                companyName: '',
+                botName: '',
+                botGenre: 1,
+                projectEnviroment: PROJECT_ENVIROMENT,
+                bioDevice: '',
+                places: filteredPlaces
+            };
+        } else {
+            body = {
+                companyId: COMPANY_ID,
+                companyName: COMPANY_NAME,
+                botName: BOT_NAME,
+                botGenre: botGenre,
+                projectEnviroment: PROJECT_ENVIROMENT,
+                bioDevice: BIOMETRIC_DEVICE,
+                places: filteredPlaces
+            };
+        }
+
         const response = await fetch(`${URL_MCPCLIENT}/ultravox`, {
             method: 'POST',
             headers: {
