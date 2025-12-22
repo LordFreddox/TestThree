@@ -1030,3 +1030,43 @@ button {
     right: 5vw;
     top: 5vh;
 }
+
+.keyboard {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    padding: 12px;
+    border-radius: 14px;
+    z-index: 9999;
+    color: white;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.keys button {
+    font-size: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: #333;
+    color: white;
+}
+
+.keys button:active {
+    background: #555;
+}
+
+.zero {
+    grid-column: span 2;
+}
+
+.hidden {
+    display: none;
+}
