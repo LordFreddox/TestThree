@@ -13,6 +13,7 @@ export class VirtualKeyboard {
         div.className = 'keyboard hidden';
 
         div.innerHTML = `
+         <input id="vkInput" type="text" readonly title="Entrada del teclado virtual" placeholder="Digita tu identificación" aria-label="Entrada del teclado virtual" />
             <div class="keys">
                 ${[1,2,3,4,5,6,7,8,9]
                     .map(n => `<button data-key="${n}">${n}</button>`)

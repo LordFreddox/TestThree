@@ -1030,41 +1030,107 @@ button {
     right: 5vw;
     top: 5vh;
 }
-
 .keyboard {
     position: fixed;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
-    background: #111;
-    padding: 12px;
-    border-radius: 14px;
+    transform: translateX(-50%) scale(0.5);
+    transform-origin: bottom center;
+    
+    background: #121212;
+    padding: 10px;
+    border-radius: 16px;
     z-index: 9999;
-    color: white;
+    box-sizing: border-box;
+    box-shadow:
+        0 0 18px rgba(79, 255, 255, 0.35), 
+        inset 0 0 12px rgba(168, 239, 255, 0.25); 
+}
+
+.keyboard input {
+    box-sizing: border-box; 
+    width: 100%;
+    max-width: 100%;
+    
+    padding: 10px;
+    margin: 0 0 8px 0;
+
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+
+    text-align: center;
+    background: #0B1A26;
+    color: #FFFFFF;
+
+    box-shadow:
+        inset 0 0 10px rgba(168, 239, 255, 0.35);
 }
 
 .keys {
     display: grid;
-    grid-template-columns: repeat(3, 60px);
-    gap: 10px;
-    margin-top: 10px;
+    grid-template-columns: repeat(3, 52px);
+    gap: 8px;
 }
 
 .keys button {
-    font-size: 20px;
-    padding: 14px;
-    border-radius: 8px;
-    border: none;
-    background: #333;
-    color: white;
+    font-size: 18px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #4FFFFF; 
+
+    background: linear-gradient(
+        145deg,
+        #0B1A26,
+        #121212
+    );
+
+    color: #FFFFFF;
+    cursor: pointer;
+
+    box-shadow:
+        0 0 6px rgba(79, 255, 255, 0.35),
+        inset 0 0 6px rgba(168, 239, 255, 0.25);
+
+    transition: all 0.15s ease;
+}
+
+.keys button:hover {
+    box-shadow:
+        0 0 10px rgba(160, 124, 254, 0.6), 
+        inset 0 0 8px rgba(168, 239, 255, 0.4);
 }
 
 .keys button:active {
-    background: #555;
+    transform: scale(0.92);
+    background: #0B1A26;
+
+    box-shadow:
+        0 0 16px rgba(79, 255, 255, 0.9),
+        inset 0 0 10px rgba(160, 124, 254, 0.6);
 }
 
 .zero {
     grid-column: span 2;
+}
+
+.keys button[data-action="close"] {
+    background: linear-gradient(
+        145deg,
+        #A07CFE,
+        #4FFFFF
+    );
+    color: #0B1A26;
+    font-weight: bold;
+}
+
+.keys button[data-action="back"] {
+    background: linear-gradient(
+        145deg,
+        #4FFFFF,
+        #A8EFFF
+    );
+    color: #0B1A26;
 }
 
 .hidden {
