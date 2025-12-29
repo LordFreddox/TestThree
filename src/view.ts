@@ -369,7 +369,7 @@ export function showFloor(index: number, floorLevels: Object3D[]) {
             if (line)
                 line.visible = true;
             elem.classList.remove('HideFromFloor');
-        } 
+        }
         else if (index === -1) {
             if (Math.random() < 0.2) { //20% chance to show label
                 elem.style.display = 'block';
@@ -377,7 +377,7 @@ export function showFloor(index: number, floorLevels: Object3D[]) {
                 if (line)
                     line.visible = true;
                 elem.classList.remove('HideFromFloor');
-            } 
+            }
             else {
                 elem.style.display = 'none';
                 line = labelsLine.get(elem);
@@ -410,7 +410,7 @@ export function showFloor(index: number, floorLevels: Object3D[]) {
         document.querySelectorAll('#floor-carousel .floor-selector-item').forEach(item => {
             item.classList.remove('selected');
         });
-        GetHTMLElement("#static-item").classList.add('selected');
+        GetHTMLElement("#static-item")?.classList.add('selected');
     }
 }
 
@@ -571,7 +571,7 @@ function ChangeObjectColorsByCategory(category: string, color: Color) {
 
 function ChangeColorOfSingleObject(object: Object3D, color: Color) {
     object.traverse((child) => {
-        console.log("cambiando color a"+child.name);
+        console.log("cambiando color a" + child.name);
         console.log("color" + color);
         if (child instanceof Mesh) {
             const mesh = child;
@@ -668,7 +668,6 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     SetupCardDescriptionCardPlace(placeData);
 
     const floorObj = findFloorObject(object, floorLevels);
-    console.table("floorObj=" + floorObj);
     const floorIndex = floorObj ? floorLevels.indexOf(floorObj) : -1;
 
     // const carouselItem = document.querySelector(`#floor-carousel .floor-selector-item[data-index="${floorIndex}"]`) as HTMLElement;
@@ -682,6 +681,10 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     //     return { piso: "Piso no encontrado", success: false };
     // }
 }
+
+// GetHTMLElement(".searchPlace3DPanel").addEventListener('click', () => {
+//     SetupDescriptionCardForPlaceByID("14362");
+// });
 
  async function WaitForFocusAnimation(object: Object3D, placeData: Place) {
      console.log('Waiting for focus animation on object:', object.name);
@@ -848,5 +851,7 @@ export {
     updateLabelPositions, updateLabelVisibility,
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
     SetupPlacesForSearchVirtualTour, SetupPlacesForSearchMap3D,
-    CreateTextForPlace, SetupDescriptionCardForPlace, SetupDescriptionCardForPlaceByID,ChangeColorOfSingleObject,RestoreOriginalColors
+    CreateTextForPlace, SetupDescriptionCardForPlace, SetupDescriptionCardForPlaceByID, ChangeColorOfSingleObject, RestoreOriginalColors
 };
+
+//(window as any).SetupDescriptionCardForPlaceByID = SetupDescriptionCardForPlaceByID;

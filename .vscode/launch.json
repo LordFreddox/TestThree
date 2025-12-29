@@ -6,10 +6,22 @@
             "name": "Launch Microsoft Edge",
             "request": "launch",
             "runtimeArgs": [
-                "--remote-debugging-port=9222",
-                "--window-size=720,1520"
+                "--remote-debugging-port=9222"
             ],
-            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=203", // https://strg01tockall.blob.core.windows.net/container-unity/Maps3D-chatbot/index.html?ServType=3&project=zyon_pru&placeId=821
+            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=203&bioDevice=CEI_BFIA", // Provide your project's url to finish configuring
+            "presentation": {
+                "hidden": true
+            }
+        },
+        {
+            "type": "pwa-msedge",
+            "name": "Launch Microsoft Edge in headless mode",
+            "request": "launch",
+            "runtimeArgs": [
+                "--headless",
+                "--remote-debugging-port=9222"
+            ],
+            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=1007&bioDevice=CEI_BFIA", // Provide your project's url to finish configuring
             "presentation": {
                 "hidden": true
             }
@@ -18,7 +30,7 @@
             "type": "vscode-edge-devtools.debug",
             "name": "Open Edge DevTools",
             "request": "attach",
-            "url": "http://localhost:4200/index.html?ServType=3&project=triptrapp&placeId=198",
+            "url": "http://localhost:4200/index.html?ServType=3&project=zyon&placeId=1007&bioDevice=CEI_BFIA", // Provide your project's url to finish configuring
             "presentation": {
                 "hidden": true
             }
@@ -26,22 +38,10 @@
     ],
     "compounds": [
         {
-            "name": "Launch Edge and attach DevTools",
+            "name": "Launch Edge Headless and attach DevTools",
             "configurations": [
-                "Launch Microsoft Edge",
+                "Launch Microsoft Edge in headless mode",
                 "Open Edge DevTools"
-            ]
-        },
-        {
-            "name": "Just Attach",
-            "configurations": [
-                "Open Edge DevTools"
-            ]
-        },
-        {
-            "name": "Just Launch",
-            "configurations": [
-                "Launch Microsoft Edge"
             ]
         }
     ]

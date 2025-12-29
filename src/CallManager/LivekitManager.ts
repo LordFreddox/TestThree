@@ -4,7 +4,7 @@ import { SetupDescriptionCardForPlaceByID } from '../view.ts';
 import { EndCallView, HideCallViewTranscript, UpdateIsOnCallStatus, botGenre } from './CallView.ts';
 import { 
     GetAllCategories,
-    GetPlacesInfoByName,
+    GetPlacesInfoByNamePlaceList,
     RestartScene,
     SearchPlacesByDistanceCategoryArea 
 } from '../main.ts';
@@ -196,7 +196,7 @@ function ObtenerLugaresRecomendadosPorCategoria(data: RpcInvocationData) {
 function ObtenerInfoDeLugarPorNombre(data: RpcInvocationData) {
     let params = JSON.parse(data.payload);
     console.log(`sending place_name for info ${params.placeName as string}`);
-    const placesFound = GetPlacesInfoByName(params.placeName);
+    const placesFound = GetPlacesInfoByNamePlaceList(params.placeName);
     if (placesFound.length > 0) {
         console.log(`se encontraron ${placesFound.length} lugares con ese nombre`);
         console.log(JSON.stringify(placesFound));

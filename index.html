@@ -156,8 +156,17 @@
       <img src="img/icon-close.svg" alt="search" id="icon-close" class="icon-close">
     </div>
 
-    <img id="avatarButton" src="/img/icon-bot-IA.svg" alt="bot"
-      class="BotButton3D avatarImgScript vibrate raycast-blocker">
+
+    <div id="avatarContainer" class="draggable">
+    <img id="avatarButton" src="/img/icon-bot-IA.svg" title="avatar"
+         class="BotButton3D avatarImgScript vibrate raycast-blocker">
+    <div class="floating-container" style="position:absolute;">
+      <div id="avatarLoader">
+        <div class="avatar-ring"></div>
+      </div>
+      <img src="/img/end_call.png" class="EndCallButton" title="endCall">
+    </div>
+  </div>
     <div id="webView" class="card-select-place hideTop">
       <img src="img/icon-close-card.svg" alt="search" id="closeWebView">
       <iframe id="3DVisualizer" src="" title="threeOverlay" class="PlaceCardBasicDescription"
@@ -191,15 +200,6 @@
       <!--<div id="gradient-text"></div>-->
     </div>
 
-    <div id="AICallCard" class="card-select-place raycast-blocker hideTop">
-      <img src="/img/icon-bot-IA.svg" alt="avatar" class="avatarImgScript">
-      <b style="font-size: x-large;">¿Tienes dudas?</b>
-      <span style="font-size: large;">Estoy aquí para guiarte</span>
-      <span style="font-size: small; text-align: center; margin-left: 3rem; margin-right: 3rem; color: #2e2e2e">Puedes
-        preguntarme por edificos, facultades o zonas específicas. También te ayudo a encontrar baños, cafeterías o
-        salidas.</span>
-      <img src="/img/end_call.png" alt="end_call" class="EndCallButton">
-    </div>
 
     <div id="containerZTList" class="raycast-blocker containerZTList hideLeft">
       <div id="ZTArea" class="ZTArea">
@@ -320,6 +320,8 @@
           // set the element's new position:
           elmnt.style.top = newTop + "px";
           elmnt.style.left = newLeft + "px";
+
+          syncContainerPosition(newLeft, newTop);
         }
 
         function closeDragElement() {
@@ -331,6 +333,11 @@
           document.onpointerup = null;
           document.onpointermove = null;
         }
+         function syncContainerPosition(left, top) {
+          const container = document.querySelector(".floating-container");
+          container.style.left = left + "px";
+          container.style.top = top + "px";
+}
       }
     </script>
 </div>
