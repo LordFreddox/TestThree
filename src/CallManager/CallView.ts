@@ -5,11 +5,14 @@ import { AvatarResponse } from '../Utils/Types.ts';
 import { HideZT, SetCloseZTState } from '../ZT/ZTView.ts';
 import { CreateCallUltravox, EndCall as EndCallUltravox } from './UltravoxManager.ts';
 import { ChangeBotName } from '../Utils/constants.ts';
+import { VirtualKeyboard } from '../VirtualKeyboard.ts';
 
 const EndCallButton = GetHTMLElement('.EndCallButton');
 //const AICallCard = GetHTMLElement('.avatar-ring');
 const StartCallButton = GetHTMLElement('.avatarImgScript');
 const CallContainer = GetHTMLElement('#avatarLoader');
+const virtualKeyboard = new VirtualKeyboard(); //teclado virtual
+const input = document.getElementById('vkInput') as HTMLInputElement;
 export let isOnCall: boolean = false;
 export let botGenre: number = 0;
 let currentCallManager: 'livekit' | 'ultravox' | null = null;
@@ -51,6 +54,7 @@ StartCallButton.onclick = async () => {
         StartCallButton.classList.remove('avatarClickFeedback');
     }, 200);
     
+    virtualKeyboard.openForInput(input);
     if (isOnCall) return;
     CallContainer.style.display = 'block';
     EndCallButton.style.display = 'block';

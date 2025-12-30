@@ -32,7 +32,7 @@ import { FillZTArea, HideZT } from './ZT/ZTView.ts';
 import { ChangeCompanyName, COMPANY_ID, SERV_TYPE, FAKE_ID } from './Utils/constants.ts';
 import { DisplayChatAI, InitChat } from './chat.ts';
 import { focusSitPlace } from './Boleteria.ts';
-import { VirtualKeyboard } from './VirtualKeyboard.ts';
+
 // const ServType: string = urlParams.get('ServType')!;
 const loadingscreen = (document.getElementById('loadingMain') as HTMLFormElement);
 const loadingBar = document.getElementById('loading-bar') as HTMLElement;
@@ -63,7 +63,7 @@ const buildingModelPaths = [
   './models/building4.glb',
 ];
 
-const virtualKeyboard = new VirtualKeyboard(); //teclado virtual
+
 
 function loadBuildingModelsAndGenerate(
   scene: Scene,
@@ -360,11 +360,8 @@ function SetupPlacesOnScene(places: Place[], arrowLenght: number, arrowColor: st
 }
 
 
-const input = document.getElementById('vkInput') as HTMLInputElement;
-const open = document.getElementById('openVK') as HTMLButtonElement;
-open.onclick = () => {
-    virtualKeyboard.openForInput(input);
-};
+
+
 
 
 async function SetupExplorerOrVirtualtour(places: Place[]) {
