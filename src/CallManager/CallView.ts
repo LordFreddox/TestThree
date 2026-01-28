@@ -41,20 +41,24 @@ export async function loadAvatar(companyId: string) {
 }
 
 StartCallButton.onclick = async () => {
-    StartCallView();
-    SetCloseZTState();
-    HideZT();
-    
-    StartCallButton.classList.add('avatarClickFeedback');
+StartCallView();
+SetCloseZTState();
+HideZT();
 
-    setTimeout(() => {
-        StartCallButton.classList.remove('avatarClickFeedback');
-    }, 200);
-    
-    if (isOnCall) return;
-    CallContainer.style.display = 'block';
-    EndCallButton.style.display = 'block';
-    // Try LiveKit first
+StartCallButton.classList.add('avatarClickFeedback');
+setTimeout(() => {
+StartCallButton.classList.remove('avatarClickFeedback');
+}, 200);
+CallContainer.style.display = 'block';
+StartCallButton.classList.remove('vibrate');
+await delay(5000);
+
+EndCallButton.style.display = 'block';
+
+if (isOnCall) return;
+
+
+ // Try LiveKit first
     // isOnCall = await CreateCallLiveKit();
     // if (isOnCall) {
     //     currentCallManager = 'livekit';
@@ -67,13 +71,16 @@ StartCallButton.onclick = async () => {
         }
     // }
 
-    if(isOnCall) //if call created, stop avatar vibrate animation
-    {
-        StartCallButton.classList.remove('vibrate');
-        StartCallButton.style.borderStyle = 'solid';
-        CallContainer.style.display = 'none';
-    }
+if (isOnCall) {//if call created, stop avatar vibrate animation
+StartCallButton.classList.remove('vibrate');
+StartCallButton.style.borderStyle = 'solid';
+CallContainer.style.display = 'none';
+}
 };
+
+function delay(ms: number | undefined) {
+return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 EndCallButton.onclick = () => {
     if (isOnCall) {
