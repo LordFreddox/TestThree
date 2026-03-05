@@ -156,22 +156,23 @@
       <img src="img/icon-close.svg" alt="search" id="icon-close" class="icon-close">
     </div>
 
-
     <div id="avatarContainer" class="draggable">
-    <img id="avatarButton" src="/img/icon-bot-IA.svg" title="avatar"
-         class="BotButton3D avatarImgScript vibrate raycast-blocker">
-    <div class="floating-container" style="position:absolute;">
-      <div id="avatarLoader">
-        <div class="avatar-ring"></div>
+      <img id="avatarButton" src="/img/icon-bot-IA.svg" title="avatar"
+        class="BotButton3D avatarImgScript vibrate raycast-blocker">
+      <div class="floating-container" style="position:absolute;">
+        <div id="avatarLoader">
+          <div class="avatar-ring"></div>
+        </div>
+        <img src="/img/end_call.png" class="EndCallButton" title="endCall">
       </div>
-      <img src="/img/end_call.png" class="EndCallButton" title="endCall">
     </div>
-  </div>
+
     <div id="webView" class="card-select-place hideTop">
       <img src="img/icon-close-card.svg" alt="search" id="closeWebView">
       <iframe id="3DVisualizer" src="" title="threeOverlay" class="PlaceCardBasicDescription"
         style="height: 90%;width: 90%;"></iframe>
     </div>
+
     <div id="divCardPlace" class="card-select-place raycast-blocker hideTop">
       <div id="header-container">
         <img id="logo_place_card" title="logo">
@@ -183,23 +184,15 @@
         <button id="closePlaceCard" type="button" title="close">
         </button>
       </div>
-      <!-- <div class="review-container">
-        <span id="cnt-reviews" class="review">+15 reseñas</span>
-        <img class="review" title="estrellas" src="/img/icon-stars.svg">
-        <img class="review avatarImgScript" title="estrellas" src="/img/icon-bot-IA.svg">
 
-      </div> -->
       <h4 class="MoreInfo">Mas
         Información...</h4>
+
       <span id="placeCardDescription" class="PlaceCardBasicDescription PlaceCardLongDescription">
         Cargando informacion...
       </span>
 
-      <!-- <button id="text-chat-AI" title="ecommerce" type="button" class="placeCard-ecommerce">Chatear con la
-        IA</button> -->
-      <!--<div id="gradient-text"></div>-->
     </div>
-
 
     <div id="containerZTList" class="raycast-blocker containerZTList hideLeft">
       <div id="ZTArea" class="ZTArea">
@@ -333,11 +326,11 @@
           document.onpointerup = null;
           document.onpointermove = null;
         }
-         function syncContainerPosition(left, top) {
+        function syncContainerPosition(left, top) {
           const container = document.querySelector(".floating-container");
           container.style.left = left + "px";
           container.style.top = top + "px";
-}
+        }
       }
     </script>
 </body>

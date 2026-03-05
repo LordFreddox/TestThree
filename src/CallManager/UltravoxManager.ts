@@ -5,7 +5,7 @@ import { handleBlockClick, serviceList } from '../ZT/ZTView.ts';
 import { UltravoxSession, UltravoxSessionStatus } from 'ultravox-client';
 import { RestartScene, SearchPlacesByDistanceCategoryArea } from "../main.ts";
 import { scene } from "../Renderer.ts";
-import { SetupDescriptionCardForPlaceByID } from "../view.ts";
+import { SetupDescriptionCardForAI, SetupDescriptionCardForPlaceByID } from "../view.ts";
 import { focusSitPlace } from "../Boleteria.ts";
 import { GetObjectListByUserDataTags } from "../Utils/Utils.ts";
 const CallSession = new UltravoxSession();
@@ -126,6 +126,7 @@ CallSession.registerToolImplementations({
     // "FocusOnPlaceByName": ObtenerInfoDeLugarPorNombre,
     "OpenServices": OpenServices,
     "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria,
+    "ShowPost": ShowPost
     // "ShowEventSeat": ShowEventSeat
 });
 
@@ -168,6 +169,13 @@ function ObtenerLugaresRecomendadosPorCategoria(params: any) {
     if (!categoryToSearch) return `Categoría no enviada`;
 
     return SearchPlacesByDistanceCategoryArea(startObject, categoryToSearch);
+}
+
+function ShowPost(params: any) {
+    const text = params.text as string;
+    const url = params.url as string;
+    SetupDescriptionCardForAI(text,url);
+    return `Mostrando publicación.`;
 }
 
 // function ObtenerInfoDeLugarPorNombre(params: any) {

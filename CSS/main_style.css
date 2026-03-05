@@ -512,6 +512,7 @@ button {
     place-content: space-evenly;
     align-items: center;
     width: 100%;
+    height: 150px;
 }
 
 .card-select-place #logo_place_card {

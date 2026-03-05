@@ -79,6 +79,9 @@ GetHTMLElement('#closePlaceCard').onclick = () => {
 export function ClosePlaceCard() {
     divCardPlace.classList.remove('showTop');
     divCardPlace.classList.add('hideTop');
+    (GetHTMLElement("#header-container")!.querySelector('#logo_place_card')! as HTMLElement).style.visibility = 'visible';
+    (GetHTMLElement("#header-container")!.querySelector('#description_place_card')! as HTMLElement).style.visibility = 'visible';
+
     if (currentController) {
         currentController.abort();
         currentController = null;
@@ -682,6 +685,28 @@ function SetupDescriptionCardForPlaceByID(placeID: string): { piso: string, succ
     // }
 }
 
+function SetupDescriptionCardForAI(text: string, media: string): { success: boolean } {
+
+    const description = divCardPlace.querySelector('#placeCardDescription')! as HTMLElement;
+    // currentController = UpdateDescription(placeData.bigcompany_id, placeData.companysubsidiary_id, description);
+    // SetupCardDescriptionCardPlace(placeData);
+    (GetHTMLElement("#header-container")!.querySelector('#logo_place_card')! as HTMLElement).style.visibility = 'hidden';
+    (GetHTMLElement("#header-container")!.querySelector('#description_place_card')! as HTMLElement).style.visibility = 'hidden';
+    description.innerHTML = '';
+    description.innerHTML = `<p>${text}</p>`;
+    //wrap media in <img> if ends on jpeg, jpg, png
+    if (media.endsWith('.jpeg') || media.endsWith('.jpg') || media.endsWith('.png')) {
+        description.innerHTML += `<img src="${media}" alt="Media">`;
+     } else if (media.endsWith('.mp4')) {
+        description.innerHTML += `<video src="${media}" alt="Media" autoplay loop muted controls>`;
+    }
+
+    divCardPlace.classList.remove('hideTop');
+    divCardPlace.classList.add('showTop');
+    //hide header and H4
+    return { success: true };
+}
+
 // GetHTMLElement(".searchPlace3DPanel").addEventListener('click', () => {
 //     SetupDescriptionCardForPlaceByID("14362");
 // });
@@ -757,7 +782,9 @@ closeWebView.onclick = () => {
 }
 // const testbutton = document.getElementById('searchPlace3D') as HTMLInputElement;
 // testbutton.onclick = () => {
-//     SetupDescriptionCardForPlaceByID('14322');
+//     SetupDescriptionCardForAI("Aca te mostramos LA ULTIMA JUGADA, Minuto 90' ¡Lluvia de goles se vive en el Campín . gol del Tigre en su especialidad (cabeza), golazoooo, estadio lleno.\nGana Millonarios 2 - 0.",
+//         "https://strg01tockall.blob.core.windows.net/prucontainer1/multimedia/tocks/2026-03/52333_tock_media_1772483793904.mp4"
+//     );
 // }
 
 function CreateOptionItemSearchPanel(place: Place) {
@@ -838,8 +865,9 @@ export {
     initFloorSelector, initCategorySelector, CreateOptionItemSearchPanel,
     updateLabelPositions, updateLabelVisibility,
     MapObjectsListByCategoryName, labelsScene, labelContainerElem,
-    SetupPlacesForSearchVirtualTour, SetupPlacesForSearchMap3D,
-    CreateTextForPlace, SetupDescriptionCardForPlace, SetupDescriptionCardForPlaceByID, ChangeColorOfSingleObject, RestoreOriginalColors
+    SetupPlacesForSearchVirtualTour, SetupPlacesForSearchMap3D, CreateTextForPlace,
+    SetupDescriptionCardForAI, SetupDescriptionCardForPlace, SetupDescriptionCardForPlaceByID, 
+    ChangeColorOfSingleObject, RestoreOriginalColors
 };
 
 //(window as any).SetupDescriptionCardForPlaceByID = SetupDescriptionCardForPlaceByID;
