@@ -7,10 +7,12 @@ import { RestartScene, SearchPlacesByDistanceCategoryArea } from "../main.ts";
 import { scene } from "../Renderer.ts";
 import { SetupDescriptionCardForAI, SetupDescriptionCardForPlaceByID } from "../view.ts";
 import { focusSitPlace } from "../Boleteria.ts";
-import { GetObjectListByUserDataTags } from "../Utils/Utils.ts";
+import { GetHTMLElement, GetObjectListByUserDataTags } from "../Utils/Utils.ts";
 const CallSession = new UltravoxSession();
 let firstSpeak = true;
 let transcriptTimeout: number | ReturnType<typeof setTimeout> | undefined;
+const debugArea = GetHTMLElement("#debug-area") as HTMLSpanElement;
+debugArea.style.display = 'none';
 
 SetupListeners();
 
@@ -88,7 +90,7 @@ async function CreateCallUltravox(): Promise<boolean> {
 
 function SetupListeners() {
     CallSession.addEventListener('status', () => {
-        console.log(`Session status changed: ${CallSession.status}`);
+        logging(`Session status changed: ${CallSession.status}`, LogType.info);
         switch (CallSession.status) {
             case UltravoxSessionStatus.SPEAKING:
                 if (firstSpeak) {
@@ -102,7 +104,7 @@ function SetupListeners() {
                 break;
             case UltravoxSessionStatus.LISTENING:
                 transcriptTimeout = setTimeout(() => {
-                    console.log('No new transcript in 15s - closing call.');
+                    logging('No new transcript in 15s - closing call.', LogType.info);
                     EndCallView();
                     EndCall();
                     RestartScene();
@@ -116,14 +118,14 @@ function SetupListeners() {
 
     CallSession.addEventListener('transcripts', () => {
         const lastTranscript = CallSession.transcripts[CallSession.transcripts.length - 1] as Transcript;
-        console.log(lastTranscript.speaker, lastTranscript.text);
+        logging(`${lastTranscript.speaker} ${lastTranscript.text}`, LogType.info);
         if (lastTranscript.speaker != 'agent') return;
     });
 }
 
 CallSession.registerToolImplementations({
     "FocusOnPlace": EnfocarCamaraEnLugarPorID,
-    // "FocusOnPlaceByName": ObtenerInfoDeLugarPorNombre,
+    "ShowCarbyPlateTool": ShowCarbyPlateTool,
     "OpenServices": OpenServices,
     "GetPlacesRecomendationByCategory": ObtenerLugaresRecomendadosPorCategoria,
     "ShowPost": ShowPost
@@ -132,21 +134,35 @@ CallSession.registerToolImplementations({
 
 function EnfocarCamaraEnLugarPorID(params: any) {
     const placeId = params.placeId as string;
-    console.log(`EnfocarCamaraEnLugarPorID ${placeId}`);
+    logging(`EnfocarCamaraEnLugarPorID ${placeId}`, LogType.info);
     const FocusResponse = SetupDescriptionCardForPlaceByID(placeId);
     //EndCallView();
-    console.table(FocusResponse);
+    logging(JSON.stringify(FocusResponse), LogType.info);
     if (FocusResponse.success)
         return `Lugar enfocado exitosamente en ${JSON.stringify(FocusResponse)}`;
     //fail to focus by place_id from placesList. Proceding to focus by placeName using it's ID
-    console.log(`ObtenerInfoDeLugarPorNombre ${placeId}`);
+    logging(`ObtenerInfoDeLugarPorNombre ${placeId}`, LogType.info);
+    const focusedPlace = focusSitPlace(placeId);
+    return focusedPlace;
+}
+
+function ShowCarbyPlateTool(params: any) {
+    const placeId = params.placeId as string;
+    logging(`ShowCarbyPlateTool ${placeId}`, LogType.info);
+    const FocusResponse = SetupDescriptionCardForPlaceByID(placeId);
+    //EndCallView();
+    logging(JSON.stringify(FocusResponse), LogType.info);
+    if (FocusResponse.success)
+        return `Carro enfocado exitosamente en ${JSON.stringify(FocusResponse)}`;
+    //fail to focus by place_id from placesList. Proceding to focus by placeName using it's ID
+    logging(`ObtenerInfoDeLugarPorNombre ${placeId}`, LogType.info);
     const focusedPlace = focusSitPlace(placeId);
     return focusedPlace;
 }
 
 function OpenServices(params: any) {
     if (!serviceList) return `Hubo un error al mostrar el QR.`;
-    console.log(`executing tool OpenServices`, params.serviceId as number);
+
     const service =
         serviceList.find(service => service.id === Number.parseInt(params.serviceId));
     if (!service) return `Hubo un error al mostrar el QR.`;
@@ -164,7 +180,7 @@ function ObtenerLugaresRecomendadosPorCategoria(params: any) {
 
     const startObject = scene.getObjectByName(START_POINT);
     const categoryToSearch = params.category as string;
-    console.log(`entering GetPlacesRecomendationByCategory with category: ${categoryToSearch}`);
+    logging(`entering GetPlacesRecomendationByCategory with category: ${categoryToSearch}`, LogType.info);
     if (!startObject) return `Lugar inicial no encontrado en escena`;
     if (!categoryToSearch) return `Categoría no enviada`;
 
@@ -174,7 +190,7 @@ function ObtenerLugaresRecomendadosPorCategoria(params: any) {
 function ShowPost(params: any) {
     const text = params.text as string;
     const url = params.url as string;
-    SetupDescriptionCardForAI(text,url);
+    SetupDescriptionCardForAI(text, url);
     return `Mostrando publicación.`;
 }
 
@@ -191,11 +207,35 @@ function EndCall() {
     firstSpeak = true;
 }
 
+function logging(log: string, logType: LogType) {
+    // debugArea.innerText += `${LogType[logType]}: ${log}\n`;
+    switch (logType) {
+        case LogType.info:
+            console.log(log);
+            break;
+        case LogType.error:
+            console.error(log);
+            break
+        case LogType.warning:
+            console.warn(log);
+            break;
+        default:
+            console.log(log);
+            break;
+    }
+}
+
 interface Transcript {
     isFinal: boolean,
     medium: string,
     speaker: string,
     text: string
+}
+
+enum LogType {
+    info,
+    error,
+    warning
 }
 
 export { EndCall, CreateCallUltravox };
